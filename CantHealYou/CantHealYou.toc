@@ -1,0 +1,12 @@
+## Interface: 11302
+## Title:  Can't Heal You 3.44-classic
+## Version:  3.44
+## Author: Travis S. Casey, Cecile
+## X-Email: efindel@gmail.com
+## X-Date: October 21, 2019
+## Notes: Attempts to automatically detect when someone is out of line of sight or range of a heal/buff and whisper them.
+## SavedVariables: CantHealYou_Config
+## SavedVariablesPerCharacter: CHYconfig
+localization-en.lua
+CantHealYou.lua
+CantHealYou.xml

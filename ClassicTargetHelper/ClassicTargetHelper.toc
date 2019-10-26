@@ -1,0 +1,5 @@
+## Interface: 11302
+## Title: ClassicTargetHelper
+## Author: Lodimas
+## SavedVariablesPerCharacter: CTHspell, CTmacroId, CTHicon
+ClassicTargetHelper.lua

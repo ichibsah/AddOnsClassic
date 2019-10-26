@@ -1,0 +1,7 @@
+## Interface: 11302
+## Version: 1.0.2
+## Title: LFG Helper
+## Notes: Help to create chat messages
+## Author: Andy (Tira-Mograine)
+## SavedVariables: LFG_Text_Values, LFG_Classes, LFM_Text_Values, LFG_Notifications
+LFG_Helper.lua
