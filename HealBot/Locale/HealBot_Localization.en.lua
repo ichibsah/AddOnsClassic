@@ -13,6 +13,15 @@
 --
 --
 
+
+if HEALBOT_GAME_VERSION>3 then
+    HEALBOT_classicABSORBHOT="absorb"
+    HEALBOT_classicABSORBHOTUP="Absorb"
+else    
+    HEALBOT_classicABSORBHOT="HoT"
+    HEALBOT_classicABSORBHOTUP="HoT"
+end
+    
 function HealBot_Lang_enUK()
     HEALBOT_enWORD_COLOUR_SUFFIX = "our"
     HealBot_Lang_enALL()
@@ -53,8 +62,6 @@ function HealBot_Lang_enALL()
     HEALBOT_POISON                          = "Poison";
 
     HB_TOOLTIP_OFFLINE                      = "Offline";
-    HB_OFFLINE                              = "offline"; -- has gone offline msg
-    HB_ONLINE                               = "online"; -- has come online msg
 
     HEALBOT_HEALBOT                         = "HealBot";
     HEALBOT_ADDON                           = HEALBOT_HEALBOT .. " " .. HEALBOT_VERSION;
@@ -244,10 +251,10 @@ function HealBot_Lang_enALL()
     HEALBOT_OPTIONS_BARHEALTHSEPHEALS       = "Separate incoming heals";
     HEALBOT_OPTIONS_BARHEALTHALLINCHEALS    = "Always Include incoming heals";
     HEALBOT_OPTIONS_BARHEALTHALLSEPHEALS    = "Always Separate incoming heals";
-    HEALBOT_OPTIONS_BARHEALTHINCALL         = "Include incoming heals and absorbs"
-    HEALBOT_OPTIONS_BARHEALTHSEPALL         = "Separate incoming heals and absorbs"
-    HEALBOT_OPTIONS_BARHEALTHALLINCALL      = "Always include incoming heals and absorbs"
-    HEALBOT_OPTIONS_BARHEALTHALLSEPALL      = "Always separate incoming heals and absorbs"
+    HEALBOT_OPTIONS_BARHEALTHINCALL         = "Include incoming heals and "..HEALBOT_classicABSORBHOT.."s"
+    HEALBOT_OPTIONS_BARHEALTHSEPALL         = "Separate incoming heals and "..HEALBOT_classicABSORBHOT.."s"
+    HEALBOT_OPTIONS_BARHEALTHALLINCALL      = "Always include incoming heals and "..HEALBOT_classicABSORBHOT.."s"
+    HEALBOT_OPTIONS_BARHEALTHALLSEPALL      = "Always separate incoming heals and "..HEALBOT_classicABSORBHOT.."s"
     HEALBOT_OPTIONS_BARHEALTH1              = "as delta";
     HEALBOT_OPTIONS_BARHEALTH2              = "as percentage";
     HEALBOT_OPTIONS_TIPTEXT                 = "Tooltip information";
@@ -297,15 +304,12 @@ function HealBot_Lang_enALL()
     HEALBOT_OPTIONS_DEBUFFTEXT1             = "Spell to remove debuffs";
 
     HEALBOT_OPTIONS_IGNOREDEBUFF            = "Ignore debuffs:";
-    HEALBOT_OPTIONS_IGNOREDEBUFFCLASS       = "By class";
-    HEALBOT_OPTIONS_IGNOREDEBUFFMOVEMENT    = "Slow movement";
     HEALBOT_OPTIONS_IGNOREDEBUFFDURATION    = "Short duration";
-    HEALBOT_OPTIONS_IGNOREDEBUFFNOHARM      = "Non harmful";
     HEALBOT_OPTIONS_IGNOREDEBUFFCOOLDOWN    = "When cure spell CoolDown > 1.5 secs (GCD)";
     HEALBOT_OPTIONS_IGNOREDEBUFFFRIEND      = "When caster is known as friend";
 
 
-    HEALBOT_OPTIONS_MAXBARCACHE             = "Maximum bars to pre cache";
+    HEALBOT_OPTIONS_MAXBARCACHE             = "Internal cache";
     HEALBOT_OPTIONS_RANGECHECKFREQ          = "Internal Timers and Updates";
 
     HEALBOT_OPTIONS_HIDEPARTYFRAMES         = "Hide party frames";
@@ -397,6 +401,8 @@ function HealBot_Lang_enALL()
     HEALBOT_OPTIONS_NOTIFY_MSG              = "Message"
     HEALBOT_OPTIONS_CASTNOTIFYTAGS          = " #s=spell name  -  #n=players name "
     HEALBOT_WORDS_YOU                       = "you";
+    HEALBOT_WORDS_MOREMEM                   = "More Memory";
+    HEALBOT_WORDS_LESSMEM                   = "Less Memory";
     HEALBOT_WORDS_MORECPU                   = "More CPU";
     HEALBOT_WORDS_LESSCPU                   = "Less CPU";
     HEALBOT_NOTIFYOTHERMSG                  = "Casting #s on #n";
@@ -419,7 +425,6 @@ function HealBot_Lang_enALL()
     HEALBOT_WORDS_ERROR                     = "Error"
     HEALBOT_SPELL_NOT_FOUND	                = "Spell Not Found"
     HEALBOT_OPTIONS_DISABLETOOLTIPINCOMBAT  = "Hide Tooltip in Combat"
-    HEALBOT_OPTIONS_ENABLELIBQH             = "Enable HealBot fastHealth"
 
     HEALBOT_OPTIONS_BUFFNAMED               = "Enter the player names to watch for\n\n"
     HEALBOT_WORD_ALWAYS                     = "Always";
@@ -665,7 +670,6 @@ function HealBot_Lang_enALL()
     HEALBOT_OPTIONS_SHOWPOWERCOUNTER        = "Show power counter"
     HEALBOT_OPTIONS_SHOWPOWERCOUNTER_PALA   = "Show holy power"
     HEALBOT_OPTIONS_SHOWPOWERCOUNTER_MONK   = "Show chi power"
-    HEALBOT_OPTIONS_CUSTOMDEBUFF_REVDUR     = "Reverse Duration"
     HEALBOT_OPTIONS_DISABLEHEALBOTSOLO      = "only when solo"
     HEALBOT_OPTIONS_CUSTOM_ALLDISEASE       = "All Disease"
     HEALBOT_OPTIONS_CUSTOM_ALLMAGIC         = "All Magic"
@@ -1061,8 +1065,8 @@ function HealBot_Lang_enALL()
     HEALBOT_OPTIONS_CONTENT_INOUT_PRESETCOL = "    " .. HEALBOT_OPTIONS_PRESET.." Col"..HEALBOT_enWORD_COLOUR_SUFFIX.."s"
     HEALBOT_OPTIONS_CONTENT_SKINS_FRAMES    = "    " .. HEALBOT_OPTIONS_TAB_FRAMES
     
-    HEALBOT_SKIN_ABSORBCOL_TEXT             = "Absorb effects";
-    HEALBOT_OPTIONS_BARALPHAABSORB          = "Absorb effects opacity";
+    HEALBOT_SKIN_ABSORBCOL_TEXT             = HEALBOT_classicABSORBHOTUP.." effects";
+    HEALBOT_OPTIONS_BARALPHAABSORB          = HEALBOT_classicABSORBHOTUP.." effects opacity";
     HEALBOT_OPTIONS_OUTLINE                 = "Outline"
     HEALBOT_OPTIONS_FRAME                   = "Frame"
     HEALBOT_OPTIONS_FRAMESOPTTEXT           = "Frames options"
@@ -1147,24 +1151,24 @@ function HealBot_Lang_enALL()
     
     HEALBOT_WORD_SUPPORTERS                 = "Supporters"
     HEALBOT_SUPPORTERS_PEOPLE = {  [01] = "Mythagos - Draenor",  -- Mythago
-                                   [02] = "Nerak - Cenarion Circle",  -- Noobrak
-                                   [03] = "Slayybelle",
-                                   [04] = "SUNET",
-                                   [05] = "Daskills",
-                                   [06] = "killerdavy",
-                                   [07] = "zathrain",
-                                   [08] = "warhead0",
-                                   [09] = "Droodibaby",
-                                   [10] = "Byset",
-                                   [11] = "Redemption",
-                                   [12] = "Jaiseck",
-                                   [13] = "xtacie",
-                                   [14] = "bkwildlifecntrl",
-                                   [15] = "mlharg",
-                                   [16] = "Yuriusha",
-                                   [17] = "spicy_squid",
-                                   [18] = "Ameralanna_675",
-                                   [19] = "ninjoism",
+                                   [02] = "Slayybelle",
+                                   [03] = "SUNET",
+                                   [04] = "Daskills",
+                                   [05] = "killerdavy",
+                                   [06] = "zathrain",
+                                   [07] = "Droodibaby",
+                                   [08] = "Byset",
+                                   [09] = "Redemption",
+                                   [10] = "Jaiseck",
+                                   [11] = "xtacie",
+                                   [12] = "bkwildlifecntrl",
+                                   [13] = "mlharg",
+                                   [14] = "Yuriusha",
+                                   [15] = "spicy_squid",
+                                   [16] = "Ameralanna_675",
+                                   [17] = "ninjoism",
+                                   [18] = "nydiah",
+                                   [19] = "Getsemane",
                                 }
                                
 end
@@ -1216,7 +1220,6 @@ function HealBot_Lang_Options_enALL()
                                  ["RIGHTTOOPENOPTIONS"]=HEALBOT_OPTIONS_RIGHTBOPTIONS,
                                  ["SHOWMINIMAPBUTTON"]=HEALBOT_OPTIONS_SHOWMINIMAPBUTTON,
                                  ["QUERYTALENTS"]=HEALBOT_OPTIONS_QUERYTALENTS,
-                                 ["ENABLEFASTHEALTH"]=HEALBOT_OPTIONS_ENABLELIBQH,
                                  ["ENABLEAUTOCOMBAT"]=HEALBOT_OPTIONS_ENABLEAUTOCOMBAT,
                                  ["IGNOREAURAEVENTS"]=HEALBOT_OPTION_IGNORE_AURA_RESTED,
                                  ["DISABLEHEALBOT"]=HEALBOT_OPTIONS_DISABLEHEALBOT,
@@ -1365,7 +1368,7 @@ function HealBot_Lang_Options_enALL()
                                  ["HEALBARSICCOL"]="Incoming Heals Custom Col"..HEALBOT_enWORD_COLOUR_SUFFIX,
                                  ["HEALBARSICALPHA"]=HEALBOT_OPTIONS_BARALPHAINHEAL,
                                  ["HEALBARSAECOLTYPE"]=HEALBOT_SKIN_ABSORBCOL_TEXT,
-                                 ["HEALBARSAECOL"]="Absorb Effects Custom Col"..HEALBOT_enWORD_COLOUR_SUFFIX,
+                                 ["HEALBARSAECOL"]=HEALBOT_classicABSORBHOTUP.." Effects Custom Col"..HEALBOT_enWORD_COLOUR_SUFFIX,
                                  ["HEALBARSAECOLALPHA"]=HEALBOT_OPTIONS_BARALPHAABSORB,
                                  ["HEALBARSALPHAOOR"]=HEALBOT_OPTIONS_BARALPHAEOR,
                                  ["HEALBARSALPHADIS"]=HEALBOT_OPTIONS_BARALPHADIS,
@@ -1489,7 +1492,6 @@ function HealBot_Lang_Options_enALL()
                                  ["DEBUFFSCUSTOMCAT"]=HEALBOT_CUSTOM_CATEGORY,
                                  ["DEBUFFSCUSTOMDEBUFF"]=HEALBOT_OPTIONS_TAB_CUSTOM_DEBUFFS,
                                  ["DEBUFFSCUSTOMCASTBY"]=HEALBOT_OPTIONS_CUSTOM_CASTBY,
-                                 ["DEBUFFSCUSTOMREVDUR"]=HEALBOT_OPTIONS_CUSTOMDEBUFF_REVDUR,
                                  ["DEBUFFSCUSTOMDELETE"]=HEALBOT_OPTIONS_DELSKIN,
                                  ["DEBUFFSCUSTOMNEWNAME"]=HEALBOT_OPTIONS_NEWDEBUFFTEXT,
                                  ["DEBUFFSCUSTOMNEWSAVE"]=HEALBOT_OPTIONS_SAVESKIN,
@@ -1520,6 +1522,7 @@ function HealBot_Lang_Options_enALL()
                                  ["MONITORBUFFS"]=HEALBOT_OPTIONS_MONITORBUFFS,
                                  ["MONITORBUFFSIC"]=HEALBOT_OPTIONS_MONITORBUFFSC,
                                  ["MONITORBUFFSGROUPED"]=HEALBOT_OPTIONS_IN_A_GROUP,
+                                 ["MONITORBUFFSPALABLESSING"]=HEALBOT_OPTIONS_PALADIN_BLESSINGS,
                                  ["BUFFSSPELL"]=HEALBOT_OPTIONS_BUFFSTEXT1,
                                  ["BUFFSMEMBERS"]=HEALBOT_OPTIONS_BUFFSTEXT2,
                                  ["BUFFSBARS"]=HEALBOT_OPTIONS_CDCBARS,
@@ -1608,14 +1611,13 @@ function HealBot_Lang_Options_enALL()
                                ["RIGHTTOOPENOPTIONS"]="Right click on the edge of\na frame will open options.",
                                ["SHOWMINIMAPBUTTON"]="Show a button on the minimap\nthat will open options.",
                                ["QUERYTALENTS"]="Query talent information when\nthe mouse moves over a bar.\nNOTE: This is only used by tooltips.",
-                               ["ENABLEFASTHEALTH"]="Monitor combat log and\nupdate health when required.",
                                ["ENABLEAUTOCOMBAT"]="Put healbot into lockdown combat mode when\nanyone in the group/raid goes into combat.",
                                ["IGNOREAURAEVENTS"]="Ignore required buffs when resting.",
                                ["DISABLEHEALBOT"]="Put Healbot into a deep sleep.",
                                ["DISABLEHEALBOTSOLO"]="Healbot is only sleeping when\nnot in a group or raid.",
                                ["ADJUSTMAXHLTH"]="Check for boss debuffs that alters healing\neffects and adjust max health to reflect.",
-                               ["MAXBARCACHE"]="Bars within frames can be initialized and cached before joining a group or raid.\n--\nRecommended settings:\n- [5] - You never raid.\n- [10] - You only join 10 man raids.\n- [20-25] - You regularly join 25 man raids.\n- [25-40] - You regularly join 40 man raids.\n--\nNOTE: This is a pre-cache and once a bar is initialized, it is never destroyed\nIf you pre-cache 5 bars and join a 25 man raid, you will end up with a pool of 25+ reusable bars\nHaving a large pool of bars is far more valuable than saving a tiny amount of memory.",
-                               ["INTERNALTIMERS"]="This combined with your FPS sets how\nquickly the following are updated:\n- Range checking\n- Buff checking\n- Debuff checking\n- fastHealth updates\n- Aggro updates\n- Enemy bar updates\n- Fluid bars update frequency\n- Aggro bars flash frequency\n- General checks and out of combat updates",
+                               ["MAXBARCACHE"]="Aura Cache\n=========\nThis setting determines how quickly expired unit auras are purged.\n--\nNOTE:Expired aura data can be reused, keeping frequent auras in the cache reduces CPU usage.\n__________________________________________________________________________________________\n--\nBars Cache\n=========\nBars within frames can be initialized and cached before joining a group or raid.\nThe number of bars is determined by the cache size.\n--\nNOTE: This is a pre-cache and once a bar is initialized, it is never destroyed.",
+                               ["INTERNALTIMERS"]="This combined with your FPS sets how quickly the following are updated:\n- Range checking\n- Buff updates\n- Debuff updates\n- Aggro updates\n- Enemy bar updates\n- Fluid bars update frequency\n- Aggro bars flash frequency\n- General checks and out of combat updates\n--\nNote: Higher settings use significantly more CPU, especially the highest setting.\n- For very fast updates 2 positions down from the highest is recommended",
                                ["LANG"]="Select the language used by healbot options.\nThis can be independent to the UI.",
                                ["SETLANG"]="Set the language selected.",
                                ["CMDS"]="Select a command to run.\nMany commands allow for resetting parts of\nhealbot without the need to reset to defaults.",
@@ -1756,9 +1758,9 @@ function HealBot_Lang_Options_enALL()
                                ["HEALBARSICCOLTYPE"]="Set the col"..HEALBOT_enWORD_COLOUR_SUFFIX.." of the incoming heals.\nWhen custom is used click on the custom bar to set the col"..HEALBOT_enWORD_COLOUR_SUFFIX..".",
                                ["HEALBARSICCOL"]="Set the custom col"..HEALBOT_enWORD_COLOUR_SUFFIX.." for incoming heals.",
                                ["HEALBARSICALPHA"]="Set the transparency of incoming heals.",
-                               ["HEALBARSAECOLTYPE"]="Set the col"..HEALBOT_enWORD_COLOUR_SUFFIX.." of the absorb effects.\nWhen custom is used click on the custom bar to set the col"..HEALBOT_enWORD_COLOUR_SUFFIX..".",
-                               ["HEALBARSAECOL"]="Set the custom col"..HEALBOT_enWORD_COLOUR_SUFFIX.." for absorb effects.",
-                               ["HEALBARSAECOLALPHA"]="Set the transparency of absorb effects.",
+                               ["HEALBARSAECOLTYPE"]="Set the col"..HEALBOT_enWORD_COLOUR_SUFFIX.." of the "..HEALBOT_classicABSORBHOT.." effects.\nWhen custom is used click on the custom bar to set the col"..HEALBOT_enWORD_COLOUR_SUFFIX..".",
+                               ["HEALBARSAECOL"]="Set the custom col"..HEALBOT_enWORD_COLOUR_SUFFIX.." for "..HEALBOT_classicABSORBHOT.." effects.",
+                               ["HEALBARSAECOLALPHA"]="Set the transparency of "..HEALBOT_classicABSORBHOT.." effects.",
                                ["HEALBARSALPHAOOR"]="Set the transparency of the heal bars when the bar\nis in an enabled state and the player is out of range.",
                                ["HEALBARSALPHADIS"]="Set the transparency of the heal bar\nwhen the bar is in an disabled state.",
                         -- Skins Frames Bars Text tab
@@ -1776,7 +1778,7 @@ function HealBot_Lang_Options_enALL()
                                ["HEALBARSTXTLINES"]="Use 2 lines for text, this is generally\nthe name on the 1st line and health on the 2nd.",
                                ["HEALBARSTXTMAXCHARS"]="Set the maximum number of characters shown on the heal bar.\nAuto will generally calculate the maximum number of characters\nto fit within the bar when standard fonts are used.",
                                ["HEALBARSTXTSHOWHEALTH"]="Show the players health on the bar.",
-                               ["HEALBARSTXTHEALTHICOPTION"]="Various options for incoming heals and absorbs.\n- No Incoming Heals - Never show incoming heals and absorbs\n- Include incoming heals - Include incoming heals in the health text when health is below 100%\n- Separate incoming heals - Show incoming heals next to the health text when health is below 100%\n- Always Include incoming heals - Always incoming heals in the health text\n- Always Separate incoming heals - Always show incoming heals next to the health text\n- Include incoming heals and absorbs - Include incoming heals and absorbs in the health text when health is below 100%\n- Separate incoming heals and absorbs - Show incoming heals and absorbs next to the health text when health is below 100%\n- Always include incoming heals and absorbs - Always incoming heals and absorbs in the health text\n- Always separate incoming heals and absorbs - Always show incoming heals and absorbs next to the health text",
+                               ["HEALBARSTXTHEALTHICOPTION"]="NOTE: Incoming heals and "..HEALBOT_classicABSORBHOT.."s text is only shown on enabled bars.\n--\n- No Incoming Heals - Never show incoming heals and "..HEALBOT_classicABSORBHOT.."s\n- Include incoming heals - Include incoming heals in the health text when health is below 100%\n- Separate incoming heals - Show incoming heals next to the health text when health is below 100%\n- Always Include incoming heals - Always incoming heals in the health text\n- Always Separate incoming heals - Always show incoming heals next to the health text\n- Include incoming heals and "..HEALBOT_classicABSORBHOT.."s - Include incoming heals and "..HEALBOT_classicABSORBHOT.."s in the health text when health is below 100%\n- Separate incoming heals and "..HEALBOT_classicABSORBHOT.."s - Show incoming heals and "..HEALBOT_classicABSORBHOT.."s next to the health text when health is below 100%\n- Always include incoming heals and "..HEALBOT_classicABSORBHOT.."s - Always incoming heals and "..HEALBOT_classicABSORBHOT.."s in the health text\n- Always separate incoming heals and "..HEALBOT_classicABSORBHOT.."s - Always show incoming heals and "..HEALBOT_classicABSORBHOT.."s next to the health text",
                                ["HEALBARSTXTHEALTHTYPE"]="Various options on how the health is displayed.",
                                ["HEALBARSTXTHEALTHFORMAT"]="Various options on the number format for health.",
                                ["HEALBARSTXTTAGDC"]="Display a tag before the characters name when the player is "..HEALBOT_DISCONNECTED_LABEL..".",
@@ -1881,7 +1883,6 @@ function HealBot_Lang_Options_enALL()
                                ["DEBUFFSCUSTOMCAT"]="Custom defaults and A-Z debuff categories\ncan be selected using the category dropdown.",
                                ["DEBUFFSCUSTOMDEBUFF"]="Lists custom default settings or individual\ndebuffs depending on the Category selected.",
                                ["DEBUFFSCUSTOMCASTBY"]="Sets a filter on debuffs displayed\nby checking the caster of the debuff.",
-                               ["DEBUFFSCUSTOMREVDUR"]="Debuff duration count starts at 0 and increases.",
                                ["DEBUFFSCUSTOMDELETE"]="Delete the selected custom debuff.",
                                ["DEBUFFSCUSTOMNEWNAME"]="Add a new debuff to the current category.\nNote: The Spell Name or Spell ID can be used.\nUsing Spell ID is recommended.",
                                ["DEBUFFSCUSTOMNEWSAVE"]="Save the new custom debuff.",
@@ -1912,6 +1913,7 @@ function HealBot_Lang_Options_enALL()
                                ["MONITORBUFFS"]="Turn on/off buff monitoring.",
                                ["MONITORBUFFSIC"]="Turn on/off monitoring for buffs in combat.",
                                ["MONITORBUFFSGROUPED"]="Do not monitor buffs when solo.",
+                               ["MONITORBUFFSPALABLESSING"]="Ignore if player has any blessing cast by you.",
                                ["BUFFSSPELL"]="Select the spell to monitor and cast.",
                                ["BUFFSMEMBERS"]="The members to monitor.",
                                ["BUFFSBARS"]="Bars are changed to defined col"..HEALBOT_enWORD_COLOUR_SUFFIX..". Click to change.\nWhen the player is missing a buff and settings on the Buff Warning tab apply.",

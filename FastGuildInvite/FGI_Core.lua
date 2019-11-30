@@ -42,47 +42,109 @@ function addon.dataBroker.OnClick(self, button)
 	end
 end
 
-local function MenuButtons(self)
-	local button = self.value;
-	if (button == "BLACKLIST") then
-		local dropdownFrame = UIDROPDOWNMENU_INIT_MENU;
-		local name = dropdownFrame.name;
-		local server = dropdownFrame.server;
-		
-		fn:blackList(name)
-		interface.settings.Blacklist.content:update()
-		StaticPopup_Show("FGI_BLACKLIST_CHANGE", _,_,  {name = name})
-		
-	elseif (button == "GUILD_INVITE") then
-		local dropdownFrame = UIDROPDOWNMENU_INIT_MENU;
-		local unit = dropdownFrame.unit;
-		local name = dropdownFrame.name;
-		GuildInvite(name)
-		fn:rememberPlayer(name)
-	end
-end
-
-local FGIBlackList = CreateFrame("Frame","FGIMenuButtons")
-FGIBlackList:SetScript("OnEvent", function() hooksecurefunc("UnitPopup_OnClick", MenuButtons) end)
-FGIBlackList:RegisterEvent("PLAYER_LOGIN")
-
-local PopupUnits = {}
-
-UnitPopupButtons["BLACKLIST"] = { text = "FGI - Black List"}
-UnitPopupButtons["GUILD_INVITE"] = { text = "FGI - Guild Invite"}
-
-local function addMenuButtons()
-	for i,UPMenus in pairs(UnitPopupMenus) do
-		for j=1, #UPMenus do
-			if UPMenus[j] == "WHISPER" then
-				PopupUnits[#PopupUnits + 1] = i
-				pos = j + 1
-				table.insert( UnitPopupMenus[i] ,pos , "BLACKLIST" )
-				table.insert( UnitPopupMenus[i] ,j , "GUILD_INVITE" )
-				break
+local function CanInteraction(name, server, unit)
+	if unit and not UnitIsPlayer(unit) then return false end
+	if name then
+		local canInvited = true
+		if server ~= nil then
+			canInvited = false
+			for i=1,#addon.autoCompleteRealms do
+				if addon.autoCompleteRealms[i] == server then
+					canInvited = true
+					name = format("%s-%s",name,server)
+					break;
+				end
 			end
 		end
+		
+		return canInvited
 	end
+	return false
+end
+
+local supportedTypes = {
+	-- SELF = 1, -- do we really need this? can always target self anywhere else and copy our own url
+	PARTY = 1,
+	PLAYER = 1,
+	RAID_PLAYER = 1,
+	RAID = 1,
+	FRIEND = 1,
+	-- BN_FRIEND = 1,
+	GUILD = 1,
+	GUILD_OFFLINE = 1,
+	CHAT_ROSTER = 1,
+	TARGET = 1,
+	ARENAENEMY = 1,
+	FOCUS = 1,
+	WORLD_STATE_SCORE = 1,
+	COMMUNITIES_WOW_MEMBER = 1,
+	COMMUNITIES_GUILD_MEMBER = 1,
+}
+
+local f = GUI:Create("SimpleGroup")
+f:SetWidth(150)
+f:SetHeight(42)
+f:SetLayout("NIL")
+
+local invite = GUI:Create('Button')
+invite:SetText('FGI - Guild Invite')
+invite:SetWidth(150)
+invite:SetHeight(20)
+invite:SetCallback('OnClick', function()
+	local name = f.name
+	GuildInvite(name)
+	fn:rememberPlayer(name)
+	DropDownList1:Hide()
+end)
+invite:SetPoint("TOPLEFT", f.frame, "TOPLEFT", 0, 0)
+f:AddChild(invite)
+
+local blacklist = GUI:Create('Button')
+blacklist:SetText('FGI - Black List')
+blacklist:SetWidth(150)
+blacklist:SetHeight(20)
+blacklist:SetCallback('OnClick', function()
+	local name = f.name
+	fn:blackList(name)
+	interface.settings.Blacklist.content:update()
+	StaticPopup_Show("FGI_BLACKLIST_CHANGE", _,_,  {name = name})
+	DropDownList1:Hide()
+end)
+blacklist:SetPoint("TOPLEFT", invite.frame, "BOTTOMLEFT", 0, 0)
+f:AddChild(blacklist)
+
+local function DropDownOnShow(self)
+	local dropdown = self.dropdown
+	if not dropdown then
+		return
+	end
+	if dropdown.Button == _G.LFGListFrameDropDownButton then -- LFD
+		-- ShowCustomDropDown(self, dropdown, dropdown.menuList[2].arg1)
+	elseif dropdown.which and supportedTypes[dropdown.which] then -- UnitPopup
+		local dropdownFullName
+		if dropdown.name then
+			if dropdown.server and not dropdown.name:find("-") then
+				dropdownFullName = dropdown.name .. "-" .. dropdown.server
+			else
+				dropdownFullName = dropdown.name
+			end
+		end
+		if not CanInteraction(dropdownFullName, dropdown.server, dropdown.unit) then return end
+		f.name = dropdownFullName
+	else
+		return
+	end
+	if DropDownList1:GetLeft() >= DropDownList1:GetWidth() then
+		f:ClearAllPoints()
+		f:SetPoint("TOPRIGHT", DropDownList1, "TOPLEFT",0,0)
+	else
+		f:ClearAllPoints()
+		f:SetPoint("TOPLEFT", DropDownList1, "TOPRIGHT",0,0)
+	end
+	f.frame:Show()
+end
+local function DropDownOnHide()
+	f.frame:Hide()
 end
 
 local frame = CreateFrame("Frame")
@@ -144,7 +206,11 @@ end
 
 
 function FastGuildInvite:OnEnable()
-	if DB.global.createMenuButtons then addMenuButtons() end
+	if DB.global.createMenuButtons then
+		DropDownList1:HookScript("OnShow", DropDownOnShow)
+		DropDownList1:HookScript("OnHide", DropDownOnHide)
+	end
+	
 	addon.debug = DB.global.debug
 	fn:blackListAutoKick()
 	local parent = interface.settings.filters.content.filtersFrame
@@ -238,8 +304,6 @@ local defaultSettings =  {
 		addonMSG = false,
 		systemMSG = false,
 		sendMSG = false,
-		curMessage = 1,
-		messageList = {},
 		filtersList = {},
 		blackList = {},
 		alreadySended = {},
@@ -247,6 +311,10 @@ local defaultSettings =  {
 	},
 	faction = {
 		customWhoList = {"1-15 c-\"Class\" r-\"Race\""},
+	},
+	factionrealm  = {
+		curMessage = 1,
+		messageList = {},
 	},
 	global = {
 		inviteType = 1,
@@ -258,6 +326,7 @@ local defaultSettings =  {
 		debug = false,
 		security = {blacklist = true, sended = true},
 		addonMSG = false,
+		blacklistOfficer = true,
 		rememberAll = false,
 		queueNotify = true,
 		searchAlertNotify = true,
@@ -281,34 +350,9 @@ function FastGuildInvite:OnInitialize()
 	addon.debugDB = debugDB[#debugDB]
 
 	-- for DB update
-	if DB.global.customWhoList then
-		DB.faction.customWhoList = DB.global.customWhoList
-		DB.global.customWhoList = nil
-	end
-	if DB.global.blackList then
-		DB.realm.blackList = DB.global.blackList
-		DB.global.blackList = nil
-	end
-	if DB.global.messageList then
-		DB.realm.messageList = DB.global.messageList
-		DB.global.messageList = nil
-	end
-	if DB.realm.messageList[0] then
-		table.insert(DB.realm.messageList, DB.realm.messageList[0])
-		DB.realm.messageList[0] = nil
-		DB.realm.curMessage = 1
-	end
-	if DB.global.alredySended then
-		DB.realm.alreadySended = DB.global.alredySended
-		DB.global.alredySended = nil
-	end
-	if DB.global.filtersList then
-		DB.realm.filtersList = DB.global.filtersList
-		DB.global.filtersList = nil
-	end
-	if DB.global.leave then
-		DB.realm.leave = DB.global.leave
-		DB.global.leave = nil
+	if DB.realm.messageList then
+		DB.factionrealm.messageList = DB.realm.messageList
+		DB.realm.messageList = nil
 	end
 	-- / for DB update
 	if DB.global.clearDBtimes>1 then

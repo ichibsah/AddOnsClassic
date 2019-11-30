@@ -12,9 +12,9 @@ local function GetL(ru,en,cur)
 	local L = {}
 	for k,v in pairs(ru) do
 		if type(v) == "table" then
-		  L[k] = GetL(v,en[k],cur[k])
+			L[k] = GetL(v,en[k] or {},cur[k] or {})
 		else
-		  L[k] = cur[k] or en[k] or v
+			L[k] = cur[k] or en[k] or v
 		end
 	end
 	return L
@@ -154,6 +154,7 @@ L.credits = {
 	{L["Перевод"].."-zhTW", "Anchep", "Services@280i.com", "paypal.me/280i"},
 	{L["Перевод"].."-koKR", "50000", "-", "-"},
 	{L["Перевод"].."-enUS", "brute95", "-", "-"},
+	{L["Перевод"].."-frFR", "Yazhura2017", "-", "-"},
 	{L["Тестирование"], "Shujin", "-", "-"},
 	{L["Тестирование"], "StreetX", "-", "-"},
 	{L["Тестирование"], "Мойгосподин", "-", "-"},

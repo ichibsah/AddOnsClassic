@@ -3,5 +3,18 @@
 ## Title: LFG Helper
 ## Notes: Help to create chat messages
 ## Author: Andy (Tira-Mograine)
-## SavedVariables: LFG_Text_Values, LFG_Classes, LFM_Text_Values, LFG_Notifications
+## SavedVariables: LFG_Text_Values, LFG_Classes, LFM_Text_Values, LFG_Notifications, LFG_HelperDB, LFG_Pattern, LFM_Pattern, LFG_Helper_Options, LFG_Helper_Changelog
+## OptionalDeps: Ace3, LubStub, LibDBIcon-1
+
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceEvent-3.0\AceEvent-3.0.xml
+Libs\AceDB-3.0\AceDB-3.0.xml
+Libs\AceConsole-3.0\AceConsole-3.0.xml
+Libs\AceLocale-3.0\AceLocale-3.0.xml
+Libs\LibDBIcon-1.0\embeds.xml
+Libs\LibDBIcon-1.0\LibDBIcon-1.0\lib.xml
+
 LFG_Helper.lua
+Changelog.lua

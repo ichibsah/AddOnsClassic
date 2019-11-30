@@ -1,4 +1,4 @@
-
+-- Performs by clickig on a tab button
 local function Tab_OnClick(self)
 	local childs = {self:GetParent():GetChildren()};
 	for c in pairs(childs) do
@@ -33,14 +33,24 @@ local function LFGHelperDropDownMultiContent(content, droplist)
 	UIDropDownMenu_Initialize(droplist, function(self, level, menuList)
 		local info = UIDropDownMenu_CreateInfo();
 		if level == 1 then
-			info.text, info.hasArrow, info.menuList = "Dungeons & Raids", true, "Dungeons"
+			info.text, info.hasArrow, info.menuList = "Dungeons", true, "Dungeons"
+			UIDropDownMenu_AddButton(info)
+			info.text, info.hasArrow, info.menuList = "Raids", true, "Raids"
 			UIDropDownMenu_AddButton(info)
 			info.text, info.hasArrow, info.menuList = "Quests", true, "Quests"
 			UIDropDownMenu_AddButton(info)
+			info.text, info.hasArrow, info.menuList = "PVP", true, "Battlegrounds";
+			UIDropDownMenu_AddButton(info);
 		elseif menuList == "Dungeons" then
 			for c in pairs(content["dungeons"]) do
 				info.text = content["dungeons"][c];
 				info.func = function() LFGHelperDropList_OnClick(content["dungeons"][c], droplist) end;
+				UIDropDownMenu_AddButton(info, level)
+			end
+		elseif menuList == "Raids" then
+			for c in pairs(content["raids"]) do
+				info.text = content["raids"][c];
+				info.func = function() LFGHelperDropList_OnClick(content["raids"][c], droplist) end;
 				UIDropDownMenu_AddButton(info, level)
 			end
 		elseif menuList == "Quests" then
@@ -49,11 +59,17 @@ local function LFGHelperDropDownMultiContent(content, droplist)
 				info.func = function() LFGHelperDropList_OnClick(content["quests"][c], droplist) end;
 				UIDropDownMenu_AddButton(info, level)
 			end
+		elseif menuList == "Battlegrounds" then
+			for c in pairs(content["battlegrounds"]) do
+				info.text = content["battlegrounds"][c];
+				info.func = function() LFGHelperDropList_OnClick(content["battlegrounds"][c], droplist) end;
+				UIDropDownMenu_AddButton(info, level);
+			end
 		end
 	end);
 end
 
--- loads the quests in a table
+-- Insert the quests int the table
 local function LFGHelper_GetQuests(Quests) 
 	numEntries, numQuests = GetNumQuestLogEntries();
 	for i = 1, numEntries, 1 do	
@@ -69,6 +85,7 @@ local function LFGHelper_GetQuests(Quests)
 	end
 end
 
+-- returns a new table with all quests
 local function LFGHelper_GetQuests()
 	local _quests = {};
 	numEntries, numQuests = GetNumQuestLogEntries();
@@ -88,40 +105,41 @@ local function LFGHelper_GetQuests()
 end
 
 -- loads the dungeons in a table
-local function LFGHelper_GetDungeons(LFGDungeons)
-	table.insert(LFGDungeons, "Dungeon: Ragefire Chasm");
-	table.insert(LFGDungeons, "Dungeon: Wailing Caverns");
-	table.insert(LFGDungeons, "Dungeon: The Deadmines");
-	table.insert(LFGDungeons, "Dungeon: Shadowfang Keep");
-	table.insert(LFGDungeons, "Dungeon: Blackfathom Deeps");
-	table.insert(LFGDungeons, "Dungeon: The Stockade");
-	table.insert(LFGDungeons, "Dungeon: Gnomeregan");
-	table.insert(LFGDungeons, "Dungeon: Razorfen Kraul");
-	table.insert(LFGDungeons, "Dungeon: Scarlet Monastery (Graveyard)");	
-	table.insert(LFGDungeons, "Dungeon: Scarlet Monastery (Libary)");
-	table.insert(LFGDungeons, "Dungeon: Scarlet Monastery (Armory)");
-	table.insert(LFGDungeons, "Dungeon: Scarlet Monastery (Cathedral)");
-	table.insert(LFGDungeons, "Dungeon: Razorfen Downs");
-	table.insert(LFGDungeons, "Dungeon: Uldaman");
-	table.insert(LFGDungeons, "Dungeon: Zul'Farrak");
-	table.insert(LFGDungeons, "Dungeon: Maraudon");
-	table.insert(LFGDungeons, "Dungeon: Temple of Atal'Hakkar");
-	table.insert(LFGDungeons, "Dungeon: Blackrock Depths");
-	table.insert(LFGDungeons, "Dungeon: Lower Blackrock Spire");
-	table.insert(LFGDungeons, "Dungeon: Upper Blackrock Spire");
-	table.insert(LFGDungeons, "Dungeon: Dire Maul");
-	table.insert(LFGDungeons, "Dungeon: Scholomance");
-	table.insert(LFGDungeons, "Dungeon: Stratholme (Living)");
-	table.insert(LFGDungeons, "Dungeon: Stratholme (Undead)");
-	table.insert(LFGDungeons, "Raid: Molten Core");
-	table.insert(LFGDungeons, "Raid: Onyxia");
-	table.insert(LFGDungeons, "Raid: Zul'Gurub");
-	table.insert(LFGDungeons, "Raid: Ruins of Ahn'Qiraj");
-	table.insert(LFGDungeons, "Raid: Blackwing Lair");
-	table.insert(LFGDungeons, "Raid: Ahn'Qiraj");
-	table.insert(LFGDungeons, "Raid: Naxxramas");
-end
+-- local function LFGHelper_GetDungeons(LFGDungeons)
+	-- table.insert(LFGDungeons, "Dungeon: Ragefire Chasm");
+	-- table.insert(LFGDungeons, "Dungeon: Wailing Caverns");
+	-- table.insert(LFGDungeons, "Dungeon: The Deadmines");
+	-- table.insert(LFGDungeons, "Dungeon: Shadowfang Keep");
+	-- table.insert(LFGDungeons, "Dungeon: Blackfathom Deeps");
+	-- table.insert(LFGDungeons, "Dungeon: The Stockade");
+	-- table.insert(LFGDungeons, "Dungeon: Gnomeregan");
+	-- table.insert(LFGDungeons, "Dungeon: Razorfen Kraul");
+	-- table.insert(LFGDungeons, "Dungeon: Scarlet Monastery (Graveyard)");	
+	-- table.insert(LFGDungeons, "Dungeon: Scarlet Monastery (Libary)");
+	-- table.insert(LFGDungeons, "Dungeon: Scarlet Monastery (Armory)");
+	-- table.insert(LFGDungeons, "Dungeon: Scarlet Monastery (Cathedral)");
+	-- table.insert(LFGDungeons, "Dungeon: Razorfen Downs");
+	-- table.insert(LFGDungeons, "Dungeon: Uldaman");
+	-- table.insert(LFGDungeons, "Dungeon: Zul'Farrak");
+	-- table.insert(LFGDungeons, "Dungeon: Maraudon");
+	-- table.insert(LFGDungeons, "Dungeon: Temple of Atal'Hakkar");
+	-- table.insert(LFGDungeons, "Dungeon: Blackrock Depths");
+	-- table.insert(LFGDungeons, "Dungeon: Lower Blackrock Spire");
+	-- table.insert(LFGDungeons, "Dungeon: Upper Blackrock Spire");
+	-- table.insert(LFGDungeons, "Dungeon: Dire Maul");
+	-- table.insert(LFGDungeons, "Dungeon: Scholomance");
+	-- table.insert(LFGDungeons, "Dungeon: Stratholme (Living)");
+	-- table.insert(LFGDungeons, "Dungeon: Stratholme (Undead)");
+	-- table.insert(LFGDungeons, "Raid: Molten Core");
+	-- table.insert(LFGDungeons, "Raid: Onyxia");
+	-- table.insert(LFGDungeons, "Raid: Zul'Gurub");
+	-- table.insert(LFGDungeons, "Raid: Ruins of Ahn'Qiraj");
+	-- table.insert(LFGDungeons, "Raid: Blackwing Lair");
+	-- table.insert(LFGDungeons, "Raid: Ahn'Qiraj");
+	-- table.insert(LFGDungeons, "Raid: Naxxramas");
+-- end
 
+-- returns a table with the dungeons
 local function LFGHelper_GetDungeons()
 	local _dungeons = {};
 	table.insert(_dungeons, "Dungeon: Ragefire Chasm");
@@ -145,33 +163,57 @@ local function LFGHelper_GetDungeons()
 	table.insert(_dungeons, "Dungeon: Lower Blackrock Spire");
 	table.insert(_dungeons, "Dungeon: Upper Blackrock Spire");
 	table.insert(_dungeons, "Dungeon: Dire Maul");
+	table.insert(_dungeons, "Dungeon: Dire Maul North");
+	table.insert(_dungeons, "Dungeon: Dire Maul East");
+	table.insert(_dungeons, "Dungeon: Dire Maul West");
 	table.insert(_dungeons, "Dungeon: Scholomance");
 	table.insert(_dungeons, "Dungeon: Stratholme (Living)");
 	table.insert(_dungeons, "Dungeon: Stratholme (Undead)");
-	table.insert(_dungeons, "Raid: Molten Core");
-	table.insert(_dungeons, "Raid: Onyxia");
-	table.insert(_dungeons, "Raid: Zul'Gurub");
-	table.insert(_dungeons, "Raid: Ruins of Ahn'Qiraj");
-	table.insert(_dungeons, "Raid: Blackwing Lair");
-	table.insert(_dungeons, "Raid: Ahn'Qiraj");
-	table.insert(_dungeons, "Raid: Naxxramas");
 	return _dungeons;
 end
 
+-- returns a table with the raids
+local function LFGHelper_GetRaids()
+	local _raids = {};
+	table.insert(_raids, "Raid: Molten Core");
+	table.insert(_raids, "Raid: Onyxia");
+	table.insert(_raids, "Raid: Zul'Gurub");
+	table.insert(_raids, "Raid: Ruins of Ahn'Qiraj");
+	table.insert(_raids, "Raid: Blackwing Lair");
+	table.insert(_raids, "Raid: Ahn'Qiraj");
+	table.insert(_raids, "Raid: Naxxramas");
+	return _raids;
+end
+
+-- returns a table with the battlegrounds
+local function LFGHelper_GetBattlegrounds() 
+	local _battlegrounds = {};
+	table.insert(_battlegrounds, "PVP: Open World PVP");
+	table.insert(_battlegrounds, "Battleground: [10-19] Warsong Gulch");
+	table.insert(_battlegrounds, "Battleground: [20-29] Arathi Basin");
+	table.insert(_battlegrounds, "Battleground: [51-60] Alterac Valley");
+	return _battlegrounds;
+end
+
+-- initial libdb-icon
+local lfgh_icon = LibStub("LibDBIcon-1.0");
 
 -- loads the chat channels in a table
 local function LFGHelper_GetChanels(ChatChanel)
 	local RawChatChanels = {GetChannelList()};
 	local ServerChanel = {EnumerateServerChannels()};
-
+	
 	for i in pairs(ServerChanel) do 
 			table.insert(ChatChanel, ServerChanel[i]);
 	end
+	
 	for i = 1, getn(RawChatChanels) / 3, 1 do
 		table.insert(ChatChanel, RawChatChanels[i * 3 + 2]);
 	end
+	
 end
 
+-- returns a table with the current chat channel
 local function LFGHelper_GetChanels()
 	local _channel = {};
 	local RawChatChanels = {GetChannelList()};
@@ -187,16 +229,144 @@ local function LFGHelper_GetChanels()
 	return _channel;
 end
 
+-- insert the dungeons in the contex menu
+function LFGHelper_InitDungeonUnitPopupMenu(menu)
+	local dungeons = LFGHelper_GetDungeons();
+	for i in pairs(dungeons) do
+		UnitPopupButtons[menu .. "_DUNGEON_" .. dungeons[i]] = { text = dungeons[i] };
+		table.insert(UnitPopupMenus[menu], menu .. "_DUNGEON_" .. dungeons[i]);
+	end
+end
+
+function LFGHelper_InitQuests(menu)
+	cQuests = LFGHelper_GetQuests();
+	for i in pairs(cQuests) do
+		UnitPopupButtons[menu .. "_QUEST_" .. cQuests[i]] = { text = cQuests[i] };
+		table.insert(UnitPopupMenus[menu], menu .. "_QUEST_" .. cQuests[i]);
+	end
+end
+
+-- whispers a message to a player
+function LFGHelper_WhisperUnit(unit, message) 
+	SendChatMessage(message, "WHISPER", "Common", unit);
+end
+
 local ChatChanel = {};
 local LFGDungeons = {};
 local Quests = {}
 local MultiMenuDropDownContent = {};
 
-
-
 local LFGMemberCountContent = {};
 for i = 1, 40, 1 do
 	table.insert(LFGMemberCountContent, i);
+end
+
+-- create the minimap contex menu
+function LFGHelper_MiniMenue_Initial(self,level,menuList)
+	print("LEVEL");
+	local info = UIDropDownMenu_CreateInfo();
+	if level == 1 then
+		info.text = "LFG Helper Options";
+		-- info.isTitle = true;
+		-- info.isUninteractable = true;
+		-- info.isSubsection = true;
+		-- info.isSubsectionTitle = true;
+		-- isSubsectionSeparator = false;
+		UIDropDownMenu_AddButton(info);
+	end
+end
+
+local LFGHelper_MiniMenue = CreateFrame("Frame", "Test_DropDown", UIParent, "UIDropDownMenuTemplate");
+UIDropDownMenu_SetWidth(LFGHelper_MiniMenue, 200)
+UIDropDownMenu_Initialize(LFGHelper_MiniMenue, LFGHelper_MiniMenue_Initial, "MENU");
+
+
+-- create the contex menue items for the friends menu
+UnitPopupButtons["LFG_HELPER"] = { text = "LFG Helper", isTitle = true, isUninteractable = true, isSubsection = true, isSubsectionTitle = true, isSubsectionSeparator = true };
+UnitPopupButtons["LFM_TANK"] = { text = "Whisper LFM (|cffff0000Tank|r)", nested = 1 };
+UnitPopupButtons["LFM_HEALER"] = { text = "Whisper LFM (|cff00ff00Heal|r)", nested = 1 };
+UnitPopupButtons["LFM_DPS"] = { text = "Whisper LFM (|cffDA70D6DPS|r)", nested = 1 };
+UnitPopupButtons["LFM_QUESTS"] = { text = "Whisper LFM Quest", nested = 1 };
+UnitPopupButtons["LFG_HELPER_END"] = {  text = "", isTitle = true, isUninteractable = true, isSubsection = true, isSubsectionTitle = false, isSubsectionSeparator = true };
+UnitPopupMenus["LFM_TANK"] = {};
+UnitPopupMenus["LFM_HEALER"] = {};
+UnitPopupMenus["LFM_DPS"] = {};
+UnitPopupMenus["LFM_QUESTS"] = {};
+
+LFGHelper_InitDungeonUnitPopupMenu("LFM_TANK");
+LFGHelper_InitDungeonUnitPopupMenu("LFM_HEALER");
+LFGHelper_InitDungeonUnitPopupMenu("LFM_DPS");
+LFGHelper_InitQuests("LFM_QUESTS");
+
+table.insert(UnitPopupMenus["FRIEND"], #UnitPopupMenus["FRIEND"], "LFG_HELPER");
+table.insert(UnitPopupMenus["FRIEND"], #UnitPopupMenus["FRIEND"], "LFM_TANK");
+table.insert(UnitPopupMenus["FRIEND"], #UnitPopupMenus["FRIEND"], "LFM_HEALER");
+table.insert(UnitPopupMenus["FRIEND"], #UnitPopupMenus["FRIEND"], "LFM_DPS");
+table.insert(UnitPopupMenus["FRIEND"], #UnitPopupMenus["FRIEND"], "LFM_QUESTS");
+table.insert(UnitPopupMenus["FRIEND"], #UnitPopupMenus["FRIEND"], "LFG_HELPER_END");
+
+function LFGHelper_ContexMenuButton(self)
+	local dropdownFrame = UIDROPDOWNMENU_INIT_MENU;
+	local unitButton = self.value;
+	
+	if string.find(unitButton, "LFM_TANK_DUNGEON", 1, true) then
+		message = LFG_Helper_Options["WhisperPattern"];
+		dungeon = string.gsub(unitButton, "LFM_TANK_DUNGEON_", "");
+		message = string.gsub(message, "%%unit%%", dropdownFrame.name);
+		message = string.gsub(message, "%%dungeon%%", dungeon);
+		message = string.gsub(message, "%%rule%%", "Tank");
+		LFGHelper_WhisperUnit(dropdownFrame.name, message);
+		return;
+	end		
+	
+	if string.find(unitButton, "LFM_HEALER_DUNGEON", 1, true) then
+		message = LFG_Helper_Options["WhisperPattern"];
+		dungeon = string.gsub(unitButton, "LFM_HEALER_DUNGEON_", "");
+		message = string.gsub(message, "%%unit%%", dropdownFrame.name);
+		message = string.gsub(message, "%%dungeon%%", dungeon);
+		message = string.gsub(message, "%%rule%%", "Healer");
+		LFGHelper_WhisperUnit(dropdownFrame.name, message);
+		return;
+	end
+	
+	if string.find(unitButton, "LFM_DPS_DUNGEON", 1, true) then
+		message = LFG_Helper_Options["WhisperPattern"];
+		dungeon = string.gsub(unitButton, "LFM_DPS_DUNGEON_", "");
+		message = string.gsub(message, "%%unit%%", dropdownFrame.name);
+		message = string.gsub(message, "%%dungeon%%", dungeon);
+		message = string.gsub(message, "%%rule%%", "DPS");
+		LFGHelper_WhisperUnit(dropdownFrame.name, message);
+		return;
+	end
+	
+	if string.find(unitButton, "LFM_QUESTS_QUEST_", 1, true) then
+		questName = string.gsub(unitButton, "LFM_QUESTS_QUEST_", "");
+		message = "LFM " .. questName .. " /w me for invite";
+		LFGHelper_WhisperUnit(dropdownFrame.name, message);
+		return;
+	end
+	
+end
+hooksecurefunc("UnitPopup_OnClick",LFGHelper_ContexMenuButton)
+
+-- Create queslog Button
+QuestFrameExitButton:Hide();
+local LFG_Questlog_Button = CreateFrame("Button", "LFG_Post_Button", QuestLogFrame, "UIPanelButtonTemplate");
+LFG_Questlog_Button:SetText("LFG");
+LFG_Questlog_Button:SetSize(QuestFrameExitButton:GetWidth(), QuestFrameExitButton:GetHeight());
+LFG_Questlog_Button:SetPoint(QuestFrameExitButton:GetPoint());
+LFG_Questlog_Button:SetScript("OnClick", function() LFGHelper_QuestLog_ButtonClick() end);
+
+function LFGHelper_QuestLog_ButtonClick()
+	if LFG_Helper_Options["ShortLFGChannel"] == "None" then
+		print("|cffff0000".. "Error no channel selected - please select a channel in the option menue");
+		return;
+	end
+	selectedQuestIndex = GetQuestLogSelection();
+	questTitle = GetQuestLogTitle(selectedQuestIndex);
+	message = "LFG/LFM " .. questTitle .. " /w me";
+	local index = GetChannelName(UIDropDownMenu_GetText(Option_ShortLFG_Channel));
+	SendChatMessage(message ,"CHANNEL" ,nil , index);
 end
 
 -- Create Frame UIPanelDialogTemplate
@@ -207,7 +377,7 @@ LFG_MainFrame:SetFrameStrata("HIGH");
 LFG_MainFrame:RegisterEvent("ADDON_LOADED");
 LFG_MainFrame:RegisterEvent("PLAYER_LOGOUT");
 LFG_MainFrame:RegisterEvent("CHAT_MSG_CHANNEL");
-LFG_MainFrame.numTabs  = 3;
+LFG_MainFrame.numTabs  = 4;
 LFG_MainFrame.text = LFG_MainFrame:CreateFontString(nil,"ARTWORK","GameFontHighlight");
 LFG_MainFrame.text:SetPoint("TOPLEFT", 30, -5);
 LFG_MainFrame.text:SetText("LFG Helper");
@@ -422,13 +592,27 @@ function LFG_PostBtn_OnClick()
 	
 	rollestr = rollestr:sub(1, -2)
 	
-	local String = LFG_Prefix_EditBox:GetText() .. " LF" .. UIDropDownMenu_GetText(LFG_Member_Count_DropDown) .. "M " .. LFG_COMB_EditBox:GetText() .. " \"" .. UIDropDownMenu_GetText(LFG_Dungeon_DropDown) .. "\"" .. rollestr .. " pref: (" .. ClassesString .. ") " .. LFG_Postfix_EditBox:GetText();
+	-- local String = LFG_Prefix_EditBox:GetText() .. " LF" .. UIDropDownMenu_GetText(LFG_Member_Count_DropDown) .. "M " .. LFG_COMB_EditBox:GetText() .. " \"" .. UIDropDownMenu_GetText(LFG_Dungeon_DropDown) .. "\"" .. rollestr .. " pref: (" .. ClassesString .. ") " .. LFG_Postfix_EditBox:GetText();
+	newstr = LFM_Pattern;
+	newstr = string.gsub(newstr, "%%prefix%%", LFG_Prefix_EditBox:GetText());
+	newstr = string.gsub(newstr, "%%count%%", UIDropDownMenu_GetText(LFG_Member_Count_DropDown));
+	newstr = string.gsub(newstr, "%%mid%%",  LFG_COMB_EditBox:GetText());
+	newstr = string.gsub(newstr, "%%subject%%", '"' .. UIDropDownMenu_GetText(LFG_Dungeon_DropDown) .. '"');
+	newstr = string.gsub(newstr, "%%rules%%", rollestr);
+	newstr = string.gsub(newstr, "%%classes%%", ClassesString);
+	newstr = string.gsub(newstr, "%%postfix%%", LFG_Postfix_EditBox:GetText());
+	newstr = string.gsub(newstr, "  ", " ");
+	newstr = string.gsub(newstr, "   ", " ");
+	newstr = string.gsub(newstr, "   ", " ");
+	newstr = string.gsub(newstr, "    ", " ");
+	newstr = string.gsub(newstr, "     ", " ");
+	
+	
 	local index = GetChannelName(UIDropDownMenu_GetText(LFG_ChatChanel_DropDown));
-	SendChatMessage(String ,"CHANNEL" ,nil , index);
-	-- print(String);
+	SendChatMessage(newstr ,"CHANNEL" ,nil , index);
+	-- print(newstr);
 	
 	LFGHelper_Save();
-		
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -510,28 +694,43 @@ UIDropDownMenu_SetText(LFM_ChatChanel_DropDown, "Chat Channel")
 function LFM_PostBtn_OnClick() 
 	level = UnitLevel("player");
 	localizedClass, englishClass, classIndex = UnitClass("player");
-	local String = "";
+
+	-- local String = "";
 	
-	if LFM_Prefix_EditBox:GetText() ~= "" then
-		String = String .. LFM_Prefix_EditBox:GetText() .. " ";
-	end
+	-- if LFM_Prefix_EditBox:GetText() ~= "" then
+		-- String = String .. LFM_Prefix_EditBox:GetText() .. " ";
+	-- end
 	
-	String = String .. englishClass .. " LEVEL " .. level .. " LFG ";
+	-- String = String .. englishClass .. " LEVEL " .. level .. " LFG ";
 	
-	if LFM_COMB_EditBox:GetText() ~= "" then
-		String = String .. LFM_COMB_EditBox:GetText() .. " ";
-	end
+	-- if LFM_COMB_EditBox:GetText() ~= "" then
+		-- String = String .. LFM_COMB_EditBox:GetText() .. " ";
+	-- end
 	
-	String = String .. UIDropDownMenu_GetText(LFM_Dungeon_DropDown) .. " ";
+	-- String = String .. UIDropDownMenu_GetText(LFM_Dungeon_DropDown) .. " ";
 	
-	if LFM_Postfix_EditBox:GetText() ~= "" then
-		String = String .. LFM_Postfix_EditBox:GetText();
-	end
+	-- if LFM_Postfix_EditBox:GetText() ~= "" then
+		-- String = String .. LFM_Postfix_EditBox:GetText();
+	-- end
+	
+	newstr = LFG_Pattern;
+	newstr = string.gsub(newstr, "%%prefix%%", LFM_Prefix_EditBox:GetText());
+	newstr = string.gsub(newstr, "%%lvl%%", level);
+	newstr = string.gsub(newstr, "%%class%%", localizedClass);
+	newstr = string.gsub(newstr, "%%mid%%", LFM_COMB_EditBox:GetText());
+	newstr = string.gsub(newstr, "%%subject%%", UIDropDownMenu_GetText(LFM_Dungeon_DropDown));
+	newstr = string.gsub(newstr, "%%postfix%%", LFM_Postfix_EditBox:GetText());
+	newstr = string.gsub(newstr, "  ", " ");
+	newstr = string.gsub(newstr, "   ", " ");
+	newstr = string.gsub(newstr, "   ", " ");
+	newstr = string.gsub(newstr, "    ", " ");
+	newstr = string.gsub(newstr, "     ", " ");
+	
 	
 	local index = GetChannelName(UIDropDownMenu_GetText(LFM_ChatChanel_DropDown));
-	SendChatMessage(String ,"CHANNEL" ,nil , index);
+	SendChatMessage(newstr ,"CHANNEL" ,nil , index);
 	
-	-- print(String);
+	-- print(newstr);
 	LFGHelper_Save();
 end
 
@@ -579,14 +778,14 @@ function LFG_createNotification(parent, headline, mCount, author)
 	local NotificationHeadline = CreateFrame("SimpleHTML", nil, NotificationFrame);
 	NotificationHeadline:SetPoint("TOPLEFT", 10, -10);
 	NotificationHeadline:SetFont('Fonts\\FRIZQT__.TTF', 12);
-	NotificationHeadline:SetSize(200, 30);
+	NotificationHeadline:SetSize(250, 30);
 	NotificationHeadline:SetText("<html><body><h1>[+".. mCount .. "] ".. headline .. "</h1></body></html>");
 	NotificationHeadline:SetTextColor(244,220,0,1);
 	
 	local NotificationAuthor = CreateFrame("SimpleHTML", nil, NotificationFrame);
-	NotificationAuthor:SetPoint("TOPLEFT", 10, -30);
+	NotificationAuthor:SetPoint("TOPLEFT", 10, -40);
 	NotificationAuthor:SetFont('Fonts\\FRIZQT__.TTF', 10);
-	NotificationAuthor:SetSize(200, 30);
+	NotificationAuthor:SetSize(250, 30);
 	NotificationAuthor:SetText("<html><body><h1>Leader: " .. author .. "</h1></body></html>");
 	
 	local NotificationApplyBtn = CreateFrame("Button", nil, NotificationFrame, "UIPanelButtonTemplate");
@@ -637,6 +836,87 @@ function LFG_ParseNotification(author, msg)
 	end	
 end
 
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- Options
+-----------------------------------------------------------------------------------------------------------------------------------------
+local LFG_TAB_4 = CreateFrame("Button", "LFG_MainFrameTab4", LFG_MainFrame, "CharacterFrameTabButtonTemplate");
+LFG_TAB_4:SetText("Options");
+LFG_TAB_4:SetID(4);
+LFG_TAB_4:SetPoint("BOTTOMLEFT", 280, -30);
+LFG_TAB_4:SetScript("OnClick", Tab_OnClick);
+LFG_TAB_4.content = CreateFrame("Frame", nil, LFG_MainFrame);
+LFG_TAB_4.content:SetSize(400, 550);
+LFG_TAB_4.content:SetPoint("CENTER");
+LFG_TAB_4.content:Hide();
+
+local Option_LFM_Pattern_Label = CreateFrame('SimpleHTML', 'LFM_COMB_Label', LFG_TAB_4.content);
+Option_LFM_Pattern_Label:SetPoint("TOPLEFT", 30, -60);
+Option_LFM_Pattern_Label:SetFont('Fonts\\FRIZQT__.TTF', 10);
+Option_LFM_Pattern_Label:SetSize(200, 30);
+Option_LFM_Pattern_Label:SetText("<html><body><p>LFM Text Pattern</p></body></html>");
+Option_LFM_Pattern_Label:SetTextColor(244,220,0,1);
+
+local Option_LFM_Pattern_EditBox = CreateFrame("EditBox", "LFM_COMB_EditBox", LFG_TAB_4.content, "InputBoxTemplate");
+Option_LFM_Pattern_EditBox:SetPoint("TOPLEFT", 30, -80);
+Option_LFM_Pattern_EditBox:SetSize(340, 30);
+Option_LFM_Pattern_EditBox:SetText("");
+Option_LFM_Pattern_EditBox:SetAutoFocus(false);
+
+local Option_LFG_Pattern_Label = CreateFrame('SimpleHTML', 'LFM_COMB_Label', LFG_TAB_4.content);
+Option_LFG_Pattern_Label:SetPoint("TOPLEFT", 30, -115);
+Option_LFG_Pattern_Label:SetFont('Fonts\\FRIZQT__.TTF', 10);
+Option_LFG_Pattern_Label:SetSize(200, 30);
+Option_LFG_Pattern_Label:SetText("<html><body><p>LFG Text Pattern</p></body></html>");
+Option_LFG_Pattern_Label:SetTextColor(244,220,0,1);
+
+local Option_LFG_Pattern_EditBox = CreateFrame("EditBox", "LFM_COMB_EditBox", LFG_TAB_4.content, "InputBoxTemplate");
+Option_LFG_Pattern_EditBox:SetPoint("TOPLEFT", 30, -135);
+Option_LFG_Pattern_EditBox:SetSize(340, 30);
+Option_LFG_Pattern_EditBox:SetText("");
+Option_LFG_Pattern_EditBox:SetAutoFocus(false);
+
+local Option_Whisper_Pattern_Label = CreateFrame('SimpleHTML', 'Option_Whisper_Pattern_Label', LFG_TAB_4.content);
+Option_Whisper_Pattern_Label:SetPoint("TOPLEFT", 30, -170);
+Option_Whisper_Pattern_Label:SetFont('Fonts\\FRIZQT__.TTF', 10);
+Option_Whisper_Pattern_Label:SetSize(200, 30);
+Option_Whisper_Pattern_Label:SetText("<html><body><p>Whisper Pattern</p></body></html>");
+Option_Whisper_Pattern_Label:SetTextColor(244,220,0,1);
+
+local Option_Whisper_Pattern_EditBox = CreateFrame("EditBox", "Option_Whisper_Pattern_EditBox", LFG_TAB_4.content, "InputBoxTemplate");
+Option_Whisper_Pattern_EditBox:SetPoint("TOPLEFT", 30, -190);
+Option_Whisper_Pattern_EditBox:SetSize(340, 30);
+Option_Whisper_Pattern_EditBox:SetText("");
+Option_Whisper_Pattern_EditBox:SetAutoFocus(false);
+
+local Option_Save_Button = CreateFrame("Button", "Option_Save_Button", LFG_TAB_4.content, "UIPanelButtonTemplate");
+Option_Save_Button:SetText("Save");
+Option_Save_Button:SetSize(120, 30);
+Option_Save_Button:SetPoint("BOTTOMLEFT", 260, 20);
+Option_Save_Button:SetScript("OnClick", function() LFGHelper_Save() end);
+
+local Option_reset_Button = CreateFrame("Button", "Option_reset_Button", LFG_TAB_4.content, "UIPanelButtonTemplate");
+Option_reset_Button:SetText("Defual Values");
+Option_reset_Button:SetSize(120, 30);
+Option_reset_Button:SetPoint("BOTTOMLEFT", 140, 20);
+Option_reset_Button:SetScript("OnClick", function() LFG_Helper_Restore_Options() end);
+
+local Option_EnabdleShortLFG = CreateFrame("CheckButton", "Option_EnabdleShortLFG", LFG_TAB_4.content, "UICheckButtonTemplate");
+Option_EnabdleShortLFG:SetPoint("TOPLEFT", 20, -245);
+Option_EnabdleShortLFG.text:SetText("Enable questlog LFG button");
+Option_EnabdleShortLFG:SetScript("OnClick", function() LFGHelper_Save(); LFGHelper_TriggerShortLFG(LFG_Helper_Options["EnableShortLFG"]); end);
+
+local Option_ShortLFG_Label = CreateFrame('SimpleHTML', 'Option_ShortLFG_Label', LFG_TAB_4.content);
+Option_ShortLFG_Label:SetPoint("TOPLEFT", 30, -292);
+Option_ShortLFG_Label:SetFont('Fonts\\FRIZQT__.TTF', 10);
+Option_ShortLFG_Label:SetSize(200, 30);
+Option_ShortLFG_Label:SetText("<html><body><p>Standardt Channel</p></body></html>");
+Option_ShortLFG_Label:SetTextColor(244,220,0,1);
+
+local Option_ShortLFG_Channel = CreateFrame("FRAME", "Option_ShortLFG_Channel", LFG_TAB_4.content, "UIDropDownMenuTemplate")
+Option_ShortLFG_Channel:SetPoint("TOPLEFT", 165, -285)
+UIDropDownMenu_SetWidth(Option_ShortLFG_Channel, 170)
+UIDropDownMenu_SetText(Option_ShortLFG_Channel, "Chat Channel")
+
 function LFGHelper_Save()
 	LFG_Text_Values = {};
 	LFG_Text_Values["Dungeon"] = UIDropDownMenu_GetText(LFG_Dungeon_DropDown);
@@ -669,9 +949,48 @@ function LFGHelper_Save()
 	LFM_Text_Values["Comb"] = LFM_COMB_EditBox:GetText();
 	
 	LFG_Notifications = LFG_Notification_EnableBtn:GetChecked();
-	-- print("saved");
 	
+	LFM_Pattern = Option_LFM_Pattern_EditBox:GetText();
+	LFG_Pattern = Option_LFG_Pattern_EditBox:GetText();
+	
+	LFG_Helper_Options["WhisperPattern"] = Option_Whisper_Pattern_EditBox:GetText();
+	LFG_Helper_Options["EnableShortLFG"] = Option_EnabdleShortLFG:GetChecked();
+	LFG_Helper_Options["ShortLFGChannel"] = UIDropDownMenu_GetText(Option_ShortLFG_Channel);
 end
+
+function LFG_Helper_Restore_Options() 
+	LFM_Pattern = "%prefix%" .. " LF%count%M " .. " %mid% " .. " %subject% " .. " %rules% pref: " .. "(%classes%)" .. " %postfix%";
+	LFG_Pattern = "%prefix% " .. "[%lvl%] %class% " .. " LFG %mid% " .. " \"%subject%\" " .. " %postfix%";
+	LFG_Helper_Options["WhisperPattern"] = "Hello %unit% we currently looking for a %rule% for \"%dungeon%\"";
+	Option_LFM_Pattern_EditBox:SetText(LFM_Pattern);
+	Option_LFG_Pattern_EditBox:SetText(LFG_Pattern);
+end
+
+-- Register Minimap Button
+local lfgh_addon = LibStub("AceAddon-3.0"):NewAddon("LFG-Helper", "AceConsole-3.0")
+local lfghLDB = LibStub("LibDataBroker-1.1"):NewDataObject("LfgHelperObject", {
+	type = "data source",
+	text = "LFG-Helper",
+	icon = "Interface/AddOns/LFG_Helper/Icons/MinimapButtonNormal",
+	OnClick = function() LFM_MinimapBtn_OnClick() end,
+})
+
+-- Initialize the Button
+function lfgh_addon:OnInitialize()
+	self.db = LibStub("AceDB-3.0"):New("LFG_HelperDB", {
+		profile = {
+			minimap = {
+				hide = false,
+			},
+		},
+	})
+		
+	lfgh_icon:Register("LfgHelperObject", lfghLDB, self.db.profile.minimap)
+end
+
+-- Show the Icon
+lfgh_icon:Show("LfgHelperObject")
+
 
 function onevent(self, event, arg1, arg2, ...)
 	if event == "ADDON_LOADED" then
@@ -713,7 +1032,7 @@ function onevent(self, event, arg1, arg2, ...)
 			
 			if LFG_Notifications ~= nil then
 				LFG_Notification_EnableBtn:SetChecked(LFG_Notifications);
-			end
+			end			
 		end	
 		
 		-- Load LFM options
@@ -723,21 +1042,64 @@ function onevent(self, event, arg1, arg2, ...)
 			LFM_Postfix_EditBox:SetText(LFM_Text_Values["Postfix"]);
 			LFM_COMB_EditBox:SetText(LFM_Text_Values["Comb"]);
 		end
+			
+		if LFM_Pattern ~= nil then
+			Option_LFM_Pattern_EditBox:SetText(LFM_Pattern);
+		else
+			LFM_Pattern = "%prefix%" .. " LF%count%M " .. " %mid% " .. " %subject% " .. " %rules% pref: " .. "(%classes%)" .. " %postfix%";
+			Option_LFM_Pattern_EditBox:SetText(LFM_Pattern);
+		end
+		
+		if LFG_Pattern ~= nil then
+			Option_LFG_Pattern_EditBox:SetText(LFG_Pattern);
+		else
+			LFG_Pattern = "%prefix% " .. "[%lvl%] %class% " .. " LFG %mid% " .. " \"%subject%\" " .. " %postfix%"
+			Option_LFG_Pattern_EditBox:SetText(LFG_Pattern);
+		end
 		
 		-- Load Dropdown Values
 		wipe(MultiMenuDropDownContent);
 		MultiMenuDropDownContent = {};
 		MultiMenuDropDownContent["dungeons"] = LFGHelper_GetDungeons();
+		MultiMenuDropDownContent["raids"] = LFGHelper_GetRaids();
 		MultiMenuDropDownContent["quests"] = LFGHelper_GetQuests();
+		MultiMenuDropDownContent["battlegrounds"] = LFGHelper_GetBattlegrounds();
 		
 		wipe(ChatChanel);
 		ChatChanel = LFGHelper_GetChanels();
-		
+		-- Load lfg droplist
 		LFGHelperDropDownMultiContent(MultiMenuDropDownContent, LFG_Dungeon_DropDown);
 		LFGHelperSetDropDownContent(ChatChanel, LFG_ChatChanel_DropDown);
-
+		-- Load lfm droplist
 		LFGHelperDropDownMultiContent(MultiMenuDropDownContent, LFM_Dungeon_DropDown);
-		LFGHelperSetDropDownContent(ChatChanel, LFM_ChatChanel_DropDown);	
+		LFGHelperSetDropDownContent(ChatChanel, LFM_ChatChanel_DropDown);
+		-- Load option droplist
+		LFGHelperSetDropDownContent(ChatChanel, Option_ShortLFG_Channel);
+								
+		-- Load the option page values
+		if LFG_Helper_Options ~= nil then
+			Option_EnabdleShortLFG:SetChecked(LFG_Helper_Options["EnableShortLFG"]);
+			UIDropDownMenu_SetText(Option_ShortLFG_Channel, LFG_Helper_Options["ShortLFGChannel"]);
+			LFGHelper_TriggerShortLFG(LFG_Helper_Options["EnableShortLFG"]);
+			
+			-- if the "WhisperPattern" option not exist, create the normal value for it
+			if LFG_Helper_Options["WhisperPattern"] == nil then
+				LFG_Helper_Options["WhisperPattern"] = "Hello %unit% we currently looking for a %rule% for \"%dungeon%\"";
+			end
+			Option_Whisper_Pattern_EditBox:SetText(LFG_Helper_Options["WhisperPattern"]);	
+			
+		else
+			LFG_Helper_Options = {};
+			LFG_Helper_Options["EnableShortLFG"] = false;
+			LFG_Helper_Options["ShortLFGChannel"] = "None";
+			LFG_Helper_Options["WhisperPattern"] = "Hello %unit% we currently looking for %rule% for the dungeon %dungeon%";
+			
+			Option_EnabdleShortLFG:SetChecked(LFG_Helper_Options["EnableShortLFG"]);
+			UIDropDownMenu_SetText(Option_ShortLFG_Channel, LFG_Helper_Options["ShortLFGChannel"]);
+			LFGHelper_TriggerShortLFG(LFG_Helper_Options["EnableShortLFG"]);
+			Option_Whisper_Pattern_EditBox:SetText(LFG_Helper_Options["WhisperPattern"]);
+		end
+		
 	end
 	
 	if event == "CHAT_MSG_CHANNEL" then
@@ -748,6 +1110,7 @@ function onevent(self, event, arg1, arg2, ...)
 	
 end
 LFG_MainFrame:SetScript("OnEvent", onevent);
+
 
 -- Minimap button "Interface\\LFG_Helper\\Icons\\Logo"
 local Visible = false;
@@ -760,15 +1123,20 @@ MinimapBtn:SetHighlightTexture("Interface/AddOns/LFG_Helper/Icons/LogoHighliteBt
 MinimapBtn:SetScript("OnClick", function() LFM_MinimapBtn_OnClick() end);
 MinimapBtn:SetFrameStrata("HIGH");
 MinimapBtn:IsMovable(true);
+MinimapBtn:Hide();
 
 function LFM_MinimapBtn_OnClick() 
+	-- ToggleDropDownMenu(1, nil, LFGHelper_MiniMenue, "cursor", 3, -3);
+
 	if LFG_MainFrame:IsShown() == false then
 		LFG_MainFrame:Show();
 		-- reload muli content table
 		wipe(MultiMenuDropDownContent);
 		MultiMenuDropDownContent = {};
 		MultiMenuDropDownContent["dungeons"] = LFGHelper_GetDungeons();
+		MultiMenuDropDownContent["raids"] = LFGHelper_GetRaids();
 		MultiMenuDropDownContent["quests"] = LFGHelper_GetQuests();
+		MultiMenuDropDownContent["battlegrounds"] = LFGHelper_GetBattlegrounds();
 		-- reload channel table
 		wipe(ChatChanel);
 		ChatChanel = LFGHelper_GetChanels();
@@ -778,8 +1146,20 @@ function LFM_MinimapBtn_OnClick()
 		-- reload lfm channel
 		LFGHelperDropDownMultiContent(MultiMenuDropDownContent, LFM_Dungeon_DropDown);
 		LFGHelperSetDropDownContent(ChatChanel, LFM_ChatChanel_DropDown);
+		-- reload option channel
+		LFGHelperSetDropDownContent(ChatChanel, Option_ShortLFG_Channel);
 	else
 		LFG_MainFrame:Hide();
+	end
+end
+
+function LFGHelper_TriggerShortLFG(enabled)
+	if enabled then
+		QuestFrameExitButton:Hide();
+		LFG_Questlog_Button:Show();
+	else
+		QuestFrameExitButton:Show();
+		LFG_Questlog_Button:Hide();
 	end
 end
 

@@ -247,13 +247,9 @@ end
 function Spy:UpdateBarTextures()
 	for k, v in pairs(Spy.MainWindow.Rows) do
 		v.StatusBar:SetStatusBarTexture(SM:Fetch(SM.MediaType.STATUSBAR, Spy.db.profile.BarTexture))
---		if IsAddOnLoaded("Tukui") then v.StatusBar:SetStatusBarTexture("Interface\\AddOns\\Tukui\\medias\\textures\\normTex.tga") end
---		if IsAddOnLoaded("ElvUI") then v.StatusBar:SetStatusBarTexture("Interface\\AddOns\\ElvUI\\media\\textures\\normTex.tga") end
 	end
-
 	if Spy.db.profile.Font then
 		Spy:SetFont(Spy.db.profile.Font)
---		if IsAddOnLoaded("Tukui") then Spy:SetFont("Interface\AddOns\Tukui\medias\fonts\normal_font.ttf") end
 	end
 end
 
@@ -262,8 +258,6 @@ function Spy:SetBarTextures(handle)
 	Spy.db.profile.BarTexture=handle
 	for k, v in pairs(Spy.MainWindow.Rows) do
 		v.StatusBar:SetStatusBarTexture(Texture)
---		if IsAddOnLoaded("Tukui") then v.StatusBar:SetStatusBarTexture("Interface\\AddOns\\Tukui\\medias\\textures\\normTex.tga") end
---		if IsAddOnLoaded("ElvUI") then v.StatusBar:SetStatusBarTexture("Interface\\AddOns\\ElvUI\\media\\textures\\normTex.tga") end
 	end
 end
 
@@ -508,7 +502,6 @@ function Spy:CreateMainWindow()
 		local theFrame = Spy.MainWindow
 		theFrame:SetResizable(true)
 		theFrame:SetMinResize(90, 34)
---		theFrame:SetMinResize(170, 34)		
 		theFrame:SetMaxResize(300, 264)
 		theFrame:SetScript("OnSizeChanged",
 		function(self)
@@ -1089,8 +1082,7 @@ function Spy:ShowAlert(type, name, source, location)
 		Spy.AlertType = type
 	elseif type == "prowl" and Spy.AlertType ~= "kos" and Spy.AlertType ~= "kosguild" then
 		Spy.Colors:RegisterBorder("Alert", "Stealth Border", Spy.AlertWindow)
---		Spy.AlertWindow.Icon:SetBackdrop({ bgFile = "Interface\\Icons\\Ability_druid_prowl" })
-		Spy.AlertWindow.Icon:SetBackdrop({ bgFile = "Interface\\Icons\\Ability_Ambush" })		
+		Spy.AlertWindow.Icon:SetBackdrop({ bgFile = "Interface\\Icons\\Ability_Ambush" }) --++		
 		Spy.Colors:RegisterBorder("Alert", "Background", Spy.AlertWindow.Icon)
 		Spy.Colors:RegisterBackground("Alert", "Icon", Spy.AlertWindow.Icon)
 		Spy.Colors:RegisterFont("Alert", "Stealth Text", Spy.AlertWindow.Title)

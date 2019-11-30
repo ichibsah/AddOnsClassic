@@ -145,6 +145,7 @@ L["Не отображать в чате отправляемые сообщен
 L["Не отображать в чате системные сообщения"] = "Do not display system messages in Chat"
 L["Не отображать в чате сообщения аддона"] = "Do not display addon messages in Chat"
 L["Не отображать значок у миникарты"] = "Do not display the minimap icon."
+L["Невозможно выполнить действие."] = "Unable to complete the action."
 L["Нельзя добавить пустое сообщение"] = "Cannot add empty message"
 L["Нельзя сохранить пустое сообщение"] = "Cannot save empty message"
 L["Неправильный шаблон"] = "Wrong template"
@@ -179,6 +180,8 @@ L[ [=[Синхронизация с %s.
 %d/%d]=] ] = [=[Sync with %s.
 %d/%d]=]
 L["Слово NAME заглавными буквами будет заменено на название вашей гильдии."] = "The word NAME in capital letters will be replaced with the name of your guild."
+L["Сообщать о добавлении в черный список в офицерский канал."] = "Report adding a player to the blacklist in the officer channel"
+L["Сообщение, если приглашение отклонено"] = "Message if invitation is declined"
 L["Сохранить"] = "Save"
 L["Сочетание клавиш уже занято"] = "Keyboard shortcut busy"
 L["Список отправленных приглашений"] = "List of sent invitations"

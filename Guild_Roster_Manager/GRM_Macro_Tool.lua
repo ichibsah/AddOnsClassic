@@ -3101,10 +3101,6 @@ end
 
 
 
-
-
-
-
 -- Method:          GRM.SetNumHoursToKickValue()
 -- What it Does:    Resets the numberOfHours value if player changes it, on the fly
 -- Purpose:         UX
@@ -3158,19 +3154,19 @@ end
 GRM_UI.RefreshToolButtonsOnUpdate = function()
     local count = #GRM.GetNamesByFilterRules();
 
-    if GRM_UI.GRM_RosterChangeLogFrame.GRM_LoadToolButton:IsVisible() then
+    if GRM_UI.GRM_LoadToolButton:IsVisible() then
         if count > 0 then
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_LoadToolButtonText:SetText ( GRM.L ( "Macro Tool: {num}" , nil , nil , count ) );
+            GRM_UI.GRM_LoadToolButtonText:SetText ( GRM.L ( "Macro Tool: {num}" , nil , nil , count ) );
         else
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_LoadToolButtonText:SetText ( GRM.L ( "Macro Tool" ) );
+            GRM_UI.GRM_LoadToolButtonText:SetText ( GRM.L ( "Macro Tool" ) );
         end
     end
 
-    if GRM_UI.GRM_RosterChangeLogFrame.GRM_LoadToolOldRosterButton:IsVisible() then
+    if GRM_UI.GRM_LoadToolOldRosterButton:IsVisible() then
         if count > 0 then
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_LoadToolOldRosterButtonText:SetText ( GRM.L ( "Macro Tool: {num}" , nil , nil , count ) );
+            GRM_UI.GRM_LoadToolOldRosterButtonText:SetText ( GRM.L ( "Macro Tool: {num}" , nil , nil , count ) );
         else
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_LoadToolOldRosterButtonText:SetText ( GRM.L ( "Macro Tool" ) );
+            GRM_UI.GRM_LoadToolOldRosterButtonText:SetText ( GRM.L ( "Macro Tool" ) );
         end
     end
 end

@@ -1,9 +1,6 @@
 # <FGI> FastGuildInvite
 
-## 47 (2019-10-22)
+## 57 (2019-11-28)
 
 
-- blacklist RegExp change  
-    blacklist chat command fix  
-    blacklist lowercase fix  
-- interface disappearance fixed  
+- remove debug print  
