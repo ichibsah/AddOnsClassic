@@ -5,7 +5,7 @@ if not L then return end
 -- Addon information
 L["Spy"] = "Spy"
 L["Version"] = "버전"
-L["VersionCheck"] = "|cff9933ffWrong version of Spy loaded. Remove this version and install Spy Classic."
+L["VersionCheck"] = "|cffc41e3a경고! 잘못된 Spy 버전이 설치되었습니다. 이 버전을 제거하고 Spy Classic 을 설치하십시오."
 L["SpyEnabled"] = "|cff9933ffSpy 애드온이 활성화되었습니다.."
 L["SpyDisabled"] = "|cff9933ffSpy 애드온이 비활성화되었습니다. |cffffffff/spy enable|cff9933ff 을 입력해 활성화 시키십시오."
 L["UpgradeAvailable"] = "|cff9933ffA Spy의 새로운 버전을 사용할 수 있습니다. 다운로드 주소:\n|cffffffffhttps://www.curseforge.com/wow/addons/spy-classic"
@@ -302,6 +302,7 @@ L["StatsSeparator"] = "  "
 L["StatsLoses"] = "|cff0070dd패: "
 L["Located"] = "위치:"
 L["Yards"] = "야드"
+L["LocalDefenseChannelName"] = "수비"
 
 Spy_KOSReasonListLength = 6
 Spy_KOSReasonList = {
@@ -438,9 +439,6 @@ L["GOBLIN"] = "고블린"
 -- Stealth abilities
 L["Stealth"] = "은신"
 L["Prowl"] = "숨기"
-
--- Channel names
-L["LocalDefenseChannelName"] = "수비"
 
 --++ Minimap color codes
 --L["MinimapClassTextDEATHKNIGHT"] = "|cffc41e3a"

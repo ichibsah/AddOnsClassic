@@ -1,6 +1,6 @@
-## v4.8.20 Changes
+## v4.8.22 Changes
 
-* Fixed bug with saving of Accounting data.
-* Fixed bug with AH not properly hiding.
+* Fixed error when evaluating some custom prices.
+* Fixed error during Sniper.
 
 [Known Issues](http://support.tradeskillmaster.com/display/KB/TSM4+Currently+Known+Issues)

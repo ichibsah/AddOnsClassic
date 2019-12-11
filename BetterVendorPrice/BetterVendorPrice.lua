@@ -28,7 +28,7 @@ local L = BVP.L
 -- BVP.debug = 9 -- to debug before saved variables are loaded
 
 BVP.slashCmdName = "bvp"
-BVP.addonHash = "6242e25"
+BVP.addonHash = "c818409"
 BVP.savedVarName = "betterVendorPriceSaved"
 
 -- default value
@@ -74,12 +74,12 @@ function BVP.Slash(arg) -- can't be a : because used directly as slash command
   if cmd == "v" then
     -- version
     BVP:PrintDefault("BetterVendorPrice " .. BVP.manifestVersion ..
-                       " (6242e25) by MooreaTv (moorea@ymail.com)")
+                       " (c818409) by MooreaTv (moorea@ymail.com)")
   elseif cmd == "b" then
     local subText = L["Please submit on discord or on https://|cFF99E5FFbit.ly/vendorbug|r  or email"]
     BVP:PrintDefault(L["Better Vendor Price bug report open: "] .. subText)
     -- base molib will add version and date/timne
-    BVP:BugReport(subText, "6242e25\n\n" .. L["Bug report from slash command"])
+    BVP:BugReport(subText, "c818409\n\n" .. L["Bug report from slash command"])
   elseif cmd == "c" then
     -- Show config panel
     -- InterfaceOptionsList_DisplayPanel(BVP.optionsPanel)
@@ -121,7 +121,7 @@ function BVP:CreateOptionsPanel()
   BVP.optionsPanel = p
   p:addText(L["Better Vendor Price options"], "GameFontNormalLarge"):Place()
   p:addText(L["These options let you control the behavior of BetterVendorPrice"] .. " " .. BVP.manifestVersion ..
-              " 6242e25"):Place()
+              " c818409"):Place()
   p:addText(L["Get Auction House DataBase (|cFF99E5FFAHDB|r) v0.12 or newer to see auction information on the toolip!"])
     :Place(0, 16)
 
@@ -212,8 +212,9 @@ function BVP.ToolTipHook(t)
     BVP:Debug(1, "No item link for % on %", name, t:GetName())
     return
   end
+  local compactView = BVP.holdShiftForMore and not IsShiftKeyDown()
   local auctionData = {}
-  if BVP.showAhdb and AuctionDB and AuctionDB.AHGetAuctionInfoByLink then
+  if BVP.showAhdb and AuctionDB and AuctionDB.AHGetAuctionInfoByLink and not compactView then
     auctionData = AuctionDB:AHGetAuctionInfoByLink(link)
   end
   if auctionData.numAuctions then
@@ -259,14 +260,14 @@ function BVP.ToolTipHook(t)
     local curValue = count * itemSellPrice
     local maxValue = itemStackCount * itemSellPrice
     -- if/else getting kinda ugly here
-    if BVP.holdShiftForMore and not IsShiftKeyDown() then
+    if compactView then
       if count > 1 then
         if count == itemStackCount then
           SetTooltipMoney(t, maxValue, "STATIC", L["Vendors for:"],
-                          string.format(L[" (curr. full stack of %d)"], itemStackCount))
+                          string.format(L[" (full stack of %d)"], itemStackCount))
         else
           SetTooltipMoney(t, curValue, "STATIC", L["Vendors for:"],
-                          string.format(L[" (current stack of %d/%d)"], count, itemStackCount))
+                          string.format(L[" (curr. stack of %d/%d)"], count, itemStackCount))
         end
       else
         SetTooltipMoney(t, itemSellPrice, "STATIC", L["Vendors for:"],

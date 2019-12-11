@@ -610,7 +610,7 @@ function LFG_PostBtn_OnClick()
 	
 	local index = GetChannelName(UIDropDownMenu_GetText(LFG_ChatChanel_DropDown));
 	SendChatMessage(newstr ,"CHANNEL" ,nil , index);
-	-- print(newstr);
+	LFG_Helper_LastMessage = newstr;
 	
 	LFGHelper_Save();
 end
@@ -729,8 +729,7 @@ function LFM_PostBtn_OnClick()
 	
 	local index = GetChannelName(UIDropDownMenu_GetText(LFM_ChatChanel_DropDown));
 	SendChatMessage(newstr ,"CHANNEL" ,nil , index);
-	
-	-- print(newstr);
+	LFG_Helper_LastMessage = newstr;
 	LFGHelper_Save();
 end
 
@@ -768,31 +767,88 @@ LFG_Notification_EnableBtn:SetPoint("TOPLEFT", 20, -30);
 LFG_Notification_EnableBtn.text:SetText("Enable Notification's (beta)");
 LFG_Notification_EnableBtn:SetScript("OnClick", function() LFGHelper_Save(); end);
 
+local LFG_Add_Options_PatternFrame = CreateFrame("Frame", "LFG_NotificationPatternFrame", LFG_TAB_3.content, "InsetFrameTemplate2");
+LFG_Add_Options_PatternFrame:SetPoint("TOPLEFT", 20, -80);
+LFG_Add_Options_PatternFrame:SetSize(355, 60);
+
+local LFG_LFGPattern_CheckBox = CreateFrame("CheckButton", "LFG_LFGPattern_CheckBox", LFG_Add_Options_PatternFrame, "UICheckButtonTemplate");
+LFG_LFGPattern_CheckBox:SetPoint("LEFT", 15, 0);
+LFG_LFGPattern_CheckBox.text:SetText("LFG Notification");
+LFG_LFGPattern_CheckBox:SetScript("OnClick", function() LFGHelper_Save(); end);
+
+local LFG_LFMPattern_CheckBox = CreateFrame("CheckButton", "LFG_LFMPattern_CheckBox", LFG_Add_Options_PatternFrame, "UICheckButtonTemplate");
+LFG_LFMPattern_CheckBox:SetPoint("LEFT", 150, 0);
+LFG_LFMPattern_CheckBox.text:SetText("LFM Notification");
+LFG_LFMPattern_CheckBox:SetScript("OnClick", function() LFGHelper_Save(); end);
+
+local LFG_NotificationPatternFrame = CreateFrame("Frame", "LFG_NotificationPatternFrame", LFG_TAB_3.content, "InsetFrameTemplate2");
+LFG_NotificationPatternFrame:SetPoint("TOPLEFT", 20, -150);
+LFG_NotificationPatternFrame:SetSize(355, 200);
+
+local LFG_NotificationPatternScrollFrame = CreateFrame("ScrollFrame", "TM_TalentTemplatePreviewScrollFrame", LFG_NotificationPatternFrame, "UIPanelScrollFrameTemplate");
+LFG_NotificationPatternScrollFrame:SetPoint("TOPLEFT", 10, -10);
+LFG_NotificationPatternScrollFrame:SetSize("315", "180");
+
+local LFG_NotificationPatternScrollChild = CreateFrame("Frame", "LFG_NotificationPatternScrollChild", nil);
+LFG_NotificationPatternScrollChild:SetSize("345", "800");
+LFG_NotificationPatternScrollChild:SetPoint("TOPLEFT");
+LFG_NotificationPatternScrollFrame:SetScrollChild(LFG_NotificationPatternScrollChild);
+
+local LFG_Add_Notification_PatternFrame = CreateFrame("Frame", "LFG_NotificationPatternFrame", LFG_TAB_3.content, "InsetFrameTemplate2");
+LFG_Add_Notification_PatternFrame:SetPoint("TOPLEFT", 20, -360);
+LFG_Add_Notification_PatternFrame:SetSize(355, 40);
+
+local LFG_NotificationAddPattern_EditBox = CreateFrame("EditBox", "LFG_NotificationAddPattern_EditBox", LFG_Add_Notification_PatternFrame, "InputBoxTemplate");
+LFG_NotificationAddPattern_EditBox:SetPoint("TOPLEFT", 15, -5);
+LFG_NotificationAddPattern_EditBox:SetSize(230, 30);
+LFG_NotificationAddPattern_EditBox:SetText("");
+LFG_NotificationAddPattern_EditBox:SetAutoFocus(false);
+
+local LFG_NotificationAddPattern_Button = CreateFrame("Button", nil, LFG_Add_Notification_PatternFrame, "UIPanelButtonTemplate");
+LFG_NotificationAddPattern_Button:SetPoint("TOPLEFT", 250, -10);
+LFG_NotificationAddPattern_Button:SetSize(90, 22);
+LFG_NotificationAddPattern_Button:SetText("add pattern");
+LFG_NotificationAddPattern_Button:SetScript("OnClick", function() lfgh_create_notification_pattern(LFG_NotificationAddPattern_EditBox:GetText()); end);
+
 local frames = {};
-function LFG_createNotification(parent, headline, mCount, author)
+function LFG_createNotification(parent, headline, mCount, author, mode)
 	local NotificationFrame = CreateFrame("Frame", nil, parent, "GlowBoxTemplate");
 	NotificationFrame:SetSize(290, 100);
+	NotificationFrame:SetFrameStrata("HIGH");
 	local ticker = C_Timer.NewTicker(10, function() LFG_CloseNotification(NotificationFrame); end)
 	local frameTable = {NotificationFrame, true};
+		
+	local localizedClass, englishClass, classIndex = UnitClass(author);
 	
 	local NotificationHeadline = CreateFrame("SimpleHTML", nil, NotificationFrame);
 	NotificationHeadline:SetPoint("TOPLEFT", 10, -10);
-	NotificationHeadline:SetFont('Fonts\\FRIZQT__.TTF', 12);
+	NotificationHeadline:SetFont('Fonts\\FRIZQT__.TTF', 8);
+	NotificationHeadline:SetFont('h1', 'Fonts\\FRIZQT__.TTF', 12);
+	NotificationHeadline:SetFont('h2', 'Fonts\\FRIZQT__.TTF', 10);
+	NotificationHeadline:SetFont('h3', 'Fonts\\FRIZQT__.TTF', 8);
 	NotificationHeadline:SetSize(250, 30);
-	NotificationHeadline:SetText("<html><body><h1>[+".. mCount .. "] ".. headline .. "</h1></body></html>");
-	NotificationHeadline:SetTextColor(244,220,0,1);
+	NotificationHeadline:SetText("<html><body><h1>[+".. mCount .. "] ".. headline .. "</h1><br/><h2>Author: " .. author .. "</h2></body></html>");
+	NotificationHeadline:SetTextColor('h1', 244,220,0,1);
 	
-	local NotificationAuthor = CreateFrame("SimpleHTML", nil, NotificationFrame);
-	NotificationAuthor:SetPoint("TOPLEFT", 10, -40);
-	NotificationAuthor:SetFont('Fonts\\FRIZQT__.TTF', 10);
-	NotificationAuthor:SetSize(250, 30);
-	NotificationAuthor:SetText("<html><body><h1>Leader: " .. author .. "</h1></body></html>");
+	-- local NotificationAuthor = CreateFrame("SimpleHTML", nil, NotificationFrame);
+	-- NotificationAuthor:SetPoint("TOPLEFT", 10, -40);
+	-- NotificationAuthor:SetFont('Fonts\\FRIZQT__.TTF', 10);
+	-- NotificationAuthor:SetSize(250, 30);
+	-- NotificationAuthor:SetText("<html><body><h1>Leader: " .. author .. "</h1></body></html>");
 	
-	local NotificationApplyBtn = CreateFrame("Button", nil, NotificationFrame, "UIPanelButtonTemplate");
-	NotificationApplyBtn:SetPoint("CENTER", 0, -25);
-	NotificationApplyBtn:SetSize(120, 30);
-	NotificationApplyBtn:SetText("Apply");
-	NotificationApplyBtn:SetScript("OnClick", function() LFG_NoificationApply(author, headline); end);
+	if mode == "lfg" then
+		local NotificationApplyBtn = CreateFrame("Button", nil, NotificationFrame, "UIPanelButtonTemplate");
+		NotificationApplyBtn:SetPoint("RIGHT", -5, -30);
+		NotificationApplyBtn:SetSize(120, 30);
+		NotificationApplyBtn:SetText("Invite");
+		NotificationApplyBtn:SetScript("OnClick", function() LFG_NoificationInvite(author, headline); end);
+	else	
+		local NotificationApplyBtn = CreateFrame("Button", nil, NotificationFrame, "UIPanelButtonTemplate");
+		NotificationApplyBtn:SetPoint("RIGHT", -5, -30);
+		NotificationApplyBtn:SetSize(120, 30);
+		NotificationApplyBtn:SetText("Apply");
+		NotificationApplyBtn:SetScript("OnClick", function() LFG_NoificationApply(author, headline); end);
+	end
 	
 	table.insert(frames, frameTable);
 	LFG_createNotificationList();
@@ -827,13 +883,68 @@ function LFG_NoificationApply(groupLeader, headline)
 	SendChatMessage(message, "WHISPER", "Common", groupLeader);
 end
 
+function LFG_NoificationInvite(player, headline)
+	local level = UnitLevel("player");
+	local localizedClass, englishClass, classIndex = UnitClass("player");
+	local message = "Invite for " .. headline;
+	
+	SendChatMessage(message, "WHISPER", "Common", player);
+	InviteUnit(player);
+end
+
 function LFG_ParseNotification(author, msg)
+	lfg = string.find(msg, "LFG");
+	lfm2 = string.find(msg, "LF(%d+)M");
+	lfm = string.find(msg, "LFM");
 	mCount = string.match(msg, "LF(%d+)M");
 	dungeon = string.match(msg, '"(.+)"');
+
+		
+	if LFG_Notifications["lfm"] == true and lfm ~= nil then
+		if lfg_pattern_contains(msg) == true then
+			LFG_createNotification(LFG_NotificationFrame_ScrollChild, msg, 0, author, "lfm");
+		end
+	end
 	
-	if mCount ~= nil and dungeon ~= nil then
-		LFG_createNotification(LFG_NotificationFrame_ScrollChild, dungeon, mCount, author);
-	end	
+	if LFG_Notifications["lfm"] == true and lfm2 ~= nil then
+		if lfg_pattern_contains(msg) == true then
+			LFG_createNotification(LFG_NotificationFrame_ScrollChild, msg, mCount, author, "lfm");
+		end
+	end
+	
+	if LFG_Notifications["lfg"] == true and lfg ~= nil then
+		if lfg_pattern_contains(msg) == true then
+			LFG_createNotification(LFG_NotificationFrame_ScrollChild, msg, 0, author, "lfg");
+		end
+	end
+
+end
+
+function lfg_pattern_contains(msg) 
+	if LFG_NotificationPattern ~= nil then
+		for i in pairs(LFG_NotificationPattern) do
+			if LFG_NotificationPattern[i]["state"] == true then
+				local name = LFG_NotificationPattern[i]["name"];
+				local mat = string.find(msg, name);
+				if mat ~= nil then 
+					return true;
+				end
+			end
+		end
+	end
+	return false;
+end
+
+function lfg_pattern_change_state(name, state) 
+	for i in pairs(LFG_NotificationPattern) do
+		if LFG_NotificationPattern[i]["name"] == name then
+			LFG_NotificationPattern[i]["state"] = state;
+		end
+	end
+end
+
+function lfg_pattern_change_state_by_id(id, state)
+	LFG_NotificationPattern[id]["state"] = state;
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -917,6 +1028,54 @@ Option_ShortLFG_Channel:SetPoint("TOPLEFT", 165, -285)
 UIDropDownMenu_SetWidth(Option_ShortLFG_Channel, 170)
 UIDropDownMenu_SetText(Option_ShortLFG_Channel, "Chat Channel")
 
+
+function lfgh_create_notification_pattern(name)
+	pattern = {};
+	pattern["name"] = name;
+	pattern["state"] = false;
+	table.insert(LFG_NotificationPattern, pattern);
+	create_notification_pattern();
+end
+
+local lfg_notantification_pattern_frames = {};
+function create_notification_pattern_frame(name, state, parent, width, height, index) 
+	LFG_Notification_Pattern_Frane = nil;
+	i = index -1;
+	if i == 0 then
+		LFG_Notification_Pattern_Frane = CreateFrame("Frame", "LFG_Notification_Pattern_Option_" .. name, parent);
+		LFG_Notification_Pattern_Frane:SetPoint("TOPLEFT", 0, -((i * height) + (i * 5)));
+		LFG_Notification_Pattern_Frane:SetSize(width, height);
+		LFG_Notification_Pattern_Frane:SetBackdropColor(0,0,0, 1);
+	else
+		LFG_Notification_Pattern_Frane = CreateFrame("Frame", "LFG_Notification_Pattern_Option_" .. name, parent);
+		LFG_Notification_Pattern_Frane:SetPoint("TOPLEFT", 0, -((i * height) + (i * 5)));
+		LFG_Notification_Pattern_Frane:SetSize(width, height);
+		LFG_Notification_Pattern_Frane:SetBackdropColor(0,0,0, 1);
+	end
+	
+	local LFG_Notification_Pattern_Option = CreateFrame("CheckButton", "LFG_Notification_Pattern_Option_" .. name, LFG_Notification_Pattern_Frane, "UICheckButtonTemplate");
+	LFG_Notification_Pattern_Option:SetPoint("TOPLEFT", 0, 0);
+	LFG_Notification_Pattern_Option.text:SetText(name);
+	LFG_Notification_Pattern_Option:SetChecked(state);
+	LFG_Notification_Pattern_Option:SetScript("OnClick", function() lfg_pattern_change_state_by_id(index, LFG_Notification_Pattern_Option:GetChecked()); create_notification_pattern(); end);
+	
+	table.insert(lfg_notantification_pattern_frames, LFG_Notification_Pattern_Frane);
+end
+
+function create_notification_pattern()
+	
+	for i in pairs(lfg_notantification_pattern_frames) do
+		lfg_notantification_pattern_frames[i]:Hide();
+	end
+	
+	wipe(lfg_notantification_pattern_frames);
+	for i in pairs(LFG_NotificationPattern) do
+		create_notification_pattern_frame(LFG_NotificationPattern[i]["name"], LFG_NotificationPattern[i]["state"], LFG_NotificationPatternScrollChild, 300, 20, i);
+	end	
+end
+
+
+
 function LFGHelper_Save()
 	LFG_Text_Values = {};
 	LFG_Text_Values["Dungeon"] = UIDropDownMenu_GetText(LFG_Dungeon_DropDown);
@@ -948,7 +1107,11 @@ function LFGHelper_Save()
 	LFM_Text_Values["Postfix"] = LFM_Postfix_EditBox:GetText();
 	LFM_Text_Values["Comb"] = LFM_COMB_EditBox:GetText();
 	
-	LFG_Notifications = LFG_Notification_EnableBtn:GetChecked();
+	LFG_Notifications = {};
+	LFG_Notifications["acitve"] = LFG_Notification_EnableBtn:GetChecked();
+	LFG_Notifications["lfg"] = LFG_LFGPattern_CheckBox:GetChecked();
+	LFG_Notifications["lfm"] = LFG_LFMPattern_CheckBox:GetChecked();
+	
 	
 	LFM_Pattern = Option_LFM_Pattern_EditBox:GetText();
 	LFG_Pattern = Option_LFG_Pattern_EditBox:GetText();
@@ -964,6 +1127,29 @@ function LFG_Helper_Restore_Options()
 	LFG_Helper_Options["WhisperPattern"] = "Hello %unit% we currently looking for a %rule% for \"%dungeon%\"";
 	Option_LFM_Pattern_EditBox:SetText(LFM_Pattern);
 	Option_LFG_Pattern_EditBox:SetText(LFG_Pattern);
+	
+	table.wipe(LFG_NotificationPattern);
+	for i in pairs(LFGHelper_GetDungeons()) do
+		pattern = {};
+		pattern["name"] = LFGHelper_GetDungeons()[i];
+		pattern["state"] = false;
+		table.insert(LFG_NotificationPattern, pattern);
+	end
+			
+	for i in pairs(LFGHelper_GetRaids()) do
+		pattern = {};
+		pattern["name"] = LFGHelper_GetRaids()[i];
+		pattern["state"] = false;
+		table.insert(LFG_NotificationPattern, pattern);
+	end
+			
+	for i in pairs(LFGHelper_GetBattlegrounds()) do
+		pattern = {};
+		pattern["name"] = LFGHelper_GetBattlegrounds()[i];
+		pattern["state"] = false;
+		table.insert(LFG_NotificationPattern, pattern);
+	end
+	create_notification_pattern();
 end
 
 -- Register Minimap Button
@@ -1030,9 +1216,22 @@ function onevent(self, event, arg1, arg2, ...)
 				LFG_DPS:SetChecked(LFG_Classes["DPS"]);
 			end
 			
-			if LFG_Notifications ~= nil then
-				LFG_Notification_EnableBtn:SetChecked(LFG_Notifications);
-			end			
+			if LFG_Notifications == nil then
+				LFG_Notifications = {};
+			end
+			
+			if LFG_Notifications["acitve"] ~= nil then
+				LFG_Notification_EnableBtn:SetChecked(LFG_Notifications["acitve"]);
+			end		
+			
+			if LFG_Notifications["lfg"] ~= nil then
+				LFG_LFGPattern_CheckBox:SetChecked(LFG_Notifications["lfg"]);
+			end
+			
+			if LFG_Notifications["lfm"] ~= nil then
+				LFG_LFMPattern_CheckBox:SetChecked(LFG_Notifications["lfm"]);
+			end
+			
 		end	
 		
 		-- Load LFM options
@@ -1100,10 +1299,38 @@ function onevent(self, event, arg1, arg2, ...)
 			Option_Whisper_Pattern_EditBox:SetText(LFG_Helper_Options["WhisperPattern"]);
 		end
 		
+		if LFG_NotificationPattern == nil then
+			LFG_NotificationPattern = {};
+			
+			for i in pairs(LFGHelper_GetDungeons()) do
+				pattern = {};
+				pattern["name"] = LFGHelper_GetDungeons()[i];
+				pattern["state"] = false;
+				table.insert(LFG_NotificationPattern, pattern);
+			end
+			
+			for i in pairs(LFGHelper_GetRaids()) do
+				pattern = {};
+				pattern["name"] = LFGHelper_GetRaids()[i];
+				pattern["state"] = false;
+				table.insert(LFG_NotificationPattern, pattern);
+			end
+			
+			for i in pairs(LFGHelper_GetBattlegrounds()) do
+				pattern = {};
+				pattern["name"] = LFGHelper_GetBattlegrounds()[i];
+				pattern["state"] = false;
+				table.insert(LFG_NotificationPattern, pattern);
+			end
+			
+			create_notification_pattern();
+		else
+			create_notification_pattern();	
+		end
 	end
 	
 	if event == "CHAT_MSG_CHANNEL" then
-		if LFG_Notifications ~= nil and LFG_Notifications == true then
+		if LFG_Notifications["acitve"] ~= nil and LFG_Notifications["acitve"] == true then
 			LFG_ParseNotification(arg2, arg1);
 		end
 	end
@@ -1165,6 +1392,16 @@ end
 
 SLASH_LFGH1 = '/lfgh';
 function SlashCmdList.LFGH(msg)
+	
+	if string.find(msg, "post") ~= nil then
+		local chanelStr = string.gsub(msg, "post ", "");
+		local channelTbl = {strsplit(";", chanelStr)};
+		for i in pairs(channelTbl) do
+			SendChatMessage(LFG_Helper_LastMessage , "CHANNEL", nil, channelTbl[i]); 
+		end
+		return
+	end
+
 	LFG_MainFrame:Show();
 	-- reload muli content table
 	wipe(MultiMenuDropDownContent);
@@ -1181,4 +1418,3 @@ function SlashCmdList.LFGH(msg)
 	LFGHelperDropDownMultiContent(MultiMenuDropDownContent, LFM_Dungeon_DropDown);
 	LFGHelperSetDropDownContent(ChatChanel, LFM_ChatChanel_DropDown);
 end
-

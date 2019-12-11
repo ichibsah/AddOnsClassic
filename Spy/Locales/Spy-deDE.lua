@@ -5,7 +5,7 @@ if not L then return end
 --Addon-Informationen
 L["Spy"] = "Spy"
 L["Version"] = "Version"
-L["VersionCheck"] = "|cff9933ffWrong version of Spy loaded. Remove this version and install Spy Classic."
+L["VersionCheck"] = "|cffc41e3aWarnung! Die falsche Version von Spy ist installiert. Entfernen Sie diese Version und installieren Sie Spy Classic."
 L["SpyEnabled"] = "|cff9933ffSpy-Addon aktiviert."
 L["SpyDisabled"] = "|cff9933ffSpy-Addon deaktiviert. Tippen Sie |cffffffff/Spy enable|cff9933ff um es zu aktivieren."
 L["UpgradeAvailable"] = "|cff9933ffEine neue Version von Spy ist verfügbar. Es kann von: \n| cffffffffhttps://www.curseforge.com/wow/addons/spy-classic heruntergeladen werden."
@@ -302,6 +302,7 @@ L["StatsSeparator"] = ""
 L["StatsLoses"] = "|cff0070ddNiederlagen:"
 L["Located"] = "lokalisiert:"
 L["Yards"] = "Yards"
+L["LocalDefenseChannelName"] = "LokaleVerteidigung"
  
 Spy_KOSReasonListLength = 6
 Spy_KOSReasonList = {
@@ -438,9 +439,6 @@ L["TROLL"] = "Troll"
 --Stealth Fähigkeiten
 L["Stealth"] = "Verstohlenheit"
 L["Prowl"] = "Schleichen"
- 
---Kanalnamen
-L["LocalDefenseChannelName"] = "LokaleVerteidigung"
  
 --++ Minimap-Farbcodes
 --L["MinimapClassTextDEATHKNIGHT"] = "|cffc41e3a"

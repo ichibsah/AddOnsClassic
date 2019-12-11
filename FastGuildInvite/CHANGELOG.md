@@ -1,6 +1,7 @@
 # <FGI> FastGuildInvite
 
-## 57 (2019-11-28)
+## 59 (2019-12-06)
 
 
-- remove debug print  
+- change the split long messages  
+    preview update  

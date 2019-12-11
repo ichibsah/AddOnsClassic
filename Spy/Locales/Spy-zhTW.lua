@@ -5,7 +5,7 @@ if not L then return end
 -- Addon information
 L["Spy"] = "偵測敵方玩家 Spy"
 L["Version"] = "版本"
-L["VersionCheck"] = "|cff9933ffWrong version of Spy loaded. Remove this version and install Spy for Retail."
+L["VersionCheck"] = "|cffc41e3a警告！ 安裝了錯誤的Spy版本。 刪除此版本並安裝Spy Classic。"
 L["SpyEnabled"] = "|cff9933ff偵測敵方玩家插件已啟用。"
 L["SpyDisabled"] = "|cff9933ff偵測敵方玩家插件已停用，輸入 |cffffffff/spy enable|cff9933ff 來啟用。"
 L["UpgradeAvailable"] = "|cff9933ff偵測敵方玩家插件已有新版本，可以到這裡下載：\n|cffffffffhttps://www.curseforge.com/wow/addons/spy-classic"
@@ -302,6 +302,7 @@ L["StatsSeparator"] = "  "
 L["StatsLoses"] = "|cff0070dd敗："
 L["Located"] = "位置:"
 L["Yards"] = "碼"
+L["LocalDefenseChannelName"] = "本地防務"
 
 Spy_KOSReasonListLength = 6
 Spy_KOSReasonList = {
@@ -438,9 +439,6 @@ L["TROLL"] = "巨魔"
 -- Stealth abilities
 L["Stealth"] = "潜行"
 L["Prowl"] = "潛行"
-
--- Channel names
-L["LocalDefenseChannelName"] = "本地防務"
 
 --++ Minimap color codes
 --L["MinimapClassTextDEATHKNIGHT"] = "|cffc41e3a"

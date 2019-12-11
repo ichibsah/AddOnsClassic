@@ -5,7 +5,7 @@ if not L then return end
 -- Addon information
 L["Spy"] = "Spy 侦测敌方玩家"
 L["Version"] = "版本"
-L["VersionCheck"] = "|cff9933ffWrong version of Spy loaded. Remove this version and install Spy Classic."
+L["VersionCheck"] = "|cffc41e3a警告！ 安装了错误的Spy版本。 删除此版本并安装Spy Classic。"
 L["SpyEnabled"] = "|cff9933ffSpy 侦测敌方玩家插件已启动。"
 L["SpyDisabled"] = "|cff9933ffSpy 侦测敌方玩家插件已关闭。 输入 |cffffffff/spy enable|cff9933ff 启动插件。"
 L["UpgradeAvailable"] = "|cff9933ff新版Spy 侦测敌方玩家 已有新的版本。 可以从这里下载新版本：\n|cffffffffhttps://www.curseforge.com/wow/addons/spy-classic"
@@ -302,6 +302,7 @@ L["StatsSeparator"] = "  "
 L["StatsLoses"] = "|cff0070dd失败："
 L["Located"] = "位置："
 L["Yards"] = "码"
+L["LocalDefenseChannelName"] = "本地防務"
  
 Spy_KOSReasonListLength = 6
 Spy_KOSReasonList = {
@@ -439,9 +440,6 @@ L["GOBLIN"] = "Goblin"
 L["Stealth"] = "潜行"
 L["Prowl"] = "潛行"
 
--- Channel names
-L["LocalDefenseChannelName"] = "本地防務"
-
 --++ Minimap color codes
 --L["MinimapClassTextDEATHKNIGHT"] = "|cffc41e3a"
 --L["MinimapClassTextDEMONHUNTER"] = "|cffa330c9"
@@ -463,6 +461,7 @@ Spy_AbilityList = {
 -- Allows an estimation of the race, class and level of a
 -- player based on the abilities observed in the combat log.
 -----------------------------------------------------------
+
 --++ Racial Traits ++	
 	["影遁"]={ race = "Night Elf", level = 1, },
 	["血性狂暴"]={ race = "Orc", level = 1, },
@@ -499,11 +498,8 @@ Spy_AbilityList = {
 	
 --++ Druid Abilities ++	
 	["治疗之触"]={ class = "DRUID", level = 1, },
-	["野性印记"]={ class = "DRUID", level = 1, },
 	["愤怒"]={ class = "DRUID", level = 1, },
 	["月火术"]={ class = "DRUID", level = 4, },
-	["回春术"]={ class = "DRUID", level = 4, },
-	["荆棘术"]={ class = "DRUID", level = 6, },
 	["纠缠根须"]={ class = "DRUID", level = 8, },
 	["熊形态"]={ class = "DRUID", level = 10, },
 	["挫志咆哮"]={ class = "DRUID", level = 10, },
@@ -532,25 +528,18 @@ Spy_AbilityList = {
 	["急奔"]={ class = "DRUID", level = 26, },
 	["挑战咆哮"]={ class = "DRUID", level = 28, },
 	["畏缩"]={ class = "DRUID", level = 28, },
-	["宁静"]={ class = "DRUID", level = 30, },
 	["旅行形态"]={ class = "DRUID", level = 30, },
 	["凶猛撕咬"]={ class = "DRUID", level = 32, },
 	["毁灭"]={ class = "DRUID", level = 32, },
 	["狂暴回复"]={ class = "DRUID", level = 36, },
 	["突袭"]={ class = "DRUID", level = 36, },
 	["巨熊形态"]={ class = "DRUID", level = 40, },
-	["激活"]={ class = "DRUID", level = 40, },
-	["树皮术"]={ class = "DRUID", level = 44, },
-	["Barkskin Effect (DND)"]={ class = "DRUID", level = 44, },
-	["野性赐福"]={ class = "DRUID", level = 50, },
 --++ Druid Talents ++	
 	["自然之握"]={ class = "DRUID", level = 10, },
 	["野性冲锋"]={ class = "DRUID", level = 20, },
 	["虫群"]={ class = "DRUID", level = 20, },
 	["清晰预兆"]={ class = "DRUID", level = 20, },
 	["精灵之火（野性）"]={ class = "DRUID", level = 30, },
-	["枭兽形态"]={ class = "DRUID", level = 40, },
-	["迅捷治愈"]={ class = "DRUID", level = 40, },
 --++ Hunter Abilities ++	
 	["准备就绪"]={ class = "HUNTER", level = 1, },
 	["自动射击"]={ class = "HUNTER", level = 1, },
@@ -605,10 +594,8 @@ Spy_AbilityList = {
 	["胁迫"]={ class = "HUNTER", level = 30, },
 	["驱散射击"]={ class = "HUNTER", level = 30, },
 	["狂野怒火"]={ class = "HUNTER", level = 40, },
-	["强击光环"]={ class = "HUNTER", level = 40, },
 	["翼龙钉刺"]={ class = "HUNTER", level = 40, },
 --++ Mage Abilities ++	
-	["奥术智慧"]={ class = "MAGE", level = 1, },
 	["火球术"]={ class = "MAGE", level = 1, },
 	["霜甲术"]={ class = "MAGE", level = 1, },
 	["寒冰箭"]={ class = "MAGE", level = 4, },
@@ -618,12 +605,9 @@ Spy_AbilityList = {
 	["奥术飞弹"]={ class = "MAGE", level = 8, },
 	["变形术"]={ class = "MAGE", level = 8, },
 	["冰霜新星"]={ class = "MAGE", level = 10, },
-	["魔法抑制"]={ class = "MAGE", level = 12, },
-	["缓落术"]={ class = "MAGE", level = 12, },
 	["魔爆术"]={ class = "MAGE", level = 14, },
 	["侦测魔法"]={ class = "MAGE", level = 16, },
 	["烈焰风暴"]={ class = "MAGE", level = 16, },
-	["魔法增效"]={ class = "MAGE", level = 18, },
 	["解除次级诅咒"]={ class = "MAGE", level = 18, },
 	["闪现术"]={ class = "MAGE", level = 20, },
 	["暴风雪"]={ class = "MAGE", level = 20, },
@@ -666,67 +650,44 @@ Spy_AbilityList = {
 	["燃烧"]={ class = "MAGE", level = 40, },
 	["寒冰护体"]={ class = "MAGE", level = 40, },
 --++ Paladin Abilities ++	
-	["虔诚光环"]={ class = "PALADIN", level = 1, },
 	["圣光术"]={ class = "PALADIN", level = 1, },
 	["正义圣印"]={ class = "PALADIN", level = 1, },
-	["力量祝福"]={ class = "PALADIN", level = 4, },
 	["审判"]={ class = "PALADIN", level = 4, },
 	["圣佑术"]={ class = "PALADIN", level = 6, },
 	["十字军圣印"]={ class = "PALADIN", level = 6, },
 	["制裁之锤"]={ class = "PALADIN", level = 8, },
 	["纯净术"]={ class = "PALADIN", level = 8, },
-	["保护祝福"]={ class = "PALADIN", level = 10, },
 	["圣疗术"]={ class = "PALADIN", level = 10, },
 	["救赎"]={ class = "PALADIN", level = 12, },
-	["智慧祝福"]={ class = "PALADIN", level = 14, },
-	["惩罚光环"]={ class = "PALADIN", level = 16, },
 	["正义之怒"]={ class = "PALADIN", level = 16, },
-	["自由祝福"]={ class = "PALADIN", level = 18, },
 	["驱邪术"]={ class = "PALADIN", level = 20, },
 	["圣光闪现"]={ class = "PALADIN", level = 20, },
 	["感知亡灵"]={ class = "PALADIN", level = 20, },
-	["专注光环"]={ class = "PALADIN", level = 22, },
 	["公正圣印"]={ class = "PALADIN", level = 22, },
 	["超度亡灵"]={ class = "PALADIN", level = 24, },
 	["拯救祝福"]={ class = "PALADIN", level = 26, },
-	["暗影抗性光环"]={ class = "PALADIN", level = 28, },
 	["神圣干涉"]={ class = "PALADIN", level = 30, },
 	["光明圣印"]={ class = "PALADIN", level = 30, },
-	["冰霜抗性光环"]={ class = "PALADIN", level = 32, },
 	["圣盾术"]={ class = "PALADIN", level = 34, },
-	["火焰抗性光环"]={ class = "PALADIN", level = 36, },
 	["智慧圣印"]={ class = "PALADIN", level = 38, },
 	["光明祝福"]={ class = "PALADIN", level = 40, },
 	["召唤军马"]={ class = "PALADIN", level = 40, },
 	["清洁术"]={ class = "PALADIN", level = 42, },
 	["愤怒之锤"]={ class = "PALADIN", level = 44, },
-	["牺牲祝福"]={ class = "PALADIN", level = 46, },
 	["神圣愤怒"]={ class = "PALADIN", level = 50, },
-	["强效力量祝福"]={ class = "PALADIN", level = 52, },
-	["强效智慧祝福"]={ class = "PALADIN", level = 54, },
-	["强效王者祝福"]={ class = "PALADIN", level = 60, },
-	["强效光明祝福"]={ class = "PALADIN", level = 60, },
-	["强效拯救祝福"]={ class = "PALADIN", level = 60, },
-	["强效庇护祝福"]={ class = "PALADIN", level = 60, },
 	["召唤战马"]={ class = "PALADIN", level = 60, },
 --++ Paladin Talents ++	
-	["王者祝福"]={ class = "PALADIN", level = 20, },
 	["奉献"]={ class = "PALADIN", level = 20, },
 	["命令圣印"]={ class = "PALADIN", level = 20, },
-	["庇护祝福"]={ class = "PALADIN", level = 30, },
 	["神恩术"]={ class = "PALADIN", level = 30, },
-	["圣洁光环"]={ class = "PALADIN", level = 30, },
 	["神圣之盾"]={ class = "PALADIN", level = 40, },
 	["神圣震击"]={ class = "PALADIN", level = 40, },
 	["忏悔"]={ class = "PALADIN", level = 40, },
 --++ Priest Abilities ++	
 	["次级治疗术"]={ class = "PRIEST", level = 1, },
-	["真言术：韧"]={ class = "PRIEST", level = 1, },
 	["惩击"]={ class = "PRIEST", level = 1, },
 	["暗言术：痛"]={ class = "PRIEST", level = 4, },
-	["真言术：盾"]={ class = "PRIEST", level = 6, },
 	["渐隐术"]={ class = "PRIEST", level = 8, },
-	["恢复"]={ class = "PRIEST", level = 8, },
 	["绝望祷言"]={ class = "PRIEST", level = 10, },
 	["虚弱妖术"]={ class = "PRIEST", level = 10, },
 	["心灵震爆"]={ class = "PRIEST", level = 10, },
@@ -739,7 +700,6 @@ Spy_AbilityList = {
 	["驱散魔法"]={ class = "PRIEST", level = 18, },
 	["噬灵瘟疫"]={ class = "PRIEST", level = 20, },
 	["艾露恩的赐福"]={ class = "PRIEST", level = 20, },
-	["防护恐惧结界"]={ class = "PRIEST", level = 20, },
 	["回馈"]={ class = "PRIEST", level = 20, },
 	["快速治疗"]={ class = "PRIEST", level = 20, },
 	["神圣之火"]={ class = "PRIEST", level = 20, },
@@ -750,22 +710,15 @@ Spy_AbilityList = {
 	["法力燃烧"]={ class = "PRIEST", level = 24, },
 	["精神控制"]={ class = "PRIEST", level = 30, },
 	["治疗祷言"]={ class = "PRIEST", level = 30, },
-	["防护暗影"]={ class = "PRIEST", level = 30, },
 	["驱除疾病"]={ class = "PRIEST", level = 32, },
 	["漂浮术"]={ class = "PRIEST", level = 34, },
 	["强效治疗术"]={ class = "PRIEST", level = 40, },
-	["坚韧祷言"]={ class = "PRIEST", level = 48, },
-	["暗影防护祷言"]={ class = "PRIEST", level = 56, },
-	["精神祷言"]={ class = "PRIEST", level = 60, },
 --++ Priest Talents ++	
 	["神圣新星"]={ class = "PRIEST", level = 20, },
 	["心灵专注"]={ class = "PRIEST", level = 20, },
 	["精神鞭笞"]={ class = "PRIEST", level = 20, },
-	["神圣之灵"]={ class = "PRIEST", level = 30, },
 	["沉默"]={ class = "PRIEST", level = 30, },
-	["吸血鬼的拥抱"]={ class = "PRIEST", level = 30, },
 	["光明之泉"]={ class = "PRIEST", level = 40, },
-	["能量灌注"]={ class = "PRIEST", level = 40, },
 	["暗影形态"]={ class = "PRIEST", level = 40, },
 --++ Rogue Abilities ++	
 	["刺骨"]={ class = "ROGUE", level = 1, },
@@ -832,14 +785,12 @@ Spy_AbilityList = {
 	["治疗之泉图腾"]={ class = "SHAMAN", level = 20, },
 	["次级治疗波"]={ class = "SHAMAN", level = 20, },
 	["清毒图腾"]={ class = "SHAMAN", level = 22, },
-	["水下呼吸"]={ class = "SHAMAN", level = 22, },
 	["抗寒图腾"]={ class = "SHAMAN", level = 24, },
 	["视界术"]={ class = "SHAMAN", level = 26, },
 	["熔岩图腾"]={ class = "SHAMAN", level = 26, },
 	["法力之泉图腾"]={ class = "SHAMAN", level = 26, },
 	["抗火图腾"]={ class = "SHAMAN", level = 28, },
 	["火舌图腾"]={ class = "SHAMAN", level = 28, },
-	["水上行走"]={ class = "SHAMAN", level = 28, },
 	["星界传送"]={ class = "SHAMAN", level = 30, },
 	["根基图腾"]={ class = "SHAMAN", level = 30, },
 	["自然抗性图腾"]={ class = "SHAMAN", level = 30, },
@@ -929,7 +880,6 @@ Spy_AbilityList = {
 	["黑暗契约"]={ class = "WARLOCK", level = 40, },
 	["灵魂链接"]={ class = "WARLOCK", level = 40, },
 --++ Warrior Abilities ++	
-	["战斗怒吼"]={ class = "WARRIOR", level = 1, },
 	["战斗姿态"]={ class = "WARRIOR", level = 1, },
 	["英勇打击"]={ class = "WARRIOR", level = 1, },
 	["强化拳击"]={ class = "WARRIOR", level = 1, },

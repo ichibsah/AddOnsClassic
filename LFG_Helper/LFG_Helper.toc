@@ -3,7 +3,7 @@
 ## Title: LFG Helper
 ## Notes: Help to create chat messages
 ## Author: Andy (Tira-Mograine)
-## SavedVariables: LFG_Text_Values, LFG_Classes, LFM_Text_Values, LFG_Notifications, LFG_HelperDB, LFG_Pattern, LFM_Pattern, LFG_Helper_Options, LFG_Helper_Changelog
+## SavedVariables: LFG_Text_Values, LFG_Classes, LFM_Text_Values, LFG_Notifications, LFG_NotificationPattern, LFG_HelperDB, LFG_Pattern, LFM_Pattern, LFG_Helper_Options, LFG_Helper_Changelog, LFG_Helper_LastMessage
 ## OptionalDeps: Ace3, LubStub, LibDBIcon-1
 
 Libs\LibStub\LibStub.lua
