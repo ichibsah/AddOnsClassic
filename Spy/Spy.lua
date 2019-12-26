@@ -7,7 +7,7 @@ local fonts = SM:List("font")
 local _
 
 Spy = LibStub("AceAddon-3.0"):NewAddon("Spy", "AceConsole-3.0", "AceEvent-3.0", "AceComm-3.0", "AceTimer-3.0")
-Spy.Version = "1.0.18"
+Spy.Version = "1.0.20"
 Spy.DatabaseVersion = "1.1"
 Spy.Signature = "[Spy]"
 Spy.ButtonLimit = 15
@@ -44,9 +44,9 @@ Spy.options = {
 	name = L["Spy"],
 	type = "group",
 	args = {
-		General = {
-			name = L["GeneralSettings"],
-			desc = L["GeneralSettings"],
+		About = {
+			name = L["About"],
+			desc = L["About"],
 			type = "group",
 			order = 1,
 			args = {
@@ -55,8 +55,28 @@ Spy.options = {
 					type = "description",
 					order = 1,
 					fontSize = "medium",					
+				},	
+				intro2 = {
+					name = L["SpyDescription2"],
+					type = "description",
+					order = 6,
+					fontSize = "medium",
+				},				
+			}, 	
+		},
+		General = {
+			name = L["GeneralSettings"],
+			desc = L["GeneralSettings"],
+			type = "group",
+			order = 1,
+			args = {
+				intro = {
+					name = L["GeneralSettingsDescription"],
+					type = "description",
+					order = 1,
+					fontSize = "medium",					
 				},
-				Enabled = {
+--[[				Enabled = {
 					name = L["EnableSpy"],
 					desc = L["EnableSpyDescription"],
 					type = "toggle",
@@ -68,7 +88,7 @@ Spy.options = {
 					set = function(info, value)
 						Spy:EnableSpy(value, true)
 					end,
-				},
+				}, ]]--
 				EnabledInBattlegrounds = {
 					name = L["EnabledInBattlegrounds"],
 					desc = L["EnabledInBattlegroundsDescription"],
@@ -97,7 +117,7 @@ Spy.options = {
 						Spy:ZoneChangedEvent()
 					end,
 				},
-				EnabledInWintergrasp = {
+--[[				EnabledInWintergrasp = {
 					name = L["EnabledInWintergrasp"],
 					desc = L["EnabledInWintergraspDescription"],
 					type = "toggle",
@@ -110,7 +130,7 @@ Spy.options = {
 						Spy.db.profile.EnabledInWintergrasp = value
 						Spy:ZoneChangedEvent()
 					end,
-				},
+				}, ]]--
 				DisableWhenPVPUnflagged = {
 					name = L["DisableWhenPVPUnflagged"],
 					desc = L["DisableWhenPVPUnflaggedDescription"],
@@ -125,11 +145,29 @@ Spy.options = {
 						Spy:ZoneChangedEvent()
 					end,
 				},
-				intro2 = {
-					name = L["SpyDescription2"],
-					type = "description",
-					order = 6,
-					fontSize = "medium",
+				DisabledInZones = {
+					name = L["DisabledInZones"],
+					desc = L["DisabledInZonesDescription"],
+					type = "multiselect",
+					order = 6,					
+					get = function(info, key) 
+						return Spy.db.profile.FilteredZones[key] 
+					end,
+					set = function(info, key, value) 
+						Spy.db.profile.FilteredZones[key] = value 
+					end,
+					values = {
+						["Booty Bay"] = L["Booty Bay"],
+						["Everlook"] = L["Everlook"],						
+						["Gadgetzan"] = L["Gadgetzan"],
+						["Ratchet"] = L["Ratchet"],
+						["The Salty Sailor Tavern"] = L["The Salty Sailor Tavern"],
+--						["Shattrath City"] = L["Shattrath City"],
+--						["Area 52"] = L["Area 52"],
+--						["Dalaran"] = L["Dalaran"],
+--						["Bogpaddle"] = L["Bogpaddle"],
+--						["The Vindicaar"] = L["The Vindicaar"],
+					},
 				},
 			},
 		},
@@ -205,7 +243,7 @@ Spy.options = {
 					desc = L["LockSpyDescription"],
 					type = "toggle",
 					order = 5,
-					width = "full",
+--					width = "full",
 					get = function(info) 
 						return Spy.db.profile.Locked
 					end,
@@ -215,11 +253,25 @@ Spy.options = {
 						Spy:RefreshCurrentList()						
 					end,
 				},
+				ClampToScreen = {
+					name = L["ClampToScreen"],
+					desc = L["ClampToScreenDescription"],				
+					type = "toggle",
+					order = 6,
+					width = "double",					
+					get = function(info) 
+						return Spy.db.profile.ClampToScreen
+					end,					
+					set = function(info, value)
+						Spy.db.profile.ClampToScreen = value
+						Spy:ClampToScreen(value)
+					end,
+				},
 				InvertSpy = {
 					name = L["InvertSpy"],
 					desc = L["InvertSpyDescription"],
 					type = "toggle",
-					order = 6,
+					order = 7,
 					get = function(info)
 						return Spy.db.profile.InvertSpy
 					end,
@@ -231,7 +283,7 @@ Spy.options = {
 					name = L["Reload"],
 					desc = L["ReloadDescription"],
 					type = 'execute',
-					order = 7,					
+					order = 8,					
 					width = .6,					
 					func = function()
 						C_UI.Reload()
@@ -241,7 +293,7 @@ Spy.options = {
 					name = L["ResizeSpy"],
 					desc = L["ResizeSpyDescription"],
 					type = "toggle",
-					order = 8,
+					order = 9,
 					width = "full",
 					get = function(info)
 						return Spy.db.profile.ResizeSpy
@@ -253,7 +305,7 @@ Spy.options = {
 				},
 				ResizeSpyLimit = {  
 					type = "range",
-					order = 9,
+					order = 10,
 					name = L["ResizeSpyLimit"],
 					desc = L["ResizeSpyLimitDescription"],
 					min = 1, max = 15, step = 1,
@@ -270,7 +322,7 @@ Spy.options = {
 					name = L["DisplayTooltipNearSpyWindow"],
 					desc = L["DisplayTooltipNearSpyWindowDescription"],
 					type = "toggle",
-					order = 10,
+					order = 11,
 					width = "full",
 					get = function(info)
 						return Spy.db.profile.DisplayTooltipNearSpyWindow
@@ -281,7 +333,7 @@ Spy.options = {
 				},	
 				SelectTooltipAnchor = {
 					type = "select",
-					order = 11,
+					order = 12,
 					name = L["SelectTooltipAnchor"],
 					desc = L["SelectTooltipAnchorDescription"],
 					values = { 
@@ -300,7 +352,7 @@ Spy.options = {
 					name = L["TooltipDisplayWinLoss"],
 					desc = L["TooltipDisplayWinLossDescription"],
 					type = "toggle",
-					order = 12,
+					order = 13,
 					width = "full",
 					get = function(info)
 						return Spy.db.profile.DisplayWinLossStatistics
@@ -313,7 +365,7 @@ Spy.options = {
 					name = L["TooltipDisplayKOSReason"],
 					desc = L["TooltipDisplayKOSReasonDescription"],
 					type = "toggle",
-					order = 13,
+					order = 14,
 					width = "full",
 					get = function(info)
 						return Spy.db.profile.DisplayKOSReason
@@ -326,7 +378,7 @@ Spy.options = {
 					name = L["TooltipDisplayLastSeen"],
 					desc = L["TooltipDisplayLastSeenDescription"],
 					type = "toggle",
-					order = 14,
+					order = 15,
 					width = "full",
 					get = function(info)
 						return Spy.db.profile.DisplayLastSeen
@@ -337,7 +389,7 @@ Spy.options = {
 				},
 				SelectFont = {
 					type = "select",
-					order = 15,
+					order = 16,
 					name = L["SelectFont"],
 					desc = L["SelectFontDescription"],
 					values = fonts,
@@ -355,7 +407,7 @@ Spy.options = {
 				},
 				RowHeight = {
 					type = "range",
-					order = 16,
+					order = 17,
 					name = L["RowHeight"], 
 					desc = L["RowHeightDescription"], 
 					min = 8, max = 20, step = 1,
@@ -367,7 +419,7 @@ Spy.options = {
 				},
 				BarTexture = {
 					type = "select",				
-					order = 17,
+					order = 18,
 					name = L["Texture"],	
 					desc = L["TextureDescription"],	
 					dialogControl = "LSM30_Statusbar",					
@@ -1056,7 +1108,7 @@ Spy.optionsSlash = {
 			order = 1,
 			cmdHidden = true,
 		},
-		enable = {
+--[[		enable = {
 			name = L["Enable"],
 			desc = L["EnableDescription"],
 			type = 'execute',
@@ -1065,17 +1117,28 @@ Spy.optionsSlash = {
 				Spy:EnableSpy(true, true)
 			end,
 			dialogHidden = true
-		},
+		}, ]]--
 		show = {
 			name = L["Show"],
 			desc = L["ShowDescription"],
 			type = 'execute',
 			order = 2,
 			func = function()
-				Spy.MainWindow:Show()
+				Spy:EnableSpy(true, true)
+--				Spy.MainWindow:Show()
 			end,
 			dialogHidden = true
 		},
+		hide = {
+			name = L["Hide"],
+			desc = L["HideDescription"],
+			type = 'execute',
+			order = 2,
+			func = function()
+				Spy:EnableSpy(false, true)				
+			end,
+			dialogHidden = true
+		},		
 		reset = {
 			name = L["Reset"],
 			desc = L["ResetDescription"],
@@ -1215,7 +1278,7 @@ local Default_Profile = {
 				LeftButton=true,
 				RightButton=true,
 			},
-			RowHeight=18,
+			RowHeight=14,
 			RowSpacing=2,
 			TextHeight=12,
 			AutoHide=true,
@@ -1238,6 +1301,7 @@ local Default_Profile = {
 		MainWindowVis=true,
 		CurrentList=1,
 		Locked=false,
+		ClampToScreen=true,		
 		Font="Friz Quadrata TT",
 		Scaling=1,
 		Enabled=true,
@@ -1285,7 +1349,18 @@ local Default_Profile = {
 		ShareKOSBetweenCharacters=true,
 		AppendUnitNameCheck=false,
 		AppendUnitKoSCheck=false,
-		ClampToScreen = false,
+		FilteredZones = {
+			["Booty Bay"] = false,
+			["Gadgetzan"] = false,
+			["Ratchet"] = false,
+			["Everlook"] = false,
+			["The Salty Sailor Tavern"] = false,
+--			["Shattrath City"] = false,
+--			["Area 52"] = false,
+--			["Dalaran"] = false,
+--			["Bogpaddle"] = false,			
+--			["The Vindicaar"] = false,
+		}
 	}
 }
 
@@ -1443,9 +1518,8 @@ end
 function Spy:HandleProfileChanges()
 	Spy:CreateMainWindow()
 	Spy:UpdateTimeoutSettings()
-	Spy:ScaleWindows(Spy.db.profile.Scaling)	
-	Spy:SetStrataAndClamp()	
 	Spy:LockWindows(Spy.db.profile.Locked)
+	Spy:ClampToScreen(Spy.db.profile.ClampToScreen)	
 end
 
 function Spy:RegisterModuleOptions(name, optionTbl, displayName)
@@ -1461,6 +1535,7 @@ function Spy:SetupOptions()
 
 	local ACD3 = LibStub("AceConfigDialog-3.0")
 	self.optionsFrames.Spy = ACD3:AddToBlizOptions("Spy", L["Spy Option"], nil, "General")
+	self.optionsFrames.About = ACD3:AddToBlizOptions("Spy", L["About"], L["Spy Option"], "About")
 	self.optionsFrames.DisplayOptions = ACD3:AddToBlizOptions("Spy", L["DisplayOptions"], L["Spy Option"], "DisplayOptions")
 	self.optionsFrames.AlertOptions = ACD3:AddToBlizOptions("Spy", L["AlertOptions"], L["Spy Option"], "AlertOptions")
 	self.optionsFrames.ListOptions = ACD3:AddToBlizOptions("Spy", L["ListOptions"], L["Spy Option"], "ListOptions")
@@ -1496,7 +1571,7 @@ function Spy:UpdateTimeoutSettings()
 	end
 end
 
-function Spy:ResetMainWindow()
+function Spy:ResetMainWindow() -- not used
 	Spy:EnableSpy(true, true)
 	Spy:CreateMainWindow()
 	Spy:RestoreMainWindowPosition(Default_Profile.profile.MainWindow.Position.x, Default_Profile.profile.MainWindow.Position.y, Default_Profile.profile.MainWindow.Position.w, 34)
@@ -1551,7 +1626,7 @@ function Spy:OnDisable()
 	Spy:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	Spy:UnregisterEvent("PLAYER_REGEN_ENABLED")
 	Spy:UnregisterEvent("PLAYER_DEAD")
-	Spy:UnregisterEvent("CHAT_MSG_CHANNEL_NOTICE")	
+--	Spy:UnregisterEvent("CHAT_MSG_CHANNEL_NOTICE")	
 	Spy:UnregisterComm(Spy.Signature)
 	Spy.IsEnabled = false
 end
@@ -1660,6 +1735,7 @@ function Spy:OnInitialize()
 	end
 
 	Spy:LockWindows(Spy.db.profile.Locked)
+	Spy:ClampToScreen(Spy.db.profile.ClampToScreen)	
 	ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", Spy.FilterNotInParty)
 	Spy.WoWBuildInfo = select(4, GetBuildInfo())
 	if Spy.WoWBuildInfo > 20000 then 	
@@ -1673,8 +1749,8 @@ function Spy:ChannelNoticeEvent(_, chStatus, _, _, Channel)
 		if Spy.zName == "Dalaran" then
 			Spy.ChnlTime = time()
 			Spy.EnabledInZone = false
-		end	
-	end	
+		end
+	end
 end ]]--
 
 function Spy:PlayerEnteringWorldEvent()
@@ -1720,8 +1796,9 @@ function Spy:ZoneChanged()
 	Spy.InInstance = false
 	local pvpType = GetZonePVPInfo()
 	local subZone = GetSubZoneText()
-	
-	if pvpType == "sanctuary" or GetZoneText() == "" or subZone == "The Vindicaar" then --++ chg so Spy is not active in the Vindicaar 	
+	local InFilteredZone = Spy:InFilteredZone(subZone)
+--	if pvpType == "sanctuary" or GetZoneText() == "" or subZone == "The Vindicaar" then
+	if pvpType == "sanctuary" or zone == "" or InFilteredZone then
 		Spy.EnabledInZone = false
 	else
 		Spy.EnabledInZone = true
@@ -1751,6 +1828,18 @@ function Spy:ZoneChanged()
 	else
 		if not InCombatLockdown() then Spy.MainWindow:Hide() end
 	end
+end
+
+function Spy:InFilteredZone(subzone)
+	local InFilteredZone = false
+	for filteredZone, value in pairs(Spy.db.profile.FilteredZones) do
+		if subzone == filteredZone and value then			
+			InFilteredZone = true
+			break
+		end
+	end
+
+	return InFilteredZone
 end
 
 function Spy:PlayerTargetEvent()
@@ -1933,13 +2022,10 @@ timestamp, event, hideCaster, srcGUID, srcName, srcFlags, sourceRaidFlags, dstGU
 		-- updates win stats for pet kills
 		if (combatEvent[event] and srcName == petName) then		
 			if event == "SWING_DAMAGE" then
---				_, overkill = ...
 				if arg13 == nil then overkill = 0 else overkill = arg13 end
 			else
---				_, _, _, _, overkill = ...
 				if arg16 == nil then overkill = 0 else overkill = arg16 end
 			end
---			if arg16 == nil then overkill = 0 else overkill = arg16 end			
 			if (overkill > 1 and srcName == petName) and dstName then
 				local playerData = SpyPerCharDB.PlayerData[dstName]
 				if playerData then

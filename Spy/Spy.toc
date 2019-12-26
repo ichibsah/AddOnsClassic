@@ -1,11 +1,11 @@
 ﻿## Interface: 11303
 ## Title: Spy
-## Version: 1.0.18
+## Version: 1.0.20
 ## Notes: Detects and alerts you to the presence of nearby enemy players.
 ## Notes-deDE: Detektiert und warnt Sie vor, in der Nähe befindlichen, Gegnern.
 ## Notes-esES: Detects and alerts you to the presence of nearby enemy players.
 ## Notes-esMX: Detects and alerts you to the presence of nearby enemy players.
-## Notes-frFR: Detects and alerts you to the presence of nearby enemy players.
+## Notes-frFR: Détecte et vous avertit de la présence de joueurs ennemis à proximité.
 ## Notes-itIT: Detects and alerts you to the presence of nearby enemy players.
 ## Notes-koKR: 근처에 있는 적 플레이어를 탐지하고 경고합니다.
 ## Notes-ptBR: Detecta e alerta você da presença de jogadores inimigos.
@@ -19,7 +19,8 @@
 ## X-Credits-deDE: Localization: Jana
 ## X-Credits-deCN: Localization: Kidd8250
 ## X-Credits-koKR: Localization: Ringdove
-## OptionalDeps:  Ace3, LibSharedMedia-3.0, 
+## X-Credits-frFR: Localization: FishtrBone and others
+## OptionalDeps: Ace3, LibSharedMedia-3.0, 
 ## SavedVariables: SpyDB
 ## SavedVariablesPerCharacter: SpyPerCharDB
 

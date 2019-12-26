@@ -9,6 +9,7 @@ function QuestieQuestBlacklist:Load()
         [787] = true, -- The New Horde is not in the game. See #830
         [6606] = true, -- Quest is not in the game. See #1338
         [6072] = true, -- Ayanna Everstride doesn't start "Hunter's Path" (this quest is most likely simply not in the game) #700
+        [618] = true, -- Duplicate of 8554
         --Stray quests
         [3861] = true, --CLUCK!
         --World event quests
@@ -362,7 +363,9 @@ function QuestieQuestBlacklist:Load()
         [8758] = true,
         [8759] = true,
         [8760] = true,
-        --All PVP Quests
+        -- Arathi Basin Quests
+        [8438] = true,
+        [8384] = true,
         [8080] = true,
         [8154] = true,
         [8155] = true,
@@ -393,7 +396,6 @@ function QuestieQuestBlacklist:Load()
         [8443] = true,
         [8115] = true,
         [8114] = true,
-        [7386] = true,
         [8123] = true,
         [8160] = true,
         [8161] = true,
@@ -402,10 +404,6 @@ function QuestieQuestBlacklist:Load()
         [8265] = true,
         [8263] = true,
         [8264] = true,
-        [8404] = true,
-        [8405] = true,
-        [8406] = true,
-        [8408] = true,
         [8367] = true,
         [8388] = true,
         [8081] = true,
@@ -428,16 +426,57 @@ function QuestieQuestBlacklist:Load()
         [8169] = true,
         [8170] = true,
         [8171] = true,
+        -- PvP Quests which are not in the game anymore
+        -----------------------------------------------
+        -- Vanquish the Invaders
+        [7788] = true,
+        [7871] = true,
+        [7872] = true,
+        [7873] = true,
+        [8290] = true,
+        [8291] = true,
+        -- Talisman of Merit
+        [7886] = true,
+        [7887] = true,
+        [7888] = true,
+        [7921] = true,
+        [8567] = true,
+        [8289] = true,
+        [8292] = true,
         [8001] = true,
-        --More pvp quests ?? strange Ones
-        [8387] = true,
-        [8375] = true,
-        [8383] = true,
-        [8438] = true,
-        [8384] = true,
-        [7863] = true,
-        [7864] = true,
-        [7865] = true,
+        -- Quell the Silverwing Usurpers
+        [7789] = true,
+        [7874] = true,
+        [7875] = true,
+        [7876] = true,
+        [8294] = true,
+        [8295] = true,
+        -- Warsong Mark of Honor
+        [7922] = true,
+        [7923] = true,
+        [7924] = true,
+        [7925] = true,
+        [8293] = true,
+        [8296] = true,
+        [8568] = true,
+        [8570] = true,
+        [8002] = true,
+        -- Arathi Basin
+        [8565] = true,
+        [8566] = true,
+        -- Alterac Valley
+        -- Master Ryson's All Seeing Eye
+        [6847] = true,
+        [6848] = true,
+        -- WANTED: Orcs and WANTED: Dwarves
+        [7402] = true,
+        [7428] = true,
+        [7401] = true,
+        [7427] = true,
+        -----------------------------------------------
+
+        -- Phase 3
+        [7761] = true,
 
         -- corrupted windblossom
         [2523] = true,

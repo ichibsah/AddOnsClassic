@@ -1,6 +1,5 @@
-## v4.8.22 Changes
+## v4.8.24 Changes
 
-* Fixed error when evaluating some custom prices.
-* Fixed error during Sniper.
+* Fixed issue with TSM blocking various game functions
 
 [Known Issues](http://support.tradeskillmaster.com/display/KB/TSM4+Currently+Known+Issues)

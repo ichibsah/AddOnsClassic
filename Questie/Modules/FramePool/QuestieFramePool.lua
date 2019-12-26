@@ -690,7 +690,9 @@ function _QuestieFramePool:Questie_Tooltip()
                 end
             end
         end
+        ---@param questId QuestId
         for questId, textList in pairs(self.questOrder) do -- this logic really needs to be improved
+            ---@type Quest
             local quest = QuestieDB:GetQuest(questId);
             local questTitle = quest:GetColoredQuestName();
             if haveGiver then
@@ -710,25 +712,49 @@ function _QuestieFramePool:Questie_Tooltip()
                 end
             end
 
+            local function _GetLevelString(creatureLevels, name)
+                local levelString = name
+                if creatureLevels[name] then
+                    local minLevel = creatureLevels[name][1]
+                    local maxLevel = creatureLevels[name][2]
+                    local rank = creatureLevels[name][3]
+                    if minLevel == maxLevel then
+                        levelString = name .. " (" .. minLevel
+                    else
+                        levelString = name .. " (" .. minLevel .. "-" .. maxLevel
+                    end
+
+                    if rank and rank == 1 then
+                        levelString = levelString .. "+"
+                    end
+
+                    levelString = levelString .. ")"
+                end
+                return levelString
+            end
+
             -- Used to get the white color for the quests which don't have anything to collect
             local defaultQuestColor = QuestieLib:GetRGBForObjective({})
             if shift then
-                for index, textData in pairs(textList) do
+                local creatureLevels = QuestieDB:GetCreatureLevels(quest) -- Data for min and max level
+                for _, textData in pairs(textList) do
                     for textLine, nameData in pairs(textData) do
                         local dataType = type(nameData)
                         if dataType == "table" then
                             for name in pairs(nameData) do
+                                name = _GetLevelString(creatureLevels, name)
                                 self:AddLine("   |cFFDDDDDD" .. name);
                             end
                         elseif dataType == "string" then
+                            nameData = _GetLevelString(creatureLevels, nameData)
                             self:AddLine("   |cFFDDDDDD" .. nameData);
                         end
                         self:AddLine("      " .. defaultQuestColor .. textLine);
                     end
                 end
             else
-                for index, textData in pairs(textList) do
-                    for textLine, v2 in pairs(textData) do
+                for _, textData in pairs(textList) do
+                    for textLine, _ in pairs(textData) do
                         self:AddLine("   " .. defaultQuestColor .. textLine);
                     end
                 end
