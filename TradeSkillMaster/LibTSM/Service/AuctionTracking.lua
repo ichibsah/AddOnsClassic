@@ -1,8 +1,8 @@
 -- ------------------------------------------------------------------------------ --
 --                                TradeSkillMaster                                --
---          http://www.curse.com/addons/wow/tradeskillmaster_warehousing          --
+--             https://www.curseforge.com/wow/addons/tradeskill-master            --
 --                                                                                --
---             A TradeSkillMaster Addon (http://tradeskillmaster.com)             --
+--             A TradeSkillMaster Addon (https://tradeskillmaster.com)            --
 --    All Rights Reserved* - Detailed license information included with addon.    --
 -- ------------------------------------------------------------------------------ --
 
@@ -19,6 +19,7 @@ local Sound = TSM.Include("Util.Sound")
 local Money = TSM.Include("Util.Money")
 local ItemInfo = TSM.Include("Service.ItemInfo")
 local Settings = TSM.Include("Service.Settings")
+local AuctionHouseWrapper = TSM.Include("Service.AuctionHouseWrapper")
 local private = {
 	settings = nil,
 	indexDB = nil,
@@ -31,20 +32,23 @@ local private = {
 		list = {},
 		pending = {},
 	},
+	cancelAuctionId = nil,
 	lastScanNum = nil,
 	ignoreUpdateEvent = nil,
 	lastPurchase = {},
 	prevLineId = nil,
 	prevLineResult = nil,
 	origChatFrameOnEvent = nil,
+	pendingFuture = nil,
 }
 local PLAYER_NAME = UnitName("player")
 local SALE_HINT_SEP = "\001"
 local SALE_HINT_EXPIRE_TIME = 33 * 24 * 60 * 60
-local SORT_ORDER_83 = TSM.IsWow83() and {
+local SORT_ORDER = not TSM.IsWowClassic() and {
 	{ sortOrder = Enum.AuctionHouseSortOrder.Name, reverseSort = false },
 	{ sortOrder = Enum.AuctionHouseSortOrder.Buyout, reverseSort = false },
 }
+local AUCTIONABLE_WOW_TOKEN_ITEM_ID = 122270
 
 
 
@@ -62,16 +66,11 @@ AuctionTracking:OnSettingsLoad(function()
 		:AddKey("global", "coreOptions", "auctionSaleSound")
 	Event.Register("AUCTION_HOUSE_SHOW", private.AuctionHouseShowHandler)
 	Event.Register("AUCTION_HOUSE_CLOSED", private.AuctionHouseClosedHandler)
-	if not TSM.IsWow83() then
+	if TSM.IsWowClassic() then
 		Event.Register("AUCTION_OWNED_LIST_UPDATE", private.AuctionOwnedListUpdateHandler)
 	else
 		Event.Register("OWNED_AUCTIONS_UPDATED", private.AuctionOwnedListUpdateHandler)
-		Event.Register("AUCTION_CANCELED", AuctionTracking.QueryOwnedAuctions)
-		Event.Register("CHAT_MSG_SYSTEM", function(_, msg)
-			if msg == ERR_AUCTION_STARTED or msg == ERR_AUCTION_REMOVED then
-				AuctionTracking.QueryOwnedAuctions()
-			end
-		end)
+		Event.Register("AUCTION_CANCELED", private.AuctionCanceledHandler)
 	end
 	private.indexDB = Database.NewSchema("AUCTION_TRACKING_INDEXES")
 		:AddUniqueNumberField("index")
@@ -87,8 +86,10 @@ AuctionTracking:OnSettingsLoad(function()
 		:AddNumberField("buyout")
 		:AddNumberField("stackSize")
 		:AddNumberField("saleStatus")
+		:AddNumberField("auctionId")
 		:AddIndex("index")
 		:AddIndex("saleStatus")
+		:AddIndex("auctionId")
 		:Commit()
 	private.quantityDB = Database.NewSchema("AUCTION_TRACKING_QUANTITY")
 		:AddUniqueStringField("itemString")
@@ -104,7 +105,7 @@ AuctionTracking:OnSettingsLoad(function()
 		end
 	end
 
-	if not TSM.IsWow83() then
+	if TSM.IsWowClassic() then
 		hooksecurefunc("PostAuction", function(_, _, duration)
 			private.PostAuctionHookHandler(duration)
 		end)
@@ -115,11 +116,14 @@ AuctionTracking:OnSettingsLoad(function()
 		hooksecurefunc(C_AuctionHouse, "PostItem", function(_, duration)
 			private.PostAuctionHookHandler(duration)
 		end)
+		hooksecurefunc(C_AuctionHouse, "CancelAuction", function(auctionId)
+			private.cancelAuctionId = auctionId
+		end)
 	end
 
 	-- setup enhanced sale / buy messages
 	ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", private.FilterSystemMsg)
-	if not TSM.IsWow83() then
+	if TSM.IsWowClassic() then
 		hooksecurefunc("PlaceAuctionBid", function(_, index, amountPaid)
 			local link = GetAuctionItemLink("list", index)
 			local name, _, stackSize, _, _, _, _, _, _, buyout = GetAuctionItemInfo("list", index)
@@ -196,10 +200,6 @@ function AuctionTracking.CreateQueryUnsoldItem(itemString)
 		:Equal(itemString == ItemString.GetBaseFast(itemString) and "baseItemString" or "itemString", itemString)
 end
 
-function AuctionTracking.GetFieldByIndex(index, field)
-	return private.indexDB:GetUniqueRowField("index", index, field)
-end
-
 function AuctionTracking.GetSaleHintItemString(name, stackSize, buyout)
 	for info in pairs(private.settings.auctionSaleHints) do
 		local infoName, itemString, infoStackSize, infoBuyout = strsplit(SALE_HINT_SEP, info)
@@ -214,10 +214,21 @@ function AuctionTracking.GetQuantityByBaseItemString(baseItemString)
 end
 
 function AuctionTracking.QueryOwnedAuctions()
-	if not TSM.IsWow83() then
+	if not private.isAHOpen then
+		return
+	end
+	if TSM.IsWowClassic() then
 		GetOwnerAuctionItems()
 	else
-		C_AuctionHouse.QueryOwnedAuctions(SORT_ORDER_83)
+		if private.pendingFuture then
+			return
+		end
+		private.pendingFuture = AuctionHouseWrapper.QueryOwnedAuctions(SORT_ORDER)
+		if not private.pendingFuture then
+			Delay.AfterTime(0.5, AuctionTracking.QueryOwnedAuctions)
+			return
+		end
+		private.pendingFuture:SetScript("OnDone", private.PendingFutureOnDone)
 	end
 end
 
@@ -229,10 +240,12 @@ end
 
 function private.AuctionHouseShowHandler()
 	private.isAHOpen = true
-	AuctionTracking.QueryOwnedAuctions()
-	if not TSM.IsWow83() then
+	if TSM.IsWowClassic() then
+		AuctionTracking.QueryOwnedAuctions()
 		-- We don't always get AUCTION_OWNED_LIST_UPDATE events, so do our own scanning if needed
 		Delay.AfterTime("AUCTION_BACKGROUND_SCAN", 1, private.DoBackgroundScan, 1)
+	else
+		Delay.AfterTime(0.1, AuctionTracking.QueryOwnedAuctions)
 	end
 end
 
@@ -262,6 +275,19 @@ function private.AuctionOwnedListUpdateHandler()
 	Delay.AfterFrame("AUCTION_OWNED_LIST_SCAN", 2, private.AuctionOwnedListUpdateDelayed)
 end
 
+function private.AuctionCanceledHandler(_, auctionId)
+	local row = private.indexDB:NewQuery()
+		:Equal("auctionId", auctionId == 0 and private.cancelAuctionId or auctionId)
+		:GetFirstResultAndRelease()
+	private.cancelAuctionId = nil
+	if not row then
+		return
+	end
+
+	private.indexDB:DeleteRow(row)
+	row:Release()
+end
+
 function private.AuctionOwnedListUpdateDelayed()
 	if not private.isAHOpen then
 		return
@@ -269,12 +295,12 @@ function private.AuctionOwnedListUpdateDelayed()
 		-- default UI auctions tab is visible, so scan later
 		Delay.AfterFrame("AUCTION_OWNED_LIST_SCAN", 2, private.AuctionOwnedListUpdateDelayed)
 		return
-	elseif TSM.IsWow83() and not C_AuctionHouse.HasFullOwnedAuctionResults() then
+	elseif not TSM.IsWowClassic() and not C_AuctionHouse.HasFullOwnedAuctionResults() then
 		-- don't have all the results yet, so try again in a moment
 		Delay.AfterFrame("AUCTION_OWNED_LIST_SCAN", 0.1, private.AuctionOwnedListUpdateDelayed)
 		return
 	end
-	if not TSM.IsWow83() then
+	if TSM.IsWowClassic() then
 		-- check if we need to change the sort
 		local needsSort = false
 		local numColumns = #AuctionSort.owner_duration
@@ -303,34 +329,43 @@ function private.AuctionOwnedListUpdateDelayed()
 	local expire = math.huge
 	for i = #private.indexUpdates.list, 1, -1 do
 		local index = private.indexUpdates.list[i]
-		local auctionId, link, name, texture, stackSize, quality, minBid, buyout, bid, highBidder, saleStatus, duration = private.GetOwnedAuctionInfo(index)
-		name = name or ItemInfo.GetName(link)
-		texture = texture or ItemInfo.GetTexture(link)
-		quality = quality or ItemInfo.GetQuality(link)
-		if link and name and texture and quality then
-			assert(saleStatus == 0 or saleStatus == 1)
-			duration = saleStatus == 0 and duration or (time() + duration)
-			if saleStatus == 0 then
-				if duration == 1 then -- 30 min
-					expire = min(expire, time() + 0.5 * 60 * 60)
-				elseif duration == 2 then -- 2 hours
-					expire = min(expire, time() + 2 * 60 * 60)
-				elseif duration == 3 then -- 12 hours
-					expire = min(expire, time() + 12 * 60 * 60)
-				end
-			end
-			highBidder = highBidder or ""
-			local itemString = ItemString.Get(link)
-			local currentBid = highBidder ~= "" and bid or minBid
-			if saleStatus == 0 then
-				local baseItemString = ItemString.GetBaseFast(itemString)
-				private.settings.auctionQuantity[baseItemString] = (private.settings.auctionQuantity[baseItemString] or 0) + stackSize
-				local hintInfo = strjoin(SALE_HINT_SEP, ItemInfo.GetName(link), itemString, stackSize, buyout)
-				private.settings.auctionSaleHints[hintInfo] = time()
-			end
+		local auctionId, link, name, texture, stackSize, quality, minBid, buyout, bid, highBidder, saleStatus, duration, shouldIgnore = private.GetOwnedAuctionInfo(index)
+		if shouldIgnore then
 			private.indexUpdates.pending[index] = nil
 			tremove(private.indexUpdates.list, i)
-			private.indexDB:BulkInsertNewRow(auctionId, itemString, link, texture, name, quality, duration, highBidder, currentBid, buyout, stackSize, saleStatus)
+		else
+			name = name or ItemInfo.GetName(link)
+			texture = texture or ItemInfo.GetTexture(link)
+			quality = quality or ItemInfo.GetQuality(link)
+			if link and name and texture and quality then
+				assert(saleStatus == 0 or saleStatus == 1)
+				highBidder = highBidder or ""
+				local itemString = ItemString.Get(link)
+				local currentBid = highBidder ~= "" and bid or minBid
+				if saleStatus == 0 then
+					if TSM.IsWowClassic() then
+						if duration == 1 then -- 30 min
+							expire = min(expire, time() + 0.5 * 60 * 60)
+						elseif duration == 2 then -- 2 hours
+							expire = min(expire, time() + 2 * 60 * 60)
+						elseif duration == 3 then -- 12 hours
+							expire = min(expire, time() + 12 * 60 * 60)
+						end
+					else
+						duration = time() + duration
+						expire = min(expire, duration)
+					end
+					local baseItemString = ItemString.GetBaseFast(itemString)
+					private.settings.auctionQuantity[baseItemString] = (private.settings.auctionQuantity[baseItemString] or 0) + stackSize
+					local hintInfo = strjoin(SALE_HINT_SEP, ItemInfo.GetName(link), itemString, stackSize, buyout)
+					private.settings.auctionSaleHints[hintInfo] = time()
+				else
+					duration = time() + duration
+				end
+				private.indexUpdates.pending[index] = nil
+				tremove(private.indexUpdates.list, i)
+				private.indexDB:BulkInsertNewRow(index, itemString, link, texture, name, quality, duration, highBidder, currentBid, buyout, stackSize, saleStatus, auctionId)
+			end
 		end
 	end
 	private.RebuildQuantityDB()
@@ -371,7 +406,7 @@ function private.RebuildQuantityDB()
 end
 
 function private.GetNumOwnedAuctions()
-	if not TSM.IsWow83() then
+	if TSM.IsWowClassic() then
 		return GetNumAuctionItems("owner")
 	else
 		return C_AuctionHouse.GetNumOwnedAuctions()
@@ -379,7 +414,7 @@ function private.GetNumOwnedAuctions()
 end
 
 function private.GetOwnedAuctionInfo(index)
-	if not TSM.IsWow83() then
+	if TSM.IsWowClassic() then
 		local name, texture, stackSize, quality, _, _, _, minBid, _, buyout, bid, highBidder, _, _, _, saleStatus = GetAuctionItemInfo("owner", index)
 		local link = name and name ~= "" and GetAuctionItemLink("owner", index)
 		if not link then
@@ -389,14 +424,17 @@ function private.GetOwnedAuctionInfo(index)
 		return index, link, name, texture, stackSize, quality, minBid, buyout, bid, highBidder, saleStatus, duration
 	else
 		local info = C_AuctionHouse.GetOwnedAuctionInfo(index)
+		if info.itemKey.itemID == AUCTIONABLE_WOW_TOKEN_ITEM_ID then
+			-- this is a token, so just ignore it
+			return nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, true
+		end
 		local link = info and info.itemLink
 		if not link then
 			return
 		end
 		local bid = info.bidAmount or info.buyoutAmount
 		local minBid = bid
-		local duration = 2 -- FIXME
-		return info.auctionID, link, nil, nil, info.quantity, nil, minBid, info.buyoutAmount, bid, info.bidder or "", info.status, duration
+		return info.auctionID, link, nil, nil, info.quantity, nil, minBid, info.buyoutAmount, bid, info.bidder or "", info.status, info.timeLeftSeconds
 	end
 end
 
@@ -499,4 +537,10 @@ function private.FilterSystemMsg(_, _, msg, ...)
 			return nil, private.prevLineResult, ...
 		end
 	end
+end
+
+function private.PendingFutureOnDone()
+	-- we also hook the event, so don't care what the result is
+	private.pendingFuture:GetValue()
+	private.pendingFuture = nil
 end

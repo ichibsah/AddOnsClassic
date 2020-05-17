@@ -1,7 +1,4 @@
 # <FGI> FastGuildInvite
+## 66 (2020-03-28)
 
-## 59 (2019-12-06)
-
-
-- change the split long messages  
-    preview update  
+- fix race loop for Chinese  

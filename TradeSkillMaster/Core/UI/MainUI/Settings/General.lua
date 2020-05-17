@@ -203,6 +203,7 @@ function private.GetGeneralSettingsFrame()
 				:SetStyle("hintJustifyH", "LEFT")
 				:SetHintText(L["Enter a name for the new profile"])
 				:SetScript("OnEnterPressed", private.NewProfileInputOnEnterPressed)
+				:SetScript("OnTextChanged", private.NewProfileInputOnTextChanged)
 			)
 			:AddChild(TSMAPI_FOUR.UI.NewElement("ActionButton", "newProfileBtn")
 				:SetStyle("width", 240)
@@ -235,6 +236,7 @@ function private.GetGeneralSettingsFrame()
 				:SetStyle("hintJustifyH", "LEFT")
 				:SetHintText(L["Enter name of logged-in character from other account"])
 				:SetScript("OnEnterPressed", private.NewAccountSyncInputOnEnterPressed)
+				:SetScript("OnTextChanged", private.NewAccountSyncInputOnTextChanged)
 			)
 			:AddChild(TSMAPI_FOUR.UI.NewElement("ActionButton", "newAccountSyncBtn")
 				:SetStyle("width", 240)
@@ -571,6 +573,10 @@ function private.NewProfileInputOnEnterPressed(input)
 	input:GetElement("__parent.newProfileBtn"):Click()
 end
 
+function private.NewProfileInputOnTextChanged(input)
+	input:SetText(input:GetText())
+end
+
 function private.NewProfileBtnOnClick(button)
 	local profileName = strtrim(button:GetElement("__parent.newProfileInput"):GetText())
 	if not TSM.db:IsValidProfileName(profileName) then
@@ -623,6 +629,10 @@ end
 
 function private.NewAccountSyncInputOnEnterPressed(input)
 	input:GetElement("__parent.newAccountSyncBtn"):Click()
+end
+
+function private.NewAccountSyncInputOnTextChanged(input)
+	input:SetText(input:GetText())
 end
 
 function private.NewAccountSyncBtnOnClick(button)

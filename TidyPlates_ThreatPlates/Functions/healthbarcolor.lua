@@ -13,6 +13,7 @@ local abs = abs
 local UnitIsConnected, UnitReaction, UnitCanAttack, UnitAffectingCombat = UnitIsConnected, UnitReaction, UnitCanAttack, UnitAffectingCombat
 local UnitIsPlayer, UnitPlayerControlled = UnitIsPlayer, UnitPlayerControlled
 local UnitIsUnit, UnitExists = UnitIsUnit, UnitExists
+local GetPartyAssignment = GetPartyAssignment
 local RAID_CLASS_COLORS = RAID_CLASS_COLORS
 
 -- ThreatPlates APIs
@@ -101,7 +102,7 @@ local function GetThreatSituation(unit, style, enable_off_tank)
         if target_threat_situation > 1 then
           -- Target unit does tank unit, so check if target unit is a tank or an tank-like pet/guardian
           --if ("TANK" == UnitGroupRolesAssigned(target_unit) and not UnitIsUnit("player", target_unit)) or UnitIsUnit(target_unit, "pet") or IsOffTankCreature(target_unit) then
-          if UnitIsUnit(target_unit, "pet") or IsOffTankCreature(target_unit) then
+          if (GetPartyAssignment("MAINTANK", target_unit) and not UnitIsUnit("player", target_unit)) or UnitIsUnit(target_unit, "pet") or IsOffTankCreature(target_unit) then
             unit.IsOfftanked = true
           else
             -- Reset "unit.IsOfftanked"
@@ -177,7 +178,7 @@ local function GetColorByClass(unit)
   local c
   if unit.type == "PLAYER" then
     if unit.reaction == "HOSTILE" and db.allowClass then
-      c = RAID_CLASS_COLORS[unit.class]
+      c = db.Colors.Classes[unit.class]
     elseif unit.reaction == "FRIENDLY" then
       local db_social = db.socialWidget
       if db_social.ShowFriendColor and IsFriend(unit) then
@@ -185,7 +186,7 @@ local function GetColorByClass(unit)
       elseif db_social.ShowGuildmateColor and IsGuildmate(unit) then
         c = db_social.GuildmateColor
       elseif db.friendlyClass then
-        c = RAID_CLASS_COLORS[unit.class]
+        c = db.Colors.Classes[unit.class]
       end
     end
   end

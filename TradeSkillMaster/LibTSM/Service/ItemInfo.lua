@@ -30,6 +30,8 @@ local private = {
 	availableItems = {},
 	isRebuilding = false,
 	settings = nil,
+	infoChangeCallbacks = {},
+	hasChanged = false,
 }
 local UNKNOWN_ITEM_ITEMSTRING = "i:0"
 local ITEM_MAX_ID = 999999
@@ -38,30 +40,57 @@ local ITEM_INFO_INTERVAL = 0.05
 local MAX_REQUESTED_ITEM_INFO = 50
 local MAX_REQUESTS_PER_ITEM = 5
 local UNKNOWN_ITEM_NAME = L["Unknown Item"]
-local DB_VERSION = 5
-local RECORD_DATA_LENGTH = 17
-local FIELD_LENGTH_BITS = {
-	itemLevel = 16,
-	minLevel = 8,
-	maxStack = 16,
-	vendorSell = 32,
-	invSlotId = 8,
-	texture = 32,
-	classId = 8,
-	subClassId = 8,
-	quality = 4,
-	isBOP = 2,
-	isCraftingReagent = 2,
+local DB_VERSION = 6
+local ENCODING_NUM_BITS = 6
+local ENCODING_NUM_VALUES = 2 ^ ENCODING_NUM_BITS
+local ENCODING_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
+assert(#ENCODING_ALPHABET == ENCODING_NUM_VALUES)
+local ENCODING_TABLE = {}
+local ENCODING_TABLE_2 = {}
+local DECODING_TABLE = {}
+for i = 0, #ENCODING_ALPHABET - 1 do
+	local encodedValue = strbyte(ENCODING_ALPHABET, i + 1, i + 1)
+	ENCODING_TABLE[i] = encodedValue
+	DECODING_TABLE[encodedValue] = i
+end
+for i = 0, ENCODING_NUM_VALUES ^ 2 - 1 do
+	local value = i
+	local charValue0 = value % 2 ^ ENCODING_NUM_BITS
+	value = (value - charValue0) / 2 ^ ENCODING_NUM_BITS
+	local charValue1 = value % 2 ^ ENCODING_NUM_BITS
+	value = (value - charValue1) / 2 ^ ENCODING_NUM_BITS
+	ENCODING_TABLE_2[i] = { ENCODING_TABLE[charValue0], ENCODING_TABLE[charValue1] }
+	assert(value == 0)
+end
+local ENCODED_NIL_CHAR = ENCODING_TABLE[#ENCODING_ALPHABET - 1]
+local DECODED_NIL_VALUE = ENCODING_NUM_VALUES - 1
+local RECORD_DATA_LENGTH_CHARS = 22
+local FIELD_INFO = {
+	itemLevel = { numBits = 12 },
+	minLevel = { numBits = 12 },
+	vendorSell = { numBits = 30 },
+	maxStack = { numBits = 12 },
+	invSlotId = { numBits = 6 },
+	texture = { numBits = 30 },
+	classId = { numBits = 6 },
+	subClassId = { numBits = 6 },
+	quality = { numBits = 6 },
+	isBOP = { numBits = 6 },
+	isCraftingReagent = { numBits = 6 },
 }
+do
+	local totalLengthChars = 0
+	for _, info in pairs(FIELD_INFO) do
+		assert(info.numBits % ENCODING_NUM_BITS == 0)
+		info.numChars = info.numBits / ENCODING_NUM_BITS
+		totalLengthChars = totalLengthChars + info.numChars
+		info.nilValue = 2 ^ info.numBits - 1
+		info.maxValue = 2 ^ info.numBits - 2
+	end
+	assert(totalLengthChars == RECORD_DATA_LENGTH_CHARS)
+end
 local PENDING_STATE_NEW = 1
 local PENDING_STATE_CREATED = 2
-do
-	local totalLength = 0
-	for _, length in pairs(FIELD_LENGTH_BITS) do
-		totalLength = totalLength + length
-	end
-	assert(totalLength == RECORD_DATA_LENGTH * 8)
-end
 local ITEM_QUALITY_BY_HEX_LOOKUP = {}
 for quality, info in pairs(ITEM_QUALITY_COLORS) do
 	ITEM_QUALITY_BY_HEX_LOOKUP[info.hex] = quality
@@ -115,13 +144,14 @@ ItemInfo:OnSettingsLoad(function()
 
 	-- load the item info database
 	local build, revision = GetBuildInfo()
-	if not TSMItemInfoDB or #TSMItemInfoDB.data % RECORD_DATA_LENGTH ~= 0 or TSMItemInfoDB.version ~= DB_VERSION or TSMItemInfoDB.locale ~= GetLocale() or TSMItemInfoDB.build ~= build or TSMItemInfoDB.revision ~= revision then
+	if not TSMItemInfoDB or #TSMItemInfoDB.data % RECORD_DATA_LENGTH_CHARS ~= 0 or TSMItemInfoDB.version ~= DB_VERSION or TSMItemInfoDB.locale ~= GetLocale() or TSMItemInfoDB.build ~= build or TSMItemInfoDB.revision ~= revision then
 		private.isRebuilding = true
 		TSMItemInfoDB = {
 			names = nil,
 			itemStrings = nil,
 			data = "",
 		}
+		private.hasChanged = true
 		wipe(private.settings.vendorItems)
 		-- delay this message to make it more likely to be seen
 		Delay.AfterTime(3, function()
@@ -134,8 +164,8 @@ ItemInfo:OnSettingsLoad(function()
 		private.settings.vendorItems[itemString] = private.settings.vendorItems[itemString] or cost
 	end
 
-	local names = TSMItemInfoDB.names and String.SafeSplit(TSMItemInfoDB.names, SEP_CHAR) or {}
-	local itemStrings = TSMItemInfoDB.itemStrings and String.SafeSplit(TSMItemInfoDB.itemStrings, SEP_CHAR) or {}
+	local names = private.LoadLongString(TSMItemInfoDB.names)
+	local itemStrings = private.LoadLongString(TSMItemInfoDB.itemStrings)
 	assert(#itemStrings == #names)
 	local numItemsLoaded = #names
 	Log.Info("Imported %d items worth of data", numItemsLoaded)
@@ -158,31 +188,59 @@ ItemInfo:OnSettingsLoad(function()
 		:Commit()
 	private.db:BulkInsertStart()
 	for i = 1, numItemsLoaded do
+		-- load all the fields from the string
+		local dataOffset = (i - 1) * RECORD_DATA_LENGTH_CHARS + 1
+		local b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21, bExtra = strbyte(TSMItemInfoDB.data, dataOffset, dataOffset + RECORD_DATA_LENGTH_CHARS - 1)
+		assert(b21 and not bExtra)
+
+		-- load the fields
+		local itemLevel = (b0 == ENCODED_NIL_CHAR and b1 == ENCODED_NIL_CHAR) and -1 or (DECODING_TABLE[b0] + DECODING_TABLE[b1] * 2 ^ ENCODING_NUM_BITS)
+		local minLevel = (b2 == ENCODED_NIL_CHAR and b3 == ENCODED_NIL_CHAR) and -1 or (DECODING_TABLE[b2] + DECODING_TABLE[b3] * 2 ^ ENCODING_NUM_BITS)
+		local vendorSell = nil
+		if b4 == ENCODED_NIL_CHAR and b5 == ENCODED_NIL_CHAR and b6 == ENCODED_NIL_CHAR and b7 == ENCODED_NIL_CHAR and b8 == ENCODED_NIL_CHAR then
+			vendorSell = -1
+		else
+			vendorSell = DECODING_TABLE[b4] + DECODING_TABLE[b5] * 2 ^ ENCODING_NUM_BITS + DECODING_TABLE[b6] * 2 ^ (ENCODING_NUM_BITS * 2) + DECODING_TABLE[b7] * 2 ^ (ENCODING_NUM_BITS * 3) + DECODING_TABLE[b8] * 2 ^ (ENCODING_NUM_BITS * 4)
+		end
+		local maxStack = (b9 == ENCODED_NIL_CHAR and b10 == ENCODED_NIL_CHAR) and -1 or (DECODING_TABLE[b9] + DECODING_TABLE[b10] * 2 ^ ENCODING_NUM_BITS)
+		local invSlotId = DECODING_TABLE[b11]
+		if invSlotId == DECODED_NIL_VALUE then
+			invSlotId = -1
+		end
+		local texture = nil
+		if b12 == ENCODED_NIL_CHAR and b13 == ENCODED_NIL_CHAR and b14 == ENCODED_NIL_CHAR and b15 == ENCODED_NIL_CHAR and b16 == ENCODED_NIL_CHAR then
+			texture = -1
+		else
+			texture = DECODING_TABLE[b12] + DECODING_TABLE[b13] * 2 ^ ENCODING_NUM_BITS + DECODING_TABLE[b14] * 2 ^ (ENCODING_NUM_BITS * 2) + DECODING_TABLE[b15] * 2 ^ (ENCODING_NUM_BITS * 3) + DECODING_TABLE[b16] * 2 ^ (ENCODING_NUM_BITS * 4)
+		end
+		local classId = DECODING_TABLE[b17]
+		if classId == DECODED_NIL_VALUE then
+			classId = -1
+		end
+		local subClassId = DECODING_TABLE[b18]
+		if subClassId == DECODED_NIL_VALUE then
+			subClassId = -1
+		end
+		local quality = DECODING_TABLE[b19]
+		if quality == DECODED_NIL_VALUE then
+			quality = -1
+		end
+		local isBOP = DECODING_TABLE[b20]
+		if isBOP == DECODED_NIL_VALUE then
+			isBOP = -1
+		end
+		local isCraftingReagent = DECODING_TABLE[b21]
+		if isCraftingReagent == DECODED_NIL_VALUE then
+			isCraftingReagent = -1
+		end
+
+		-- store in the DB
 		local itemString = itemStrings[i]
 		local name = names[i]
-		-- decode all the fields
-		local dataOffset = (i - 1) * RECORD_DATA_LENGTH + 1
-		local b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16 = strbyte(TSMItemInfoDB.data, dataOffset, dataOffset + RECORD_DATA_LENGTH - 1)
-		local itemLevel = (b0 == 0xff and b1 == 0xff) and -1 or (b0 + b1 * 256)
-		local minLevel = (b2 == 0xff) and -1 or b2
-		local maxStack = (b3 == 0xff and b4 == 0xff) and -1 or (b3 + b4 * 256)
-		local vendorSell = (b5 == 0xff and b6 == 0xff and b7 == 0xff and b8 == 0xff) and -1 or (b5 + b6 * 256 + b7 * 65536 + b8 * 16777216)
-		local invSlotId = (b10 == 0xff) and -1 or b10
-		local texture = (b11 == 0xff and b12 == 0xff and b13 == 0xff and b14 == 0xff) and -1 or (b11 + b12 * 256 + b13 * 65536 + b14 * 16777216)
-		local classId = (b15 == 0xff) and -1 or b15
-		local subClassId = (b16 == 0xff) and -1 or b16
-		local quality = b9 % 0x10
-		b9 = (b9 - quality) / 0x10
-		quality = quality == 0xf and -1 or quality
-		local isBOP = b9 % 0x4
-		b9 = (b9 - isBOP) / 0x4
-		isBOP = isBOP == 0x3 and -1 or isBOP
-		local isCraftingReagent = b9 % 0x4
-		isCraftingReagent = isCraftingReagent == 0x3 and -1 or isCraftingReagent
-		-- store in the DB
-		private.db:BulkInsertNewRow(itemString, name, itemLevel, minLevel, maxStack, vendorSell, invSlotId, texture, classId, subClassId, quality, isBOP, isCraftingReagent)
+		private.db:BulkInsertNewRowFast13(itemString, name, itemLevel, minLevel, maxStack, vendorSell, invSlotId, texture, classId, subClassId, quality, isBOP, isCraftingReagent)
 	end
 	private.db:BulkInsertEnd()
+	private.DoInfoChangedCallbacks()
 
 	-- process pending item info every 0.05 seconds
 	Delay.AfterTime("processItemInfo", 0, private.ProcessItemInfo, ITEM_INFO_INTERVAL)
@@ -193,7 +251,7 @@ end)
 
 ItemInfo:OnModuleUnload(function()
 	-- save the DB
-	if not TSMItemInfoDB then
+	if not TSMItemInfoDB or not private.hasChanged then
 		-- bailing if TSMItemInfoDB doesn't exist gives us an easy way to wipe the DB via "/run TSMItemInfoDB = nil"
 		return
 	end
@@ -205,34 +263,98 @@ ItemInfo:OnModuleUnload(function()
 	for i = 1, private.db:GetNumRows() do
 		local startOffset = (i - 1) * numFields + 1
 		local itemString, name, itemLevel, minLevel, maxStack, vendorSell, invSlotId, texture, classId, subClassId, quality, isBOP, isCraftingReagent = unpack(rawData, startOffset, startOffset + numFields - 1)
-		itemLevel = itemLevel == -1 and 0xffff or itemLevel
-		minLevel = minLevel == -1 and 0xff or minLevel
-		maxStack = maxStack == -1 and 0xffff or maxStack
-		vendorSell = vendorSell == -1 and 0xffffffff or vendorSell
-		invSlotId = invSlotId == -1 and 0xff or invSlotId
-		texture = texture == -1 and 0xffffffff or texture
-		classId = classId == -1 and 0xff or classId
-		subClassId = subClassId == -1 and 0xff or subClassId
-		quality = quality == -1 and 0xf or quality
-		isBOP = isBOP == -1 and 0x3 or isBOP
-		isCraftingReagent = isCraftingReagent == -1 and 0x3 or isCraftingReagent
-		local bitfield = quality + isBOP * 16 + isCraftingReagent * 64
+		local b0, b1, b2, b3, b4, b5, b6, b7, b8, b9 = ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR
+		local b10, b11, b12, b13, b14, b15, b16, b17, b18, b19 = ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR, ENCODED_NIL_CHAR
+		local b20, b21 = ENCODED_NIL_CHAR, ENCODED_NIL_CHAR
+		if itemLevel ~= -1 then
+			local chars = ENCODING_TABLE_2[itemLevel]
+			b0 = chars[1]
+			b1 = chars[2]
+		end
+		if minLevel ~= -1 then
+			local chars = ENCODING_TABLE_2[minLevel]
+			b2 = chars[1]
+			b3 = chars[2]
+		end
+		if vendorSell ~= -1 then
+			local charValue0 = vendorSell % 2 ^ ENCODING_NUM_BITS
+			vendorSell = (vendorSell - charValue0) / 2 ^ ENCODING_NUM_BITS
+			local charValue1 = vendorSell % 2 ^ ENCODING_NUM_BITS
+			vendorSell = (vendorSell - charValue1) / 2 ^ ENCODING_NUM_BITS
+			local charValue2 = vendorSell % 2 ^ ENCODING_NUM_BITS
+			vendorSell = (vendorSell - charValue2) / 2 ^ ENCODING_NUM_BITS
+			local charValue3 = vendorSell % 2 ^ ENCODING_NUM_BITS
+			vendorSell = (vendorSell - charValue3) / 2 ^ ENCODING_NUM_BITS
+			local charValue4 = vendorSell % 2 ^ ENCODING_NUM_BITS
+			vendorSell = (vendorSell - charValue4) / 2 ^ ENCODING_NUM_BITS
+			if vendorSell ~= 0 then
+				error("Invalid remainder")
+			end
+			b4 = ENCODING_TABLE[charValue0]
+			b5 = ENCODING_TABLE[charValue1]
+			b6 = ENCODING_TABLE[charValue2]
+			b7 = ENCODING_TABLE[charValue3]
+			b8 = ENCODING_TABLE[charValue4]
+		end
+		if maxStack ~= -1 then
+			local chars = ENCODING_TABLE_2[maxStack]
+			b9 = chars[1]
+			b10 = chars[2]
+		end
+		if invSlotId ~= -1 then
+			b11 = ENCODING_TABLE[invSlotId]
+		end
+		if texture ~= -1 then
+			local charValue0 = texture % 2 ^ ENCODING_NUM_BITS
+			texture = (texture - charValue0) / 2 ^ ENCODING_NUM_BITS
+			local charValue1 = texture % 2 ^ ENCODING_NUM_BITS
+			texture = (texture - charValue1) / 2 ^ ENCODING_NUM_BITS
+			local charValue2 = texture % 2 ^ ENCODING_NUM_BITS
+			texture = (texture - charValue2) / 2 ^ ENCODING_NUM_BITS
+			local charValue3 = texture % 2 ^ ENCODING_NUM_BITS
+			texture = (texture - charValue3) / 2 ^ ENCODING_NUM_BITS
+			local charValue4 = texture % 2 ^ ENCODING_NUM_BITS
+			texture = (texture - charValue4) / 2 ^ ENCODING_NUM_BITS
+			if texture ~= 0 then
+				error("Invalid remainder")
+			end
+			b12 = ENCODING_TABLE[charValue0]
+			b13 = ENCODING_TABLE[charValue1]
+			b14 = ENCODING_TABLE[charValue2]
+			b15 = ENCODING_TABLE[charValue3]
+			b16 = ENCODING_TABLE[charValue4]
+		end
+		if classId ~= -1 then
+			b17 = ENCODING_TABLE[classId]
+		end
+		if subClassId ~= -1 then
+			b18 = ENCODING_TABLE[subClassId]
+		end
+		if quality ~= -1 then
+			b19 = ENCODING_TABLE[quality]
+		end
+		if isBOP ~= -1 then
+			b20 = ENCODING_TABLE[isBOP]
+		end
+		if isCraftingReagent ~= -1 then
+			b21 = ENCODING_TABLE[isCraftingReagent]
+		end
 
 		names[i] = name
 		itemStrings[i] = itemString
-		dataParts[i] = strchar(itemLevel % 256, itemLevel / 256, minLevel, maxStack % 256, maxStack / 256, vendorSell % 256, (vendorSell % 65536) / 256, (vendorSell % 16777216) / 65536, vendorSell / 16777216, bitfield, invSlotId, texture % 256, (texture % 65536) / 256, (texture % 16777216) / 65536, texture / 16777216, classId, subClassId)
+		dataParts[i] = strchar(b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15, b16, b17, b18, b19, b20, b21)
 
-		if #dataParts[i] ~= RECORD_DATA_LENGTH then
+		if #dataParts[i] ~= RECORD_DATA_LENGTH_CHARS then
 			names[i] = nil
 			itemStrings[i] = nil
 			dataParts[i] = nil
 		end
 	end
-	TSMItemInfoDB.names = #names > 0 and table.concat(names, SEP_CHAR) or nil
-	TSMItemInfoDB.itemStrings = #itemStrings > 0 and table.concat(itemStrings, SEP_CHAR) or nil
+	TSMItemInfoDB.names = private.StoreLongString(names)
+	TSMItemInfoDB.itemStrings = private.StoreLongString(itemStrings)
 	TSMItemInfoDB.data = table.concat(dataParts)
 
-	if #TSMItemInfoDB.data % RECORD_DATA_LENGTH ~= 0 then
+	if #TSMItemInfoDB.data % RECORD_DATA_LENGTH_CHARS ~= 0 then
 		TSMItemInfoDB = nil
 		return
 	end
@@ -249,6 +371,17 @@ end)
 -- ============================================================================
 -- Module Functions
 -- ============================================================================
+
+function ItemInfo.ClearDB()
+	TSMItemInfoDB = nil
+	ReloadUI()
+end
+
+--- Register a callback which is called when item info changes.
+-- @tparam function callback The function to be called
+function ItemInfo.RegisterInfoChangeCallback(callback)
+	tinsert(private.infoChangeCallbacks, callback)
+end
 
 --- Store the name of an item.
 -- This function is used to opportunistically populate the item cache with item names.
@@ -447,11 +580,10 @@ function ItemInfo.GetMinLevel(item)
 	-- if there is a random enchant, but no bonusIds, so the itemLevel is the same as the base item
 	local baseIsSame = strmatch(itemString, "^i:[0-9]+:[%-0-9]+$") and true or false
 	local minLevel = private.GetFieldValueHelper(itemString, "minLevel", baseIsSame, true, 0)
-	if not minLevel and private.IsItem(itemString) then
+	if not minLevel and ItemString.IsItem(itemString) then
 		local baseItemString = ItemString.GetBase(itemString)
-		local classId = ItemInfo.GetClassId(itemString)
-		local subClassId = ItemInfo.GetSubClassId(itemString)
-		if itemString ~= baseItemString and classId and subClassId and classId ~= LE_ITEM_CLASS_WEAPON and classId ~= LE_ITEM_CLASS_ARMOR and (classId ~= LE_ITEM_CLASS_GEM or subClassId ~= LE_ITEM_GEM_ARTIFACTRELIC) then
+		local canHaveVariations = ItemInfo.CanHaveVariations(itemString)
+		if itemString ~= baseItemString and canHaveVariations == false then
 			-- the bonusId does not affect the minLevel of this item
 			minLevel = ItemInfo.GetMinLevel(baseItemString)
 			if minLevel then
@@ -469,7 +601,7 @@ function ItemInfo.GetMaxStack(item)
 	local itemString = ItemString.Get(item)
 	if not itemString then return end
 	local maxStack = private.GetFieldValueHelper(itemString, "maxStack", true, true, 1)
-	if not maxStack and private.IsItem(itemString) then
+	if not maxStack and ItemString.IsItem(itemString) then
 		-- we might be able to deduce the maxStack based on the classId and subClassId
 		local classId = ItemInfo.GetClassId(item)
 		local subClassId = ItemInfo.GetSubClassId(item)
@@ -615,14 +747,49 @@ function ItemInfo.IsDisenchantable(item)
 	return quality >= LE_ITEM_QUALITY_UNCOMMON and (classId == LE_ITEM_CLASS_ARMOR or classId == LE_ITEM_CLASS_WEAPON)
 end
 
+--- Get whether or not the item is a commodity in WoW 8.3 (and above).
+-- @tparam string item The item
+-- @treturn ?number The inventory slot id
+function ItemInfo.IsCommodity(item)
+	if TSM.IsWowClassic() then
+		return false
+	end
+	local stackSize = ItemInfo.GetMaxStack(item)
+	if not stackSize then
+		return nil
+	end
+	return stackSize > 1
+end
+
+--- Get whether or not the item can have variations.
+-- @tparam string item The item
+-- @treturn ?boolean Whether or not the item can have variations
+function ItemInfo.CanHaveVariations(item)
+	local classId = ItemInfo.GetClassId(item)
+	if not classId then
+		return nil
+	end
+	if classId == LE_ITEM_CLASS_ARMOR or classId == LE_ITEM_CLASS_WEAPON or classId == LE_ITEM_CLASS_BATTLEPET then
+		return true
+	elseif classId == LE_ITEM_CLASS_GEM then
+		local subClassId = ItemInfo.GetSubClassId(item)
+		if not subClassId then
+			return nil
+		end
+		return subClassId == LE_ITEM_GEM_ARTIFACTRELIC
+	else
+		return false
+	end
+end
+
 --- Fetch info for the item.
 -- This function can be called ahead of time for items which we know we need to have info cached for.
--- @tparam string item The item
+-- @tparam ?string item The item
 function ItemInfo.FetchInfo(item)
 	if item == UNKNOWN_ITEM_ITEMSTRING then return end
 	local itemString = ItemString.Get(item)
 	if not itemString then return end
-	if private.IsPet(itemString) then
+	if ItemString.IsPet(itemString) then
 		if not private.GetField(itemString, "name") then
 			private.StoreGetItemInfoInstant(itemString)
 		end
@@ -639,7 +806,7 @@ end
 function ItemInfo.GeneralizeLink(itemLink)
 	local itemString = ItemString.Get(itemLink)
 	if not itemString then return end
-	if private.IsItem(itemString) and not strmatch(itemString, "i:[0-9]+:[0-9%-]*:[0-9]*") then
+	if ItemString.IsItem(itemString) and not strmatch(itemString, "i:[0-9]+:[0-9%-]*:[0-9]*") then
 		-- swap out the itemString part of the link
 		local leader, quality, _, name, trailer, trailer2, extra = ("\124"):split(itemLink)
 		if trailer2 and not extra then
@@ -655,21 +822,13 @@ end
 -- Helper Functions
 -- ============================================================================
 
-function private.IsPet(itemString)
-	return strmatch(itemString, "^p:") and true or false
-end
-
-function private.IsItem(itemString)
-	return strmatch(itemString, "^i:") and true or false
-end
-
 function private.GetFieldValueHelper(itemString, field, baseIsSame, storeBaseValue, petDefaultValue)
 	local value = private.GetField(itemString, field)
 	if value ~= nil then
 		return value
 	end
 	ItemInfo.FetchInfo(itemString)
-	if private.IsPet(itemString) then
+	if ItemString.IsPet(itemString) then
 		-- we can fetch info instantly for pets so try again
 		value = private.GetField(itemString, field)
 		if value == nil and petDefaultValue ~= nil then
@@ -691,6 +850,9 @@ function private.GetFieldValueHelper(itemString, field, baseIsSame, storeBaseVal
 end
 
 function private.ProcessItemInfo()
+	if InCombatLockdown() then
+		return
+	end
 	private.db:SetQueryUpdatesPaused(true)
 
 	-- create rows for items which don't exist at all in the DB in bulk
@@ -698,11 +860,9 @@ function private.ProcessItemInfo()
 	for itemString, state in pairs(private.pendingItems) do
 		if state == PENDING_STATE_NEW then
 			local baseItemString = ItemString.GetBase(itemString)
-			if not private.db:HasUniqueRow("itemString", itemString) then
-				private.db:BulkInsertNewRow(itemString, "", -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1)
-			end
-			if baseItemString ~= itemString and not private.db:HasUniqueRow("itemString", baseItemString) then
-				private.db:BulkInsertNewRow(baseItemString, "", -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1)
+			private.CreateDBRowIfNotExists(itemString, true)
+			if baseItemString ~= itemString then
+				private.CreateDBRowIfNotExists(baseItemString, true)
 			end
 			private.pendingItems[itemString] = PENDING_STATE_CREATED
 		end
@@ -732,7 +892,7 @@ function private.ProcessItemInfo()
 			-- give up on this item
 			if private.numRequests[itemString] ~= math.huge then
 				private.numRequests[itemString] = math.huge
-				local itemId = ItemString.ToId(itemString)
+				local itemId = ItemString.IsItem(itemString) and ItemString.ToId(itemString) or nil
 				if not TSM.IsWowClassic() then
 					Log.Err("Giving up on item info for %s", itemString)
 				end
@@ -776,12 +936,16 @@ function private.ScanMerchant()
 	for i = 1, GetMerchantNumItems() do
 		local itemString = ItemString.Get(GetMerchantItemLink(i))
 		if itemString then
+			local currentValue = private.settings.vendorItems[itemString]
+			local newValue = nil
 			local _, _, price, quantity, _, _, _, extendedCost = GetMerchantItemInfo(i)
 			-- bug with big keech vendor returning extendedCost = true for gold only items so need to check GetMerchantItemCostInfo
 			if price > 0 and (not extendedCost or GetMerchantItemCostInfo(i) == 0) then
-				private.settings.vendorItems[itemString] = Math.Round(price / quantity)
-			else
-				private.settings.vendorItems[itemString] = nil
+				newValue = Math.Round(price / quantity)
+			end
+			if newValue ~= currentValue then
+				private.settings.vendorItems[itemString] = newValue
+				private.DoInfoChangedCallbacks(itemString)
 			end
 		end
 	end
@@ -795,7 +959,7 @@ function private.CheckFieldValue(key, value)
 	if value == -1 then
 		return
 	end
-	assert(value >= 0 and value < 2 ^ FIELD_LENGTH_BITS[key] - 1)
+	assert(value >= 0 and value <= FIELD_INFO[key].maxValue)
 end
 
 function private.GetField(itemString, key)
@@ -806,25 +970,30 @@ function private.GetField(itemString, key)
 	return value
 end
 
-function private.CreateDBRowIfNotExists(itemString)
+function private.CreateDBRowIfNotExists(itemString, isBulkInsert)
 	if private.db:HasUniqueRow("itemString", itemString) then
 		return
 	end
-	private.db:NewRow()
-		:SetField("itemString", itemString)
-		:SetField("name", "")
-		:SetField("minLevel", -1)
-		:SetField("itemLevel", -1)
-		:SetField("maxStack", -1)
-		:SetField("vendorSell", -1)
-		:SetField("quality", -1)
-		:SetField("isBOP", -1)
-		:SetField("isCraftingReagent", -1)
-		:SetField("texture", -1)
-		:SetField("classId", -1)
-		:SetField("subClassId", -1)
-		:SetField("invSlotId", -1)
-		:Create()
+	if isBulkInsert then
+		private.db:BulkInsertNewRow(itemString, "", -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1)
+	else
+		private.db:NewRow()
+			:SetField("itemString", itemString)
+			:SetField("name", "")
+			:SetField("minLevel", -1)
+			:SetField("itemLevel", -1)
+			:SetField("maxStack", -1)
+			:SetField("vendorSell", -1)
+			:SetField("quality", -1)
+			:SetField("isBOP", -1)
+			:SetField("isCraftingReagent", -1)
+			:SetField("texture", -1)
+			:SetField("classId", -1)
+			:SetField("subClassId", -1)
+			:SetField("invSlotId", -1)
+			:Create()
+	end
+	private.hasChanged = true
 end
 
 function private.SetSingleField(itemString, key, value)
@@ -840,6 +1009,8 @@ function private.SetSingleField(itemString, key, value)
 	end
 	private.CreateDBRowIfNotExists(itemString)
 	private.db:SetUniqueRowField("itemString", itemString, key, value)
+	private.hasChanged = true
+	private.DoInfoChangedCallbacks(itemString)
 end
 
 function private.SetItemInfoInstantFields(itemString, texture, classId, subClassId, invSlotId)
@@ -852,6 +1023,8 @@ function private.SetItemInfoInstantFields(itemString, texture, classId, subClass
 	private.db:SetUniqueRowField("itemString", itemString, "classId", classId)
 	private.db:SetUniqueRowField("itemString", itemString, "subClassId", subClassId)
 	private.db:SetUniqueRowField("itemString", itemString, "invSlotId", invSlotId)
+	private.hasChanged = true
+	private.DoInfoChangedCallbacks(itemString)
 end
 
 function private.StoreGetItemInfoInstant(itemString)
@@ -932,11 +1105,13 @@ function private.SetGetItemInfoFields(itemString, name, minLevel, itemLevel, max
 	private.db:SetUniqueRowField("itemString", itemString, "quality", quality)
 	private.db:SetUniqueRowField("itemString", itemString, "isBOP", isBOP)
 	private.db:SetUniqueRowField("itemString", itemString, "isCraftingReagent", isCraftingReagent)
+	private.hasChanged = true
+	private.DoInfoChangedCallbacks(itemString)
 end
 
 function private.StoreGetItemInfo(itemString)
 	private.StoreGetItemInfoInstant(itemString)
-	assert(private.IsItem(itemString))
+	assert(ItemString.IsItem(itemString))
 	local wowItemString = ItemString.ToWow(itemString)
 	local baseItemString = ItemString.GetBase(itemString)
 	local baseWowItemString = ItemString.ToWow(baseItemString)
@@ -945,7 +1120,7 @@ function private.StoreGetItemInfo(itemString)
 	local isBOP = (bindType == LE_ITEM_BIND_ON_ACQUIRE or bindType == LE_ITEM_BIND_QUEST) and 1 or 0
 	isCraftingReagent = isCraftingReagent and 1 or 0
 	-- some items (i.e. "i:40752" produce a very high max stack, so cap it)
-	maxStack = maxStack and min(maxStack, 2 ^ FIELD_LENGTH_BITS.maxStack - 2) or nil
+	maxStack = maxStack and min(maxStack, FIELD_INFO.maxStack.maxValue) or nil
 	-- some items (i.e. "i:117356::1:573") produce an negative min level
 	minLevel = minLevel and max(minLevel, 0) or nil
 
@@ -1008,9 +1183,7 @@ function private.ProcessAvailableItems()
 	private.db:BulkInsertStart()
 	for itemId in pairs(private.availableItems) do
 		local itemString = "i:"..itemId
-		if not private.db:HasUniqueRow("itemString", itemString) then
-			private.db:BulkInsertNewRow(itemString, "", -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1)
-		end
+		private.CreateDBRowIfNotExists(itemString, true)
 	end
 	private.db:BulkInsertEnd()
 
@@ -1029,4 +1202,40 @@ function private.ProcessAvailableItems()
 	TempTable.Release(processedItems)
 
 	private.db:SetQueryUpdatesPaused(false)
+end
+
+function private.DoInfoChangedCallbacks(itemString)
+	for _, callback in ipairs(private.infoChangeCallbacks) do
+		callback(itemString)
+	end
+end
+
+function private.LoadLongString(value)
+	local result = {}
+	if type(value) == "string" then
+		String.SafeSplit(value, SEP_CHAR, result)
+	elseif type(value) == "table" then
+		for _, part in ipairs(value) do
+			String.SafeSplit(part, SEP_CHAR, result)
+		end
+	else
+		assert(value == nil)
+	end
+	return result
+end
+
+function private.StoreLongString(values)
+	assert(type(values) == "table")
+	-- store no more than 1000 values per string
+	if #values == 0 then
+		return nil
+	elseif #values <= 1000 then
+		return table.concat(values, SEP_CHAR)
+	else
+		local result = {}
+		for i = 1, #values, 1000 do
+			tinsert(result, table.concat(values, SEP_CHAR, i, min(i + 1000 - 1, #values)))
+		end
+		return result
+	end
 end

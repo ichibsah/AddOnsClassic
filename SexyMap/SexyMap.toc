@@ -1,5 +1,5 @@
-## Interface: 11302
-## Version: v4-classic
+## Interface: 11303
+## Version: v5-classic
 ## Title: SexyMap
 ## Notes: Spice up your minimap with some sexy options.
 ## Notes-deDE: Spice up your minimap with some sexy options.

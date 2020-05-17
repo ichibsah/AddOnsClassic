@@ -17,12 +17,13 @@ local Table = TSM.Include("Util.Table")
 local Money = TSM.Include("Util.Money")
 local String = TSM.Include("Util.String")
 local Log = TSM.Include("Util.Log")
+local Wow = TSM.Include("Util.Wow")
 local ItemInfo = TSM.Include("Service.ItemInfo")
 local private = {
 	db = nil,
 	fsm = nil,
-	professionsOrder = {},
 	professions = {},
+	professionsKeys = {},
 	groupSearch = "",
 	showDelayFrame = 0,
 	filterText = "",
@@ -46,7 +47,7 @@ private.dividedContainerContext = {}
 -- ============================================================================
 
 function Crafting.OnInitialize()
-	TSM.Wow.RegisterItemLinkedCallback(private.ItemLinkedCallback)
+	TSM.UI.RegisterItemLinkedCallback(private.ItemLinkedCallback)
 	TSM.UI.CraftingUI.RegisterTopLevelPage("Crafting", "iconPack.24x24/Crafting", private.GetCraftingFrame)
 	private.FSMCreate()
 end
@@ -651,14 +652,14 @@ function private.ProfessionDropdownOnSelectionChanged(_, value)
 		-- nothing selected
 	else
 		local key = Table.GetDistinctKey(private.professions, value)
-		local player, profession = strsplit(KEY_SEP, key)
+		local player, profession, skillId = strsplit(KEY_SEP, key)
 		if not profession then
 			-- the current linked / guild / NPC profession was re-selected, so just ignore this change
 			return
 		end
 		-- TODO: support showing of other player's professions?
 		assert(player == UnitName("player"))
-		TSM.Crafting.ProfessionUtil.OpenProfession(profession)
+		TSM.Crafting.ProfessionUtil.OpenProfession(profession, skillId)
 	end
 end
 
@@ -726,7 +727,7 @@ function private.ItemOnClick(text)
 			end
 		end
 	else
-		TSM.Wow.SafeItemRef(ItemInfo.GetLink(text:GetElement("__parent.name"):GetContext()))
+		Wow.SafeItemRef(ItemInfo.GetLink(text:GetElement("__parent.name"):GetContext()))
 	end
 end
 
@@ -753,6 +754,9 @@ function private.CraftAllBtnOnClick(button)
 end
 
 function private.QueueOnRowClick(button, data, mouseButton)
+	if not private.IsPlayerProfession() then
+		return
+	end
 	local spellId = data:GetField("spellId")
 	if mouseButton == "RightButton" then
 		private.fsm:ProcessEvent("EV_QUEUE_RIGHT_CLICKED", spellId)
@@ -888,7 +892,7 @@ function private.FSMCreate()
 		local currentProfession = TSM.Crafting.ProfessionState.GetCurrentProfession()
 		local isCurrentProfessionPlayer = private.IsPlayerProfession()
 		wipe(private.professions)
-		wipe(private.professionsOrder)
+		wipe(private.professionsKeys)
 		if currentProfession and not isCurrentProfessionPlayer then
 			assert(not TSM.IsWowClassic())
 			local playerName = nil
@@ -902,16 +906,16 @@ function private.FSMCreate()
 			end
 			assert(playerName)
 			local key = currentProfession
-			tinsert(private.professionsOrder, key)
+			tinsert(private.professionsKeys, key)
 			private.professions[key] = format("%s - %s", currentProfession, playerName)
 			dropdownSelection = key
 		end
 
-		for _, player, profession, level, maxLevel in TSM.Crafting.PlayerProfessions.Iterator() do
+		for _, player, profession, skillId, level, maxLevel in TSM.Crafting.PlayerProfessions.Iterator() do
 			-- TODO: support showing of other player's professions?
 			if player == UnitName("player") then
-				local key = player..KEY_SEP..profession
-				tinsert(private.professionsOrder, key)
+				local key = player..KEY_SEP..profession..KEY_SEP..skillId
+				tinsert(private.professionsKeys, key)
 				private.professions[key] = format("%s %d/%d - %s", profession, level, maxLevel, player)
 				if isCurrentProfessionPlayer and profession == currentProfession then
 					assert(not dropdownSelection)
@@ -921,7 +925,7 @@ function private.FSMCreate()
 		end
 
 		context.frame:GetElement("left.viewContainer.main.content.profession.dropdownFilterFrame.professionDropdown")
-			:SetDictionaryItems(private.professions, private.professions[dropdownSelection], private.professionsOrder, true)
+			:SetDictionaryItems(private.professions, private.professions[dropdownSelection], private.professionsKeys, true)
 			:Draw()
 	end
 	function fsmPrivate.UpdateContentPage(context)
@@ -935,7 +939,7 @@ function private.FSMCreate()
 		local currentProfession = TSM.Crafting.ProfessionState.GetCurrentProfession()
 		local isCurrentProfessionPlayer = private.IsPlayerProfession()
 		wipe(private.professions)
-		wipe(private.professionsOrder)
+		wipe(private.professionsKeys)
 		if currentProfession and not isCurrentProfessionPlayer then
 			assert(not TSM.IsWowClassic())
 			local playerName = nil
@@ -949,16 +953,16 @@ function private.FSMCreate()
 			end
 			assert(playerName)
 			local key = currentProfession
-			tinsert(private.professionsOrder, key)
+			tinsert(private.professionsKeys, key)
 			private.professions[key] = format("%s - %s", currentProfession, playerName)
 			dropdownSelection = key
 		end
 
-		for _, player, profession, level, maxLevel in TSM.Crafting.PlayerProfessions.Iterator() do
+		for _, player, profession, skillId, level, maxLevel in TSM.Crafting.PlayerProfessions.Iterator() do
 			-- TODO: support showing of other player's professions?
 			if player == UnitName("player") then
-				local key = player..KEY_SEP..profession
-				tinsert(private.professionsOrder, key)
+				local key = player..KEY_SEP..profession..KEY_SEP..skillId
+				tinsert(private.professionsKeys, key)
 				private.professions[key] = format("%s %d/%d - %s", profession, level, maxLevel, player)
 				if isCurrentProfessionPlayer and profession == currentProfession then
 					assert(not dropdownSelection)
@@ -968,7 +972,7 @@ function private.FSMCreate()
 		end
 
 		context.frame:GetElement("left.viewContainer.main.content.profession.dropdownFilterFrame.professionDropdown")
-			:SetDictionaryItems(private.professions, private.professions[dropdownSelection], private.professionsOrder, true)
+			:SetDictionaryItems(private.professions, private.professions[dropdownSelection], private.professionsKeys, true)
 			:Draw()
 
 		local craftingContentFrame = context.frame:GetElement("left.viewContainer.main.content.profession")

@@ -16,6 +16,7 @@ local Analytics = TSM.Include("Util.Analytics")
 local Math = TSM.Include("Util.Math")
 local Money = TSM.Include("Util.Money")
 local ItemString = TSM.Include("Util.ItemString")
+local Wow = TSM.Include("Util.Wow")
 local ErrorHandler = TSM.Include("Service.ErrorHandler")
 local SlashCommands = TSM.Include("Service.SlashCommands")
 local Threading = TSM.Include("Service.Threading")
@@ -33,8 +34,8 @@ local APP_INFO_REQUIRED_KEYS = { "version", "lastSync", "message", "news" }
 local LOGOUT_TIME_WARNING_THRESHOLD_MS = 20
 do
 	-- show a message if we were updated
-	if GetAddOnMetadata("TradeSkillMaster", "Version") ~= "v4.8.24" then
-		message("TSM was just updated and may not work properly until you restart WoW.")
+	if GetAddOnMetadata("TradeSkillMaster", "Version") ~= "v4.9.35" then
+		Wow.ShowBasicMessage("TSM was just updated and may not work properly until you restart WoW.")
 	end
 end
 
@@ -57,36 +58,57 @@ function TSM.OnInitialize()
 	TSM.db.sync.internalData.classKey = select(2, UnitClass("player"))
 
 	-- core price sources
+	ItemInfo.RegisterInfoChangeCallback(function(itemString)
+		CustomPrice.OnSourceChange("VendorBuy", itemString)
+		CustomPrice.OnSourceChange("VendorSell", itemString)
+		CustomPrice.OnSourceChange("ItemQuality", itemString)
+		CustomPrice.OnSourceChange("ItemLevel", itemString)
+		CustomPrice.OnSourceChange("RequiredLevel", itemString)
+	end)
 	CustomPrice.RegisterSource("TradeSkillMaster", "VendorBuy", L["Buy from Vendor"], ItemInfo.GetVendorBuy)
 	CustomPrice.RegisterSource("TradeSkillMaster", "VendorSell", L["Sell to Vendor"], ItemInfo.GetVendorSell)
-	CustomPrice.RegisterSource("TradeSkillMaster", "Destroy", L["Destroy Value"], function(itemString) return CustomPrice.GetConversionsValue(itemString, TSM.db.global.coreOptions.destroyValueSource) end)
+	CustomPrice.RegisterSource("TradeSkillMaster", "Destroy", L["Destroy Value"], function(itemString) return CustomPrice.GetConversionsValue(itemString, TSM.db.global.coreOptions.destroyValueSource) end, nil, nil, true)
 	CustomPrice.RegisterSource("TradeSkillMaster", "ItemQuality", L["Item Quality"], ItemInfo.GetQuality)
 	CustomPrice.RegisterSource("TradeSkillMaster", "ItemLevel", L["Item Level"], ItemInfo.GetItemLevel)
 	CustomPrice.RegisterSource("TradeSkillMaster", "RequiredLevel", L["Required Level"], ItemInfo.GetMinLevel)
 
 	-- Auctioneer price sources
-	if TSM.Wow.IsAddonEnabled("Auc-Advanced") and AucAdvanced then
+	if Wow.IsAddonEnabled("Auc-Advanced") and AucAdvanced then
+		local registeredAuctioneerSources = {}
+		hooksecurefunc(AucAdvanced, "SendProcessorMessage", function(msg)
+			if msg == "scanfinish" then
+				for _, source in ipairs(registeredAuctioneerSources) do
+					CustomPrice.OnSourceChange(source)
+				end
+			end
+		end)
 		if AucAdvanced.Modules.Util.Appraiser and AucAdvanced.Modules.Util.Appraiser.GetPrice then
 			CustomPrice.RegisterSource("External", "AucAppraiser", L["Auctioneer - Appraiser"], AucAdvanced.Modules.Util.Appraiser.GetPrice, true)
+			tinsert(registeredAuctioneerSources, "AucAppraiser")
 		end
 		if AucAdvanced.Modules.Util.SimpleAuction and AucAdvanced.Modules.Util.SimpleAuction.Private.GetItems then
 			local function GetAucMinBuyout(itemLink)
 				return select(6, AucAdvanced.Modules.Util.SimpleAuction.Private.GetItems(itemLink)) or nil
 			end
 			CustomPrice.RegisterSource("External", "AucMinBuyout", L["Auctioneer - Minimum Buyout"], GetAucMinBuyout, true)
+			tinsert(registeredAuctioneerSources, "AucMinBuyout")
 		end
 		if AucAdvanced.API.GetMarketValue then
 			CustomPrice.RegisterSource("External", "AucMarket", L["Auctioneer - Market Value"], AucAdvanced.API.GetMarketValue, true)
+			tinsert(registeredAuctioneerSources, "AucMarket")
 		end
 	end
 
 	-- Auctionator price sources
-	if TSM.Wow.IsAddonEnabled("Auctionator") and Atr_GetAuctionBuyout then
+	if Wow.IsAddonEnabled("Auctionator") and Atr_GetAuctionBuyout and Atr_RegisterFor_DBupdated then
+		Atr_RegisterFor_DBupdated(function(...)
+			CustomPrice.OnSourceChange("AtrValue")
+		end)
 		CustomPrice.RegisterSource("External", "AtrValue", L["Auctionator - Auction Value"], Atr_GetAuctionBuyout, true)
 	end
 
 	-- TheUndermineJournal and BootyBayGazette price sources
-	if TSM.Wow.IsAddonEnabled("TheUndermineJournal") and TUJMarketInfo then
+	if Wow.IsAddonEnabled("TheUndermineJournal") and TUJMarketInfo then
 		local function GetTUJPrice(itemLink, arg)
 			local data = TUJMarketInfo(itemLink)
 			return data and data[arg] or nil
@@ -95,7 +117,7 @@ function TSM.OnInitialize()
 		CustomPrice.RegisterSource("External", "TUJMarket", L["TUJ 14-Day Price"], GetTUJPrice, true, "market")
 		CustomPrice.RegisterSource("External", "TUJGlobalMean", L["TUJ Global Mean"], GetTUJPrice, true, "globalMean")
 		CustomPrice.RegisterSource("External", "TUJGlobalMedian", L["TUJ Global Median"], GetTUJPrice, true, "globalMedian")
-	elseif TSM.Wow.IsAddonEnabled("BootyBayGazette") and TUJMarketInfo then
+	elseif Wow.IsAddonEnabled("BootyBayGazette") and TUJMarketInfo then
 		local function GetBBGPrice(itemLink, arg)
 			local data = TUJMarketInfo(itemLink)
 			return data and data[arg] or nil
@@ -107,7 +129,11 @@ function TSM.OnInitialize()
 	end
 
 	-- AHDB price sources
-	if TSM.Wow.IsAddonEnabled("AuctionDB") and AuctionDB and AuctionDB.AHGetAuctionInfoByLink then
+	if Wow.IsAddonEnabled("AuctionDB") and AuctionDB and AuctionDB.AHGetAuctionInfoByLink then
+		hooksecurefunc(AuctionDB, "AHendOfScanCB", function(...)
+			CustomPrice.OnSourceChange("AHDBMinBuyout")
+			CustomPrice.OnSourceChange("AHDBMinBid")
+		end)
 		local function GetAHDBPrice(itemLink, arg)
 			local info = AuctionDB:AHGetAuctionInfoByLink(itemLink)
 			return info and info[arg] or nil
@@ -117,13 +143,12 @@ function TSM.OnInitialize()
 	end
 
 	-- module price sources
-	CustomPrice.RegisterSource("Accounting", "avgSell", L["Avg Sell Price"], TSM.Accounting.Transactions.GetAverageSalePrice)
-	CustomPrice.RegisterSource("Accounting", "avgSell", L["Avg Sell Price"], TSM.Accounting.Transactions.GetAverageSalePrice)
-	CustomPrice.RegisterSource("Accounting", "maxSell", L["Max Sell Price"], TSM.Accounting.Transactions.GetMaxSalePrice)
-	CustomPrice.RegisterSource("Accounting", "minSell", L["Min Sell Price"], TSM.Accounting.Transactions.GetMinSalePrice)
-	CustomPrice.RegisterSource("Accounting", "avgBuy", L["Avg Buy Price"], TSM.Accounting.Transactions.GetAverageBuyPrice)
-	CustomPrice.RegisterSource("Accounting", "maxBuy", L["Max Buy Price"], TSM.Accounting.Transactions.GetMaxBuyPrice)
-	CustomPrice.RegisterSource("Accounting", "minBuy", L["Min Buy Price"], TSM.Accounting.Transactions.GetMinBuyPrice)
+	CustomPrice.RegisterSource("Accounting", "AvgSell", L["Avg Sell Price"], TSM.Accounting.Transactions.GetAverageSalePrice)
+	CustomPrice.RegisterSource("Accounting", "MaxSell", L["Max Sell Price"], TSM.Accounting.Transactions.GetMaxSalePrice)
+	CustomPrice.RegisterSource("Accounting", "MinSell", L["Min Sell Price"], TSM.Accounting.Transactions.GetMinSalePrice)
+	CustomPrice.RegisterSource("Accounting", "AvgBuy", L["Avg Buy Price"], TSM.Accounting.Transactions.GetAverageBuyPrice)
+	CustomPrice.RegisterSource("Accounting", "MaxBuy", L["Max Buy Price"], TSM.Accounting.Transactions.GetMaxBuyPrice)
+	CustomPrice.RegisterSource("Accounting", "MinBuy", L["Min Buy Price"], TSM.Accounting.Transactions.GetMinBuyPrice)
 	CustomPrice.RegisterSource("Accounting", "NumExpires", L["Expires Since Last Sale"], TSM.Accounting.Auctions.GetNumExpiresSinceSale)
 	CustomPrice.RegisterSource("AuctionDB", "DBMarket", L["AuctionDB - Market Value"], TSM.AuctionDB.GetRealmItemData, false, "marketValue")
 	CustomPrice.RegisterSource("AuctionDB", "DBMinBuyout", L["AuctionDB - Minimum Buyout"], TSM.AuctionDB.GetRealmItemData, false, "minBuyout")
@@ -134,8 +159,8 @@ function TSM.OnInitialize()
 	CustomPrice.RegisterSource("AuctionDB", "DBRegionSaleAvg", L["AuctionDB - Region Sale Average (via TSM App)"], TSM.AuctionDB.GetRegionItemData, false, "regionSale")
 	CustomPrice.RegisterSource("AuctionDB", "DBRegionSaleRate", L["AuctionDB - Region Sale Rate (via TSM App)"], TSM.AuctionDB.GetRegionSaleInfo, false, "regionSalePercent")
 	CustomPrice.RegisterSource("AuctionDB", "DBRegionSoldPerDay", L["AuctionDB - Region Sold Per Day (via TSM App)"], TSM.AuctionDB.GetRegionSaleInfo, false, "regionSoldPerDay")
-	CustomPrice.RegisterSource("Crafting", "Crafting", L["Crafting Cost"], TSM.Crafting.Cost.GetLowestCostByItem)
-	CustomPrice.RegisterSource("Crafting", "matPrice", L["Crafting Material Cost"], TSM.Crafting.Cost.GetMatCost)
+	CustomPrice.RegisterSource("Crafting", "Crafting", L["Crafting Cost"], TSM.Crafting.Cost.GetLowestCostByItem, nil, nil, true)
+	CustomPrice.RegisterSource("Crafting", "MatPrice", L["Crafting Material Cost"], TSM.Crafting.Cost.GetMatCost, nil, nil, true)
 
 	-- slash commands
 	SlashCommands.Register("", TSM.MainUI.Toggle, L["Toggles the main TSM window"])
@@ -186,11 +211,19 @@ function TSM.OnInitialize()
 end
 
 function TSM.OnEnable()
-	if not TSM.Wow.IsAddonInstalled("TradeSkillMaster_AppHelper") then
+	for i = 1, GetNumAddOns() do
+		local name = GetAddOnInfo(i)
+		if strmatch(name, "^TradeSkillMaster") and name ~= "TradeSkillMaster" and name ~= "TradeSkillMaster_AppHelper" and name ~= "TradeSkillMaster_StringConverter" then
+			Wow.ShowBasicMessage(format(L["An old TSM addon was found installed. Please remove %s and any other old TSM addons to avoid issues."], name))
+			break
+		end
+	end
+
+	if not Wow.IsAddonInstalled("TradeSkillMaster_AppHelper") then
 		return
 	end
 
-	if not TSM.Wow.IsAddonEnabled("TradeSkillMaster_AppHelper") then
+	if not Wow.IsAddonEnabled("TradeSkillMaster_AppHelper") then
 		-- TSM_AppHelper is disabled
 		StaticPopupDialogs["TSM_APP_DATA_ERROR"] = {
 			text = L["The TradeSkillMaster_AppHelper addon is installed, but not enabled. TSM has enabled it and requires a reload."],
@@ -202,7 +235,7 @@ function TSM.OnEnable()
 				ReloadUI()
 			end,
 		}
-		TSM.Wow.ShowStaticPopupDialog("TSM_APP_DATA_ERROR")
+		Wow.ShowStaticPopupDialog("TSM_APP_DATA_ERROR")
 		return
 	end
 
@@ -216,7 +249,7 @@ function TSM.OnEnable()
 			timeout = 0,
 			whileDead = true,
 		}
-		TSM.Wow.ShowStaticPopupDialog("TSM_APP_DATA_ERROR")
+		Wow.ShowStaticPopupDialog("TSM_APP_DATA_ERROR")
 		return
 	end
 
@@ -235,7 +268,7 @@ function TSM.OnEnable()
 			button1 = OKAY,
 			timeout = 0,
 		}
-		TSM.Wow.ShowStaticPopupDialog("TSM_APP_MESSAGE")
+		Wow.ShowStaticPopupDialog("TSM_APP_MESSAGE")
 	end
 
 	if time() - private.appInfo.lastSync > 60 * 60 then
@@ -246,7 +279,7 @@ function TSM.OnEnable()
 			timeout = 0,
 			whileDead = true,
 		}
-		TSM.Wow.ShowStaticPopupDialog("TSM_APP_DATA_ERROR")
+		Wow.ShowStaticPopupDialog("TSM_APP_DATA_ERROR")
 	end
 end
 
@@ -260,10 +293,11 @@ function TSM.OnDisable()
 		Log.Warn("private.SaveAppData took %0.2fms", timeTaken)
 	end
 	if not success then
-		Log.Err	("private.SaveAppData hit an error: %s", tostring(errMsg))
+		Log.Err("private.SaveAppData hit an error: %s", tostring(errMsg))
+		-- force ourselves back to the original profile
+		TSM.db:SetProfile(originalProfile, true)
+		error("Error while saving app data: "..tostring(errMsg))
 	end
-	-- ensure we're back on the correct profile
-	TSM.db:SetProfile(originalProfile)
 end
 
 
@@ -338,8 +372,7 @@ function private.DebugSlashCommandHandler(arg)
 	elseif arg == "logout" then
 		TSM.AddonTestLogout()
 	elseif arg == "clearitemdb" then
-		TSMItemInfoDB = nil
-		ReloadUI()
+		ItemInfo.ClearDB()
 	end
 end
 

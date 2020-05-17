@@ -108,8 +108,8 @@ function HealBot_Lang_enALL()
     HEALBOT_SORTBY_CLASS                    = "Class"
     HEALBOT_SORTBY_GROUP                    = "Group"
     HEALBOT_SORTBY_MAXHEALTH                = "Max health"
-    HEALBOT_OPTIONS_NEWDEBUFFTEXT           = "New Bebuff"
-    HEALBOT_OPTIONS_NEWHOTBUFFTEXT          = "New Buff/HoT"
+    HEALBOT_OPTIONS_NEWDEBUFFTEXT           = "New Debuff"
+    HEALBOT_OPTIONS_NEWHOTBUFFTEXT          = "New Buff"
     HEALBOT_OPTIONS_DELSKIN                 = "Delete"
     HEALBOT_OPTIONS_NEWSKINTEXT             = "New skin"
     HEALBOT_OPTIONS_SAVESKIN                = "Save"
@@ -153,7 +153,9 @@ function HealBot_Lang_enALL()
     HEALBOT_OPTIONS_CDCWARNINGS             = "Debuff warnings";
     HEALBOT_OPTIONS_BUFFWARNINGS            = "Buff warnings";
     HEALBOT_OPTIONS_BUFFCUSTOM              = "Custom buffs";
+    HEALBOT_OPTIONS_BUFFCUSTOMURL           = "Custom buffs are available at  "..HEALBOT_ABOUT_URL
     HEALBOT_OPTIONS_DEBUFFCUSTOM            = "Custom debuffs"
+    HEALBOT_OPTIONS_DEBUFFCUSTOMURL         = "Raid and Instance custom debuffs are available at  "..HEALBOT_ABOUT_URL
     HEALBOT_OPTIONS_BUFFMISSING             = "Missing buffs";
     HEALBOT_OPTIONS_DEBUFFDISPELL           = "Dispellable debuffs";
     HEALBOT_OPTIONS_SHOWDEBUFFICON          = "Show debuff";
@@ -209,6 +211,7 @@ function HealBot_Lang_enALL()
     HEALBOT_CLASSES_HEALERS                 = "Healers";
     HEALBOT_CLASSES_CUSTOM                  = "Custom";
 
+    HEALBOT_OPTIONS_DEBUFFNAME              = "Debuff Name"
     HEALBOT_OPTIONS_SHOWTOOLTIP             = "Show tooltips";
     HEALBOT_OPTIONS_SHOWDETTOOLTIP          = "Show detailed spell information";
     HEALBOT_OPTIONS_SHOWCDTOOLTIP           = "Show spell cooldown";
@@ -411,7 +414,7 @@ function HealBot_Lang_enALL()
     HEALBOT_OPTIONS_ICONSCALE               = "Buff Icon Scale"
     HEALBOT_OPTIONS_DEBUFFICONSCALE         = "Debuff Icon Scale"
     HEALBOT_OPTIONS_MAXICONS                = "Max Icons"
-    
+    HEALBOT_OPTIONS_ENABLELIBQH             = "Enable HealBot fastHealth"
 
     HEALBOT_OPTIONS_AGGROBARSIZE            = "Aggro bar size"
     HEALBOT_OPTIONS_DOUBLETEXTLINES         = "Double text lines"
@@ -443,7 +446,7 @@ function HealBot_Lang_enALL()
                    [8] = "[HealBot] /hb spt -- Self Pet toggle",
                    [9] = "[HealBot] /hb flb -- Toggle frame lock bypass (frame always moves with Ctrl+Alt+Left click)",
                    [10] = "[HealBot] /hb hs -- Display additional slash commands",
-                   [11] = "[HealBot] - All commands are listed on the HealBot website "..HEALBOT_ABOUT_URL,
+                   [11] = "[HealBot] - All commands are listed on the HealBot website at "..HEALBOT_ABOUT_URL,
                   }
 
     HEALBOT_HELP2={ [1] = "[HealBot] /hb rtb -- Toggle restrict target bar to Left=SmartCast and Right=add/remove to/from My Targets",
@@ -560,6 +563,7 @@ function HealBot_Lang_enALL()
     HEALBOT_OPTIONS_SELFCASTS               = "Self casts only"
     HEALBOT_OPTIONS_HOTSHOWICON             = "Show icon"
     HEALBOT_OPTIONS_ALLSPELLS               = "Buffs / HoTs"
+    HEALBOT_OPTIONS_BUFFNAME                = "Buff Name"
     HEALBOT_OPTIONS_DOUBLEROW               = "Double row"
     HEALBOT_OPTIONS_HOTBELOWBAR             = "Below bar"
     HEALBOT_OPTIONS_OTHERSPELLS             = "Other spells"
@@ -674,7 +678,11 @@ function HealBot_Lang_enALL()
     HEALBOT_OPTIONS_CUSTOM_ALLPOISON        = "All Poison"
     HEALBOT_OPTIONS_CUSTOM_ALLBOSS          = "All Boss"
     HEALBOT_OPTIONS_CUSTOM_ALLBOSSSTRICT    = "Strict Mode"
+    HEALBOT_OPTIONS_CUSTOM_IDMETHOD         = "Identify By"
     HEALBOT_OPTIONS_CUSTOM_CASTBY           = "Cast By"
+    HEALBOT_OPTIONS_CUSTOM_IDMETHODSID      = "Spell ID"
+    HEALBOT_OPTIONS_CUSTOM_IDMETHODSNAME    = "Spell Name"
+    HEALBOT_OPTIONS_CUSTOM_IDMETHODSBOTH    = "ID or Name"
 
     HEALBOT_BLIZZARD_MENU                   = "Blizzard menu"
     HEALBOT_HB_MENU                         = "Healbot menu"
@@ -1005,6 +1013,7 @@ function HealBot_Lang_enALL()
                                   }
 
     HEALBOT_OPTIONS_SKINAUTHOR              = "Skin Author"
+    HEALBOT_OPTIONS_MORESKINSURL            = "Additional skins are available at  "..HEALBOT_ABOUT_URL
     HEALBOT_OPTIONS_AVOIDBLUECURSOR         = "Avoid\nBlue Cursor"
     HEALBOT_PLAYER_OF_REALM                 = "of"
     
@@ -1087,7 +1096,7 @@ function HealBot_Lang_enALL()
     HEALBOT_OPTIONS_SET_ALL_FRAMES          = "Apply current tab settings to all Frames"
     HEALBOT_WORDS_PROFILE                   = "Profile"
     HEALBOT_SHARE_SCREENSHOT                = "ScreenShot taken"
-    HEALBOT_SHARE_INSTRUCTION               = "Go to the website for instructions on sharing with "..HEALBOT_ABOUT_URL
+    HEALBOT_SHARE_INSTRUCTION               = "Go to the website for instructions on sharing at "..HEALBOT_ABOUT_URL
     HEALBOT_INOUT_STATUS_SKINSINIT          = "Skins can be shared at "..HEALBOT_ABOUT_URL
     HEALBOT_INOUT_STATUS_CDEBUFFINIT        = "Custom Debuffs can be shared at "..HEALBOT_ABOUT_URL
     HEALBOT_INOUT_STATUS_BUFFINIT           = "Custom Buffs can be shared at "..HEALBOT_ABOUT_URL

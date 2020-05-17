@@ -24,6 +24,7 @@ local private = {
 local MAX_SCAN_DATA_AGE = 24 * 60 * 60
 local MAX_ITEM_INFO_RETRIES = 30
 local MAX_MISSING_ITEM_DATA = 20
+local ITEMS_PER_PAGE = TSM.IsWowClassic() and NUM_AUCTION_ITEMS_PER_PAGE or 500
 
 
 
@@ -80,11 +81,39 @@ function private.GenerateQueriesThread(itemList, callback)
 	end
 
 	if not TSM.IsWowClassic() then
-		private.PopulateDataThreaded()
-		Threading.Yield()
-		if not private.isComplete then
-			Log.Err("Auction count database not complete")
+		-- sort the item list so all base items are grouped together
+		sort(itemList)
+		local currentBaseItemString = nil
+		local currentItems = TempTable.Acquire()
+		for _, itemString in ipairs(itemList) do
+			local baseItemString = ItemString.GetBaseFast(itemString)
+			assert(baseItemString)
+			if baseItemString == currentBaseItemString then
+				-- same base item
+				tinsert(currentItems, itemString)
+			else
+				-- new base item
+				if currentBaseItemString then
+					callback(currentItems, ItemInfo.GetName(currentBaseItemString))
+					wipe(currentItems)
+				end
+				currentBaseItemString = baseItemString
+				tinsert(currentItems, itemString)
+			end
 		end
+		if currentBaseItemString then
+			callback(currentItems, ItemInfo.GetName(currentBaseItemString))
+			wipe(currentItems)
+		end
+		TempTable.Release(currentItems)
+		return
+	else
+		-- TODO: add optimizations in for classic?
+		-- private.PopulateDataThreaded()
+		-- Threading.Yield()
+		-- if not private.isComplete then
+		-- 	Log.Err("Auction count database not complete")
+		-- end
 	end
 
 	-- if the DB is not fully populated (or we're on classic), we don't have all the item info, just do individual scans
@@ -225,7 +254,11 @@ end
 
 function private.GetItemNumAuctions(itemString)
 	itemString = ItemString.Filter(itemString)
-	return private.counts[itemString] or 0
+	if TSM.IsWowClassic() then
+		return private.counts[itemString] or 0
+	else
+		return private.counts[itemString] and 1 or 0
+	end
 end
 
 function private.GetQueryNumPages(queryClass, queryMinLevel, queryMaxLevel, queryQuality)
@@ -288,7 +321,7 @@ function private.GetItemQueryInfo(itemString)
 end
 
 function private.NumAuctionsToNumPages(num)
-	return max(ceil(num / NUM_AUCTION_ITEMS_PER_PAGE), 1)
+	return max(ceil(num / ITEMS_PER_PAGE), 1)
 end
 
 function private.GetCommonInfo(items)

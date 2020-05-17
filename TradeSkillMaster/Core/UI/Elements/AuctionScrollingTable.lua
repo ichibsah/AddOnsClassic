@@ -25,6 +25,7 @@ local private = {
 		sortValueByHash = {},
 		baseItemStringByHash = {},
 		isBaseItemHash = {},
+		maxAuctionIdByHash = {},
 	},
 	rowFrameLookup = {},
 	queryAuctionScrollingTableLookup = {},
@@ -95,22 +96,36 @@ function AuctionScrollingTable.Acquire(self)
 			:SetJustifyH("RIGHT")
 			:SetTextFunction(private.GetItemLevelCellText)
 			:Commit()
-		:NewColumn("posts")
-			:SetTitles(L["Posts"])
-			:SetWidth(40)
-			:SetFont(TSM.UI.Fonts.RobotoMedium)
-			:SetFontHeight(12)
-			:SetJustifyH("RIGHT")
-			:SetTextFunction(private.GetAuctionsPostsText)
-			:Commit()
-		:NewColumn("stack")
-			:SetTitles(L["Stack"])
-			:SetWidth(40)
-			:SetFont(TSM.UI.Fonts.RobotoMedium)
-			:SetFontHeight(12)
-			:SetJustifyH("RIGHT")
-			:SetTextFunction(private.GetAuctionsStackText)
-			:Commit()
+	if not TSM.IsWowClassic() then
+		self:GetScrollingTableInfo()
+			:NewColumn("qty")
+				:SetTitles(L["Qty"])
+				:SetWidth(40)
+				:SetFont(TSM.UI.Fonts.RobotoMedium)
+				:SetFontHeight(12)
+				:SetJustifyH("RIGHT")
+				:SetTextFunction(private.GetAuctionsQuantityText)
+				:Commit()
+	else
+		self:GetScrollingTableInfo()
+			:NewColumn("posts")
+				:SetTitles(L["Posts"])
+				:SetWidth(40)
+				:SetFont(TSM.UI.Fonts.RobotoMedium)
+				:SetFontHeight(12)
+				:SetJustifyH("RIGHT")
+				:SetTextFunction(private.GetAuctionsPostsText)
+				:Commit()
+			:NewColumn("stack")
+				:SetTitles(L["Stack"])
+				:SetWidth(40)
+				:SetFont(TSM.UI.Fonts.RobotoMedium)
+				:SetFontHeight(12)
+				:SetJustifyH("RIGHT")
+				:SetTextFunction(private.GetAuctionsStackText)
+				:Commit()
+	end
+	self:GetScrollingTableInfo()
 		:NewColumn("timeLeft")
 			:SetTitleIcon("iconPack.14x14/Clock")
 			:SetWidth(26)
@@ -230,6 +245,7 @@ end
 -- @treturn AuctionScrollingTable The auction scrolling table object
 function AuctionScrollingTable.SetMarketValueFunction(self, func)
 	self._marketValueFunc = func
+	self:_UpdateData()
 	return self
 end
 
@@ -319,6 +335,8 @@ function AuctionScrollingTable._UpdateData(self)
 				sortValue = record.stackSize
 			elseif sortKey == "stack" then
 				sortValue = record.stackSize
+			elseif sortKey == "qty" then
+				sortValue = record.stackSize
 			elseif sortKey == "timeLeft" then
 				sortValue = record.timeLeft
 			elseif sortKey == "seller" then
@@ -336,22 +354,27 @@ function AuctionScrollingTable._UpdateData(self)
 			end
 			private.sortContext.sortValueByHash[hash] = sortValue
 		end
+		private.sortContext.maxAuctionIdByHash[hash] = max(private.sortContext.maxAuctionIdByHash[hash] or 0, record.auctionId)
 		if not private.sortContext.baseItemStringByHash[hash] then
 			-- insert the hash
 			tinsert(hashes, hash)
 			private.sortContext.baseItemStringByHash[hash] = baseItemString
 		end
 
-		-- determine if this comes before the current base record
-		local baseRecordSortValue = private.sortContext.baseRecordSortValues[baseItemString]
-		if not baseRecordSortValue or (sortAscending and sortValue < baseRecordSortValue) or (not sortAscending and sortValue > baseRecordSortValue) then
-			local prevRecord = self._baseRecordByItem[baseItemString]
+		-- determine if this comes before the current base item record
+		local prevBaseItemRecord = self._baseRecordByItem[baseItemString]
+		if private.RecordSortHelper(record, prevBaseItemRecord, sortAscending) then
 			self._baseRecordByItem[baseItemString] = record
-			private.sortContext.isBaseItemHash[record.hash] = true
-			if prevRecord then
-				private.sortContext.isBaseItemHash[prevRecord.hash] = nil
+			private.sortContext.isBaseItemHash[hash] = true
+			if prevBaseItemRecord then
+				private.sortContext.isBaseItemHash[prevBaseItemRecord.hash] = nil
 			end
 			private.sortContext.baseRecordSortValues[baseItemString] = sortValue
+		end
+
+		-- determine if this comes before the current base hash record
+		if private.RecordSortHelper(record, self._baseRecordByHash[hash], sortAscending) then
+			self._baseRecordByHash[hash] = record
 		end
 
 		-- count the number of auctions grouped by hash
@@ -359,21 +382,7 @@ function AuctionScrollingTable._UpdateData(self)
 			self._numAuctionsByItem[baseItemString] = (self._numAuctionsByItem[baseItemString] or 0) + 1
 			self._numAuctionsByHash[hash] = 0
 		end
-		self._numAuctionsByHash[hash] = self._numAuctionsByHash[hash] + 1
-
-		-- use the highest filterId record so more recent auctions show up first in sniper
-		if not self._baseRecordByHash[hash] or record.filterId > self._baseRecordByHash[hash].filterId then
-			self._baseRecordByHash[hash] = record
-			-- need to make sure _baseRecordByHash and _baseRecordByItem are kept in sync
-			if private.sortContext.baseRecordSortValues[baseItemString] == sortValue then
-				local prevRecord = self._baseRecordByItem[baseItemString]
-				self._baseRecordByItem[baseItemString] = record
-				private.sortContext.isBaseItemHash[record.hash] = true
-				if prevRecord then
-					private.sortContext.isBaseItemHash[prevRecord.hash] = nil
-				end
-			end
-		end
+		self._numAuctionsByHash[hash] = self._numAuctionsByHash[hash] + (TSM.IsWowClassic() and 1 or record.stackSize)
 	end
 
 	-- sort the data
@@ -392,6 +401,7 @@ function AuctionScrollingTable._UpdateData(self)
 	wipe(private.sortContext.baseRecordSortValues)
 	wipe(private.sortContext.baseItemStringByHash)
 	wipe(private.sortContext.isBaseItemHash)
+	wipe(private.sortContext.maxAuctionIdByHash)
 
 	-- reselect the row in case the grouping changed
 	local newSelection = self:GetSelection()
@@ -550,6 +560,28 @@ function private.QueryUpdateCallback(query)
 	private.queryAuctionScrollingTableLookup[query]:UpdateData(true)
 end
 
+function private.RecordSortHelper(a, b, sortAscending)
+	local aSortValue = a and private.sortContext.sortValueByHash[a.hash] or nil
+	local bSortValue = b and private.sortContext.sortValueByHash[b.hash] or nil
+	if aSortValue == nil then
+		return false
+	elseif bSortValue == nil then
+		return true
+	elseif aSortValue ~= bSortValue then
+		if sortAscending then
+			return aSortValue < bSortValue
+		else
+			return aSortValue > bSortValue
+		end
+	elseif a.auctionId ~= b.auctionId then
+		return a.auctionId > b.auctionId
+	elseif a.filterId ~= b.filterId then
+		return a.filterId > b.filterId
+	else
+		return tostring(a) < tostring(b)
+	end
+end
+
 function private.SortByHashAscendingHelper(a, b)
 	local sortContext = private.sortContext
 	local aBaseItemString = sortContext.baseItemStringByHash[a]
@@ -564,7 +596,10 @@ function private.SortByHashAscendingHelper(a, b)
 			elseif sortContext.isBaseItemHash[b] then
 				return false
 			else
-				return a < b
+				-- show the higher auctionId first
+				local aAuctionId = sortContext.maxAuctionIdByHash[a]
+				local bAuctionId = sortContext.maxAuctionIdByHash[b]
+				return aAuctionId > bAuctionId
 			end
 		end
 		return aSortValue < bSortValue
@@ -593,7 +628,10 @@ function private.SortByHashDescendingHelper(a, b)
 			elseif sortContext.isBaseItemHash[b] then
 				return false
 			else
-				return a > b
+				-- show the higher auctionId first
+				local aAuctionId = sortContext.maxAuctionIdByHash[a]
+				local bAuctionId = sortContext.maxAuctionIdByHash[b]
+				return aAuctionId > bAuctionId
 			end
 		end
 		return aSortValue > bSortValue
@@ -618,6 +656,11 @@ end
 function private.GetItemLevelCellText(self, context)
 	local record = self._baseRecordByHash[context]
 	return ItemInfo.GetItemLevel(record:GetField("itemLink"))
+end
+
+function private.GetAuctionsQuantityText(self, context)
+	local record = self._baseRecordByHash[context]
+	return self._numAuctionsByHash[record:GetField("hash")]
 end
 
 function private.GetAuctionsPostsText(self, context)
@@ -650,7 +693,7 @@ function private.GetBidCellText(self, context, titleIndex)
 	else
 		error("Unexpected titleIndex: "..tostring(titleIndex))
 	end
-	return record:GetField("isHighBidder") and Money.ToString(value, "|cff00ff00") or Money.ToString(value)
+	return Money.ToString(value, record:GetField("isHighBidder") and "|cff00ff00" or nil, "OPT_83_NO_COPPER")
 end
 
 function private.GetBuyoutCellText(self, context, titleIndex)
@@ -663,7 +706,7 @@ function private.GetBuyoutCellText(self, context, titleIndex)
 	else
 		error("Unexpected titleIndex: "..tostring(titleIndex))
 	end
-	return Money.ToString(value)
+	return Money.ToString(value, nil, "OPT_83_NO_COPPER")
 end
 
 function private.GetPercentCellText(self, context)

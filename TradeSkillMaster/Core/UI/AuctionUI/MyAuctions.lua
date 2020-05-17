@@ -25,6 +25,9 @@ local DURATION_LIST = {
 	"Long (2h to 12h)",
 	"Very Long (Over 12h)",
 }
+local SECONDS_PER_MIN = 60
+local SECONDS_PER_HOUR = 60 * SECONDS_PER_MIN
+local SECONDS_PER_DAY = 24 * SECONDS_PER_HOUR
 
 
 
@@ -144,7 +147,7 @@ function private.GetMyAuctionsFrame()
 					:SetFont(TSM.UI.Fonts.MontserratRegular)
 					:SetFontHeight(12)
 					:SetJustifyH("LEFT")
-					:SetTextInfo("highBidder")
+					:SetTextInfo(nil, private.AuctionsGetHighBidderText)
 					:Commit()
 				:NewColumn("group")
 					:SetTitles(GROUP)
@@ -317,6 +320,7 @@ function private.FSMCreate()
 	local fsmContext = {
 		frame = nil,
 		currentSelectionIndex = nil,
+		currentSelectionAuctionId = nil,
 		durationFilter = nil,
 		keywordFilter = "",
 		bidFilter = false,
@@ -333,7 +337,19 @@ function private.FSMCreate()
 			private.query:Release()
 			private.query = TSM.MyAuctions.CreateQuery()
 			if private.durationFilter then
-				private.query:Equal("duration", private.durationFilter)
+				if not TSM.IsWowClassic() then
+					if private.durationFilter == 1 then
+						private.query:LessThan("duration", time() + (30 * SECONDS_PER_MIN))
+					elseif private.durationFilter == 2 then
+						private.query:LessThan("duration", time() + (2 * SECONDS_PER_HOUR))
+					elseif private.durationFilter == 3 then
+						private.query:LessThanOrEqual("duration", time() + (12 * SECONDS_PER_HOUR))
+					else
+						private.query:GreaterThan("duration", time() + (12 * SECONDS_PER_HOUR))
+					end
+				else
+					private.query:Equal("duration", private.durationFilter)
+				end
 			end
 			if private.keywordFilter then
 				private.query:Matches("itemName", private.keywordFilter)
@@ -346,15 +362,29 @@ function private.FSMCreate()
 		-- select the next row we can cancel (or clear the selection otherwise)
 		local selectedRow = nil
 		if context.currentSelectionIndex then
-			-- find the highest index which is at most context.currentSelectionIndex
+			if not TSM.IsWowClassic() and TSM.MyAuctions.CanCancel(context.currentSelectionAuctionId) then
+				-- try to select the same row
+				for _, row in private.query:Iterator() do
+					local auctionId = row:GetFields("auctionId")
+					if not selectedRow and auctionId == context.currentSelectionAuctionId then
+						selectedRow = row
+					end
+				end
+			end
+			-- find the next auction to cancel
 			for _, row in private.query:Iterator() do
-				local rowIndex = row:GetField("index")
-				if rowIndex <= context.currentSelectionIndex and rowIndex > (selectedRow and selectedRow:GetField("index") or 0) and TSM.MyAuctions.CanCancel(rowIndex) then
+				local index, auctionId = row:GetFields("index", "auctionId")
+				if not selectedRow and TSM.MyAuctions.CanCancel(auctionId) and ((not TSM.IsWowClassic() and index >= context.currentSelectionIndex) or (TSM.IsWowClassic() and index <= context.currentSelectionIndex)) then
 					selectedRow = row
 				end
 			end
 		end
-		context.currentSelectionIndex = selectedRow and selectedRow:GetField("index") or nil
+		if selectedRow then
+			context.currentSelectionIndex, context.currentSelectionAuctionId = selectedRow:GetFields("index", "auctionId")
+		else
+			context.currentSelectionIndex = nil
+			context.currentSelectionAuctionId = nil
+		end
 		auctions:SetSelection(selectedRow and selectedRow:GetUUID() or nil, true)
 
 		context.frame:GetElement("headerFrame.clearfilterBtn")
@@ -362,13 +392,6 @@ function private.FSMCreate()
 			:Draw()
 
 		local hasSelection = auctions:GetSelection() and true or false
-		local bottomFrame = context.frame:GetElement("bottom")
-		bottomFrame:GetElement("cancelBtn")
-			:SetDisabled(not hasSelection)
-			:Draw()
-		bottomFrame:GetElement("skipBtn")
-			:SetDisabled(not hasSelection)
-			:Draw()
 		local numPending = TSM.MyAuctions.GetNumPending()
 		local progressText = nil
 		if numPending > 0 then
@@ -378,6 +401,13 @@ function private.FSMCreate()
 		else
 			progressText = L["Select Auction to Cancel"]
 		end
+		local bottomFrame = context.frame:GetElement("bottom")
+		bottomFrame:GetElement("cancelBtn")
+			:SetDisabled(not hasSelection or (not TSM.IsWowClassic() and numPending > 0) or (not TSM.IsWowClassic() and context.currentSelectionAuctionId and C_AuctionHouse.GetCancelCost(context.currentSelectionAuctionId) > GetMoney()))
+			:Draw()
+		bottomFrame:GetElement("skipBtn")
+			:SetDisabled(not hasSelection)
+			:Draw()
 		bottomFrame:GetElement("progressBar")
 			:SetProgressIconHidden(numPending == 0)
 			:SetText(progressText)
@@ -447,6 +477,7 @@ function private.FSMCreate()
 				if didChange then
 					context.filterChanged = true
 					context.currentSelectionIndex = nil
+					context.currentSelectionAuctionId = nil
 					return "ST_SHOWN"
 				end
 			end)
@@ -455,6 +486,7 @@ function private.FSMCreate()
 			:SetOnEnter(function(context)
 				local row = context.frame:GetElement("auctions"):GetSelection()
 				context.currentSelectionIndex = row and row:GetField("index") or nil
+				context.currentSelectionAuctionId = row and row:GetField("auctionId") or nil
 				return "ST_SHOWN"
 			end)
 			:AddTransition("ST_SHOWN")
@@ -465,9 +497,9 @@ function private.FSMCreate()
 				buttonsFrame:GetElement("cancelBtn"):SetDisabled(true)
 				buttonsFrame:GetElement("skipBtn"):SetDisabled(true)
 				buttonsFrame:Draw()
-				local selectedIndex = context.frame:GetElement("auctions"):GetSelection():GetField("index")
-				if TSM.MyAuctions.CanCancel(selectedIndex) then
-					TSM.MyAuctions.CancelAuction(selectedIndex)
+				local auctionId = context.frame:GetElement("auctions"):GetSelection():GetField("auctionId")
+				if TSM.MyAuctions.CanCancel(auctionId) then
+					TSM.MyAuctions.CancelAuction(auctionId)
 				end
 				return "ST_SHOWN"
 			end)
@@ -476,14 +508,20 @@ function private.FSMCreate()
 		)
 		:AddState(FSM.NewState("ST_SKIPPING")
 			:SetOnEnter(function(context)
-				context.currentSelectionIndex = context.currentSelectionIndex - 1
 				local selectedRow = nil
 				for _, row in private.query:Iterator() do
-					if row:GetField("index") == context.currentSelectionIndex then
-						selectedRow = row:GetUUID()
+					local index, auctionId = row:GetFields("index", "auctionId")
+					if not selectedRow and TSM.MyAuctions.CanCancel(auctionId) and (not TSM.IsWowClassic() and index > context.currentSelectionIndex) or (TSM.IsWowClassic() and index < context.currentSelectionIndex) then
+						selectedRow = row
 					end
 				end
-				context.frame:GetElement("auctions"):SetSelection(selectedRow)
+				if selectedRow then
+					context.currentSelectionIndex, context.currentSelectionAuctionId = selectedRow:GetFields("index", "auctionId")
+				else
+					context.currentSelectionIndex = nil
+					context.currentSelectionAuctionId = nil
+				end
+				context.frame:GetElement("auctions"):SetSelection(selectedRow and selectedRow:GetUUID() or nil)
 				return "ST_SHOWN"
 			end)
 			:AddTransition("ST_SHOWN")
@@ -508,16 +546,28 @@ function private.AuctionsGetItemTooltip(itemString)
 end
 
 function private.AuctionsGetTimeLeftText(row)
-	local saleStatus = row:GetField("saleStatus")
-	local duration = row:GetField("duration")
-	if saleStatus == 1 then
-		local timeLeft = duration - time()
-		return timeLeft < 60 and format("%ds", timeLeft) or format("%dm %ds", floor(timeLeft / 60), timeLeft % 60)
-	elseif row:GetField("isPending") then
+	local saleStatus, duration, isPending = row:GetFields("saleStatus", "duration", "isPending")
+	if saleStatus == 0 and isPending then
 		return "..."
+	elseif saleStatus == 1 or not TSM.IsWowClassic() then
+		local timeLeft = duration - time()
+		if timeLeft < SECONDS_PER_MIN then
+			return timeLeft.."s"
+		elseif timeLeft < SECONDS_PER_HOUR then
+			return floor(timeLeft / SECONDS_PER_MIN).."m"
+		elseif timeLeft < SECONDS_PER_DAY then
+			return floor(timeLeft / SECONDS_PER_HOUR).."h"
+		else
+			return floor(timeLeft / SECONDS_PER_DAY).."d"
+		end
 	else
 		return TSM.UI.GetTimeLeftString(duration)
 	end
+end
+
+function private.AuctionsGetHighBidderText(row)
+	local saleStatus = row:GetField("saleStatus")
+	return saleStatus == 1 and not TSM.IsWowClassic() and "" or row:GetField("highBidder")
 end
 
 function private.AuctionsGetGroupText(itemString)

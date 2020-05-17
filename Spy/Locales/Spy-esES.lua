@@ -62,8 +62,16 @@ L["The Salty Sailor Tavern"] = "Taberna del Grumete Frito"
 L["Shattrath City"] = "Ciudad de Shattrath"
 L["Area 52"] = "Area 52"
 L["Dalaran"] = "Dalaran"
+L["Dalaran (Northrend)"] = "Dalaran (Rasganorte)"
 L["Bogpaddle"] = "Chapaleos"
 L["The Vindicaar"] = "El Vindicaar"
+L["Krasus' Landing"] = "Alto de Krasus"
+L["The Violet Gate"] = "La Puerta Violeta"
+L["Magni's Encampment"] = "Campamento de Magni"
+L["Silithus"] = "Silithus"
+L["Chamber of Heart"] = "Cámara del Corazón"
+L["Hall of Ancient Paths"] = "Cámara de Sendas Ancestrales"
+L["Sanctum of the Sages"] = "Santuario de los Sabios"
 
 -- Display
 L["DisplayOptions"] = "Display"
@@ -251,6 +259,8 @@ L["KOSDescription"] = "Añadir/Eliminar un jugador de la lista de Matar a la Vis
 L["InvalidInput"] = "Invalid Input"
 L["Ignore"] = "Ignore"
 L["IgnoreDescription"] = "Añadir/Eliminar un jugador de la lista de Ignorados."
+L["Test"] = "Test"
+L["TestDescription"] = "Muestra una advertencia para que pueda reposicionarla."
 
 -- Lists
 L["Nearby"] = "Nearby"
@@ -259,6 +269,8 @@ L["Ignore"] = "Ignorar"
 L["KillOnSight"] = "Kill On Sight"
 
 --Stats
+L["Won"] = "Ganado"
+L["Lost"] = "Perdido"
 L["Time"] = "Time"	
 L["List"] = "Lista"
 L["Filter"] = "Filter"
@@ -338,24 +350,24 @@ Spy_KOSReasonList = {
 	[1] = {
 		["title"] = "Started combat";
 		["content"] = {
-			"Attacked me for no reason",
-			"Attacked me at a quest giver", 
-			"Attacked me while I was fighting NPCs",
-			"Attacked me while I was near an instance",
-			"Attacked me while I was AFK",
-			"Attacked me while I was mounted/flying",
-			"Attacked me while I had low health/mana",
+			"Me atacó sin razón",
+			"Me atacó cerca del NPC que me dio una misión.", 
+			"Me atacó mientras luchaba contra NPCs",
+			"Me atacó mientras estaba cerca de una mazmorra",
+			"Me atacó mientras estaba AFK",
+			"Me atacó mientras estaba montado / volando",
+			"Me atacó mientras tenía poca vida / maná",
 		};
 	},
 	[2] = {
 		["title"] = "Style of combat";
 		["content"] = {
-			"Ambushed me",
-			"Always attacks me on sight",
+			"Me emboscó",
+			"Siempre me ataca cuando me ve",
 			"Killed me with a higher level character",
 			"Steamrolled me with a group of enemies",
-			"Doesn't attack without backup",
-			"Always calls for help",
+			"No ataca sin ayuda",
+			"Siempre pide ayuda a otros enemigos.",
 			"Uses too much crowd control",
 		};
 	},
@@ -374,8 +386,8 @@ Spy_KOSReasonList = {
 	[4] = {
 		["title"] = "Questing";
 		["content"] = {
-			"Attacked me while I was questing",
-			"Attacked me after I helped with a quest",
+			"Me atacó mientras estaba haciendo una mision",
+			"Me atacó después de ayudarle con una mision",
 			"Interfered with a quest objective",
 			"Started a quest I wanted to do",
 			"Killed my faction's NPCs",
@@ -400,7 +412,7 @@ Spy_KOSReasonList = {
 			"Flagged for PvP",
 			"Pushed me off a cliff",
 			"Uses engineering tricks",
-			"Always manages to escape",
+			"Siempre escapa",
 			"Uses items and skills to escape",
 			"Exploits game mechanics",
 			"Enter your own reason...",
@@ -412,7 +424,7 @@ StaticPopupDialogs["Spy_SetKOSReasonOther"] = {
 	preferredIndex=STATICPOPUPS_NUMDIALOGS,  -- http://forums.wowace.com/showthread.php?p=320956
 	text = "Enter the Kill On Sight reason for %s:",
 	button1 = "Set",
-	button2 = "Cancel",
+	button2 = "Cancelar",
 	timeout = 120,
 	hasEditBox = 1,
 	editBoxWidth = 260,	
@@ -421,7 +433,7 @@ StaticPopupDialogs["Spy_SetKOSReasonOther"] = {
 	OnShow = function(self)
 		self.editBox:SetText("");
 	end,
-    	OnAccept = function(self)
+   	OnAccept = function(self)
 		local reason = self.editBox:GetText()
 		Spy:SetKOSReason(self.playerName, "Enter your own reason...", reason)
 	end,

@@ -1,7 +1,7 @@
-## Interface: 11302
+## Interface: 11303
 ## Author: Knoot
 ## Title: |cffffff00<|r|cff16ABB5FGI|r|cffffff00>|r |cff16ABB5FastGuildInvite|r
-## Version: 59
+## Version: 66
 ## X-Curse-Project-ID: 313283
 ## SavedVariables: FGI_DB, FGI_DEBUG
 ## DefaultState: enabled

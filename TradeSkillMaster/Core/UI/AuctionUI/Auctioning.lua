@@ -15,6 +15,7 @@ local Table = TSM.Include("Util.Table")
 local Sound = TSM.Include("Util.Sound")
 local Money = TSM.Include("Util.Money")
 local Log = TSM.Include("Util.Log")
+local Math = TSM.Include("Util.Math")
 local ItemString = TSM.Include("Util.ItemString")
 local Threading = TSM.Include("Service.Threading")
 local ItemInfo = TSM.Include("Service.ItemInfo")
@@ -30,7 +31,7 @@ local private = {
 	groupSearch = "",
 	selectionFrame = nil,
 	logQuery = nil,
-	itemLocation = ItemLocation.CreateEmpty(),
+	itemLocation = ItemLocation:CreateEmpty(),
 }
 local DEFAULT_DIVIDED_CONTAINER_CONTEXT = {
 	leftWidth = 272,
@@ -747,7 +748,7 @@ function private.RunPostBagsButtonOnclick(button)
 end
 
 function private.ScanBackButtonOnClick()
-	if not TSM.IsWow83() then
+	if TSM.IsWowClassic() then
 		ClearCursor()
 		ClickAuctionSellItemButton(AuctionsItemButton, "LeftButton")
 		ClearCursor()
@@ -763,7 +764,11 @@ end
 function private.BidBuyoutTextOnValueChanged(text, value)
 	value = Money.FromString(value)
 	if value then
-		value = min(value, MAXIMUM_BID_PRICE)
+		if TSM.IsWowClassic() then
+			value = max(min(value, MAXIMUM_BID_PRICE), 0)
+		else
+			value = max(min(Math.Round(value, COPPER_PER_SILVER), MAXIMUM_BID_PRICE - 99), COPPER_PER_SILVER)
+		end
 		private.fsm:ProcessEvent("EV_POST_DETAIL_CHANGED", text:GetContext(), value)
 	else
 		text:Draw()
@@ -791,42 +796,45 @@ function private.FSMCreate()
 		auctionScan = nil,
 		scanProgress = 0,
 		scanProgressText = L["Starting Scan..."],
+		pendingFuture = nil,
 	}
 	private.scanQuery = fsmContext.db:NewQuery()
 	Event.Register("AUCTION_HOUSE_CLOSED", function()
 		private.fsm:ProcessEvent("EV_AUCTION_HOUSE_CLOSED")
 	end)
-	Event.Register("CHAT_MSG_SYSTEM", function(_, msg)
-		if msg == ERR_AUCTION_STARTED then
-			private.fsm:SetLoggingEnabled(false)
-			private.fsm:ProcessEvent("EV_AUCTION_POST_CONFIRM", true)
-			private.fsm:SetLoggingEnabled(true)
-		elseif msg == ERR_AUCTION_REMOVED then
-			private.fsm:SetLoggingEnabled(false)
-			private.fsm:ProcessEvent("EV_AUCTION_CANCEL_CONFIRM", true)
-			private.fsm:SetLoggingEnabled(true)
-		end
-	end)
-	local POST_ERR_MSGS = {
-		-- errors where we can retry
-		[ERR_ITEM_NOT_FOUND] = true,
-		[ERR_AUCTION_DATABASE_ERROR] = true,
-		-- errors where we can't retry
-		[ERR_AUCTION_REPAIR_ITEM] = false,
-		[ERR_AUCTION_LIMITED_DURATION_ITEM] = false,
-		[ERR_AUCTION_USED_CHARGES] = false,
-		[ERR_AUCTION_WRAPPED_ITEM] = false,
-		[ERR_AUCTION_BAG] = false,
-		[ERR_NOT_ENOUGH_MONEY] = false,
-	}
-	Event.Register("UI_ERROR_MESSAGE", function(_, _, msg)
-		if POST_ERR_MSGS[msg] ~= nil then
-			private.fsm:ProcessEvent("EV_AUCTION_POST_CONFIRM", false, POST_ERR_MSGS[msg])
-		end
-		if msg == ERR_ITEM_NOT_FOUND then
-			private.fsm:ProcessEvent("EV_AUCTION_CANCEL_CONFIRM", false, true)
-		end
-	end)
+	if TSM.IsWowClassic() then
+		Event.Register("CHAT_MSG_SYSTEM", function(_, msg)
+			if msg == ERR_AUCTION_STARTED then
+				private.fsm:SetLoggingEnabled(false)
+				private.fsm:ProcessEvent("EV_AUCTION_POST_CONFIRM", true)
+				private.fsm:SetLoggingEnabled(true)
+			elseif msg == ERR_AUCTION_REMOVED then
+				private.fsm:SetLoggingEnabled(false)
+				private.fsm:ProcessEvent("EV_AUCTION_CANCEL_CONFIRM", true)
+				private.fsm:SetLoggingEnabled(true)
+			end
+		end)
+		local POST_ERR_MSGS = {
+			-- errors where we can retry
+			[ERR_ITEM_NOT_FOUND] = true,
+			[ERR_AUCTION_DATABASE_ERROR] = true,
+			-- errors where we can't retry
+			[ERR_AUCTION_REPAIR_ITEM] = false,
+			[ERR_AUCTION_LIMITED_DURATION_ITEM] = false,
+			[ERR_AUCTION_USED_CHARGES] = false,
+			[ERR_AUCTION_WRAPPED_ITEM] = false,
+			[ERR_AUCTION_BAG] = false,
+			[ERR_NOT_ENOUGH_MONEY] = false,
+		}
+		Event.Register("UI_ERROR_MESSAGE", function(_, _, msg)
+			if POST_ERR_MSGS[msg] ~= nil then
+				private.fsm:ProcessEvent("EV_AUCTION_POST_CONFIRM", false, POST_ERR_MSGS[msg])
+			end
+			if msg == ERR_ITEM_NOT_FOUND then
+				private.fsm:ProcessEvent("EV_AUCTION_CANCEL_CONFIRM", false, true)
+			end
+		end)
+	end
 	local function UpdateDepositCost(context)
 		if context.scanType ~= "POST" then
 			return
@@ -851,30 +859,32 @@ function private.FSMCreate()
 			:GetFirstResultAndRelease()
 		local postTime = Table.GetDistinctKey(TSM.CONST.AUCTION_DURATIONS, detailsHeader2:GetElement("duration.dropdown"):GetSelection())
 		local stackSize = tonumber(currentRow:GetField("stackSize"))
-		local depositCost = nil
-		if not TSM.IsWow83() then
-			if postBag and postSlot then
+		local depositCost = 0
+		if postBag and postSlot then
+			if TSM.IsWowClassic() then
 				ClearCursor()
 				PickupContainerItem(postBag, postSlot)
 				ClickAuctionSellItemButton(AuctionsItemButton, "LeftButton")
 				ClearCursor()
-			end
-			local bid = Money.FromString(detailsHeader1:GetElement("bid.text"):GetText())
-			local buyout = Money.FromString(detailsHeader1:GetElement("buyout.text"):GetText())
-			depositCost = GetAuctionDeposit(postTime, bid, buyout, stackSize, 1)
-			ClearCursor()
-			ClickAuctionSellItemButton(AuctionsItemButton, "LeftButton")
-			ClearCursor()
-		else
-			private.itemLocation:Clear()
-			private.itemLocation:SetBagAndSlot(postBag, postSlot)
-			local commodityStatus = C_AuctionHouse.GetItemCommodityStatus(private.itemLocation)
-			if commodityStatus == Enum.ItemCommodityStatus.Item then
-				depositCost = C_AuctionHouse.CalculateItemDeposit(private.itemLocation, postTime, stackSize)
-			elseif commodityStatus == Enum.ItemCommodityStatus.Commodity then
-				depositCost = C_AuctionHouse.CalculateCommodityDeposit(ItemString.ToId(itemString), postTime, stackSize)
+				local bid = Money.FromString(detailsHeader1:GetElement("bid.text"):GetText())
+				local buyout = Money.FromString(detailsHeader1:GetElement("buyout.text"):GetText())
+				depositCost = GetAuctionDeposit(postTime, bid, buyout, stackSize, 1)
+				ClearCursor()
+				ClickAuctionSellItemButton(AuctionsItemButton, "LeftButton")
+				ClearCursor()
 			else
-				error("Unknown commodity status: "..tostring(itemString))
+				private.itemLocation:Clear()
+				private.itemLocation:SetBagAndSlot(postBag, postSlot)
+				local commodityStatus = C_AuctionHouse.GetItemCommodityStatus(private.itemLocation)
+				if commodityStatus == Enum.ItemCommodityStatus.Item then
+					depositCost = C_AuctionHouse.CalculateItemDeposit(private.itemLocation, postTime, stackSize)
+				elseif commodityStatus == Enum.ItemCommodityStatus.Commodity then
+					depositCost = C_AuctionHouse.CalculateCommodityDeposit(ItemString.ToId(itemString), postTime, stackSize)
+				elseif commodityStatus == Enum.ItemCommodityStatus.Unknown then
+					return
+				else
+					error("Unknown commodity status: "..tostring(itemString))
+				end
 			end
 		end
 
@@ -909,7 +919,7 @@ function private.FSMCreate()
 		if currentRow then
 			local selectedRow = nil
 			for _, row in private.logQuery:Iterator() do
-				if currentRow:GetField("index") == row:GetField("index") then
+				if currentRow:GetField("auctionId") == row:GetField("index") then
 					selectedRow = row
 				end
 			end
@@ -930,18 +940,26 @@ function private.FSMCreate()
 				:SetTooltip(itemString)
 				:Draw()
 			detailsHeader1:GetElement("bid.text")
-				:SetText(Money.ToString(currentRow:GetField("bid")))
+				:SetText(Money.ToString(currentRow:GetField(ItemInfo.IsCommodity(itemString) and "itemBuyout" or "bid"), nil, "OPT_83_NO_COPPER"))
+				:SetEditing(false)
 				:Draw()
 			detailsHeader1:GetElement("buyout.text")
-				:SetText(Money.ToString(currentRow:GetField("buyout")))
+				:SetText(Money.ToString(currentRow:GetField(ItemInfo.IsCommodity(itemString) and "itemBuyout" or "buyout"), nil, "OPT_83_NO_COPPER"))
+				:SetEditing(false)
 				:Draw()
 			detailsHeader2:GetElement("quantity.text")
 				:SetText(format(L["%d of %d"], rowStacksRemaining, currentRow:GetField("stackSize")))
 				:Draw()
 			if context.scanType == "POST" then
-				detailsHeader1:GetElement("bid.editBtn")
-					:Show()
-					:Draw()
+				if ItemInfo.IsCommodity(itemString) then
+					detailsHeader1:GetElement("bid.editBtn")
+						:Hide()
+						:Draw()
+				else
+					detailsHeader1:GetElement("bid.editBtn")
+						:Show()
+						:Draw()
+				end
 				detailsHeader1:GetElement("buyout.editBtn")
 					:Show()
 					:Draw()
@@ -1041,7 +1059,7 @@ function private.FSMCreate()
 				:SetProgress(totalNum > 0 and (numProcessed / totalNum) or 1)
 				:SetProgressIconHidden(iconHidden)
 				:SetText(progressText)
-			bottom:GetElement("processBtn"):SetDisabled(numProcessed == totalNum)
+			bottom:GetElement("processBtn"):SetDisabled(numProcessed == totalNum or (not TSM.IsWowClassic() and context.pendingFuture))
 			bottom:GetElement("skipBtn"):SetDisabled(numProcessed == totalNum)
 		else
 			-- we're scanning
@@ -1073,6 +1091,10 @@ function private.FSMCreate()
 				if context.auctionScan then
 					context.auctionScan:Release()
 					context.auctionScan = nil
+				end
+				if context.pendingFuture then
+					context.pendingFuture:Cancel()
+					context.pendingFuture = nil
 				end
 
 				if ... then
@@ -1139,7 +1161,7 @@ function private.FSMCreate()
 					else
 						progress = (filtersScanned + pagesScanned / numPages) / numFilters
 					end
-					text = format(L["Scanning %d / %d (Page %d / %d)"], filtersScanned + 1, numFilters, pagesScanned + 1, numPages)
+					text = format(L["Scanning %d / %d (Page %d / %d)"], filtersScanned + 1, numFilters, pagesScanned < numPages and pagesScanned + 1 or numPages, numPages)
 				end
 				context.scanProgress = progress
 				context.scanProgressText = text
@@ -1164,7 +1186,7 @@ function private.FSMCreate()
 					end
 				elseif context.scanType == "CANCEL" then
 					TSM.Auctioning.CancelScan.HandleConfirm(success, canRetry)
-					local _, _, numConfirmed, numFailed, totalNum = TSM.Auctioning.CancelScan.GetStatus()
+					local _, numConfirmed, numFailed, totalNum = TSM.Auctioning.CancelScan.GetStatus()
 					if numConfirmed == totalNum then
 						if numFailed > 0 then
 							-- TODO: need to wait for the player's auctions to settle
@@ -1193,19 +1215,20 @@ function private.FSMCreate()
 			:AddTransition("ST_INIT")
 			:AddTransition("ST_HANDLING_CONFIRM")
 			:AddEvent("EV_PROCESS_CLICKED", function(context)
+				local result, noRetry = nil, nil
 				if context.scanType == "POST" then
-					local success, noRetry = TSM.Auctioning.PostScan.DoProcess()
-					if not success then
-						-- we failed to post
-						return "ST_HANDLING_CONFIRM", false, not noRetry
-					end
+					result, noRetry = TSM.Auctioning.PostScan.DoProcess()
 				elseif context.scanType == "CANCEL" then
-					if not TSM.Auctioning.CancelScan.DoProcess() then
-						-- we failed to cancel but can retry
-						return "ST_HANDLING_CONFIRM", false, true
-					end
+					result, noRetry = TSM.Auctioning.CancelScan.DoProcess()
 				else
 					error("Invalid scan type: "..tostring(context.scanType))
+				end
+				if not result then
+					-- we failed to post / cancel
+					return "ST_HANDLING_CONFIRM", false, not noRetry
+				elseif not TSM.IsWowClassic() then
+					context.pendingFuture = result
+					context.pendingFuture:SetScript("OnDone", private.FSMPendingFutureOneDone)
 				end
 				UpdateScanFrame(context)
 			end)
@@ -1218,6 +1241,20 @@ function private.FSMCreate()
 					error("Invalid scan type: "..tostring(context.scanType))
 				end
 				UpdateScanFrame(context)
+			end)
+			:AddEvent("EV_PENDING_FUTURE_DONE", function(context)
+				assert(context.pendingFuture:IsDone())
+				local value = context.pendingFuture:GetValue()
+				context.pendingFuture = nil
+				if value == true then
+					return "ST_HANDLING_CONFIRM", true, false
+				elseif value == false then
+					return "ST_HANDLING_CONFIRM", false, true
+				elseif value == nil then
+					return "ST_HANDLING_CONFIRM", false, false
+				else
+					error("Invalid value: "..tostring(value))
+				end
 			end)
 			:AddEvent("EV_AUCTION_POST_CONFIRM", function(context, success, canRetry)
 				if context.scanType == "POST" then
@@ -1257,6 +1294,9 @@ function private.FSMCreate()
 		end)
 		:AddDefaultEventTransition("EV_BACK_BUTTON_CLICKED", "ST_INIT")
 		:AddDefaultEventTransition("EV_AUCTION_HOUSE_CLOSED", "ST_INIT")
+		:AddDefaultEvent("EV_PENDING_FUTURE_DONE", function(context)
+			error("Unexpected pending future done event")
+		end)
 		:Init("ST_INIT", fsmContext)
 end
 
@@ -1269,6 +1309,10 @@ end
 
 function private.FSMScanCallback()
 	private.fsm:ProcessEvent("EV_SCAN_COMPLETE")
+end
+
+function private.FSMPendingFutureOneDone(value)
+	private.fsm:ProcessEvent("EV_PENDING_FUTURE_DONE")
 end
 
 
@@ -1286,7 +1330,7 @@ function private.BagGetOperationText(firstOperation)
 end
 
 function private.LogGetBuyoutText(buyout)
-	return buyout == 0 and "-" or Money.ToString(buyout)
+	return buyout == 0 and "-" or Money.ToString(buyout, nil, "OPT_83_NO_COPPER")
 end
 
 function private.LogGetIndexText(index)

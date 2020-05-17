@@ -1901,7 +1901,7 @@ function _G._detalhes:Start()
 	edgeSize = 16, bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark", tileSize = 64, tile = true, insets={left=4, right=4, top=4, bottom=4}})
 
 	local warningMessage = taintWarning:CreateFontString (nil, "overlay", "GameFontNormal")
-	warningMessage:SetText ("< right click and choose enter if they try to blame addons")
+	warningMessage:SetText ("< right click and choose 'Enter Battle' if 'Enter Battle' button not work")
 
 	C_Timer.NewTicker(1, function()
 		if (StaticPopup1:IsShown()) then
@@ -1937,7 +1937,19 @@ function _G._detalhes:Start()
 		end
 	end)
 
+	local gameLocale = GetLocale()
+	if gameLocale == "enGB" then
+		gameLocale = "enUS"
+	end
 
+	if (gameLocale ~= "zhTW" and  gameLocale ~= "koKR" and gameLocale ~= "zhCN") then
+		for classFile, colorTable in pairs (Details.class_colors) do
+			local classNameUncap = classFile:gsub ("(%a)([%w_']*)", function (first, rest) return first:upper() .. rest:lower() end)
+			if (classNameUncap) then
+				Details.class_colors [classNameUncap] = colorTable
+			end
+		end
+	end
 
 end
 

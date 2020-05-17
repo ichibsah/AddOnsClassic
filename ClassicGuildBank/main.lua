@@ -50,7 +50,13 @@ function ClassicGuildBank:HandleChatCommand(input)
   if #deposits > 0 then
     exportString  = exportString .. '[DEPOSITS]'
     for j=1, #deposits do
-      exportString = exportString .. '[' .. deposits[j].sender .. ',' .. deposits[j].itemId .. ',' .. deposits[j].quantity .. ',' .. deposits[j].money .. '];'
+      local sender = deposits[j].sender;
+
+      if sender == nil then
+        sender = 'Unkown Sender'
+      end
+
+      exportString = exportString .. '[' .. sender .. ',' .. deposits[j].itemId .. ',' .. deposits[j].quantity .. ',' .. deposits[j].money .. '];'
     end
 
     tinsert(self.db.char.history, 1, { date=date(), deposits=self.db.char.deposits});
@@ -302,6 +308,13 @@ function ClassicGuildBank:InitializeInboxButton()
   btn:SetScript('OnClick', function()
     ClassicGuildBank:SendDeposit()
   end)
+  btn:SetScript('OnEvent', function(__, event)
+    if (event == "PLAYER_LOGIN" and CT_MailMod and CT_MailMod.requestAddOnConflictResolution) then
+      -- asks CT_MailMod to make some room so the button can fit.
+      CT_MailMod:requestAddOnConflictResolution("ClassicGuildBank", 1, btn)
+    end
+  end)
+  btn:RegisterEvent("PLAYER_LOGIN");
 end
 
 function ClassicGuildBank:SendDeposit()
@@ -386,8 +399,8 @@ function ClassicGuildBank:IsNewDeposit(uid)
   for i=1, #history do
     local historyDeposits = history[i].deposits
 
-    for j=1, # historyDeposits do
-      local historyDeposit = historyDeposits[i]
+    for j=1, #historyDeposits do
+      local historyDeposit = historyDeposits[j]
 
       if historyDeposit.uid == uid then
         returnValue = false

@@ -10,6 +10,8 @@ TSMAPI_FOUR.Auction = {}
 local _, TSM = ...
 local Auction = TSM:NewPackage("Auction")
 local ObjectPool = TSM.Include("Util.ObjectPool")
+local Database = TSM.Include("Util.Database")
+local ItemInfo = TSM.Include("Service.ItemInfo")
 Auction.classes = {}
 local private = {
 	auctionFilters = nil,
@@ -35,5 +37,42 @@ end
 
 function Auction.GetRequiredBidByScanResultRow(row)
 	local bid, minBid, minIncrement = row:GetFields("bid", "minBid", "minIncrement")
-	return bid == 0 and minBid or (bid + minIncrement)
+	if TSM.IsWowClassic() then
+		return bid == 0 and minBid or (bid + minIncrement)
+	else
+		return minBid
+	end
+end
+
+function Auction.CanBid(row)
+	if row:GetField("isHighBidder") then
+		return false
+	elseif row:GetField("displayedBid") == row:GetField("buyout") then
+		return false
+	elseif ItemInfo.IsCommodity(row:GetField("itemString")) then
+		return false
+	elseif GetMoney() < Auction.GetRequiredBidByScanResultRow(row) then
+		return false
+	end
+	return true
+end
+
+function Auction.CanBuyout(row, db)
+	local buyout = row:GetField(TSM.IsWowClassic() and "buyout" or "itemBuyout")
+	if buyout == 0 or GetMoney() < buyout then
+		return false
+	elseif ItemInfo.IsCommodity(row:GetField("itemString")) then
+		-- make sure it's the cheapest
+		local itemBuyout = db:NewQuery()
+			:Equal("itemString", row:GetField("itemString"))
+			:NotEqual("stackSize", Database.OtherFieldQueryParam("numOwnerItems"))
+			:OrderBy("itemBuyout", true)
+			:Select("itemBuyout")
+			:GetFirstResultAndRelease()
+		if itemBuyout ~= row:GetField("itemBuyout") then
+			-- this isn't the cheapest commodity
+			return false
+		end
+	end
+	return true
 end

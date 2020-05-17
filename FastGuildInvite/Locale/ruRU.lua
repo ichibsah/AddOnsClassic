@@ -38,6 +38,7 @@ L["invite"] = "/fgi invite - Пригласить первого игрока и
 L["KulTiran"] = "Култираска"
 L["LightforgedDraenei"] = "Озаренная дренейка"
 L["MagharOrc"] = "Маг'харка"
+L["Mechagnome"] = "Механогномка"
 L["minimap"] = [=[ЛКМ - пригласить
 ПКМ - открыть главное окно
 Shift+ЛКМ - пауза/продолжить
@@ -314,6 +315,8 @@ L.settings = {
 		DarkIronDwarf = 160,
 		ZandalariTroll = 120,
 		KulTiran = 120,
+		Mechagnome = 150,
+		Vulpera = 120,
 		
 		
 		filterNameLabel = 200,

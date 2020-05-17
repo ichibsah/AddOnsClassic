@@ -184,6 +184,9 @@ end
 function private.NameOnValueChanged(text, newName)
 	local oldName = text:GetText()
 	newName = strlower(strtrim(newName))
+	if newName == oldName then
+		return
+	end
 	if newName == "" then
 		newName = oldName
 	elseif gsub(newName, "([a-z]+)", "") ~= "" then
@@ -208,7 +211,7 @@ function private.ValueOnValueChanged(text, newValue)
 		Log.PrintUser(L["Invalid price source."].." "..errText)
 		newValue = oldValue
 	else
-		TSM.db.global.userData.customPriceSources[text:GetParentElement():GetContext()] = newValue
+		CustomPrice.SetCustomPriceSource(text:GetParentElement():GetContext(), newValue)
 	end
 	text:SetText(newValue)
 		:Draw()
@@ -221,7 +224,7 @@ function private.DeleteCustomPriceOnClick(button)
 			:Draw()
 		private.editingElement = nil
 	end
-	TSM.db.global.userData.customPriceSources[button:GetParentElement():GetContext()] = nil
+	CustomPrice.DeleteCustomPriceSource(button:GetParentElement():GetContext())
 	local rowFrame = button:GetParentElement()
 	local parentFrame = rowFrame:GetParentElement()
 	parentFrame:RemoveChild(rowFrame)

@@ -1,6 +1,7 @@
 # SexyMap
 
-## [v4-classic](https://github.com/funkydude/SexyMap/tree/v4-classic) (2019-12-05)
-[Full Changelog](https://github.com/funkydude/SexyMap/compare/v3-classic...v4-classic)
+## [v5-classic](https://github.com/funkydude/SexyMap/tree/v5-classic) (2020-01-14)
+[Full Changelog](https://github.com/funkydude/SexyMap/compare/v4-classic...v5-classic)
 
-- enable publishing to wowinterface  
+- Buttons: Add support for the MiniMapBattlefieldFrame, closes #111  
+- bump toc  

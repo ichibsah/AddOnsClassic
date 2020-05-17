@@ -4,8 +4,6 @@ local QuestieOptionsDefaults = QuestieLoader:CreateModule("QuestieOptionsDefault
 function QuestieOptionsDefaults:Load()
     return {
         global = {
-            maxLevelFilter = 7,
-            minLevelFilter = GetQuestGreenRange(), -- Raised the default to allow more quests to be shown
             clusterLevelHotzone = 70,
             enableIconLimit = false,
             iconLimit = 200,
@@ -61,6 +59,7 @@ function QuestieOptionsDefaults:Load()
             trackerFontSizeLine = 11,
             hookTracking = true,
             trackerEnabled = true,
+            trackerShowCompleteQuests = true,
             trackerShowQuestLevel = true,
             showBlizzardQuestTimer = false,
             stickyDurabilityFrame = true,
@@ -72,22 +71,30 @@ function QuestieOptionsDefaults:Load()
             trackerbindUntrack = "shiftleft",
             iconFadeLevel = 0.3,
             trackerLocked = true,
-            hideUnexploredMapIcons = false,
-            showRepeatableQuests = true,
             trackerBackgroundEnabled = false,
         },
         char = {
+            minLevelFilter = GetQuestGreenRange(), -- Raised the default to allow more quests to be shown
+            maxLevelFilter = 7,
             complete = {},
             hidden = {},
             enableMinimalisticIcons = false,
             enabled = true,
             lowlevel = false,
             manualMinLevelOffset = false,
+            absoluteLevelOffset = false,
             journey = {},
             searchType = 1,
             autoaccept = false,
             autocomplete = false,
+            autoModifier = "shift",
+            acceptTrivial = false,
             isTrackerExpanded = true,
+            hideUnexploredMapIcons = false,
+            showRepeatableQuests = true,
+            showEventQuests = true,
+            showDungeonQuests = true,
+            showPvPQuests = true,
         },
         profile = {minimap = {hide = false}}
     }

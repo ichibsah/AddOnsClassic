@@ -1,5 +1,5 @@
-## v4.8.24 Changes
+## v4.9.35 Changes
 
-* Fixed issue with TSM blocking various game functions
+* [All] Fixed error when loading very old settings
 
 [Known Issues](http://support.tradeskillmaster.com/display/KB/TSM4+Currently+Known+Issues)

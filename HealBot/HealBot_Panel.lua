@@ -293,14 +293,14 @@ function HealBot_Panel_ClearBlackList()
     for x,_ in pairs(HealBot_Panel_BlackList) do
         HealBot_Panel_BlackList[x]=nil
     end 
-    HealBot_nextRecalcParty(0)
+    HealBot_setOptions_Timer(595)
 end
 
 function HealBot_Panel_AddBlackList(unit)
     xGUID=UnitGUID(unit)
     if xGUID then
         HealBot_Panel_BlackList[xGUID]=true;
-        HealBot_nextRecalcParty(0)
+        HealBot_setOptions_Timer(595)
     end
 end
 
@@ -331,7 +331,7 @@ function HealBot_Panel_ToggelHealTarget(unit, perm)
             table.insert(HealBot_MyHealTargets,xGUID)
         end
     end
-    HealBot_nextRecalcParty(6)
+    HealBot_setOptions_Timer(596)
 end
 
 function HealBot_Panel_ToggelPrivateTanks(unit, perm)
@@ -351,7 +351,7 @@ function HealBot_Panel_ToggelPrivateTanks(unit, perm)
         end
     end
     HealBot_Panel_buildDataStore(true, true)
-    HealBot_nextRecalcParty(0)
+    HealBot_setOptions_Timer(595)
 end
 
 function HealBot_Panel_ToggelPrivateHealers(unit, perm)
@@ -371,7 +371,7 @@ function HealBot_Panel_ToggelPrivateHealers(unit, perm)
         end
     end
     HealBot_Panel_buildDataStore(true, true)
-    HealBot_nextRecalcParty(0)
+    HealBot_setOptions_Timer(595)
 end
 
 function HealBot_Panel_RetMyHealTarget(unit, perm)
@@ -711,16 +711,16 @@ function HealBot_Panel_ToggleTestBars()
         for j=1,10 do
             HealBot_Action_HidePanel(j)
         end
+        HealBot_Action_setLuVars("TestBarsOn", false)
+        HealBot_setLuVars("TestBarsOn", false)
         HealBot_setTestCols={}
     else
+        HealBot_Action_setLuVars("TestBarsOn", true)
+        HealBot_setLuVars("TestBarsOn", true)
         HealBot_setTestBars=true
         HealBot_Panel_luVars["TestBarsDelAll"]=true
         HealBot_Options_TestBarsButton:SetText(HEALBOT_OPTIONS_TESTBARS.." "..HEALBOT_WORD_ON)
     end
-end
-
-function HealBot_Panel_retTestBars()
-    return HealBot_setTestBars
 end
 
 local vPosButton=""
@@ -1049,9 +1049,9 @@ local function HealBot_Panel_TestBarShow(index,button,tRole)
             end
         end
         bar:SetValue(100)
+        bar:SetStatusBarColor(HealBot_colIndex["hcr"..index],HealBot_colIndex["hcg"..index],HealBot_colIndex["hcb"..index],Healbot_Config_Skins.BarCol[Healbot_Config_Skins.Current_Skin][button.frame]["HA"]);
         HealBot_setTestCols[index]=true
     end
-    bar:SetStatusBarColor(HealBot_colIndex["hcr"..index],HealBot_colIndex["hcg"..index],HealBot_colIndex["hcb"..index],Healbot_Config_Skins.BarCol[Healbot_Config_Skins.Current_Skin][button.frame]["HA"]);
     bar.txt = _G[bar:GetName().."_text"];
     if Healbot_Config_Skins.BarText[Healbot_Config_Skins.Current_Skin][button.frame]["HLTHONBAR"] then
         if Healbot_Config_Skins.BarText[Healbot_Config_Skins.Current_Skin][button.frame]["DOUBLE"]==false then
@@ -1118,6 +1118,9 @@ local function HealBot_Panel_TestBarsOn()
             HealBot_Action_MarkDeleteButton(xButton)
         end
     end
+    for x,_ in pairs(HealBot_Action_HealButtons) do
+        HealBot_Action_HealButtons[x]=nil;
+    end 
     for xHeader,xButton in pairs(HealBot_Header_Frames) do
         HealBot_Panel_DeleteHeader(xButton.id, xHeader)
     end
@@ -1180,7 +1183,8 @@ local function HealBot_Panel_TestBarsOn()
             end
         elseif healGroups[gl]["NAME"]==HEALBOT_OPTIONS_MYTARGET_en then
             if HealBot_Globals.TestBars["TARGETS"]>0 and healGroups[gl]["STATE"] then
-                HealBot_Panel_testAddButton(HEALBOT_OPTIONS_MYTARGET,HEALBOT_DISABLED_TARGET,1,HealBot_Globals.TestBars["TARGETS"])
+                --HealBot_Panel_testAddButton(HEALBOT_OPTIONS_MYTARGET,HEALBOT_DISABLED_TARGET,1,HealBot_Globals.TestBars["TARGETS"])
+                HealBot_Panel_testAddButton(HEALBOT_OPTIONS_MYTARGET,HEALBOT_OPTIONS_MYTARGET,1,HealBot_Globals.TestBars["TARGETS"])
                 xRaidBars=xRaidBars-HealBot_Globals.TestBars["TARGETS"]
             end
         elseif healGroups[gl]["NAME"]==HEALBOT_OPTIONS_PETHEALS_en and hbCurrentFrame<6 then
@@ -1257,6 +1261,8 @@ local function HealBot_Panel_TestBarsOn()
         end 
         HealBot_Panel_testAddButton(HEALBOT_FOCUS,HEALBOT_FOCUS,1,1)
         HealBot_Panel_SetupExtraBars(9)
+    else
+        HealBot_Action_HidePanel(9)
     end
     
     if healGroups[9]["STATE"] then
@@ -1266,6 +1272,8 @@ local function HealBot_Panel_TestBarsOn()
         end 
         HealBot_Panel_testAddButton(HEALBOT_OPTIONS_TARGETHEALS,HEALBOT_OPTIONS_TARGETHEALS,1,1)
         HealBot_Panel_SetupExtraBars(8)
+    else
+        HealBot_Action_HidePanel(8)
     end
     
     if HealBot_Globals.TestBars["PETS"]>0 and Healbot_Config_Skins.HealGroups[Healbot_Config_Skins.Current_Skin][8]["FRAME"]==7 and Healbot_Config_Skins.HealGroups[Healbot_Config_Skins.Current_Skin][8]["STATE"] then
@@ -1275,6 +1283,8 @@ local function HealBot_Panel_TestBarsOn()
         end 
         HealBot_Panel_testAddButton(HEALBOT_OPTIONS_PETHEALS,HEALBOT_OPTIONS_PETHEALS,1,HealBot_Globals.TestBars["PETS"],HEALBOT_OPTIONS_PETHEALS)
         HealBot_Panel_SetupExtraBars(7)
+    else
+        HealBot_Action_HidePanel(7)
     end
     
     if Healbot_Config_Skins.HealGroups[Healbot_Config_Skins.Current_Skin][7]["FRAME"]==6 and Healbot_Config_Skins.HealGroups[Healbot_Config_Skins.Current_Skin][7]["STATE"] then
@@ -1284,6 +1294,8 @@ local function HealBot_Panel_TestBarsOn()
         end 
         HealBot_Panel_testAddButton(HEALBOT_VEHICLE,HEALBOT_VEHICLE,1,2)
         HealBot_Panel_SetupExtraBars(6)
+    else
+        HealBot_Action_HidePanel(6)
     end
     
     if healGroups[11]["STATE"] then
@@ -1293,19 +1305,24 @@ local function HealBot_Panel_TestBarsOn()
         end 
         HealBot_Panel_testAddButton(HEALBOT_CUSTOM_CASTBY_ENEMY,HEALBOT_CUSTOM_CASTBY_ENEMY,1,HealBot_Globals.TestBars["ENEMY"],HEALBOT_CUSTOM_CASTBY_ENEMY)
         HealBot_Panel_SetupExtraBars(10)
+    else
+        HealBot_Action_HidePanel(10)
     end
     for _,xButton in pairs(HealBot_Unit_Button) do
         if not HealBot_TestBarsActive[xButton.id] then
+            HealBot_setTestCols[xButton.id]=false
             HealBot_Action_MarkDeleteButton(xButton)
         end
     end
     for _,xButton in pairs(HealBot_Enemy_Button) do
         if not HealBot_TestBarsActive[xButton.id] then
+            HealBot_setTestCols[xButton.id]=false
             HealBot_Action_MarkDeleteButton(xButton)
         end
     end
     for _,xButton in pairs(HealBot_Pet_Button) do
         if not HealBot_TestBarsActive[xButton.id] then
+            HealBot_setTestCols[xButton.id]=false
             HealBot_Action_MarkDeleteButton(xButton)
         end
     end

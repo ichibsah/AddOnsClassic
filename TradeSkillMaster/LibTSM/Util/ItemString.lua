@@ -18,6 +18,7 @@ local private = {
 	itemStringCache = {},
 	baseItemStringMap = nil,
 	baseItemStringReader = nil,
+	hasNonBaseItemStrings = {},
 }
 local ITEM_UPGRADE_VALUE_SHIFT = 1000000
 local ITEM_MAX_ID = 999999
@@ -73,8 +74,10 @@ end
 -- @treturn number The itemId
 function ItemString.ToId(item)
 	local itemString = ItemString.Get(item)
-	if type(itemString) ~= "string" then return end
-	return tonumber(strmatch(itemString, "^i:(%d+)"))
+	if type(itemString) ~= "string" then
+		return
+	end
+	return tonumber(strmatch(itemString, "^[ip]:(%d+)"))
 end
 
 --- Converts the parameter into a base itemString.
@@ -89,7 +92,6 @@ end
 
 --- Converts the parameter into a base itemString.
 -- @tparam string item An item to get the base itemString of
--- whether or not this specific item is in a group (preserve the full itemString) or not (convert to a baseItemString)
 -- @treturn string The base itemString
 function ItemString.GetBase(item)
 	-- make sure it's a valid itemString
@@ -99,6 +101,21 @@ function ItemString.GetBase(item)
 	-- quickly return if we're certain it's already a valid baseItemString
 	if type(itemString) == "string" and strmatch(itemString, "^[ip]:[0-9]+$") then return itemString end
 	return ItemString.GetBaseFast(itemString)
+end
+
+--- Converts an itemKey from WoW into a base itemString.
+-- @tparam table itemKey An itemKey to get the itemString of
+-- @treturn string The base itemString
+function ItemString.GetBaseFromItemKey(itemKey)
+	if itemKey.battlePetSpeciesID > 0 then
+		return "p:"..itemKey.battlePetSpeciesID
+	else
+		return "i:"..itemKey.itemID
+	end
+end
+
+function ItemString.HasNonBase(baseItemString)
+	return private.hasNonBaseItemStrings[baseItemString] or false
 end
 
 --- Converts the parameter into a WoW itemString.
@@ -116,6 +133,14 @@ function ItemString.ToWow(itemString)
 		return "item:"..itemId.."::::::"..(rand or "").."::"..level..":"..spec..":512::"..numBonus..":"..bonusIds..":"..upgradeValue..":::"
 	end
 	return "item:"..itemId.."::::::"..(rand or "").."::"..level..":"..spec..":::"..(numBonus and strmatch(itemString, "i:[0-9]+:[0-9%-]*:(.*)") or "")..":::"
+end
+
+function ItemString.IsItem(itemString)
+	return strmatch(itemString, "^i:") and true or false
+end
+
+function ItemString.IsPet(itemString)
+	return strmatch(itemString, "^p:") and true or false
 end
 
 
@@ -155,12 +180,11 @@ function private.ToItemString(item)
 	local result = nil
 	if strmatch(item, "^i:([0-9%-:]+)$") then
 		return private.FixItemString(item)
-	elseif strmatch(item, "^p:([0-9%-:]+)$") then
-		result = strjoin(":", strmatch(item, "^(p):(%d+:%d+:%d+)"))
-		if result then
-			return result
-		end
-		return item
+	elseif strmatch(item, "^p:([0-9:]+)$") then
+		local p0, p1, p2, p3 = strsplit(":", item)
+		p2 = p2 or "0"
+		p3 = p3 or "0"
+		return strjoin(":", p0, p1, p2, p3)
 	end
 
 	result = strmatch(item, "^\124cff[0-9a-z]+\124[Hh](.+)\124h%[.+%]\124h\124r$")
@@ -206,6 +230,10 @@ function private.RemoveExtra(itemString)
 	local num = 1
 	while num > 0 do
 		itemString, num = gsub(itemString, ":0?$", "")
+		if num > 1 and strmatch(itemString, "^p:") then
+			-- pets shouldn't end in :0
+			return nil
+		end
 	end
 	return itemString
 end
@@ -257,5 +285,9 @@ function private.GetUpgradeValue(itemString)
 end
 
 function private.ToBaseItemString(itemString)
-	return strmatch(itemString, "[ip]:%d+")
+	local baseItemString = strmatch(itemString, "[ip]:%d+")
+	if baseItemString ~= itemString then
+		private.hasNonBaseItemStrings[baseItemString] = true
+	end
+	return baseItemString
 end

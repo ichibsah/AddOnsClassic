@@ -12,7 +12,6 @@ local ADDON_NAME, TSM = ...
 TSMAPI_FOUR = {}
 local VERSION_RAW = GetAddOnMetadata("TradeSkillMaster", "Version")
 local IS_DEV_VERSION = strmatch(VERSION_RAW, "^@tsm%-project%-version@$") and true or false
-local IS_WOW_83 = select(4, GetBuildInfo()) >= 80300
 local private = {
 	path = {},
 	context = {},
@@ -118,8 +117,8 @@ function TSM.IsWowClassic()
 	return WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 end
 
-function TSM.IsWow83()
-	return IS_WOW_83
+function TSM.DebugLogout()
+	private.UnloadAll()
 end
 
 
@@ -130,7 +129,7 @@ end
 
 function private.ModuleInfoIterator(_, index)
 	index = index + 1
-	local path = private.moduleList[index]
+	local path = private.initOrder[index]
 	if not path then
 		return
 	end
@@ -200,6 +199,13 @@ function private.ProcessModuleUnload(path)
 	end
 end
 
+function private.UnloadAll()
+	-- unload in the opposite order we loaded
+	for i = #private.loadOrder, 1, -1 do
+		private.ProcessModuleUnload(private.loadOrder[i])
+	end
+end
+
 function private.OnEvent(_, event, arg)
 	if event == "ADDON_LOADED" and arg == ADDON_NAME and not private.gotAddonLoaded then
 		assert(not private.gotAddonLoaded and not private.gotPlayerLogin and not private.gotPlayerLogout)
@@ -212,6 +218,7 @@ function private.OnEvent(_, event, arg)
 		for _, path in ipairs(private.loadOrder) do
 			private.ProcessSettingsLoad(path)
 		end
+		private.frame:UnregisterEvent("ADDON_LOADED")
 	elseif event == "PLAYER_LOGIN" then
 		assert(private.gotAddonLoaded and not private.gotPlayerLogin and not private.gotPlayerLogout)
 		private.gotPlayerLogin = true
@@ -220,12 +227,13 @@ function private.OnEvent(_, event, arg)
 			private.ProcessGameDataLoad(path)
 		end
 	elseif event == "PLAYER_LOGOUT" then
-		assert(private.gotAddonLoaded and private.gotPlayerLogin and not private.gotPlayerLogout)
+		assert(private.gotAddonLoaded and not private.gotPlayerLogout)
 		private.gotPlayerLogout = true
-		-- unload in the opposite order we loaded
-		for i = #private.loadOrder, 1, -1 do
-			private.ProcessModuleUnload(private.loadOrder[i])
+		if not private.gotPlayerLogin then
+			-- this can happen if the player exists the game during the loading screen, in which case we just ignore it
+			return
 		end
+		private.UnloadAll()
 	end
 end
 
@@ -241,5 +249,4 @@ do
 	private.frame:RegisterEvent("PLAYER_LOGIN")
 	private.frame:RegisterEvent("PLAYER_LOGOUT")
 	private.frame:SetScript("OnEvent", private.OnEvent)
-	private.frame:Show()
 end

@@ -54,7 +54,11 @@ end
 local floor=floor
 
 function HealBot_Text_Len(v)
-    return hbStringLen(v)
+    if "string" == type( v ) then
+        return hbStringLen(v)
+    else
+        return 0
+    end
 end
 
 local tConcat={}
@@ -166,7 +170,7 @@ local function HealBot_Text_TextColours(button)
     if button.status.current==9 and not hbGUID~=HealBot_Data["PGUID"] then
         if UnitHasIncomingResurrection(button.unit) then
             atcR,atcG,atcB=0.2, 1.0, 0.2
-        elseif UnitIsFriend(button.unit, "player") then
+        elseif button.status.friend then
             if UnitIsUnit(button.unit, "player") then
                 atcR,atcG,atcB=0.7, 0.4, 0.4
             elseif button.status.range > 0 or UnitInRange(button.unit) then
@@ -199,12 +203,14 @@ local function HealBot_Text_TextColours(button)
 end
 
 local vTextCharDoubleSpace,vTextCharSpace,vTextCharPercent,vTextCharPlus="  "," ","%","+"
-local vTextCharMinus,vTextCharNewline,vTextCharDot="-","\n","."
-local vShortHealTxtIsK,vShortHealTxtAmount,vShortHealTxtSuffix=true,0,""
+local vTextCharNewline,vTextCharDot="\n","."
+local vShortHealTxtIsK,vShortHealTxtAmount,vShortHealTxtSuffix,vShortHealTxtAbsNum=true,0,"",0
+local hbAbs=math.abs
 local function HealBot_Text_shortHealTxt(amount, hbCurFrame)
-    if amount>999 and hbNumFormats["Places"][hbCurFrame]>-1 then
+    vShortHealTxtAbsNum=hbAbs(amount)
+    if vShortHealTxtAbsNum>999 and hbNumFormats["Places"][hbCurFrame]>-1 then
         if hbNumFormats["Places"][hbCurFrame]<3 then 
-            if amount>999999 then
+            if vShortHealTxtAbsNum>999999 then
                 vShortHealTxtAmount=HealBot_Comm_round(amount/1000000,hbNumFormats["Places"][hbCurFrame]) 
                 vShortHealTxtSuffix=hbNumFormats["SuffixM"][hbCurFrame]
             else
@@ -212,13 +218,13 @@ local function HealBot_Text_shortHealTxt(amount, hbCurFrame)
                 vShortHealTxtSuffix=hbNumFormats["SuffixK"][hbCurFrame]
             end
         else
-            if amount>9999999 then
+            if vShortHealTxtAbsNum>9999999 then
                 vShortHealTxtAmount=HealBot_Comm_round(amount/1000000,0)
                 vShortHealTxtSuffix=hbNumFormats["SuffixM"][hbCurFrame]
-            elseif amount>999999 then
+            elseif vShortHealTxtAbsNum>999999 then
                 vShortHealTxtAmount=HealBot_Comm_round(amount/1000000,1)
                 vShortHealTxtSuffix=hbNumFormats["SuffixM"][hbCurFrame]
-            elseif amount>99999 then
+            elseif vShortHealTxtAbsNum>9999 then
                 vShortHealTxtAmount=HealBot_Comm_round(amount/1000,0)
                 vShortHealTxtSuffix=hbNumFormats["SuffixK"][hbCurFrame]
             else
@@ -311,7 +317,7 @@ function HealBot_Text_setHealthText(button)
             if vHealthTextTotal>0 then
                 tHealthConcat[3]=vTextCharPlus
             else
-                tHealthConcat[3]=vTextCharMinus
+                tHealthConcat[3]=vTextCharNothing
             end
             tHealthConcat[4]=vHealthTextTotal
             tHealthConcat[5]=ahtNumSuffix
@@ -397,7 +403,7 @@ end
 
 function HealBot_Text_setNameTag(button)
     if UnitExists(button.unit) then
-        if UnitIsFriend("player",button.unit) then
+        if button.status.friend then
             if button.status.offline then
                 button.text.tag=Healbot_Config_Skins.BarText[Healbot_Config_Skins.Current_Skin][button.frame]["TAGDC"];
             elseif button.status.current==9 then
@@ -451,6 +457,8 @@ function HealBot_Text_setNameText(button)
             else
                 vSetNameTextName=HealBot_GetUnitName(button.unit, button.guid)
             end
+        else
+            vSetNameTextName=vTextCharNothing
         end
     else
         vSetNameTextName=button.unit
@@ -501,6 +509,18 @@ function HealBot_Text_SetText(button)
         end
     end
     --HealBot_setCall("HealBot_Text_SetText")
+end
+
+function HealBot_Text_UpdateNames()
+    for _,xButton in pairs(HealBot_Unit_Button) do
+        HealBot_Text_setNameText(xButton)
+    end
+    for _,xButton in pairs(HealBot_Pet_Button) do
+        HealBot_Text_setNameText(xButton)
+    end
+    for _,xButton in pairs(HealBot_Enemy_Button) do
+        HealBot_Text_setNameText(xButton)
+    end
 end
 
 function HealBot_Text_UpdateButtons()

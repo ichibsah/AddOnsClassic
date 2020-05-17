@@ -1,7 +1,7 @@
 ## Interface: 11303
 ## Title: HealBot French Localization
 ## Author: Kubik
-## Notes: HealBot Localization for frFR
+## Notes: HealBot localization for frFR
 ## RequiredDeps: HealBot
 ## LoadOnDemand: 1
 ## Version: 1.13.3.0
