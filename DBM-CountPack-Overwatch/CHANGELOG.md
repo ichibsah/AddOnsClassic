@@ -1,8 +1,7 @@
 # <DBM> Countpack Overwatch
 
-## [1.4.10](https://github.com/DeadlyBossMods/DBM-CountPack-Overwatch/tree/1.4.10) (2020-03-10)
-[Full Changelog](https://github.com/DeadlyBossMods/DBM-CountPack-Overwatch/compare/1.4.9...1.4.10)
+## [1.4.12](https://github.com/DeadlyBossMods/DBM-CountPack-Overwatch/tree/1.4.12) (2020-07-07)
+[Full Changelog](https://github.com/DeadlyBossMods/DBM-CountPack-Overwatch/compare/1.4.11...1.4.12) [Previous Releases](https://github.com/DeadlyBossMods/DBM-CountPack-Overwatch/releases)
 
-- Revert travis change for now. packager doesn't yet support 1.13.4  
-- Updated toc file for 1.13.4  
-    Updated travis for 1.13.4  
+- Bump TOC for classic  
+- Update editorconfig and enable strict Lua checking  

@@ -1,5 +1,5 @@
-## v4.9.35 Changes
+## v4.9.37 Changes
 
-* [All] Fixed error when loading very old settings
+* [Classic] TOC bump for 1.13.5
 
 [Known Issues](http://support.tradeskillmaster.com/display/KB/TSM4+Currently+Known+Issues)
