@@ -180,8 +180,20 @@ local function inviteBtnText(text)
 	interface.scanFrame.invite:SetText(text)
 end
 
-local function IsInBlackList(name)
-	return (DB.realm.blackList[name:lower()] or DB.realm.blackList[name:gsub("^%l", string.upper)]) and true or false
+local function IsInBlackList(name, full)
+	local n1 = name:lower()
+	local n2 = name:gsub("^%l", string.upper)
+	if DB.realm.blackList[n1] then return n1 end
+	if DB.realm.blackList[n2] then return n2 end
+	if not full then return false end
+	n1 = "^"..n1
+	n2 = "^"..n2
+	for k,v in pairs(DB.realm.blackList) do
+		if k:find(n1) or k:find(n2) then
+			return k
+		end
+	end
+	return false
 end
 
 local function IsInLeaveList(name)
@@ -207,10 +219,18 @@ local function onListUpdate()
 	inviteBtnText(format(L["Пригласить: %d"], #list))
 end
 
+function fn:blacklistRemove(name)
+	DB.realm.blackList[name:lower()] = nil
+	DB.realm.blackList[name:gsub("^%l", string.upper)] = nil
+end
 
-function fn:parseBL(str)
+function fn:parseName(name)
+	return name:match("([^%s-]+)")
+end
+
+function fn:parseBL(cmd, str)
 	local name, reason
-	str = str:gsub("blacklist", '')
+	str = str:gsub(cmd, '')
 	if str:find('-') then
 		name,reason = str:match("([^%s-]+)[^%s]*[%s-]+([^-]+)")
 	else
@@ -246,6 +266,7 @@ frame:SetScript("OnEvent", function(_,_,msg)
 			if DB.realm.alreadySended[name] then
 				addon.searchInfo.invited()
 			end
+			fn:setNote(name)
 		end
 	end
 end)
@@ -253,6 +274,29 @@ end)
 function fn:initDB()
 	DB = addon.DB
 	debugDB = addon.debugDB
+end
+
+function fn:setNote(name)
+	return 	--BETA
+	--[[if DB.global.setNote or DB.global.setOfficerNote then
+		for index=1, GetNumGuildMembers() do
+			local n, _, _, _, _, _, publicNote, officerNote = GetGuildRosterInfo(index)
+			if name ~= nil and n:match("(.*)-") ~= name then
+				if DB.global.setNote and CanEditPublicNote() and publicNote == "" then
+					-- GuildRosterSetPublicNote(index, DB.global.noteText)	--BETA
+					-- print("set note \""..DB.global.noteText.."\" for "..name)
+				end
+				if DB.global.setOfficerNote and C_GuildInfo.CanEditOfficerNote() and officerNote == "" then
+					-- GuildRosterSetOfficerNote(index, DB.global.officerNoteText)	--BETA
+					-- print("set officer note \""..DB.global.officerNoteText.."\" for "..name)
+				end
+			end
+		end
+	end]]
+end
+
+function fn:getCharLen(str)
+	return #(str):gsub('[\128-\191]', '')
 end
 
 local function guildKick(name)
@@ -287,11 +331,21 @@ function fn:blackListAutoKick()
 end
 
 function fn:blackList(name, reason)
-	DB.realm.blackList[name] = reason or L.defaultReason
+	DB.realm.blackList[name] = reason or (DB.global.blacklistReasonText == nil and L.defaultReason or DB.global.blacklistReasonText)
 	if not DB.global.addonMSG then
 		print(format("%s%s|r", color.red, format(L["Игрок %s добавлен в черный список."], name)))
 	end
 	fn:blacklistKick()
+end
+
+function fn:unblacklist(name)
+	local inBlacklist = IsInBlackList(name, true)
+	if inBlacklist then
+		fn:blacklistRemove(inBlacklist)
+		print(format(L["Игрок %s удален из черного списка"], inBlacklist))
+	else
+		print(format(L["Игрок %s не найден в черном списке"], name))
+	end
 end
 
 function fn:closeBtn(obj)
@@ -720,10 +774,10 @@ function fn:filtered(player)
 	return false
 end
 
-local function addNewPlayer(p)
+function fn:addNewPlayer(p)
 	local list = addon.search.inviteList
 	local playerInfoStr = format("%s - lvl:%d; race:%s; class:%s; Guild: \"%s\"", p.Name, p.Level, p.Race, p.Class, p.Guild)
-	if p.Guild == "" then
+	if p.Guild == "" or FGI.ai then
 		if not IsInBlackList(p.Name) then
 			if not IsInLeaveList(p.Name) then
 				if not IsInTempList(addon.search, p.Name) then
@@ -774,7 +828,7 @@ local function searchWhoResultCallback(query, results)
 	addon.search.oldCount = #addon.search.inviteList
 	for i=1,#results do
 		local player = results[i]
-		addNewPlayer(player)
+		fn:addNewPlayer(player)
 	end
 	if DB.global.queueNotify and #addon.search.inviteList > addon.search.oldCount then
 		FGI.animations.notification:Start(format(L["Игроков найдено: %d"], #addon.search.inviteList - addon.search.oldCount))
@@ -826,6 +880,9 @@ function fn:nextSearch()
 	
 	addon.search.progress = (addon.search.progress <= (#addon.search.whoQueryList or 1)) and addon.search.progress or 1
 	local curQuery = addon.search.whoQueryList[addon.search.progress]
+	if curQuery == nil then
+		return	print("epmty search query")
+	end
 	libWho:GetWho(curQuery)
 end
 

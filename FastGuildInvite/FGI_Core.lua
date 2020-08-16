@@ -90,7 +90,7 @@ end
 addon.MENU = GUI:Create("SimpleGroup")
 local f = addon.MENU
 f:SetWidth(135)
-f:SetHeight(42)
+f:SetHeight(63)
 f:SetLayout("NIL")
 
 local invite = GUI:Create('Button')
@@ -113,14 +113,29 @@ blacklist:SetWidth(135)
 blacklist:SetHeight(20)
 blacklist.frame.HandlesGlobalMouseEvent = HandlesGlobalMouseEvent
 blacklist:SetCallback('OnClick', function()
-	local name = f.name
+	local name = fn:parseName(f.name)
 	fn:blackList(name)
 	interface.settings.Blacklist.content:update()
-	StaticPopup_Show("FGI_BLACKLIST_CHANGE", _,_,  {name = name})
+	if not DB.global.fastBlacklist then
+		StaticPopup_Show("FGI_BLACKLIST_CHANGE", _,_,  {name = name})
+	end
 	CloseDropDownMenus()
 end)
 blacklist:SetPoint("TOPLEFT", invite.frame, "BOTTOMLEFT", 0, 0)
 f:AddChild(blacklist)
+
+local unblacklist = GUI:Create('Button')
+unblacklist:SetText('FGI - Unlacklist')
+unblacklist:SetWidth(135)
+unblacklist:SetHeight(20)
+unblacklist.frame.HandlesGlobalMouseEvent = HandlesGlobalMouseEvent
+unblacklist:SetCallback('OnClick', function()
+	local name = fn:parseName(f.name)
+	fn:unblacklist(name)
+	CloseDropDownMenus()
+end)
+unblacklist:SetPoint("TOPLEFT", blacklist.frame, "BOTTOMLEFT", 0, 0)
+f:AddChild(unblacklist)
 
 local function DropDownOnShow(self)
 	local dropdown = self.dropdown
@@ -345,6 +360,12 @@ local defaultSettings =  {
 		queueNotify = true,
 		searchAlertNotify = true,
 		createMenuButtons = true,
+		setNote = false,
+		noteText = "",
+		setOfficerNote = false,
+		officerNoteText = "",
+		confirmSearchClear = true,
+		fastBlacklist = false,
 	},
 } 
 
@@ -437,12 +458,16 @@ function Console:FGIInput(str)
 	elseif str == "nextSearch" then
 		interface.scanFrame.pausePlay.frame:Click()
 	elseif str:find("^blacklist") then 
-		local name,reason = fn:parseBL(str)
+		local name,reason = fn:parseBL("blacklist", str)
 		if not name then return print('Blacklist: nil name') end
 		fn:blackList(name, reason)
-		if not reason then
+		if not reason and not DB.global.fastBlacklist then
 			StaticPopup_Show("FGI_BLACKLIST_CHANGE", _,_,  {name = name})
 		end
+	elseif str:find("^unblacklist") then 
+		local name = fn:parseBL("unblacklist", str)
+		if not name then return print('Unblacklist: nil name') end
+		fn:unblacklist(name)
 	elseif str == 'debug' then 
 		toggleDebug()
 	elseif str == 'resetDB' then DB.realm.alreadySended = {}
@@ -467,6 +492,8 @@ function Console:FGIInput(str)
 		C_UI.Reload()
 	elseif str == "factorySettings" then
 		FastGuildInvite.db:ResetDB()
+	else
+		return print(format("FGI - unregistered command \"%s\"", str))
 	end
 end
 
@@ -479,6 +506,7 @@ function Console:FGIHelp()
 	print(L.invite)
 	print(L.nextSearch)
 	print(L.blacklist)
+	print(L.unblacklist)
 	print(L.help2)
 end
 
