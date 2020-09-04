@@ -144,7 +144,8 @@ L["Назначить кнопку (%s)"] = "Assign button (%s)"
 L["Настроить сообщения"] = "Customize posts"
 L["Настройка сообщений, подсказка"] = [=[Auto Replace.
 NAME is the name of the player to whom the message is sent.
-GUILD is the name of your guild.]=]
+GUILD is the name of your guild
+GUILDLINK - guild link.]=]
 L["Настройки"] = "Settings"
 L["Начало синхронизации"] = "Start Sync"
 L["Начать сканирование"] = "Start Scan"
@@ -154,6 +155,7 @@ L["Не отображать в чате сообщения аддона"] = "Do
 L["Не отображать значок у миникарты"] = "Do not display the minimap icon."
 L["Не отображать окно ввода причины для черного списка"] = "Do not display the input box for the reason for the blacklist"
 L["Невозможно выполнить действие."] = "Unable to complete the action."
+L["Невозможно создать ссылку гильдии. Откройте окно гильдии и попробуйте снова. Если проблема не устранена, вероятно вы не можете создавать ссылку гильдии."] = "Unable to create guild link. Open the guild window and try again. If the problem persists, you probably cannot create a guild link."
 L["Нельзя добавить пустое сообщение"] = "Cannot add empty message"
 L["Нельзя сохранить пустое сообщение"] = "Cannot save empty message"
 L["Неправильный шаблон"] = "Wrong template"

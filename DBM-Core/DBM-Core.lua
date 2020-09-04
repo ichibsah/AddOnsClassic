@@ -71,9 +71,9 @@ local function showRealDate(curseDate)
 end
 
 DBM = {
-	Revision = parseCurseDate("20200730155401"),
-	DisplayVersion = "1.13.54", -- the string that is shown as version
-	ReleaseRevision = releaseDate(2020, 7, 30) -- the date of the latest stable version that is available, optionally pass hours, minutes, and seconds for multiple releases in one day
+	Revision = parseCurseDate("20200829144948"),
+	DisplayVersion = "1.13.58", -- the string that is shown as version
+	ReleaseRevision = releaseDate(2020, 8, 29) -- the date of the latest stable version that is available, optionally pass hours, minutes, and seconds for multiple releases in one day
 }
 DBM.HighestRelease = DBM.ReleaseRevision --Updated if newer version is detected, used by update nags to reflect critical fixes user is missing on boss pulls
 
@@ -207,11 +207,12 @@ DBM.DefaultOptions = {
 	InfoFrameY = -75,
 	InfoFrameShowSelf = false,
 	InfoFrameLines = 0,
+	InfoFrameCols = 0,
 	WarningDuration2 = 1.5,
 	WarningPoint = "CENTER",
 	WarningX = 0,
 	WarningY = 260,
-	WarningFont = standardFont,
+	WarningFont = "standardFont",
 	WarningFontSize = 20,
 	WarningFontStyle = "None",
 	WarningFontShadow = true,
@@ -219,7 +220,7 @@ DBM.DefaultOptions = {
 	SpecialWarningPoint = "CENTER",
 	SpecialWarningX = 0,
 	SpecialWarningY = 75,
-	SpecialWarningFont = standardFont,
+	SpecialWarningFont = "standardFont",
 	SpecialWarningFontSize2 = 35,
 	SpecialWarningFontStyle = "THICKOUTLINE",
 	SpecialWarningFontShadow = false,
@@ -1896,7 +1897,11 @@ do
 		time = time or 5
 		numAnnounces = numAnnounces or 3
 		for i = 1, numAnnounces do
-			schedule(time - i, func, mod, self, i, ...)
+			--In event time is < numbmer of announces (ie 2 second time, with 3 announces)
+			local validTime = time - i
+			if validTime >= 1 then
+				schedule(validTime, func, mod, self, i, ...)
+			end
 		end
 	end
 
@@ -2744,12 +2749,12 @@ do
 
 		function dataBroker.OnClick(self, button)
 			if IsShiftKeyDown() then return end
-			if IsAltKeyDown() and button == "RightButton" then
-				DBM.Options.SilentMode = DBM.Options.SilentMode == false and true or false
-				DBM:AddMsg(L.SILENTMODE_IS .. (DBM.Options.SilentMode and "ON" or "OFF"))
-			else
+--			if IsAltKeyDown() and button == "RightButton" then
+--				DBM.Options.SilentMode = DBM.Options.SilentMode == false and true or false
+--				DBM:AddMsg(L.SILENTMODE_IS .. (DBM.Options.SilentMode and "ON" or "OFF"))
+--			else
 				DBM:LoadGUI()
-			end
+--			end
 		end
 
 		function dataBroker.OnTooltipShow(GameTooltip)
@@ -2758,7 +2763,7 @@ do
 			GameTooltip:AddLine(" ")
 			GameTooltip:AddLine(L.MINIMAP_TOOLTIP_FOOTER, RAID_CLASS_COLORS.MAGE.r, RAID_CLASS_COLORS.MAGE.g, RAID_CLASS_COLORS.MAGE.b, 1)
 			GameTooltip:AddLine(L.LDB_TOOLTIP_HELP1, RAID_CLASS_COLORS.MAGE.r, RAID_CLASS_COLORS.MAGE.g, RAID_CLASS_COLORS.MAGE.b)
-			GameTooltip:AddLine(L.LDB_TOOLTIP_HELP2, RAID_CLASS_COLORS.MAGE.r, RAID_CLASS_COLORS.MAGE.g, RAID_CLASS_COLORS.MAGE.b)
+--			GameTooltip:AddLine(L.LDB_TOOLTIP_HELP2, RAID_CLASS_COLORS.MAGE.r, RAID_CLASS_COLORS.MAGE.g, RAID_CLASS_COLORS.MAGE.b)
 		end
 	end
 
@@ -3176,6 +3181,14 @@ function DBM:GetCIDFromGUID(guid)
 		return tonumber(playerdbID)
 	end
 	return 0
+end
+
+function DBM:GetSpawnIdFromGUID(guid)
+	local type, _, playerdbID, _, _, cid, creationbits = strsplit("-", guid or "")
+	if type and (type == "Creature" or type == "Vehicle" or type == "Pet") then
+		return tostring(creationbits)
+	end
+	return ""
 end
 
 function DBM:IsCreatureGUID(guid)
@@ -3708,6 +3721,13 @@ do
 		self:UpdateWarningOptions()
 		self:UpdateSpecialWarningOptions()
 		self.Options.CoreSavedRevision = self.Revision
+		--Fix fonts if they are nil or set to any of standard font values
+		if not self.Options.WarningFont or (self.Options.WarningFont == "Fonts\\2002.TTF" or self.Options.WarningFont == "Fonts\\ARKai_T.ttf" or self.Options.WarningFont == "Fonts\\blei00d.TTF" or self.Options.WarningFont == "Fonts\\FRIZQT___CYR.TTF" or self.Options.WarningFont == "Fonts\\FRIZQT__.TTF") then
+			self.Options.WarningFont = "standardFont"
+		end
+		if not self.Options.SpecialWarningFont or (self.Options.SpecialWarningFont == "Fonts\\2002.TTF" or self.Options.SpecialWarningFont == "Fonts\\ARKai_T.ttf" or self.Options.SpecialWarningFont == "Fonts\\blei00d.TTF" or self.Options.SpecialWarningFont == "Fonts\\FRIZQT___CYR.TTF" or self.Options.SpecialWarningFont == "Fonts\\FRIZQT__.TTF") then
+			self.Options.SpecialWarningFont = "standardFont"
+		end
 		if WOW_PROJECT_ID == WOW_PROJECT_MAINLINE then return end--Don't do sound migration in a situation user is loading wrong DBM version, to avoid sound path corruption
 		--Migrate user sound options to soundkit Ids if selected media doesn't exist in Interface\\AddOns
 		local migrated = false
@@ -4345,7 +4365,6 @@ do
 			--Cancel any existing break timers before creating new ones, we don't want double countdowns or mismatching blizz countdown text (cause you can't call another one if one is in progress)
 			if not DBM.Options.DontShowPT2 then--and DBM.Bars:GetBar(L.TIMER_BREAK)
 				dummyMod2.timer:Stop()
-				--fireEvent("DBM_TimerStop", "break")
 			end
 			dummyMod2.text:Cancel()
 			DBM.Options.RestoreSettingBreakTimer = nil
@@ -4353,7 +4372,6 @@ do
 			self.Options.RestoreSettingBreakTimer = timer.."/"..time()
 			if not self.Options.DontShowPT2 then
 				dummyMod2.timer:Start(timer, L.TIMER_BREAK)
-				--fireEvent("DBM_TimerStart", "break", L.TIMER_BREAK, timer, "136106", "utilitytimer", nil, 0)
 			end
 			if not self.Options.DontShowPTText then
 				local hour, minute = GetGameTime()
@@ -4453,7 +4471,7 @@ do
 				elseif #newerVersionPerson >= 3 and raid[newerVersionPerson[1]] and raid[newerVersionPerson[2]] and raid[newerVersionPerson[3]] and updateNotificationDisplayed < 3 then--The following code requires at least THREE people to send that higher revision. That should be more than adaquate
 					--Disable if revision grossly out of date even if not major patch.
 					local revDifference = mmin(((raid[newerVersionPerson[1]].revision or 0) - DBM.Revision), ((raid[newerVersionPerson[2]].revision or 0) - DBM.Revision), ((raid[newerVersionPerson[3]].revision or 0) - DBM.Revision))
-					if revDifference > 100000000 then--Approx 1 month old 20190416172622
+					if revDifference > 21000000 then--Approx 3 weeks old 20190416172622
 						if updateNotificationDisplayed < 3 then
 							updateNotificationDisplayed = 3
 							AddMsg(DBM, L.UPDATEREMINDER_DISABLE)
@@ -5818,6 +5836,7 @@ do
 				--end
 			else
 				self:Debug("StartCombat called by individual mod or unknown reason. LastInstanceMapID is "..LastInstanceMapID)
+				event = ""
 			end
 			--check completed. starting combat
 			tinsert(inCombat, mod)
@@ -5839,7 +5858,7 @@ do
 			mod.inCombat = true
 			mod.blockSyncs = nil
 			mod.combatInfo.pull = GetTime() - (delay or 0)
-			bossuIdFound = (event or "") == "IEEU"
+			bossuIdFound = event == "IEEU"
 			if mod.minCombatTime then
 				self:Schedule(mmax((mod.minCombatTime - delay), 3), checkWipe, self)
 			else
@@ -5979,7 +5998,6 @@ do
 				if dummyMod then--stop pull timer
 					dummyMod.text:Cancel()
 					dummyMod.timer:Stop()
-					--fireEvent("DBM_TimerStop", "pull")
 				end
 				local bigWigs = _G["BigWigs"]
 				if bigWigs and bigWigs.db.profile.raidicon and not self.Options.DontSetIcons and self:GetRaidRank() > 0 then--Both DBM and bigwigs have raid icon marking turned on.
@@ -6523,7 +6541,7 @@ do
 	end
 
 	function DBM:PlaySound(path, ignoreSFX, validate)
-		if self.Options.SilentMode then return end
+		if self.Options.SilentMode or path == "" or path == "None" then return end
 		playSound(self, path, ignoreSFX, validate)
 	end
 end
@@ -7986,6 +8004,7 @@ do
 			["HasImmunity"] = true,
 		},
 		["PALADIN3"] = {	--Retribution Paladin
+			["Tank"] = true,
 			["Dps"] = true,
 			["Melee"] = true,
 			["MeleeDps"] = true,
@@ -7999,6 +8018,7 @@ do
 		},
 		["WARRIOR1"] = {	--Arms Warrior
 			["Dps"] = true,
+			["Tank"] = true,
 			["Melee"] = true,
 			["MeleeDps"] = true,
 			["Physical"] = true,
@@ -8012,6 +8032,7 @@ do
 			["MagicDispeller"] = (IsSpellKnown(23922) or IsSpellKnown(23923) or IsSpellKnown(23924) or IsSpellKnown(23925)) and true or false,--Shield Slam
 		},
 		["DRUID1"] = {	--Balance Druid
+			["Healer"] = true,
 			["Dps"] = true,
 			["Ranged"] = true,
 			["RangedDps"] = true,
@@ -8020,7 +8041,8 @@ do
 			["CasterDps"] = true,
 			["RemoveCurse"] = true,
 		},
-		["DRUID2"] = {	--Feral Druid
+		["DRUID2"] = { --Feral Druid
+			["Healer"] = true,
 			["Dps"] = true,
 			["Tank"] = true,
 			["Melee"] = true,
@@ -8028,7 +8050,7 @@ do
 			["Physical"] = true,
 			["RemoveCurse"] = true,
 		},
-		["DRUID3"] = {	-- Restoration Druid
+		["DRUID3"] = { -- Restoration Druid
 			["Healer"] = true,
 			["Ranged"] = true,
 			["ManaUser"] = true,
@@ -8081,7 +8103,7 @@ do
 			["RemoveMagic"] = true,
 			["HasInterrupt"] = IsSpellKnown(15487) and true or false,--Silence is a talent tree talent
 		},
-		["ROGUE1"] = {	--Assassination Rogue
+		["ROGUE1"] = { --Assassination Rogue
 			["Dps"] = true,
 			["Melee"] = true,
 			["MeleeDps"] = true,
@@ -8111,7 +8133,7 @@ do
 			["ManaUser"] = true,
 			["SpellCaster"] = true,
 		},
-		["WARLOCK1"] = {	--Affliction Warlock
+		["WARLOCK1"] = { --Affliction Warlock
 			["Dps"] = true,
 			["Ranged"] = true,
 			["RangedDps"] = true,
@@ -8257,16 +8279,22 @@ do
 		end
 	end
 
+	-- if we catch someone in a tank stance keep sending them warnings
+	local playerIsTank = false
+
 	function bossModPrototype:IsTank()
 		--IsTanking already handles external calls, no need here.
 		if not currentSpecID then
 			DBM:SetCurrentSpecInfo()
 		end
 		if specRoleTable[currentSpecID]["Tank"] then
-			return true
-		else
-			return false
+			-- 17 defensive stance, 5487 bear form, 9634 dire bear, 25780 righteous fury
+			if playerIsTank or GetShapeshiftFormID() == 18 or DBM:UnitBuff('player', 5487, 9634) then
+				playerIsTank = true
+				return true
+			end
 		end
+		return false
 	end
 
 	function bossModPrototype:IsDps(uId)
@@ -8300,10 +8328,14 @@ do
 			DBM:SetCurrentSpecInfo()
 		end
 		if specRoleTable[currentSpecID]["Healer"] then
-			return true
-		else
-			return false
+			if playerClass == "DRUID" then
+				-- not in form (moonkin for balance, cat/bear for ferals)
+				return GetShapeshiftFormID() == nil
+			else
+				return true
+			end
 		end
+		return false
 	end
 end
 
@@ -8652,9 +8684,10 @@ do
 	function DBM:UpdateWarningOptions()
 		frame:ClearAllPoints()
 		frame:SetPoint(self.Options.WarningPoint, UIParent, self.Options.WarningPoint, self.Options.WarningX, self.Options.WarningY)
-		font1:SetFont(self.Options.WarningFont, self.Options.WarningFontSize, self.Options.WarningFontStyle == "None" and nil or self.Options.WarningFontStyle)
-		font2:SetFont(self.Options.WarningFont, self.Options.WarningFontSize, self.Options.WarningFontStyle == "None" and nil or self.Options.WarningFontStyle)
-		font3:SetFont(self.Options.WarningFont, self.Options.WarningFontSize, self.Options.WarningFontStyle == "None" and nil or self.Options.WarningFontStyle)
+		local font = self.Options.WarningFont == "standardFont" and standardFont or self.Options.WarningFont
+		font1:SetFont(font, self.Options.WarningFontSize, self.Options.WarningFontStyle == "None" and nil or self.Options.WarningFontStyle)
+		font2:SetFont(font, self.Options.WarningFontSize, self.Options.WarningFontStyle == "None" and nil or self.Options.WarningFontStyle)
+		font3:SetFont(font, self.Options.WarningFontSize, self.Options.WarningFontStyle == "None" and nil or self.Options.WarningFontStyle)
 		if self.Options.WarningFontShadow then
 			font1:SetShadowOffset(1, -1)
 			font2:SetShadowOffset(1, -1)
@@ -8748,7 +8781,7 @@ do
 					self.Options.WarningX = xOfs
 					self.Options.WarningY = yOfs
 					self:Schedule(15, moveEnd, self)
-					self.Bars:CreateBar(15, L.MOVE_WARNING_BAR)
+					self.Bars:CreateBar(15, L.MOVE_WARNING_BAR, 136106)
 				end)
 			end
 			if anchorFrame:IsShown() then
@@ -8758,7 +8791,7 @@ do
 				anchorFrame.ticker = anchorFrame.ticker or C_TimerNewTicker(5, function() self:AddWarning(L.MOVE_WARNING_MESSAGE) end)
 				self:AddWarning(L.MOVE_WARNING_MESSAGE)
 				self:Schedule(15, moveEnd, self)
-				self.Bars:CreateBar(15, L.MOVE_WARNING_BAR)
+				self.Bars:CreateBar(15, L.MOVE_WARNING_BAR, 136106)
 				frame:Show()
 				frame:SetFrameStrata("TOOLTIP")
 				frame:SetAlpha(1)
@@ -8897,7 +8930,7 @@ do
 		local argTable = {...}
 		for i = 1, #argTable do
 			if type(argTable[i]) == "string" then
-				if #self.combinedtext < 8 then--Throttle spam. We may not need more than 9 targets..
+				if #self.combinedtext < 7 then--Throttle spam. We may not need more than 6 targets..
 					if not checkEntry(self.combinedtext, argTable[i]) then
 						self.combinedtext[#self.combinedtext + 1] = argTable[i]
 					end
@@ -9332,9 +9365,10 @@ do
 
 	function DBM:UpdateSpecialWarningOptions()
 		frame:ClearAllPoints()
+		local font = self.Options.SpecialWarningFont == "standardFont" and standardFont or self.Options.SpecialWarningFont
 		frame:SetPoint(self.Options.SpecialWarningPoint, UIParent, self.Options.SpecialWarningPoint, self.Options.SpecialWarningX, self.Options.SpecialWarningY)
-		font1:SetFont(self.Options.SpecialWarningFont, self.Options.SpecialWarningFontSize2, self.Options.SpecialWarningFontStyle == "None" and nil or self.Options.SpecialWarningFontStyle)
-		font2:SetFont(self.Options.SpecialWarningFont, self.Options.SpecialWarningFontSize2, self.Options.SpecialWarningFontStyle == "None" and nil or self.Options.SpecialWarningFontStyle)
+		font1:SetFont(font, self.Options.SpecialWarningFontSize2, self.Options.SpecialWarningFontStyle == "None" and nil or self.Options.SpecialWarningFontStyle)
+		font2:SetFont(font, self.Options.SpecialWarningFontSize2, self.Options.SpecialWarningFontStyle == "None" and nil or self.Options.SpecialWarningFontStyle)
 		font1:SetTextColor(unpack(self.Options.SpecialWarningFontCol))
 		font2:SetTextColor(unpack(self.Options.SpecialWarningFontCol))
 		if self.Options.SpecialWarningFontShadow then
@@ -9410,7 +9444,7 @@ do
 					self.Options.SpecialWarningX = xOfs
 					self.Options.SpecialWarningY = yOfs
 					self:Schedule(15, moveEnd, self)
-					self.Bars:CreateBar(15, L.MOVE_SPECIAL_WARNING_BAR)
+					self.Bars:CreateBar(15, L.MOVE_SPECIAL_WARNING_BAR, 136106)
 				end)
 			end
 			if anchorFrame:IsShown() then
@@ -9421,7 +9455,7 @@ do
 				DBM:AddSpecialWarning(L.MOVE_SPECIAL_WARNING_TEXT)
 				DBM:AddSpecialWarning(L.MOVE_SPECIAL_WARNING_TEXT)
 				self:Schedule(15, moveEnd, self)
-				self.Bars:CreateBar(15, L.MOVE_SPECIAL_WARNING_BAR)
+				self.Bars:CreateBar(15, L.MOVE_SPECIAL_WARNING_BAR, 136106)
 				frame:Show()
 				frame:SetFrameStrata("TOOLTIP")
 				frame:SetAlpha(1)
@@ -9623,7 +9657,7 @@ do
 		local argTable = {...}
 		for i = 1, #argTable do
 			if type(argTable[i]) == "string" then
-				if #self.combinedtext < 8 then--Throttle spam. We may not need more than 9 targets..
+				if #self.combinedtext < 6 then--Throttle spam. We may not need more than 5 targets..
 					if not checkEntry(self.combinedtext, argTable[i]) then
 						self.combinedtext[#self.combinedtext + 1] = argTable[i]
 					end
@@ -10609,7 +10643,7 @@ do
 				icon = nil
 			end
 		end
-		spellName = spellName or tostring(spellId)
+		--spellName = spellName or tostring(spellId)--this actually breaks stuff in 9.0 when spell info fails to return on first try
 		local timerTextValue
 		if timerText then
 			--If timertext is a number, accept it as a secondary auto translate spellid
@@ -10626,7 +10660,7 @@ do
 				text = timerTextValue,
 				type = timerType,
 				spellId = spellId,
-				name = spellName,
+				name = spellName,--If name gets stored as nil, it'll be corrected later in Timer start, if spell name returns in a later attempt
 				timer = timer,
 				id = id,
 				icon = icon,
@@ -10770,6 +10804,11 @@ do
 				spellName = DBM:EJ_GetSectionInfo(string.sub(spellId, 3))
 			else
 				spellName = DBM:GetSpellInfo(spellId)
+			end
+			--Name wasn't provided, but we succeeded in gettinga  name, generate one into object now for caching purposes
+			--This would really only happen if GetSpellInfo failed to return spell name on first attempt (which now happens in 9.0)
+			if spellName then
+				self.name = spellName
 			end
 		end
 		if L.AUTO_TIMER_TEXTS[timerType.."short"] and DBM.Bars:GetOption("StripCDText") then
@@ -11380,7 +11419,7 @@ end
 
 function bossModPrototype:SetRevision(revision)
 	revision = parseCurseDate(revision or "")
-	if not revision or revision == "20200730155401" then
+	if not revision or revision == "20200829144948" then
 		-- bad revision: either forgot the svn keyword or using github
 		revision = DBM.Revision
 	end

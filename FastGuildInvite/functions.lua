@@ -266,7 +266,7 @@ frame:SetScript("OnEvent", function(_,_,msg)
 			if DB.realm.alreadySended[name] then
 				addon.searchInfo.invited()
 			end
-			fn:setNote(name)
+			C_Timer.After(1, function() fn:setNote(name) end)
 		end
 	end
 end)
@@ -274,25 +274,30 @@ end)
 function fn:initDB()
 	DB = addon.DB
 	debugDB = addon.debugDB
+	addon.search = DB.factionrealm.search and DB.factionrealm.search or addon.search
 end
 
 function fn:setNote(name)
-	return 	--BETA
-	--[[if DB.global.setNote or DB.global.setOfficerNote then
+	if name == nil or name == '' then return end
+	if DB.global.setNote or DB.global.setOfficerNote then
+		name = name:match("([^-]+)-?")
 		for index=1, GetNumGuildMembers() do
 			local n, _, _, _, _, _, publicNote, officerNote = GetGuildRosterInfo(index)
-			if name ~= nil and n:match("(.*)-") ~= name then
-				if DB.global.setNote and CanEditPublicNote() and publicNote == "" then
-					-- GuildRosterSetPublicNote(index, DB.global.noteText)	--BETA
-					-- print("set note \""..DB.global.noteText.."\" for "..name)
+			if n:match("([^-]+)-?") == name then
+				if DB.global.setNote and DB.global.setNote ~= "" and CanEditPublicNote() and publicNote == "" then
+					-- GuildRosterSetPublicNote(index, date(DB.global.noteText))
+					GuildRosterSetPublicNote(index, date(fn:msgMod(DB.global.noteText, name)))
+					-- print("set note \""..date(DB.global.noteText).."\" for "..name)
 				end
-				if DB.global.setOfficerNote and C_GuildInfo.CanEditOfficerNote() and officerNote == "" then
-					-- GuildRosterSetOfficerNote(index, DB.global.officerNoteText)	--BETA
-					-- print("set officer note \""..DB.global.officerNoteText.."\" for "..name)
+				if DB.global.setOfficerNote and DB.global.setOfficerNote ~= "" and C_GuildInfo.CanEditOfficerNote() and officerNote == "" then
+					-- GuildRosterSetOfficerNote(index, date(DB.global.officerNoteText))
+					GuildRosterSetOfficerNote(index, date(fn:msgMod(DB.global.officerNoteText, name)))
+					-- print("set officer note \""..date(DB.global.officerNoteText).."\" for "..name)
 				end
+				return
 			end
 		end
-	end]]
+	end
 end
 
 function fn:getCharLen(str)
@@ -440,40 +445,60 @@ end
 
 
 function fn:messageSplit(str, arr)
-  arr = arr or {''}
-  while(str:len()>0) do
-    local _,e = str:find("[%s%.%,]")
-    local s = ''
-    if e then
-      s = str:sub(1,e)
-      str = str:sub(e+1, -1)
-    else
-      s = str
-      str = ''
-    end
-    if arr[#arr]:len()+s:len()<=255 then
-      arr[#arr] = arr[#arr] .. s
-    else
-      table.insert(arr, s)
-    end
-  end
-  for i=1, #arr do
-	if arr[i]:len()>255 then arr={};break;end
-  end
-  return arr
+	if not str then return {} end
+	arr = arr or {''}
+	while(str:len()>0) do
+		local _,e = str:find("[%s%.%,]")
+		local s = ''
+		if e then
+			s = str:sub(1,e)
+			str = str:sub(e+1, -1)
+		else
+			s = str
+			str = ''
+		end
+		if arr[#arr]:len()+s:len()<=255 then
+			arr[#arr] = arr[#arr] .. s
+		else
+			table.insert(arr, s)
+		end
+	end
+	for i=1, #arr do
+		if arr[i]:len()>255 then arr={};break;end
+	end
+	return arr
 end
 
 
 
-function fn:msgMod(msg, name)
+function fn:msgMod(msg, name, noErr)
 	if not msg then return end
 	if msg:find("NAME") then
-		local guildName, guildRankName, guildRankIndex, realm = GetGuildInfo("player")
 		msg = msg:gsub("NAME", name or 'PLAYER_NAME')
+	end
+	if msg:find("GUILDLINK") then
+		local club, link
+		DB.global.guildLinks = DB.global.guildLinks or {}
+		if DB.global.guildLinks[GetGuildInfo("player")] then
+			link = DB.global.guildLinks[GetGuildInfo("player")]
+		elseif ClubFinderGetCurrentClubListingInfo then
+			club = ClubFinderGetCurrentClubListingInfo(C_Club.GetGuildClubId())
+			if club then
+				link = GetClubFinderLink(club.clubFinderGUID, club.name)
+				DB.global.guildLinks[link:match("%[.*: (.*)%]")] = link
+			end
+		end
+		
+		msg = msg:gsub("GUILDLINK", link and link:gsub(" ", " ") or 'G_LINK')
+		
+		if not link and not noErr then
+			print(L["Невозможно создать ссылку гильдии. Откройте окно гильдии и попробуйте снова. Если проблема не устранена, вероятно вы не можете создавать ссылку гильдии."])
+			return nil
+		end
 	end
 	if msg:find("GUILD") then
 		local guildName, guildRankName, guildRankIndex, realm = GetGuildInfo("player")
-		msg = msg:gsub("GUILD", format("<%s>",guildName or 'GUILD_NAME'))
+		msg = msg:gsub("GUILD", format("<%s>", guildName and guildName:gsub(" ", " ") or 'GUILD_NAME'))
 	end
 	return msg
 end
@@ -501,7 +526,7 @@ function fn:sendWhisper(name)
 			addon.removeMsgList[name:match("([^-]*)")] = true
 		end
 		for _,message in pairs(fn:messageSplit(msg)) do
-			SendChatMessage(message, 'WHISPER', GetDefaultLanguage("player"), name)
+			SendChatMessage(message:gsub(" ", " "), 'WHISPER', GetDefaultLanguage("player"), name)
 		end
 	end
 end
@@ -833,6 +858,9 @@ local function searchWhoResultCallback(query, results)
 	if DB.global.queueNotify and #addon.search.inviteList > addon.search.oldCount then
 		FGI.animations.notification:Start(format(L["Игроков найдено: %d"], #addon.search.inviteList - addon.search.oldCount))
 	end
+	
+	DB.factionrealm.search = addon.search
+	
 	local list = addon.search.inviteList
 	interface.scanFrame.progressBar:SetMinMax(0, #addon.search.whoQueryList)
 	interface.scanFrame.progressBar:SetProgress(addon.search.progress-1)
