@@ -1,6 +1,10 @@
 # <FGI> FastGuildInvite
 
-## 74 (2020-08-25)
+## 77 (2020-10-14)
  
 
-- All search data is saved between sessions  
+- changed max level for retail  
+- intro update  
+- updated version of addon to 90001  
+- update Libs for SL  
+- Fixed player name issue in filter using non-standard characters  

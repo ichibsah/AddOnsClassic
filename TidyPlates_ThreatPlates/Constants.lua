@@ -30,8 +30,6 @@ _G["BINDING_NAME_" .. "THREATPLATES_NAMEPLATE_MODE_FOR_FRIENDLY_UNITS"] = L["Tog
 _G["BINDING_NAME_" .. "THREATPLATES_NAMEPLATE_MODE_FOR_NEUTRAL_UNITS"] = L["Toggle Neutral Headline View"]
 _G["BINDING_NAME_" .. "THREATPLATES_NAMEPLATE_MODE_FOR_ENEMY_UNITS"] = L["Toggle Enemy Headline View"]
 
-Addon.CLASSIC = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
-
 ---------------------------------------------------------------------------------------------------
 -- Color and font definitions
 ---------------------------------------------------------------------------------------------------
@@ -144,12 +142,6 @@ Addon.GLOW_TYPES = {
   AutoCast = L["Auto-Cast"],
 }
 
-Addon.CUSTOM_GLOW_FUNCTIONS = {
-  Button = { "ButtonGlow_Start", "ButtonGlow_Stop", 8 },
-  Pixel = { "PixelGlow_Start", "PixelGlow_Stop", 3 },
-  AutoCast = { "AutoCastGlow_Start", "AutoCastGlow_Stop", 4 },
-}
-
 Addon.CUSTOM_PLATES_GLOW_FRAMES = {
   None = L["None"],
   Healthbar = L["Healthbar"],
@@ -168,6 +160,7 @@ Addon.TARGET_TEXTURES = {
   crescent = L["Crescent"],
   bubble = L["Bubble"],
   arrows_legacy = L["Arrow (Legacy)"],
+  Stripes = L["Stripes"]
 }
 
 ----------------------------------------------------------------------------------------------------
@@ -181,18 +174,18 @@ ThreatPlates.Widgets = "Interface\\Addons\\TidyPlates_ThreatPlates\\Artwork\\Wid
 ---------------------------------------------------------------------------------------------------
 
 Addon.AurasFilterMode = {
-  ["whitelist"] = L["White List"],
-  ["blacklist"] = L["Black List"],
-  ["all"] = L["All Auras"],
+  Allow = L["Allow"],
+  Block = L["Block"],
+  None = L["None"],
 }
 
 ThreatPlates.SPEC_ROLES = {
-  --DEATHKNIGHT = { true, false, false },
-  --DEMONHUNTER = { false, true },
-  DRUID 			= { false, true, true },
+  DEATHKNIGHT = (Addon.CLASSIC and nil) or { true, false, false },
+  DEMONHUNTER = (Addon.CLASSIC and nil) or { false, true },
+  DRUID 			= (Addon.CLASSIC and { false, true, true }) or { false, false, true, false },
   HUNTER			= { false, false, false },
   MAGE				= { false, false, false },
-  --MONK 				= { true, false, false },
+  MONK 				= (Addon.CLASSIC and nil) or { true, false, false },
   PALADIN 		= { false, true, false },
   PRIEST			= { false, false, false },
   ROGUE				= { false, false, false },
@@ -251,16 +244,56 @@ ThreatPlates.FRIENDLY_SUBTEXT = {
 -- Totem data - define it one time for the whole addon
 -------------------------------------------------------------------------------
 
-local TOTEM_DATA = {
+local TOTEM_DATA_RETAIL = {
+  -- Baseline Totems
+  { SpellID = 192058, ID = "B1", GroupColor = "8A2BE2"},		-- Capacitor Totem (ex-Lightning Surge Totem, baseline since 8.0.1)
+
+  -- Fire totems
+  { SpellID = 192222, ID = "F1", GroupColor = "ff8f8f"}, 	  -- Liquid Magma Totem
+
   -- Earth Totems
-  { SpellID = 25361,   ID = "E1", GroupColor = "8B4513", Ranks = 5, },	  -- Strength of Earth Totem
+  { SpellID = 8143,   ID = "E1", GroupColor = "8B4513"},	  -- Tremor Totem (added in pacth 8.0.1, TP v9.0.9)
+
+  -- Totems from spezialization
+  { SpellID = 98008,  ID = "S1", GroupColor = "ffb31f"},		-- Spirit Link Totem
+  { SpellID = 5394,	  ID = "S2", GroupColor = "ffb31f"},		-- Healing Stream Totem
+  { SpellID = 108280, ID = "S3", GroupColor = "ffb31f"},		-- Healing Tide Totem
+  { SpellID = 160161, ID = "S4", GroupColor = "ffb31f"}, 	  -- Earthquake Totem
+  { SpellID = 2484,   ID = "S5",	GroupColor = "ffb31f"},   -- Earthbind Totem (added patch 7.2, TP v8.4.0)
+
+  -- Totems from Totem Mastery
+  { SpellID = 202188, ID = "M1", GroupColor = "b8d1ff"}, 	  -- Resonance Totem
+  { SpellID = 210651, ID = "M2", GroupColor = "b8d1ff"},		-- Storm Totem
+  { SpellID = 210657, ID = "M3", GroupColor = "b8d1ff"},		-- Ember Totem
+  { SpellID = 210660, ID = "M4", GroupColor = "b8d1ff"},		-- Tailwind Totem
+
+  -- Totems from talents
+  { SpellID = 157153, ID = "N1", GroupColor = "4c9900"},		-- Cloudburst Totem
+  { SpellID = 51485,  ID = "N2", GroupColor = "4c9900"},		-- Earthgrab Totem
+  { SpellID = 207399, ID = "N4", GroupColor = "4c9900"},		-- Ancestral Protection Totem
+  { SpellID = 192077, ID = "N5", GroupColor = "4c9900"},		-- Wind Rush Totem
+  { SpellID = 198838, ID = "N7", GroupColor = "4c9900"},		-- Earthen Wall Totem
+
+  -- Totems from PVP talents
+  { SpellID = 204331, ID = "P1", GroupColor = "2b76ff"},	  -- Counterstrike Totem
+  { SpellID = 204330, ID = "P2", GroupColor = "2b76ff"},	  -- Skyfury Totem
+  { SpellID = 204336, ID = "P4", GroupColor = "2b76ff"},	  -- Grounding Totem
+
+  --{ SpellID = 204332, ID = "P3", GroupColor = "2b76ff"},	  -- Windfury Totem (removed in patch 8.0.1)p
+  --{ SpellID = 196932, ID = "N6", GroupColor = "4c9900"},		-- Voodoo Totem (removed in patch 8.0.1)
+  --{ SpellID = 192058, ID = "N3", GroupColor = "4c9900"},		-- Lightning  Surge Totem (renamed to Capacitator Totem in patch 8.0.1)
+}
+
+local TOTEM_DATA_CLASSIC = {
+  -- Earth Totems
+  { SpellID = 25361,   ID = "E1", GroupColor = "8B4513", Ranks = 5, Icon ="spell_nature_earthbindtotem", },	  -- Strength of Earth Totem
   { SpellID = 10408,   ID = "E2", GroupColor = "8B4513", Ranks = 6, },	  -- Stoneskin Totem
   { SpellID = 10428,   ID = "E3", GroupColor = "8B4513", Ranks = 6, },	  -- Stoneclaw Totem
   { SpellID = 2484,    ID = "E4", GroupColor = "8B4513", },           	  -- Earthbind Totem
   { SpellID = 8143,    ID = "E5", GroupColor = "8B4513", },	              -- Tremor Totem
 
   -- Fire Totems
-  { SpellID = 10438, ID = "F1", GroupColor = "ff8f8f", Ranks = 6, }, 	  -- Searing Totem
+  { SpellID = 10438, ID = "F1", GroupColor = "ff8f8f", Ranks = 6, Icon ="spell_fire_searingtotem", }, 	  -- Searing Totem
   { SpellID = 10479, ID = "F2", GroupColor = "ff8f8f", Ranks = 3, }, 	  -- Frost Resistance Totem
   { SpellID = 11315, ID = "F3", GroupColor = "ff8f8f", Ranks = 5, }, 	  -- Fire Nova Totem
   { SpellID = 10587, ID = "F4", GroupColor = "ff8f8f", Ranks = 4, }, 	  -- Magma Totem
@@ -284,10 +317,11 @@ local TOTEM_DATA = {
   { SpellID = 8166,   ID = "W6", GroupColor = "b8d1ff", },        		  -- Poison Cleansing Totem
 }
 
-function Addon:InitializeTotemInformation()
-  local totem_name_suffix = { " II", " III", " IV", " V", " VI" }
+local TOTEM_DATA = (Addon.CLASSIC and TOTEM_DATA_CLASSIC) or TOTEM_DATA_RETAIL
+local TOTEM_RANKS_CLASSIC = { " II", " III", " IV", " V", " VI" }
 
-  for i, totem_data in ipairs(TOTEM_DATA) do
+function Addon:InitializeTotemInformation()
+  for _, totem_data in ipairs(TOTEM_DATA) do
     local name = GetSpellInfo(totem_data.SpellID)
     if name then
       totem_data.Name = name
@@ -297,12 +331,16 @@ function Addon:InitializeTotemInformation()
       totem_data.ShowNameplate = true
       totem_data.ShowHPColor = true
       totem_data.ShowIcon = true
+      totem_data.Icon = totem_data.Icon or totem_data.ID -- Use ID as legacy version until all totem info is migrated properly
 
       Addon.TotemInformation[name] = totem_data
       Addon.TOTEMS[name] = totem_data.ID
 
-      for rank = 1, (totem_data.Ranks or 1) - 1  do
-        Addon.TOTEMS[name .. totem_name_suffix[rank]] = totem_data.ID
+      -- Add totem ranks for WoW Classic
+      if Addon.CLASSIC then
+        for rank = 1, (totem_data.Ranks or 1) - 1  do
+          Addon.TOTEMS[name .. TOTEM_RANKS_CLASSIC[rank]] = totem_data.ID
+        end
       end
     end
   end
@@ -351,7 +389,7 @@ ThreatPlates.DEFAULT_SETTINGS = {
     },
   },
   profile = {
-    cache = {},
+    -- cache = {}, - removed in 9.3.0
     -- OldSetting = true, - removed in 8.7.0
     verbose = false,
     -- blizzFadeA = { -- removed in 8.5.1
@@ -621,7 +659,7 @@ ThreatPlates.DEFAULT_SETTINGS = {
         ShowOnlyMine = true,
         ShowBlizzardForEnemy = false,
         Scale = 1.0,
-        FilterMode = "blacklist",
+        FilterMode = "Block",
         FilterBySpell = {},
         FilterByType = {
           --[1] = true, -- Removed in 8.8.0
@@ -649,7 +687,7 @@ ThreatPlates.DEFAULT_SETTINGS = {
         ShowUnlimitedOnBosses = true,
         HideUnlimitedDuration = false,
         Scale = 1.5,
-        FilterMode = "blacklist",
+        FilterMode = "Block",
         FilterBySpell = {},
       },
       CrowdControl = {
@@ -659,10 +697,10 @@ ThreatPlates.DEFAULT_SETTINGS = {
         ShowDispellable = true,
         ShowBoss = true,
         ShowEnemy = true,
-        ShowAllEnemy = true,
-        ShowBlizzardForEnemy = false,
+        ShowAllEnemy = (Addon.CLASSIC and true) or false,
+        ShowBlizzardForEnemy = (Addon.CLASSIC and false) or true,
         Scale = 2.0,
-        FilterMode = "blacklist",
+        FilterMode = "Block",
         FilterBySpell = {},
       },
       ModeIcon = {
@@ -784,6 +822,26 @@ ThreatPlates.DEFAULT_SETTINGS = {
       x = 0,
       y = 26,
       anchor = "CENTER",
+      ThreatPercentage = {
+        Show = true,
+        CustomColor = RGB(255, 255, 255),
+        UseThreatColor = true,
+        -- Layout
+        Anchor = "LEFT",
+        InsideAnchor = false,
+        HorizontalOffset = -6,
+        VerticalOffset = 0,
+        Font = {
+          Typeface = Addon.DEFAULT_FONT,
+          Size = 9,
+          Transparency = 1,
+          --Color = RGB(255, 255, 255),
+          flags = "OUTLINE",
+          Shadow = true,
+          HorizontalAlignment = "RIGHT",
+          VerticalAlignment = "CENTER",
+        }
+      },
     },
     tankedWidget = {
       ON = false,
@@ -974,6 +1032,74 @@ ThreatPlates.DEFAULT_SETTINGS = {
       --ShowTrackingLine = true, -- Removed in 9.1.9
       --TrackingLineThickness = 4  -- Removed in 9.1.9
     },
+    ExperienceWidget = {
+      ON = false,
+      ShowInHeadlineView = false,
+      Height = 10,
+      Width = 120,
+      -- Appearance
+      Texture = "Smooth",
+      BorderTexture = "ThreatPlatesBorder",
+      BorderEdgeSize = 2,
+      BorderOffset = 2,
+      BorderInset = 0,
+      BarForegroundColor = RGB(247, 214, 0, 1),
+      BarBackgroundColor = RGB(0, 0, 0, 0.3),
+      BarBackgroundUseForegroundColor = false,
+      BackgroundColor = RGB(0, 0, 0, 0), -- Fully transparent
+      BackgroundUseForegroundColor = false,
+      BorderColor = RGB(0, 0, 0, 1),
+      BorderUseBarForegroundColor = false,
+      BorderUseBackgroundColor = false,
+      -- Positioning
+      HealthbarMode = {
+        Anchor = "BOTTOM",
+        InsideAnchor = false,
+        HorizontalOffset = 0,
+        VerticalOffset = -10,
+      },
+      NameMode = {
+        Anchor = "BOTTOM",
+        InsideAnchor = false,
+        HorizontalOffset = 0,
+        VerticalOffset = -10,
+      },
+      -- Texts
+      RankText = {
+        Show = true,
+        Anchor = "LEFT",
+        InsideAnchor = true,
+        HorizontalOffset = 1,
+        VerticalOffset = 0,
+        Font = {
+          Typeface = Addon.DEFAULT_FONT,
+          Size = 9,
+          Transparency = 1,
+          Color = RGB(255, 255, 255),
+          flags = "NONE",
+          Shadow = true,
+          HorizontalAlignment = "LEFT",
+          VerticalAlignment = "CENTER",
+        }
+      },
+      ExperienceText = {
+        Show = true,
+        Anchor = "RIGHT",
+        InsideAnchor = true,
+        HorizontalOffset = -1,
+        VerticalOffset = 0,
+        Font = {
+          Typeface = Addon.DEFAULT_FONT,
+          Size = 9,
+          Transparency = 1,
+          Color = RGB(255, 255, 255),
+          flags = "NONE",
+          Shadow = true,
+          HorizontalAlignment = "RIGHT",
+          VerticalAlignment = "CENTER",
+        }
+      },
+    },
 --    TestWidget = {
 --      ON = true,
 --      BarWidth = 120,
@@ -1025,6 +1151,12 @@ ThreatPlates.DEFAULT_SETTINGS = {
             NEUTRAL = true,
             HOSTILE = true,
           },
+          OutOfInstances = true,
+          InInstances = true,
+          InstanceIDs = {
+            Enabled = false,
+            IDs = "",
+          }
         },
         showIcon = true,
         useStyle = true,
@@ -1089,10 +1221,32 @@ ThreatPlates.DEFAULT_SETTINGS = {
         AlwaysFullAbsorb = false,
         OverlayTexture = true,
         OverlayColor = RGB(0, 128, 255, 1),
+        TargetUnit = {
+          Show = false,
+          CustomColor = RGB(255, 255, 255),
+          UseClassColor = true,
+          ShowOnlyInCombat = true,
+          ShowOnlyForTarget = false,
+          -- Layout
+          Anchor = "RIGHT",
+          InsideAnchor = false,
+          HorizontalOffset = 30,
+          VerticalOffset = 0,
+          Font = {
+            Typeface = Addon.DEFAULT_FONT,
+            Size = 9,
+            Transparency = 1,
+            --Color = RGB(255, 255, 255),
+            flags = "NONE",
+            Shadow = true,
+            HorizontalAlignment = "LEFT",
+            VerticalAlignment = "CENTER",
+          }
+        },
       },
       castnostop = {
         show = true, -- no longer used
-        ShowOverlay = false,
+        ShowOverlay = (Addon.CLASSIC and false) or true,
         ShowInterruptShield = false,
       },
       castborder = {
@@ -1130,6 +1284,24 @@ ThreatPlates.DEFAULT_SETTINGS = {
             HorizontalAlignment = "RIGHT",
             VerticalAlignment = "CENTER",
           },
+        },
+        FrameOrder = "HealthbarOverCastbar",
+        CastTarget = {
+          Show = true,
+          Anchor = "BOTTOM",
+          InsideAnchor = false,
+          HorizontalOffset = 0,
+          VerticalOffset = -2,
+          Font = {
+            Typeface = Addon.DEFAULT_FONT,
+            Size = 8,
+            Transparency = 1,
+            Color = RGB(255, 255, 255),
+            flags = "NONE",
+            Shadow = true,
+            HorizontalAlignment = "RIGHT",
+            VerticalAlignment = "TOP",
+          }
         },
       },
       name = { -- Names for Healthbar View

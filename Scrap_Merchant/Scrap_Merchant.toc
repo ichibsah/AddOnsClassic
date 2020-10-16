@@ -1,4 +1,4 @@
-## Interface: 11303
+## Interface: 11305
 ## Title: Scrap Merchant
 ## Notes: Load on demand merchant UI for Scrap.
 

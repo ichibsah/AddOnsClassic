@@ -80,6 +80,7 @@ L.MPROFILE_DELETE_SELF_ERROR	= "Невозможно удалить настро
 L.MPROFILE_DELETE_S_ERROR	= "Источник поврежден. Настройки не удалены или удалены частично. Удалить не удалось."
 
 L.NOTE_SHARE_SUCCESS			= "%s поделился своей заметкой для %s"
+L.NOTE_SHARE_LINK					= "Нажмите здесь, чтобы открыть заметку"
 L.NOTE_SHARE_FAIL			= "%s попытался поделиться с вами заметкой для %s. Однако модуль, связанный с этой способностью не установлен или не загружен. Если вам нужна эта заметка, убедитесь что модуль, для которого они делятся заметкой загружен и попросите поделиться снова"
 
 L.NOTEHEADER					= "Вставьте текст вашей заметки здесь. Поместив имя игрока между >< окрасит его в цвет класса. Для предупреждений с несколькими заметками, разделите заметки с помощью '/'"
@@ -154,15 +155,12 @@ L.VOICE_COUNT_MISSING		= "Голос отсчета %d использует го
 --L.BIG_WIGS						= "BigWigs"
 
 L.UPDATEREMINDER_HEADER			= "Ваша версия Deadly Boss Mods устарела.\n Версия %s (%s) доступна для загрузки здесь:"
-L.UPDATEREMINDER_HEADER_ALPHA	= "Ваша альфа версия Deadly Boss Mods устарела.\n Вы по крайней мере %s тестовых версий позади. Пользователям DBM рекомендуется использовать последнюю альфа или последнюю стабильную версию. Устаревшие альфы могут привести к плохой или неполной функциональности."
 L.UPDATEREMINDER_FOOTER			= "Нажмите " .. (IsMacClient() and "Cmd-C" or "Ctrl-C")  ..  ", чтобы скопировать ссылку загрузки в буфер обмена."
 L.UPDATEREMINDER_FOOTER_GENERIC	= "Нажмите " .. (IsMacClient() and "Cmd-C" or "Ctrl-C")  ..  ", чтобы скопировать ссылку в буфер обмена."
 --L.UPDATEREMINDER_DISABLE			= "ПРЕДУПРЕЖДЕНИЕ: В связи с тем, что Ваш Deadly Boss Mods сильно устарел (%d ревизий), он был отключен до обновления. Это сделано для того, чтобы старый и несовместимый код не вызывал плохой игровой опыт для Вас и других членов рейда."
-L.UPDATEREMINDER_NODISABLE		= "ПРЕДУПРЕЖДЕНИЕ: Ваш DBM сильно устарел. Хотя вы могли отключить уведомление об обновлении, это сообщение начинает появляться после определенного порога и не может быть отключено. НАСТОЯТЕЛЬНО рекомендуется обновиться."
 L.UPDATEREMINDER_HOTFIX			= "Ваша версия DBM будет иметь некорректные таймеры или предупреждения во время этого энкаунтера. Это исправлено в новой версии (или альфа-версии, если новая версия не доступна)"
 L.UPDATEREMINDER_HOTFIX_ALPHA	= L.UPDATEREMINDER_HOTFIX--TEMP, FIX ME!
 L.UPDATEREMINDER_MAJORPATCH		= "ПРЕДУПРЕЖДЕНИЕ: Из-за того, что ваш Deadly Boss Mods устарел, он был отключен до обновления, т.к. это большой игровой патч. Это необходимо для того, чтобы старый и несовместимый код не приводил к ухудшению игрового опыта для вас и членов вашего рейда. Убедитесь что вы скачали новую версию с deadlybossmods.com или curse.com как только она станет доступна."
-L.UPDATEREMINDER_TESTVERSION		= "WARNING: You are using a version of Deadly Boss Mods not intended to be used with this game version. Please make sure you download the appropriate version for your game client from deadlybossmods.com or curse."
 L.VEM							= "ПРЕДУПРЕЖДЕНИЕ: Вы используете Deadly Boss Mods и Voice Encounter Mods одновременно. DBM не был загружен, т.к. эти два аддона не могут работать вместе."
 L.OUTDATEDPROFILES					= "ПРЕДУПРЕЖДЕНИЕ: DBM-Profiles не совместим с этой версией DBM. Он должен быть удален прежде чем DBM сможет продолжить, чтобы избежать конфликтов."
 L.DPMCORE						= "ПРЕДУПРЕЖДЕНИЕ: Deadly PvP mods не совместимы с этой версией DBM. Чтобы продолжить, удалите их, чтобы избежать конфликтов."
@@ -172,8 +170,8 @@ L.OUT_OF_DATE_NAG				= "Ваша версия Deadly Boss Mods устарела 
 
 L.MOVABLE_BAR				= "Перетащите!"
 
---L.PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h транслирует DBM Timer: '%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[Отменить этот DBM Timer]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[Игнорировать DBM Timer от %1$s]|r|h"
-L.PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h транслирует вам таймер DBM"
+L.PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h транслирует DBM Timer: '%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[Отменить этот DBM Timer]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[Игнорировать DBM Timer от %1$s]|r|h"
+--L.PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h транслирует вам таймер DBM"
 L.PIZZA_CONFIRM_IGNORE			= "Игнорировать DBM таймеры от %s на время текущего сеанса?"
 L.PIZZA_ERROR_USAGE				= "Использование: /dbm [broadcast] timer <time> <text>. <time> должно быть больше 1."
 
@@ -564,8 +562,8 @@ L.INSTANCE_INFO_STATS_DENIED		= "Отклонили запрос: %s"
 L.INSTANCE_INFO_STATS_AWAY		= "Отошли от компьютера: %s"
 L.INSTANCE_INFO_STATS_NO_RESPONSE	= "Установлена устаревшая версия DBM: %s"
 L.INSTANCE_INFO_RESULTS			= "Результаты сканирования сохранений. Обратите внимание, что инстансы могут появляться более одного раза, если в вашем рейде есть игроки с локализованными клиентами WoW."
---L.INSTANCE_INFO_SHOW_RESULTS		= "Игроки, которые еще не ответили: %s\n|HDBM:showRaidIdResults|h|cff3588ff[Показать текущие результаты]|r|h"
-L.INSTANCE_INFO_SHOW_RESULTS		= "Игроки, которые еще не ответили: %s"
+L.INSTANCE_INFO_SHOW_RESULTS		= "Игроки, которые еще не ответили: %s\n|HDBM:showRaidIdResults|h|cff3588ff[Показать текущие результаты]|r|h"
+--L.INSTANCE_INFO_SHOW_RESULTS		= "Игроки, которые еще не ответили: %s"
 
 L.LAG_CHECKING				= "Проверка задержки у рейда..."
 L.LAG_HEADER					= "Deadly Boss Mods - Результаты проверки задержки"

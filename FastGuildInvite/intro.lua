@@ -12,7 +12,8 @@ local L = {
 		laterButton = "Напомнить при обновлении аддона",
 		neverButton = "Больше не показывать",
 		updates = {
-			"Все данные поиска сохраняются между сессиями. Таким образом, когда вы возвращаетесь в игру, прогресс поиска и список найденных игроков будут сохранены.",
+			"Быстрое исправление причин неработоспособности аддона в SL.",
+			"Почему в чате появляется информация об игроках все еще не известно.",
 		},
 	},
 	enUS = {
@@ -21,7 +22,8 @@ local L = {
 		laterButton = "Remind me when updating addon",
 		neverButton = "Do not show again",
 		updates = {
-			"All search data is saved between sessions. So now, when you come back to the game, the search progress and the list of players found will be saved.",
+			"Quick fix for the reasons for the inoperability of the add-on in SL.",
+			"Why information about players appears in the chat is still unknown.",
 		},
 	}
 }

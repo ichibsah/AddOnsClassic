@@ -266,7 +266,7 @@ frame:SetScript("OnEvent", function(_,_,msg)
 			if DB.realm.alreadySended[name] then
 				addon.searchInfo.invited()
 			end
-			C_Timer.After(1, function() fn:setNote(name) end)
+			C_Timer.After(5, function() fn:setNote(name) end)
 		end
 	end
 end)
@@ -274,7 +274,7 @@ end)
 function fn:initDB()
 	DB = addon.DB
 	debugDB = addon.debugDB
-	addon.search = DB.factionrealm.search and DB.factionrealm.search or addon.search
+	addon.search = (DB.global.saveSearch and DB.factionrealm.search) and DB.factionrealm.search or addon.search
 end
 
 function fn:setNote(name)
@@ -283,7 +283,7 @@ function fn:setNote(name)
 		name = name:match("([^-]+)-?")
 		for index=1, GetNumGuildMembers() do
 			local n, _, _, _, _, _, publicNote, officerNote = GetGuildRosterInfo(index)
-			if n:match("([^-]+)-?") == name then
+			if n and n:match("([^-]+)-?") == name then
 				if DB.global.setNote and DB.global.setNote ~= "" and CanEditPublicNote() and publicNote == "" then
 					-- GuildRosterSetPublicNote(index, date(DB.global.noteText))
 					GuildRosterSetPublicNote(index, date(fn:msgMod(DB.global.noteText, name)))
@@ -858,8 +858,9 @@ local function searchWhoResultCallback(query, results)
 	if DB.global.queueNotify and #addon.search.inviteList > addon.search.oldCount then
 		FGI.animations.notification:Start(format(L["Игроков найдено: %d"], #addon.search.inviteList - addon.search.oldCount))
 	end
-	
-	DB.factionrealm.search = addon.search
+	if DB.global.saveSearch then
+		DB.factionrealm.search = addon.search
+	end
 	
 	local list = addon.search.inviteList
 	interface.scanFrame.progressBar:SetMinMax(0, #addon.search.whoQueryList)

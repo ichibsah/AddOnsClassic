@@ -2,7 +2,238 @@
 
 _______________________
 
-**VERSION R1.88 DATE: April 29th 2020**
+
+**VERSION R1.91 RELEASE -- October 13th, 2020**
+
+* Minor fix with the player level filter range. If you were filtering levels > 60, it would error. Latest update resolves that.
+
+***MASSIVE UPDATE FOR 9.0 Shadowlands launch!***
+
+*The addon is now fully compatible with the new expansion and all of the underlying code and UI changes that came with it. You will find MANY of your old addons that have long worked for many years, even though they have not been updated, stop working this expansion. GRM should be working day 1. Hurray!*
+
+
+***QUALITY OF LIFE***
+
+
+* The Options for level filtering has been updated to match the new expansion in the GRM > Options > Scan tab
+
+* If you choose 24hr or 12hr timing, the log will now reprocess the strings and update the timestamps to reflect the new formatting. This also applies if you change the timestamp format to a different one.
+
+* Birthdays being included in the audit will be turned off by default now since most don't use the feature. This only applies to NEW GRM users, so veteran GRM users I have not undone any of your settings already in place.
+
+* SYNC changes:
+
+* * Data on the back end is now significantly more efficient and breaks down the entire database in a pre-sync comparison check on every piece of the data. Before, I broke it into blocks of 40 chunks of data for comparison, and if any pieces of info in that 40 was not the same it would compare all 40 between the 2 players just to find the 1 change. The concept finally has been expanded and now I do an exact 1:1 data point comparison pre-check between players before initiating a sync which ultimately makes it significantly more efficient, though it might add 2 to 4 seconds in pre-check sync time in very large guilds. The overall efficiency should cancel that out, however.
+
+* * New option to delay when sync occurs after logging or, or to deactivate the auto-trigger altogether. You can now set the sync to trigger any period time after logging in from 10 seconds after and onward. For people that may have lots and lots of addons, or possibly are playing on older hardware, or maybe a netbook or something that might take longer, they can adjust it so the addon will restric any sync attempts until after the input number of seconds. The default will be 60 seconds after logging in, but some may wish to push earlier and some may want later. I personally set it to 15 seconds. I know one person would prefer it only loaded after 2 minutes. The choice is all yours now.
+
+* * GRM will now go out of its way to prioritize other addons' data use on the comm channels. GRM data is not really that necessary to be needed instantly at all times, unlike many other addons, like say, DBM. So, with the server throttle limit, the last thing I want is GRM to clog up the channels, especially in a super large guild, and force them to the back of the que. As such, the sync algorithm has been updated that if any other data from other addons gets qued up GRM will delay its own sync data, allowing the others to pass through, then continue back on. This should eliminate any delays with other addons and hopefully eliminate any issues that might occur with addons clogging up the channels together and thus causing the throttle cap to be broken and in some cases, disconnects to occur. While I have not heard of any reports of disconnects in retail, there does seem to be some conflict with a couple of CLASSIC addons as to make this a possibility.
+
+* Russian Language is now fully translated with the exception of just a couple of brand new lines I snuck in at the last minute. I also spent significant effort to ensure universally compatible UI formatting so no text was overlapping off frames and fit in buttons and so on.  TY @Максим on Discord for the translation work
+
+* Global controls were previously restricted that once set, only the guild leader could edit them, unless an officer manually removed the global control settings tring in the Guild Info. This restriction has been loosened so that any officer in a guild that has access to edit the guild info can now change the GRM settings that are "Global Controls." If the string of control tags is already exported to the Guild Info then they will automatically be updated as you make changes to your global settings. Be aware that it can take up to 60 seconds for the guild Info to refresh for other players in Classic, if they are not directly looking at the screen, so other players may not immediately receive the global control changes, but they will shortly. Retail it can update within 10 seconds or less and GRM sends out a call to other players informing them that a change has been made and to re-check the global control string for quicker updating.
+
+* I noticed that on the public/officer note Blizz has some algorithm that actually changes note fonts on the fly. It detects if you are using cyrillic characters, Asian, or a combination, and then it sets the note font to an appropriate compatible one. It ONLY uses the horrible looking unversally compatible font if you give it a mess of various characters to screw with it, otherwise it sticks to the FrizQT fonts and the Cyrillic compatible one and so on. GRM's custom, officer, public note fonts will now mirror whatever font Blizz is using in that moment for compatibility. In the future I will likely give you the option to ignore this and just use the custom font, but for now I've been getting too many people who have mentioned some guildies with "???" in their notes, indicating incompatible font.
+
+* Players now have the ability to disable the message "PLAYERNAME tried to sync with you but their addon is outdated. Remind them to update!" -- While useful, there are some cases where a player just doesn't upgrade and rather than spamming you once per session day after day, you can disable the notification to chat.
+
+
+
+***BUG FIXES***
+
+* Fixed a weird edge case where if you invited a new alt to a guild and immediately promoted to guild master, it could cause your next session not to load properly.
+
+* Reprocessing the log when changing languages was causing an error due to processing the new log rules message in a new way - this has been fixed
+
+* Fixed a Lua error that could occur if player performed a hardreset to do the on logoff handler.
+
+* Fixed an issue with the Advanced Join Date tool where if you had a format where the month > 12 it would error out on parsing as it was not doing a proper boolean check that the month integer was valid and between 1-12 when passing through the enum.
+
+* Fixed an issue where if you create a new toon, and before joining a guild, you logoff, then when you log back on and join a guild, it now overwrites your settings on all alts for that guild. This should no longer occur.
+
+* "Add Join Date to:" should now properly translate in the Officer Options tab if you use a language other than English (and the accompanying translation has been made
+
+* Added several missing localizations to the localization files - they were all just in the raw English and not being wrapped by my localization function.
+
+* When swapping between languages I noticed some of the options dropdown menus were not updating to new language properly. They now should properly localize with the rest.
+
+* (CLASSIC ONLY) - The roster class coloring was not working when you changed it to player status. It now works on both roster view options! Oops!
+
+
+
+
+
+
+**VERSION R1.895: Sep 12th, 2020**
+
+* Final issue found to resolve issue when Blizz does massive new server merge.
+
+**VERSION R1.894: Sep 11th, 2020**
+
+* Fixed a bug in relation to previous release... the rush out was a bad idea as I placed the code *before* the variable was set when calling to it. Whoops! Your addon should now properly pick up when people Live join the guild without erroring.
+
+
+**VERSION R1.893: Sep 10th, 2020**
+
+* Found an issue with the recent mass server merges where the server keeps firing a player has joined the guild, yet they are already in the guild. This is a hidden "system message" but the GRM addon is picking it up and assuming it is someone joining the guild live. This now accounts for that possibility. I wanted to get this out asap as it can mess up join dates for people and it got reported early. It's happening when people log in on that toon for the first time.
+
+
+**VERSION R1.892: Sep 8th, 2020**
+
+***BUG FIXES***
+
+* Fixed a bug that cuased the patches to fail if you haven't loaded GRM in a very long time due to just a simple variable typo
+
+* Setting a new ban would cause an error on other's GRM versions in the guild as it had a parsing error on the comm message. Normal sync would work. This would only affect live changes.
+
+
+**VERSION R189 DATE: Sep 5th, 2020**
+
+
+***QUALITY OF LIFE***
+
+* EXPORT UPDATES: 
+
+![Export Tool Improvements](https://i.imgur.com/J3RS4v0.jpg)
+
+* The Export window has been rebuilt. I realized it doesn't make a whole lot of sense to go from right to left. Why is the export copy window on the left anyway? lol - So, I rearranged it a bit and slightly expanded the height to make room for possible future export options.
+
+* - Comma added as a delimiter in the EXPORT of data. Note, if comma is selected, since the alts are included as a comma separated list in the same column, the alts will be separated by semicolons, but only when comma delimiter is selected. Also, log entries the colon will be replaced with semicolon on all of them, so as to not mess up the columns.
+
+* - "::" , "|" , "\t" all added as exort delimiters. The "\t" is representation of a "Tab" - if there are any formats you would still like included, please let me know. TY!
+
+* Added the option in the Member/Former member export to only export players that are listed as a "main" in the guild, or the opposite, an alt.
+
+* Added an additional option to mass check all or uncheck the member export filters. There's 17 buttons so it is a bit tedious to go through all of them 
+
+* Added the ability to export the "Rank History" of the player to the export info as well. This sort of messes up your old columns a bit as it didn't make sense adding this to the end, just be aware this inserts a column. Also of note, this only includes the most recent 10 rank changes. If someone has like a 50 rank change history, it is just too much text spam for export and will not be included. This shouldn't be an issue for 99.99% of the community.
+
+* When exporting the member details or the former member details, the delimiter is no longer included at the end, as it is unnecessary and ultimately creates a new empty column.
+
+**-----------**
+
+* MACRO TOOL RULE UPDATES:
+
+![Macro Tool Improvements](https://i.imgur.com/PdlJqo0.jpg)
+
+* The Macro tool has essentially been reorganized from Left to Right, instead of the backwards order it was in previously. Great idea @Vishal. Oh and, the text explanation has been updated a bit with the macro being built, to make hotkey use more obvious.
+
+![New filter rules can be added](https://i.imgur.com/S8sMUTY.jpg)
+
+*   - Apply specific rule to All, mains only, or alts only.
+
+*   - Now you can match notes that are just empty - Thank you to @ManuelSifredi on Github for the idea and the contributing to its implementation into GRM.
+
+*   - Activity filter at speicif rank(s) regardless of activity level. In other words, "If player has been at Initiate for x days/months" - it will recommend to kick. Easy way to keep track of purging players who never meet standards for promotion after X amount of time, even though they log on regularly and are not actually "inactive"
+
+*   - Added Guild reputation filter - Set the filter to players less than, equal to, or greater than a specific rank (Disabled in Classic)
+
+*   - Added a new custom message on the kick rule filters - Want a custom message to also appear in your log when this rule is flagged? Now you can set one, up to 80 characters in length.
+
+* Recommend to kick log entries will now have the names properly colored to match their class.
+
+* Cleaned up some text reporting in the Macro tool tooltip for plural and singular cases
+
+* To remove confusion, if the player does not currently have the ability to remove people from the guild, they will no longer receiver the default kick recommendation notices, and they will also not be able to waste time trying to build rules in the macro tool until their rank permissions are expanded. Not that they could even use the macros before, as it would just fail and say unable to remove a player at their rank, but not it just informs them the feature is disabled and restricts the ability to build the macros.
+
+**-----------**
+
+* Since the occasional accidental click of the "Show Mouseover" button can occur, given its position at the top of the roster window, and in proxiity of the log and macro tool buttons, if unchecked the text will now display as red and make it more obvious to see.
+
+* Updated some missing frames to skin for AddOnSkins ElvUI  as well as added compatibility to the Group Info GRM Module. Fixed an issue with ElvUI AddOnSkins where the Log Extra options/configuration was getting pinned back in original location. Also updated some missing reskins, and the new ones. TUKUI also has accepted the latest updates.
+
+* Update the font of the Public, officer, and Custom notes to match the built-in font used by Blizzard "ARIALN.TTF" that is essentially a universal UTF8 font compatible with all possible characters. It's not as pretty looking, but it basically eliminates the possibility of people adding characters to their notes tht end of showing ????? in stead. Of note, this won't change the reporting to the log, so you still need a compatible font in your log on note changing. This also applies to the export window so it reveals all text appropriately.
+
+* The "Custom Notes:" on the mouseover window now says "Custom Public Notes:" so as to eliminate some confusion about this note as being public vs officer use only.
+
+* When a player rejoins the guild the "Date Originally Joined" entry would include the hour of day as well, which is generally unnecessary. This is now removed. If you wish to reprocess all your old log entries, just change the language to another in the settings, then re-change back. Otherwise, it will only be updated on New entries.
+
+* The text should no longer overlap the checkbox to ban the player when you are removing a player from the guild manually. This seemed to not be an issue for most people.
+
+* Updated some German translation work. TY @Mythos for that commit. Also to @zeatt for the line improvement suggestion as well.
+
+* The tooltip over the Sync option about sending outgoing data to all, but restricting incoming data, has been expanded to clarify chance of misunderstanding, as well as updated the tooltip as the Custom Note part was outdated.
+
+![Default Tab Opening Selection](https://i.imgur.com/XuwpNij.jpg)
+
+* Added a new option. You can now select a "default tab" to auto open everytime the core GRM window is open. No matter what you close it on, the next time you reopen it will auto reopen to your default selection. The dropdown choice will allow you to choose any tab as your default and the option can be found on the bottome left of the main "Options > General" tab.
+
+![Audit Tab Incomplete Counter](https://i.imgur.com/hjAVkiG.jpg)
+
+* Audit Tab now has an number indicator revealing how many are "incomplete" without needing to actually click on the audit window to see. The tooltip was also updated to assist here.
+
+![Keep track of your progress easier!](https://i.imgur.com/Hs05WRU.jpg)
+
+* After the first sync there is now an "Audit Report" on the % complete in the guild, and how many members are incomplete.
+
+* Added Compatibility to the "LOIHCal" Addon - On the calendar, the side LOIH window would overlap the GRM alt details window, so if you have this addon installed that issue is now resolved and takes into consideration whether you have LOIH set as an overlay on default position, or beside the original window.
+
+* Some decent code cleanuup which was a decent amount of time but overall lowers fingerprint of addon. You may not notice honestly lol.
+
+* Normalized the interact distance of all "Check Buttons" in all GRM settings and frames to have their "hit rect" interact range be the exact same distance of the width of the string. It scales dynamically as needed, matches the font size, and I wrote a script so it scales it accordingly for perfect matching regardless of the language selected. This is a fairly decent quality of life improvement that took a little time, and maybe people won't notice, but it is significant enough to merit the time for it!
+
+* Before, if you mass shifted a rank, the addon would mass spam you of it, even if the ranks were the same name, just indicating a slight difference in guild rank "integer index" - I've added some logic so that it will ONLY report when players do actually change ranks, even if you mass delete or add ranks and they shift up and down. The reason this seems simple on the surface but under the hood is a little more complicated is because Blizzard allows guilds to name ranks the very same name, so there have been several people in guilds I have encountered that want to know when people change rank, as they name all ranks the very same name (I know lol). So, I basically just added the hidden integer of the rank to tag them, but if there IS not muultiple ranks of the same name, it can be safely assumed the entire rank merely shifted and the spam can be silenced from reporting to the log.
+
+![Shift ranks up and down easily](https://i.imgur.com/Dyp0uxo.jpg)
+
+* (CLASSIC ONLY) - The Guild Control Rank permissions window, the guild leader now has the ability to mass shift ranks up and down with the click of a button, rather than needing to rename and then mass promote/demote.
+
+* (CLASSIC ONLY) - The roster class coloring (which can be enabled and disabled in the GRM UI Options), has been expanded to include class coloring of the names in chat as well.
+
+
+***BUG FIXES***
+
+*NOTE: I am only mentioning the more notable bugs. There was a LOT of little things cleaned up and found not reported on here.*
+
+* Fixed a MAJOR issue where names can become disassociated from an alt grouping during a sync. This can also affect mains being removed. This only occurred during a sync and should no longer be an issue. This was a very weird and latent issue that had been slipping by for months so it is good to finally be rid of it. Took a bit to track down. Thank you for the many reports that finally helped me trace the origin of it!
+
+* Fixed an issue whre the "Active" and "Offline" status could pop up erroneously on players that were not actually currently online. It would happen if you had the calendar window open
+
+* Issue that could arise in compatibility with some addons on adding the main tag to the chat should now be resolved, though I haven't tested this well. This should eliminate possible frustrations any addon devs might have wtih compatibility issue. I should note, that there are some major addons out there that are far more popular than GRM that do not even bother and just rely on their status as being so dominant. This is not well tested but I'd be curious to hear of any reports if the solution was not sufficient in some cases, though in theory, it *should* be!
+
+* Fixed a bug that could occur when setting the global controls to the guild info that would say the string was too long, even though you had room. This is because it was rebuilding it wrong and appending an extre "grm^" at the front. In other words, you might end up with *grmgrmgrmgrmgrm^* before the other global control tags. I'd double check them to see if this has happened to you. In most cases it will not be an issue, but you may want to cleanup if wasting characters.
+
+* Fixed a bug where resetting to default the "Only show on log changes" on the General options was only resetting using the scan reset default tab button.
+
+* If a player had ElvUI installed there was some error that was occurring when logging off or reloading. It will now no longer happen. It was just triggering an unnecessary call to set a keybind on logoff while the. I never noticed since it was getting dumped into the previous session log of errors. This will no longer happen.
+
+* GRM was overriding some tooltip scaling, but only if the tooltip size had been altered by an alternative addon, like Tiny Tooltips, and it would only happen only on the first time you loaded the GRM options. This must've existed > 1 year and only 1 reported this lol. It is now resolved as it only was noticeable in some cases anyway!
+
+* Fixed an issue where the UI Scaling buttons in the GRM Options could overlap at the bottom if your were using certain game resoletions.
+
+* Fixed an issue where an update is required, but a player has logged onto a newly created toon who has never logged on to GRM before, thus it encounters the update and has no profile to build off of and thus fails on a settings check and thus appear to reset all settings again, but if you successfully complete that session without realizing it it would then write over your old settings due to the Lua error, assuming the current settings were what you wanted. Oops!
+
+* If swapping languages or date formats, the addon would reprocess the entire log to new format, or translation, but in some old old ban formats it was failing as it was set to the wrong index identifier as an unban. This will now auto-fix and resolve.
+
+* Fixed a bug where sync could fail on some occasions when syncing the "main" info as there was an incorrect insert into a table, instead of setting a value as an integer, causing arithmetic lua error. 
+
+* Fixed an issue with major updates of people who have significantly large databases never getting through the update.
+
+* Fixed a critical issue that would allow people with a certain bug from a long time ago, or far earlier version, to not be able to update the DB and thus GRM would be unfunctional without a full reset wipe of their data. This resolves this. Of note, this affected a very small number of people, but even 1 person is enough to need to resolve it.
+
+* Danish/Dutch translations were missing a whole giant block of text strings so you would get spammed with errors. The translations are not really complete so not sure if anyone even noticed lol
+
+* Found a bit of an edge case that could affect both retail and classic, but in some circumstances, after opening the calendar (in retail), the scanning would break it's loop and never actually scan for guild changes in the background within constraints of the time delay between checks. This could happen as well in Classic but is triggered in another way. Weird never to notice til now but it happened to me which caused me to track it down. This was actually a bit of a hunt and a lot of work for something that might seem so simple.
+
+* Fixed a bug where it was refreshing and reprocessing the macro tool "rules" before confirming save of the macro filter rule. It was redundant as no changes had been saved, but wasted resources.
+
+* Fixed an issue where sync could fail and get a lua error.
+
+* Fixed an issue where it was not reporting the proper "time passed" since they had been in the guild when they were removed in some places instances of log reporting.
+
+* Fixed an issue where you could not "reset defaults" on the Macro tool if you had removed all the rules. It would technically add it, but you would have to refresh the window manually before it updated and it would Lua error every time. No longer!
+
+* (RETAIL ONLY) - Events added to the calendar already should now properly be auto-removed from the list of events to add for players who did not do them. It scans the calendar and verifies if the events has been already added and removes it from the queue if so.
+
+* (CLASSIC ONLY) - On the GRM mouseover window you could click to edit the public note, and it would let you type it in, but if you didn't have permissions it would just not do anything. Now you cannot click the note to edit if you don't have a permission.
+
+* (CLASSIC ONLY) - Roster coloring was sort of flickering a bit and when you clicked down it could reset and only rebuild after releasing mouse. It now hooks into the build function of the frame and essentially inserts itself to override the Blizz coloring completely now rather than updating after the fact. I can't believe how often Blizz fires that functin though... it is very spammy on the back end lol.
+
+* (CLASSIC ONLY) - ColorPicker should now be properly draggable in Classic. It was erroring out due to a frame name difference. Small oversight with Classic compatibility.
+
+
+
+**VERSION R1.881 DATE: April 30th 2020**
 
 ***NEW FEATURES***
 

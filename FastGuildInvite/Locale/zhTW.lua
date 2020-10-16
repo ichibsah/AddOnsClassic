@@ -194,6 +194,8 @@ L["Слово NAME заглавными буквами будет заменен
 L["Сообщать о добавлении в черный список в офицерский канал."] = "Report adding a player to the blacklist in the officer channel"
 L["Сообщение, если приглашение отклонено"] = "Message if invitation is declined"
 L["Сохранить"] = "Save"
+L["Сохранить состояние поиска"] = "Save search state"
+L["Сохранить состояние поиска между сессиями"] = "Save search state between sessions"
 L["Сочетание клавиш уже занято"] = "Keyboard shortcut busy"
 L["Список отправленных приглашений"] = "List of sent invitations"
 L["Список приглашенных"] = "List of invited players"

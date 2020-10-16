@@ -81,8 +81,8 @@ GRM_UI.noteBackdrop2 = {
     edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
     tile = true,
     tileSize = 32,
-    edgeSize = 10,
-    insets = { left = 2 , right = 2 , top = 3 , bottom = 1 }
+    edgeSize = 8,
+    insets = { left = 2 , right = 2 , top = 3 , bottom = 2 }
 }
 
 -- Clear frame - no translucent background
@@ -225,8 +225,8 @@ GRM_UI.GRM_altFrameTitleText = GRM_UI.GRM_CoreAltFrame:CreateFontString ( "GRM_a
 -- ALT OPTIONSFRAME
 GRM_UI.GRM_altDropDownOptions = CreateFrame ( "Frame" , "GRM_altDropDownOptions" , GRM_UI.GRM_MemberDetailMetaData );
 GRM_UI.GRM_altDropDownOptions:Hide();
-GRM_UI.GRM_altOptionsText = GRM_UI.GRM_altDropDownOptions:CreateFontString ( "GRM_altOptionsText" , "OVERLAY" , "GameFontNormalSmall" );
-GRM_UI.GRM_altOptionsDividerText = GRM_UI.GRM_altDropDownOptions:CreateFontString ( "GRM_altOptionsDividerText" , "OVERLAY" , "GameFontWhiteTiny" );
+GRM_UI.GRM_altDropDownOptions.GRM_altOptionsText = GRM_UI.GRM_altDropDownOptions:CreateFontString ( "GRM_altOptionsText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_altDropDownOptions.GRM_altOptionsDividerText = GRM_UI.GRM_altDropDownOptions:CreateFontString ( "GRM_altOptionsDividerText" , "OVERLAY" , "GameFontWhiteTiny" );
 -- ALT BUTTONS
 GRM_UI.GRM_AddAltButton2 = CreateFrame ( "Button" , "GRM_AddAltButton2" , GRM_UI.GRM_CoreAltFrame.GRM_CoreAltScrollFrame.GRM_CoreAltScrollChildFrame , "GameMenuButtonTemplate" );
 GRM_UI.GRM_AddAltButton2Text = GRM_UI.GRM_AddAltButton2:CreateFontString ( "GRM_AddAltButton2Text" , "OVERLAY" , "GameFontWhiteTiny" );
@@ -350,6 +350,8 @@ GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_Sho
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMinimapButtonText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMinimapButton:CreateFontString ( "GRM_ShowMinimapButtonText" , "OVERLAY" , "GameFontNormalSmall" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButton = CreateFrame ( "CheckButton" , "GRM_SyncAllSettingsCheckButton" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame , "OptionsSmallCheckButtonTemplate" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButtonText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButton:CreateFontString ( "GRM_SyncAllSettingsCheckButtonText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelectionButton = CreateFrame ( "CheckButton" , "GRM_DefaultTabSelectionButton" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame , "OptionsSmallCheckButtonTemplate" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelectionButtonText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelectionButton:CreateFontString ( "GRM_DefaultTabSelectionButtonText" , "OVERLAY" , "GameFontNormalSmall" );
 -- Color Select
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorSelectOptionsFrame = CreateFrame ( "Frame" , "GRM_ColorSelectOptionsFrame" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorSelectOptionsFrame.GRM_OptionsTexture = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorSelectOptionsFrame:CreateTexture ( nil , "Background" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorSelectOptionsFrame );
@@ -400,6 +402,12 @@ GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_24H
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_24HrSelected:Hide();
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_24HrSelected.GRM_24HrSelectedText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_24HrSelected:CreateFontString ( "GRM_24HrSelectedText" , "OVERLAY" , "GameFontWhiteTiny" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_24HrSelectedDropDownMenu = CreateFrame ( "Frame" , "GRM_24HrSelectedDropDownMenu" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_24HrSelected , "InsetFrameTemplate" );
+
+-- Default Tab Selection
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected = CreateFrame ( "Frame" , "GRM_DefaultTabSelected" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame , "InsetFrameTemplate" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected:Hide();
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected.GRM_DefaultTabSelectedText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected:CreateFontString ( "GRM_DefaultTabSelectedText" , "OVERLAY" , "GameFontWhiteTiny" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabMenu = CreateFrame ( "Frame" , "GRM_DefaultTabMenu" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected , "InsetFrameTemplate" );
 
 -- Tab Fade options
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_FadeCheckButton = CreateFrame ( "CheckButton" , "GRM_FadeCheckButton" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame , "OptionsSmallCheckButtonTemplate" );
@@ -580,6 +588,7 @@ GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_Cus
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinEditBox = CreateFrame( "EditBox" , "GRM_CustomTagJoinEditBox" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame , "InputBoxTemplate" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame:CreateFontString ( "GRM_CustomTagREJoinText" , "OVERLAY" , "GameFontNormalSmall" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText2 = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame:CreateFontString ( "GRM_CustomTagREJoinText2" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText3 = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame:CreateFontString ( "GRM_CustomTagREJoinText3" , "OVERLAY" , "GameFontNormalSmall" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinEditBox = CreateFrame( "EditBox" , "GRM_CustomTagREJoinEditBox" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame , "InputBoxTemplate" );
 
 --OPTIONS PANEL FONTSTRING DESCRIPTION ON OPTIONS CONTROLS
@@ -614,7 +623,7 @@ GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_Ro
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalEditBox = CreateFrame( "EditBox" , "GRM_RosterTimeIntervalEditBox" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButton , "InputBoxTemplate" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalEditBox:Hide();
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote = CreateFrame ( "Frame" , "GRM_RosterTimeIntervalOverlayNote" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButton );
-GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNoteText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote:CreateFontString ( "GRM_RosterTimeIntervalOverlayNoteText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote.GRM_RosterTimeIntervalOverlayNoteText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote:CreateFontString ( "GRM_RosterTimeIntervalOverlayNoteText" , "OVERLAY" , "GameFontNormalSmall" );
 -- Report Inactive Options
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButton = CreateFrame ( "CheckButton" , "GRM_RosterReportInactiveReturnButton" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame , "OptionsSmallCheckButtonTemplate" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButtonText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButton:CreateFontString ( "GRM_RosterReportInactiveReturnButtonText" , "OVERLAY" , "GameFontNormalSmall" );
@@ -644,6 +653,14 @@ GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_Roster
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterNotifyOnChangesCheckButtonText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterNotifyOnChangesCheckButton:CreateFontString ( "GRM_RosterSyncCheckButtonText" , "OVERLAY" , "GameFontNormalSmall" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton = CreateFrame ( "CheckButton" , "GRM_SyncAllRestrictReceiveButton" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame , "OptionsSmallCheckButtonTemplate" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButtonText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton:CreateFontString ( "GRM_SyncAllRestrictReceiveButtonText" , "OVERLAY" , "GameFontNormalSmall" );
+-- Auto Trigger Sync Setting
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton = CreateFrame ( "CheckButton" , "GRM_AutoTriggerSyncCheckButton" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame , "OptionsSmallCheckButtonTemplate" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton:CreateFontString ( "GRM_AutoTriggerSyncCheckButtonText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText2 = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton:CreateFontString ( "GRM_AutoTriggerSyncCheckButtonText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox = CreateFrame( "EditBox" , "GRM_AutoTriggerTimeEditBox" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton , "InputBoxTemplate" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:Hide();
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote = CreateFrame ( "Frame" , "GRM_AutoTriggerTimeOverlayNote" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote.GRM_AutoTriggerTimeOverlayNoteText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote:CreateFontString ( "GRM_AutoTriggerTimeOverlayNoteText" , "OVERLAY" , "GameFontNormalSmall" );
 -- Options RankDropDown
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncRankDropDownSelected = CreateFrame ( "Frame" , "GRM_RosterSyncRankDropDownSelected" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame , "InsetFrameTemplate" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncRankDropDownSelectedText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncRankDropDownSelected:CreateFontString ( "GRM_RosterSyncRankDropDownSelectedText" , "OVERLAY" , "GameFontWhiteTiny" );
@@ -652,6 +669,8 @@ GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_Roster
 -- SYNC with players with outdated versions
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButton = CreateFrame ( "CheckButton" , "GRM_SyncOnlyCurrentVersionCheckButton" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame , "OptionsSmallCheckButtonTemplate" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButtonText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButton:CreateFontString ( "GRM_SyncOnlyCurrentVersionCheckButtonText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncCompatibilityMessageButton = CreateFrame ( "CheckButton" , "GRM_SyncCompatibilityMessageButton" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame , "OptionsSmallCheckButtonTemplate" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncCompatibilityMessageButtonText = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncCompatibilityMessageButton:CreateFontString ( "GRM_SyncCompatibilityMessageButtonText" , "OVERLAY" , "GameFontNormalSmall" );
 
 -- SYNC with players ban lists
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanList = CreateFrame ( "CheckButton" , "GRM_RosterSyncBanList" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame , "OptionsSmallCheckButtonTemplate" );
@@ -713,10 +732,6 @@ GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_Le
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Button:CreateFontString ( "GRM_LevelFilter5Text" , "OVERLAY" , "GameFontNormalSmall" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button = CreateFrame ( "CheckButton" , "GRM_LevelFilter6Button" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame , "OptionsSmallCheckButtonTemplate" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button:CreateFontString ( "GRM_LevelFilter6Text" , "OVERLAY" , "GameFontNormalSmall" );
-GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Button = CreateFrame ( "CheckButton" , "GRM_LevelFilter7Button" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame , "OptionsSmallCheckButtonTemplate" );
-GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Button:CreateFontString ( "GRM_LevelFilter7Text" , "OVERLAY" , "GameFontNormalSmall" );
-GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Button = CreateFrame ( "CheckButton" , "GRM_LevelFilter8Button" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame , "OptionsSmallCheckButtonTemplate" );
-GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text = GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Button:CreateFontString ( "GRM_LevelFilter8Text" , "OVERLAY" , "GameFontNormalSmall" );
 
 -- Enable !note feature
 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButton = CreateFrame ( "CheckButton" , "GRM_NoteTagFeatureCheckButton" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame , "OptionsSmallCheckButtonTemplate" );
@@ -831,9 +846,9 @@ GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_BanServ
 GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_BanServerSelected.GRM_BanServerSelectedText = GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_BanServerSelected:CreateFontString ( "GRM_BanServerSelectedText" , "OVERLAY" , "GameFontWhiteTiny" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_BanServerDropDownMenu = CreateFrame ( "Frame" , "GRM_BanServerDropDownMenu" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_BanServerSelected , "InsetFrameTemplate" );
 -- Reason for the ban
-GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBox = CreateFrame( "EditBox" , "GRM_AddBanReasonEditBox" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame );
-GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBoxText = GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBox:CreateFontString ( "GRM_AddBanReasonEditBoxText" , "OVERLAY" , "GameFontNormal" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBoxFrame = CreateFrame ( "Frame" , "GRM_AddBanReasonEditBoxFrame" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBox = CreateFrame( "EditBox" , "GRM_AddBanReasonEditBox" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBoxFrame );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBoxText = GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBox:CreateFontString ( "GRM_AddBanReasonEditBoxText" , "OVERLAY" , "GameFontNormal" );
 -- Add Ban CLASS selection dropdown
 GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanClassSelectionText = GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionEditBox:CreateFontString ( "GRM_AddBanClassSelectionText" , "OVERLAY" , "GameFontNormal" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanDropDownClassSelected = CreateFrame ( "Frame" , "GRM_AddBanDropDownClassSelected" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame, "InsetFrameTemplate" );
@@ -985,7 +1000,16 @@ GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter14.GRM_
 GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter15 = CreateFrame ( "CheckButton" , "GRM_ExportFilter15" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "OptionsSmallCheckButtonTemplate" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter15.GRM_ExportFilter15Text = GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter15:CreateFontString ( "GRM_ExportFilter15Text" , "OVERLAY" , "GameFontNormal" );
 GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter16 = CreateFrame ( "CheckButton" , "GRM_ExportFilter16" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "OptionsSmallCheckButtonTemplate" );
-GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter16.GRM_ExportFilter16Text = GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter16:CreateFontString ( "GRM_ExportFilter15Text" , "OVERLAY" , "GameFontNormal" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter16.GRM_ExportFilter16Text = GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter16:CreateFontString ( "GRM_ExportFilter16Text" , "OVERLAY" , "GameFontNormal" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17 = CreateFrame ( "CheckButton" , "GRM_ExportFilter17" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "OptionsSmallCheckButtonTemplate" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1 = CreateFrame ( "CheckButton" , "GRM_ExportFilter17_Radial1" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "UIRadioButtonTemplate" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1Text = GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:CreateFontString ( "GRM_ExportFilter17_Radial1Text" , "OVERLAY" , "GameFontNormal" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2 = CreateFrame ( "CheckButton" , "GRM_ExportFilter17_Radial2" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "UIRadioButtonTemplate" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2Text = GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:CreateFontString ( "GRM_ExportFilter17_Radial2Text" , "OVERLAY" , "GameFontNormal" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton = CreateFrame ( "CheckButton" , "GRM_ExportSelectAllButton" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "OptionsSmallCheckButtonTemplate" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton.GRM_ExportSelectAllButtonText = GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton:CreateFontString ( "GRM_ExportSelectAllButtonText" , "OVERLAY" , "GameFontNormal" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter18 = CreateFrame ( "CheckButton" , "GRM_ExportFilter18" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "OptionsSmallCheckButtonTemplate" );
+GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter18.GRM_ExportFilter18Text = GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter18:CreateFontString ( "GRM_ExportFilter18Text" , "OVERLAY" , "GameFontNormal" );
 
 -- Delimiter Dropdown for Export
 GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_DelimiterDropdownMenuSelected = CreateFrame ( "Frame" , "GRM_DelimiterDropdownMenuSelected" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "InsetFrameTemplate" );
@@ -1473,7 +1497,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
                     if not GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailDateJoinedTitleTxt:IsMouseOver ( 2 , -2 , -2 , 2 ) then
                         local width = 70;
                         local height = 85;  -- Height of the window
-                        GRM_UI.GRM_altOptionsText:SetText ( GRM.SlimName ( GRM_G.selectedAlt[2] ) );
+                        GRM_UI.GRM_altDropDownOptions.GRM_altOptionsText:SetText ( GRM.SlimName ( GRM_G.selectedAlt[2] ) );
 
                         if GRM_G.selectedAlt[1] == GRM_G.selectedAlt[2] then -- Clicking current focus player's own details, not an alt.
                             -- Configure which fontstring we are over.
@@ -1520,7 +1544,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
                                 height = 85;
 
                             elseif GRM_G.editOnlineStatus  then
-                                if GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailPlayerStatus:GetText() == GRM.L ( "( Active )" ) then
+                                if GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailPlayerStatus:GetText() == GRM_G.Status[1] then
                                     GRM_UI.GRM_altSetMainButtonText:SetText ( GRM.L ( "Notify When Player Goes Offline" ) );
                                 else
                                     GRM_UI.GRM_altSetMainButtonText:SetText ( GRM.L ( "Notify When Player Comes Online" ) );
@@ -1636,8 +1660,8 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
                             end
                         end
                         GRM_UI.GRM_altDropDownOptions:Show();
-                        if GRM_UI.GRM_altOptionsText:GetStringWidth() + 15 > width then       -- For scaling the frame based on size of player name.
-                            width = GRM_UI.GRM_altOptionsText:GetStringWidth() + 15;
+                        if GRM_UI.GRM_altDropDownOptions.GRM_altOptionsText:GetStringWidth() + 15 > width then       -- For scaling the frame based on size of player name.
+                            width = GRM_UI.GRM_altDropDownOptions.GRM_altOptionsText:GetStringWidth() + 15;
                         end
                         if GRM_UI.GRM_altSetMainButtonText:GetStringWidth() + 15 > width then
                             width = GRM_UI.GRM_altSetMainButtonText:GetStringWidth() + 15;
@@ -1696,7 +1720,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
         GRM.ClearAllFrames( false );
         if not GRM_UI.MemberDetailFrame:IsVisible() and not GRM_UI.MemberDetailFrameClassic:IsVisible() then
             GRM_G.pause = false;
-            if GRM_G.BuildVersion < GRM_G.RetailBuild and ( GuildFrame and GuildFrame:IsVisible() ) then
+            if GRM_G.BuildVersion < 80000 and ( GuildFrame and GuildFrame:IsVisible() ) then
                 GRM.ClearRosterHighlights();
             end
         end
@@ -1891,8 +1915,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_DayDropDownMenuSelected:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end)
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_DayDropDownMenuSelected:SetScript ( "OnMouseDown" , function ( _ , button )
@@ -1942,8 +1965,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_MonthDropDownMenuSelected:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end)
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_MonthDropDownMenuSelected:SetScript ( "OnMouseDown" , function ( _ , button )
@@ -1993,8 +2015,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_YearDropDownMenuSelected:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end)
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_YearDropDownMenuSelected:SetScript ( "OnMouseDown" , function ( _ , button )
@@ -2057,8 +2078,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
         GameTooltip:Show();
     end)
     GRM_UI.GRM_MemberDetailMetaData.GRM_SetUnknownButton:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
     
   
@@ -2075,8 +2095,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
         GameTooltip:Show();
     end)
     GRM_UI.GRM_MemberDetailMetaData.GRM_DateSubmitCancelButton:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- Name Text
@@ -2229,19 +2248,22 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     GRM_UI.GRM_MemberDetailMetaData.GRM_noteFontString1:SetWidth ( 108 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_noteFontString1:SetJustifyH ( "LEFT" );
     GRM_UI.GRM_MemberDetailMetaData.GRM_noteFontString1:SetMaxLines ( 3 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow:SetBackdrop ( GRM_UI.noteBackdrop );
 
     if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].showBorders then
-        GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow:SetBackdrop ( GRM_UI.noteBackdrop );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow:Show();
+    else
+        GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow:Hide();
     end
     GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow:SetSize ( 125 , 40 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetPoint( "TOP" , GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow , "TOP" , 0 , 0 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetPoint( "BOTTOM" , GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow , "BOTTOM" , 0 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetPoint ( "TOP" , GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow , "TOP" , 0 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetPoint ( "BOTTOM" , GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow , "BOTTOM" , 0 , 0 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetSize ( 125 , 45 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetTextInsets( 8 , 9 , 9 , 8 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetTextInsets ( 8 , 9 , 9 , 8 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetMaxLetters ( 31 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetMultiLine( true );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetMultiLine ( true );
     GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetSpacing ( 1 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:EnableMouse( true );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:EnableMouse ( true );
     GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetFrameStrata ( "HIGH" );
     GRM_UI.GRM_MemberDetailMetaData.GRM_NoteCount:SetPoint ("TOPRIGHT" , GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow , -6 , 8 );
 
@@ -2254,8 +2276,11 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     GRM_UI.GRM_MemberDetailMetaData.GRM_noteFontString2:SetJustifyH ( "LEFT" );
     GRM_UI.GRM_MemberDetailMetaData.GRM_noteFontString2:SetMaxLines ( 3 );
 
+    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteWindow:SetBackdrop ( GRM_UI.noteBackdrop );
     if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].showBorders then
-        GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteWindow:SetBackdrop ( GRM_UI.noteBackdrop );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteWindow:Show();
+    else
+        GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteWindow:Hide();
     end
     GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteWindow:SetSize ( 125 , 40 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteEditBox:SetPoint( "TOP" , GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteWindow , "TOP" , 0 , 0 );
@@ -2268,13 +2293,24 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteEditBox:EnableMouse( true );
     GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteEditBox:SetFrameStrata ( "HIGH" );
    
+    GRM_UI.ReconfigureNoteFonts = function()
+        local universalFont = "Fonts\\ARIALN.TTF";
+        
+        if GRM_G.BuildVersion >= 80000 and CommunitiesFrame and CommunitiesFrame.GuildMemberDetailFrame.NoteBackground.PersonalNoteText ~= nil then
+            universalFont = CommunitiesFrame.GuildMemberDetailFrame.NoteBackground.PersonalNoteText:GetFont();
+        elseif GRM_G.BuildVersion < 80000 and GuildFrame and PersonalNoteTex then
+            universalFont = PersonalNoteTex:GetFont();
+        end
+        GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetFont( universalFont , GRM_G.FontModifier + 9 );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_noteFontString1:SetFont ( universalFont , GRM_G.FontModifier + 9 );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteEditBox:SetFont( universalFont , GRM_G.FontModifier + 9 );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_noteFontString2:SetFont ( universalFont , GRM_G.FontModifier + 9 );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBox:SetFont( universalFont , GRM_G.FontModifier + 9 );
+    end
     -- Due to sizing and spacing... don't want to allow font manipulation of the edits...
-    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetFont( GRM_G.FontChoice , GRM_G.FontModifier + 9 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_noteFontString1:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailONoteTitle:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailNoteTitle:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteEditBox:SetFont( GRM_G.FontChoice , GRM_G.FontModifier + 9 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_noteFontString2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9 );
+
     GRM_UI.GRM_MemberDetailMetaData.GRM_NoteCount:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
 
     -- Script handlers on Note Edit Boxes
@@ -2286,7 +2322,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
 
     -- Script handlers on Note Frames
     GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow:SetScript ( "OnMouseDown" , function ( self , button ) 
-        if button == "LeftButton" and ( CanEditPublicNote() or GRM_G.currentName == GRM_G.addonUser ) then 
+        if button == "LeftButton" and CanEditPublicNote() or ( GRM_G.BuildVersion >= 80000 and GRM_G.currentName == GRM_G.addonUser ) then 
             GRM_UI.GRM_MemberDetailMetaData.GRM_NoteCount:SetPoint ("TOPRIGHT" , self , -6 , 8 );
             GRM_G.pause = true;
             GRM_UI.GRM_MemberDetailMetaData.GRM_noteFontString1:Hide();
@@ -2310,7 +2346,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteWindow:SetScript ( "OnMouseDown" , function ( self , button ) 
-        if button == "LeftButton" and CanEditOfficerNote() then
+        if button == "LeftButton" and C_GuildInfo.CanEditOfficerNote() then
             GRM_UI.GRM_MemberDetailMetaData.GRM_NoteCount:SetPoint ("TOPRIGHT" , self , -6 , 8 );
             GRM_G.pause = true;
             GRM_UI.GRM_MemberDetailMetaData.GRM_noteFontString2:Hide();
@@ -2371,20 +2407,8 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     end);
 
     -- Updates char count as player types.
-    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetScript ( "OnChar" , function ( self ) 
+    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetScript ( "OnTextChanged" , function ( self ) 
         GRM_UI.GRM_MemberDetailMetaData.GRM_NoteCount:SetText ( self:GetNumLetters() .. "/31" );
-    end);
-
-    -- Update on backspace/delte changes too  
-    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetScript ( "OnKeyDown" , function ( self , text )  -- While technically this one script handler could do all, this is more process efficient to have 2.
-        if ( text == "BACKSPACE" and self:GetCursorPosition() ~= 0 ) or ( text == "DELETE" and self:GetCursorPosition() ~= GRM_G.CharCount ) then
-            GRM_UI.GRM_MemberDetailMetaData.GRM_NoteCount:SetText ( ( self:GetNumLetters() - 1 ) .. "/31");
-        end
-    end);
-
-    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetScript ( "OnKeyUp" , function ( self )
-        GRM_G.CharCount = self:GetNumLetters();
-        GRM_UI.GRM_MemberDetailMetaData.GRM_NoteCount:SetText ( self:GetNumLetters() .. "/31");
     end);
 
     -- Updating the new information to Public Note
@@ -2428,11 +2452,20 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
                     self:SetText( playerDetails.newNote );
     
                     -- If the memberdetailframe is open, set it as well...
-                    if GRM_G.BuildVersion >= GRM_G.RetailBuild then
-                        if GRM_UI.MemberDetailFrame:IsVisible() then
-                            if GRM.SlimName ( GRM_UI.MemberDetailFrame.Name:GetText() ) == GRM.SlimName ( GRM_G.currentName ) then
-                                GRM_UI.MemberDetailFrame.NoteBackground.PersonalNoteText:SetText( theNote );
+                    if GRM.SlimName ( GRM_UI.MemberDetailFrame.Name:GetText() ) == GRM.SlimName ( GRM_G.currentName ) then
+
+                        if GRM_G.BuildVersion >= 80000 then
+                            if CommunitiesFrame.GuildMemberDetailFrame.NoteBackground.PersonalNoteText and CommunitiesFrame.GuildMemberDetailFrame.NoteBackground.PersonalNoteText:IsVisible() then
+                                CommunitiesFrame.GuildMemberDetailFrame.NoteBackground.PersonalNoteText:SetText ( theNote );
                             end
+                        end
+
+                        if PersonalNoteText and PersonalNoteText:IsVisible() then
+                            PersonalNoteText:SetText ( theNote );
+                        end
+
+                        if GRM_UI.MemberDetailFrame:IsVisible() then
+                            GRM_UI.MemberDetailFrame.NoteBackground.PersonalNoteText:SetText( theNote );
                         end
                     end
     
@@ -2477,20 +2510,8 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteEditBox:SetScript ( "OnEscapePressed" , GRM_UI.EscapeOfficerNoteEditBox );
     
     -- Updates char count as player types.
-    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteEditBox:SetScript ( "OnChar" , function ( self ) 
+    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteEditBox:SetScript ( "OnTextChanged" , function ( self ) 
         GRM_UI.GRM_MemberDetailMetaData.GRM_NoteCount:SetText( self:GetNumLetters() .. "/31" );
-    end);
-
-    -- Update on backspace/delte changes too  
-    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteEditBox:SetScript ( "OnKeyDown" , function ( self , text )  -- While technically this one script handler could do all, this is more process efficient to have 2.
-        if ( text == "BACKSPACE" and self:GetCursorPosition() ~= 0 ) or ( text == "DELETE" and self:GetCursorPosition() ~= GRM_G.CharCount ) then
-            GRM_UI.GRM_MemberDetailMetaData.GRM_NoteCount:SetText ( ( self:GetNumLetters() - 1 ) .. "/31");
-        end
-    end);
-
-    GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteEditBox:SetScript ( "OnKeyUp" , function ( self )
-        GRM_G.CharCount = self:GetNumLetters();
-        GRM_UI.GRM_MemberDetailMetaData.GRM_NoteCount:SetText ( ( self:GetNumLetters() ) .. "/31");
     end);
 
      -- Updating the new information to Public Note
@@ -2505,7 +2526,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
             -- First, let's add the change to the official server-sde note
             for h = 1 , GRM.GetNumGuildies() do
                 local playerName ,_,_,_,_,_,_, officerNote = GetGuildRosterInfo( h );
-                if playerName == playerDetails.name and officerNote ~= playerDetails.newNote and CanEditOfficerNote() then      -- No need to update old note if it is the same.
+                if playerName == playerDetails.name and officerNote ~= playerDetails.newNote and C_GuildInfo.CanEditOfficerNote() then      -- No need to update old note if it is the same.
                     GRM_G.changeHappenedExitScan = true;
     
                     -- Saving the new note details!
@@ -2532,7 +2553,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
                     end
                     self:SetText( playerDetails.newNote );
     
-                    if GRM_G.BuildVersion >= GRM_G.RetailBuild then
+                    if GRM_G.BuildVersion >= 80000 then
                         if GRM_UI.MemberDetailFrame:IsVisible() then
                             if GRM.SlimName ( GRM_UI.MemberDetailFrame.Name:GetText() ) == GRM.SlimName ( GRM_G.currentName ) then
                                 GRM_UI.MemberDetailFrame.OfficerNoteBackground.OfficerNoteText:SetText( theNote );
@@ -2621,17 +2642,15 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- CUSTOM NOTE WINDOW DETAILS
-    GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteTextCount:SetPoint ( "BOTTOMRIGHT" , GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame , "TOPRIGHT" , -5 , 1 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteTextCount:SetPoint ( "LEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBoxText , "RIGHT" , 5 , 0 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteTextCount:Hide();
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBoxText:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame , "TOPLEFT" , 5 , 0 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBoxText:SetText ( GRM.L ( "Custom Notes:" ) );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBoxText:SetText ( GRM.L ( "Custom Public Notes:" ) );
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBoxText:SetJustifyH ( "LEFT" );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBoxText:SetWidth ( 123 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBoxText:SetWordWrap ( false );
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBox:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame , "TOPLEFT" , 2 , -1.5 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBox:SetSize ( 120 , 80 );
@@ -2650,7 +2669,6 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteSyncMetaCheckBox.GRM_CustomNoteMetaCheckBoxText:SetJustifyH ( "LEFT" );
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteSyncMetaCheckBox.GRM_CustomNoteMetaCheckBoxText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBox:SetFont( GRM_G.FontChoice , GRM_G.FontModifier + 9 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteTextCount:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBoxText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
     
@@ -2685,16 +2703,14 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteSyncMetaCheckBox:SetScript ( "OnEnter" , GRM_UI.ResetCustomNoteSyncTooltip );
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteSyncMetaCheckBox:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBox:SetScript ( "OnEditFocusGained" , function ( self )
         GRM_G.OriginalEditBoxValue = self:GetText();
         GRM_UI.GRM_MemberDetailMetaData.GRM_NoteCount:Hide();
         GRM_UI.GRM_MemberDetailMetaData.GRM_MonthDropDownMenu:Hide();
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
         GRM_G.pause = true;
         if self:GetText() == GRM.L ( "Click here to set Custom Notes" ) then
             self:SetText( "" );
@@ -2782,14 +2798,16 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteEditBox:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
     
 
     -- SCROLL FRAME
+    GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame:SetBackdrop ( GRM_UI.noteBackdrop );
     if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].showBorders then
-        GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame:SetBackdrop ( GRM_UI.noteBackdrop );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame:Show();
+    else
+        GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame:Hide();
     end
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow , "BOTTOMLEFT" , 0 , -10 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame:SetSize ( 125 , 85 );
@@ -2837,6 +2855,9 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
             self:SetValue ( tempVal );
         end
     end);
+
+    -- Confirm notes
+    GRM_UI.ReconfigureNoteFonts();
     
     -- Confirm Custom Note
     GRM_UI.GRM_MemberDetailMetaData.GRM_ConfirmCustomNoteButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_MemberDetailMetaData.GRM_ConfirmCustomNoteButton );
@@ -2863,8 +2884,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_MemberDetailMetaData.GRM_ConfirmCustomNoteButton:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
     -- Cancel Custom Note
     GRM_UI.GRM_MemberDetailMetaData.GRM_CancelCustomNoteButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_MemberDetailMetaData.GRM_CancelCustomNoteButton );
@@ -2920,7 +2940,7 @@ GRM_UI.GR_MetaDataInitializeUISecond = function( isManualUpdate )
     GRM_UI.GRM_PopupWindow:SetFrameStrata ( "HIGH" );
 
     GRM_UI.GRM_PopupWindowCheckButton1:SetPoint ( "TOPLEFT" , GRM_UI.GRM_PopupWindow , 15 , -10 );
-    GRM_UI.GRM_PopupWindowCheckButtonText:SetPoint ( "RIGHT" , GRM_UI.GRM_PopupWindowCheckButton1 , 65 , 0 );
+    GRM_UI.GRM_PopupWindowCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_PopupWindowCheckButton1 , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_PopupWindowCheckButtonText:SetText ( GRM.L ( "Ban Player?" ) );
     GRM_UI.GRM_PopupWindowCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 10 );
     GRM_UI.GRM_PopupWindowCheckButtonText:SetTextColor ( 1 , 0 , 0 , 1 );
@@ -2991,7 +3011,7 @@ GRM_UI.GR_MetaDataInitializeUISecond = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditWindowDropDownFrame:SetHeight ( 78 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditWindowDropDownFrame:SetBackdrop ( GRM_UI.noteBackdrop );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditWindowDropDownFrame:SetBackdrop ( GRM_UI.noteBackdrop2 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditWindowDropDownFrame:SetFrameStrata ( "FULLSCREEN_DIALOG" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditWindowDropDownFrame.name = "";
 
@@ -3109,6 +3129,7 @@ GRM_UI.GR_MetaDataInitializeUISecond = function( isManualUpdate )
     GRM_UI.GRM_MemberDetailPopupEditBox:EnableMouse( true );
     GRM_UI.GRM_MemberDetailPopupEditBox:SetMultiLine( true );
     GRM_UI.GRM_MemberDetailPopupEditBox:SetSpacing ( 1 );
+    GRM_UI.GRM_MemberDetailPopupEditBox:ClearFocus();
 
     -- Script handler for General popup editbox.
     GRM_UI.GRM_MemberDetailPopupEditBox:SetScript ( "OnEscapePressed" , function ()
@@ -3233,9 +3254,9 @@ GRM_UI.GR_MetaDataInitializeUISecond = function( isManualUpdate )
     GRM_UI.GRM_altDropDownOptions:SetPoint ( "BOTTOMRIGHT" , GRM_UI.GRM_MemberDetailMetaData , 15 , 0 );
     GRM_UI.GRM_altDropDownOptions:SetBackdrop ( GRM_UI.noteBackdrop2 );
     GRM_UI.GRM_altDropDownOptions:SetFrameStrata ( "FULLSCREEN_DIALOG" );
-    GRM_UI.GRM_altOptionsText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_altDropDownOptions , 7 , -13 );
-    GRM_UI.GRM_altOptionsText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
-    GRM_UI.GRM_altOptionsText:SetText ( GRM.L ( "Options" ) );
+    GRM_UI.GRM_altDropDownOptions.GRM_altOptionsText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_altDropDownOptions , 7 , -13 );
+    GRM_UI.GRM_altDropDownOptions.GRM_altOptionsText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+    GRM_UI.GRM_altDropDownOptions.GRM_altOptionsText:SetText ( GRM.L ( "Options" ) );
     GRM_UI.GRM_altSetMainButton:SetPoint ("TOPLEFT" , GRM_UI.GRM_altDropDownOptions , 7 , -22 );
     GRM_UI.GRM_altSetMainButton:SetSize ( 80 , 20 );
     GRM_UI.GRM_altSetMainButton:SetHighlightTexture ( "Interface\\Buttons\\UI-Panel-Button-Highlight" );
@@ -3252,9 +3273,9 @@ GRM_UI.GR_MetaDataInitializeUISecond = function( isManualUpdate )
     GRM_UI.GRM_ConfirmDropdownButton:SetHighlightTexture ( "Interface\\Buttons\\UI-Panel-Button-Highlight" );
     GRM_UI.GRM_ConfirmDropdownButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_ConfirmDropdownButton , "LEFT" , 0.5 , 0 );
     GRM_UI.GRM_ConfirmDropdownButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
-    GRM_UI.GRM_altOptionsDividerText:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_altFrameCancelButton , "TOPLEFT" , 0 , -2 );
-    GRM_UI.GRM_altOptionsDividerText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
-    GRM_UI.GRM_altOptionsDividerText:SetText ("__");
+    GRM_UI.GRM_altDropDownOptions.GRM_altOptionsDividerText:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_altFrameCancelButton , "TOPLEFT" , 0 , -2 );
+    GRM_UI.GRM_altDropDownOptions.GRM_altOptionsDividerText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+    GRM_UI.GRM_altDropDownOptions.GRM_altOptionsDividerText:SetText ("__");
     GRM_UI.GRM_altFrameCancelButton:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_altDropDownOptions , "BOTTOMLEFT" , 7 , 4 );
     GRM_UI.GRM_altFrameCancelButton:SetHighlightTexture ( "Interface\\Buttons\\UI-Panel-Button-Highlight" );
     GRM_UI.GRM_altFrameCancelButton:SetSize ( 80 , 20 );
@@ -3479,7 +3500,7 @@ GRM_UI.GR_MetaDataInitializeUIThird = function( isManualUpdate )
                             GRM.RefreshAuditFrames ( true , true );
                         end
                         if GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:IsVisible() then
-                            GRM.BuildAltGroupingScrollFrame();
+                            GRM.BuildAltGroupingScrollFrame( GRM_G.currentName );
                         end
 
                         if GRM_UI.GRM_ToolCoreFrame:IsVisible() then
@@ -3573,7 +3594,7 @@ GRM_UI.GR_MetaDataInitializeUIThird = function( isManualUpdate )
                 end
                 
                 if GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:IsVisible() then
-                    GRM.BuildAltGroupingScrollFrame();
+                    GRM.BuildAltGroupingScrollFrame( GRM_G.currentName );
                 end
 
                 if GRM_UI.GRM_ToolCoreFrame:IsVisible() then
@@ -3703,7 +3724,7 @@ GRM_UI.GR_MetaDataInitializeUIThird = function( isManualUpdate )
                 end
 
                 local noteDestination = "none";
-                if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination == 1 and CanEditOfficerNote() then
+                if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination == 1 and C_GuildInfo.CanEditOfficerNote() then
                     noteDestination = "officer";
                 elseif GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination == 2 and CanEditPublicNote() then
                     noteDestination = "public";
@@ -3755,7 +3776,7 @@ GRM_UI.GR_MetaDataInitializeUIThird = function( isManualUpdate )
         end
     end);
 
-    if GRM_G.BuildVersion < GRM_G.RetailBuild then
+    if GRM_G.BuildVersion < 80000 then
         GRM_UI.GRM_LoadLogOldRosterButton:SetSize ( 90 , 20 );
         GRM_UI.GRM_LoadLogOldRosterButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 10 );
     else
@@ -3802,7 +3823,7 @@ GRM_UI.GR_MetaDataInitializeUIThird = function( isManualUpdate )
     end);
 
     -- BUTTONS
-    if GRM_G.BuildVersion < GRM_G.RetailBuild then
+    if GRM_G.BuildVersion < 80000 then
         GRM_UI.GRM_LoadToolOldRosterButton:SetSize ( 90 , 20 );
         GRM_UI.GRM_LoadToolOldRosterButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 10 );
     else
@@ -3914,8 +3935,7 @@ GRM_UI.PreAddonLoadUI = function()
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame:SetSize ( 600 , 465 );
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame:SetScript ( "OnHide" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
 
         -- The new info / old log headers to be added or not.
         GRM_G.FirstTimeViewed = false;
@@ -4021,8 +4041,7 @@ GRM_UI.PreAddonLoadUI = function()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AddEventTab:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- ban list tab
@@ -4080,8 +4099,7 @@ GRM_UI.PreAddonLoadUI = function()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_BanListTab:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
     
     -- Audit Tab
@@ -4089,6 +4107,7 @@ GRM_UI.PreAddonLoadUI = function()
     GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab:SetSize ( 99.2 , 40 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab:SetFrameStrata ( "LOW" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab:SetText ( GRM.L ( "AUDIT" ) );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab.Timer = 0;
     GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab:SetScript ( "OnClick" , function ( _ , button )
         if button == "LeftButton" then
             if not GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame:IsVisible() then -- Since the height is a double, returns it as an int using math.floor
@@ -4100,6 +4119,61 @@ GRM_UI.PreAddonLoadUI = function()
             end
         end
     end);
+
+    -- Method:          GRM_UI.RefreshAuditTab ( frame ) 
+    -- What it Does:    Refreshes the tab for the audit window and the tooltip
+    -- Purpose:         Quality of life improvenent
+    GRM_UI.RefreshAuditTab = function( self )
+
+        if GRM_GuildMemberHistory_Save[GRM_G.F][GRM_G.guildName] ~= nil then
+            local numIncomplete = GRM.GetIncompleteGuildDataCounts()[5];
+
+            if numIncomplete > 0 then
+                self:SetText ( GRM.L ( "AUDIT" ) .. ": " .. numIncomplete );     -- First index will be nil.
+            else
+                self:SetText ( GRM.L ( "AUDIT" ) );
+            end
+            GRM_UI.ScaleFontStringToObjectSize ( true , 95 , self:GetFontString() , 2 );
+        end
+
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab.Timer = 0;
+    end
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab:SetScript ( "OnUpdate" , function( self , elapsed )
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab.Timer = GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab.Timer + elapsed;
+
+        if GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab.Timer >= 10 then
+
+            GRM_UI.RefreshAuditTab ( self );
+
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab.Timer = 0;
+        end
+
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab:SetScript ( "OnEnter" , function( self )
+
+        local count = string.match ( GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab:GetText() , "%d+" );
+        if count then                           -- We know there is a number now.
+            count = tonumber ( count );
+            GRM_UI.SetTooltipScale();
+            GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+            if count > 1 then
+                GameTooltip:AddLine( GRM.L ( "{num} guild members have incomeplete info." , nil , nil , count ) );
+            elseif count == 1 then
+                GameTooltip:AddLine( GRM.L ( "Just 1 guild member still has incomplete info. Great job!" ) );
+            else
+                GameTooltip:AddLine( GRM.L ( "No Audit Necessary! Great Work!" ) );
+            end
+            GameTooltip:Show();
+        end
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end);
+
+
     -- Current Addon Users Tab
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AddonUsersTab:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_BanListTab , "BOTTOMRIGHT" , 1 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AddonUsersTab:SetSize ( 99.2 , 40 );
@@ -4140,7 +4214,7 @@ GRM_UI.PreAddonLoadUI = function()
     GRM_UI.GRM_MinimapButton:SetHeight ( 33 );
     GRM_UI.GRM_MinimapButton:SetHighlightTexture ( "Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight" );
     GRM_UI.GRM_MinimapButton.GRM_MinimapButtonIcon:SetPoint ( "CENTER" , GRM_UI.GRM_MinimapButton , -2 , 1 );
-    if GRM_G.BuildVersion >= GRM_G.RetailBuild then
+    if GRM_G.BuildVersion >= 80000 then
         GRM_UI.GRM_MinimapButton.GRM_MinimapButtonIcon:SetTexture ( "Interface\\Icons\\garrison_building_magetower" );
         GRM_UI.GRM_MinimapButton.GRM_MinimapButtonIcon:SetWidth ( 20 );
         GRM_UI.GRM_MinimapButton.GRM_MinimapButtonIcon:SetHeight ( 20 );
@@ -4204,8 +4278,7 @@ GRM_UI.PreAddonLoadUI = function()
     end
 
     GRM_UI.MinimapOnLeave = function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end
  
     GRM_UI.GRM_MinimapButton:RegisterForDrag ( "LeftButton" );
@@ -4239,7 +4312,7 @@ GRM_UI.PreAddonLoadUI = function()
         GRM_UI.SetTooltipScale();
         GameTooltip:SetOwner ( self , "ANCHOR_LEFT" );
         local versionLine = "|CFF00CCFF" .. GRM.L ( "GRM" ) .. " " .. string.sub ( GRM_G.Version , string.find ( GRM_G.Version , "R" ) + 1 );
-        if GRM_G.BuildVersion < GRM_G.RetailBuild then
+        if GRM_G.BuildVersion < 80000 then
             versionLine = versionLine .. " " .. GRM.L ( "(Classic)" );
         end
         GameTooltip:AddLine ( versionLine );
@@ -4577,17 +4650,16 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
                     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame[frameName]:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame[ "colorBoxFrame" .. (i - 1) ] , "BOTTOMLEFT" , 0 , -6 );
                 end
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame[frameName]:SetSize ( 18 , 18 );
-                GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame[frameName]:SetBackdrop (
-                    {
-                        bgFile = nil,
-                        edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
-                        tile = true,
-                        tileSize = 32,
-                        edgeSize = 9,
-                        insets = { left = -2 , right = -2 , top = -3 , bottom = -2 }
-                    }
-                );
-    
+
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame[frameName]:SetBackdrop ( {
+                    bgFile = nil,
+                    edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+                    tile = true,
+                    tileSize = 32,
+                    edgeSize = 9,
+                    insets = { left = -2 , right = -2 , top = -3 , bottom = -2 }
+                } );
+
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame[textureName]:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame[frameName] );
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame[textureName]:SetSize ( 15 , 15 );
                 
@@ -4682,9 +4754,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowLinesCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame , "TOPLEFT" , 15 , -15 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowLinesCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowLinesCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowLinesCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowLinesCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowLinesCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowLinesCheckButtonText:SetText ( GRM.L ( "Numbered Lines" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowLinesCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowLinesCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowLinesCheckButton:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -4701,9 +4774,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowTooltipCheckButton:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowLinesCheckButtonText , "RIGHT" , 10 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowTooltipCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowTooltipCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowTooltipCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowTooltipCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowTooltipCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowTooltipCheckButtonText:SetText ( GRM.L ( "Log Entry Tooltip" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowTooltipCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowTooltipCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowTooltipCheckButton:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -4716,9 +4790,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_SearchAutoFocusCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogShowLinesCheckButton , "BOTTOMLEFT" , 0 , -5 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_SearchAutoFocusCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_SearchAutoFocusCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_SearchAutoFocusCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_SearchAutoFocusCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_SearchAutoFocusCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_SearchAutoFocusCheckButtonText:SetText ( GRM.L ( "Auto-Focus the search box" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_SearchAutoFocusCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_SearchAutoFocusCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_SearchAutoFocusCheckButton:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -4737,8 +4812,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end)
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_SearchAutoFocusCheckButton:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- Export Button
@@ -4798,14 +4872,14 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_RosterResetOptionsButton:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogEnableRmvClickCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_SearchAutoFocusCheckButton , "BottomLeft" , 0 , -5 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogEnableRmvClickCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogEnableRmvClickCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogEnableRmvClickCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogEnableRmvClickCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogEnableRmvClickCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogEnableRmvClickCheckButtonText:SetText ( GRM.L ( "Enable Ctrl-Shift-Click Line Removal" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogEnableRmvClickCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogEnableRmvClickCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogEnableRmvClickCheckButton:SetScript ( "OnClick" , function( self )
         if self:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].shiftClickRemove = true;
@@ -4977,7 +5051,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame:Hide();
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame:ClearAllPoints();
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame:SetPoint ( "CENTER" , UIParent );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame:SetSize ( 1015 , 455 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame:SetSize ( 1000 , 490 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame:SetFrameStrata ( "HIGH");
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame:SetToplevel ( true );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame:SetMovable ( true );
@@ -4988,7 +5062,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_BorderFrameCloseButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "TOPRIGHT" , 2, 1 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.TabPosition = 1;
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportResetOptionsButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogScrollBorderFrame , "BOTTOMRIGHT" , 0 , -6 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportResetOptionsButton:SetPoint ( "BOTTOMRIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "BOTTOMRIGHT" , -15 , 15 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportResetOptionsButton:SetSize ( 130 , 30 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportResetOptionsButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportResetOptionsButton );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportResetOptionsButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
@@ -5009,12 +5083,11 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportResetOptionsButton:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogScrollBorderFrame:SetSize ( 550 , 350 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogScrollBorderFrame:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "TOPLEFT" , 15 , -50 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogScrollBorderFrame:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "TOPRIGHT" , -35 , -50 );
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_BorderFrameCloseButton:SetWidth ( 30 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogText:SetPoint ( "TOP" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogScrollBorderFrame , 0 , 15 );
@@ -5030,7 +5103,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogFrameEditBox:ClearFocus();
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogFrameEditBox:SetMultiLine ( true );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogFrameEditBox:EnableMouse ( true );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogFrameEditBox:SetFont( GRM_G.FontChoice , GRM_G.FontModifier + 9 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogFrameEditBox:SetFont( "Fonts\\ARIALN.TTF" , GRM_G.FontModifier + 9 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogFrameEditBox:SetSpacing ( 2 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogFrameEditBox:SetJustifyH ( "LEFT" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogFrameEditBox:SetTextInsets ( 2 , 3 , 3 , 2 );
@@ -5052,7 +5125,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogTab:SetSize ( 120 , 25 );
     PanelTemplates_TabResize ( GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogTab , nil , 120 , 25 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogTab:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogScrollBorderFrame , "TOPRIGHT" , 40 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogTab:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "TOPLEFT" , 25 , - 50 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogTabText:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogTab );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogTabText:SetFont( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogTabText:SetText ( GRM.L ( "Guild Log" ) );
@@ -5136,8 +5209,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_DelimiterDropdownMenuSelected:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
 
@@ -5167,8 +5239,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_DelimiterDropdownMenu:SetScript ( "OnShow" , function()
         if GameTooltip:IsVisible() then
-            GRM_UI.RestoreTooltipScale();
-            GameTooltip:Hide();
+            GRM.RestoreTooltip();
         end
     end);
     
@@ -5176,7 +5247,11 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectedRangeButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectedRangeButton );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectedRangeButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectedRangeButtonText:SetText ( GRM.L ( "Export Selection" ) );
-
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].selectedLang == 5 then -- Russian
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectedRangeButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 10.5 );
+    else
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectedRangeButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    end
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectedRangeButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportRangeEditBox1.GRM_ExportRangeText1 , "BOTTOMLEFT" , -2 , -10 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectedRangeButton:SetSize ( 140 , 40 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectedRangeButton:SetScript ( "OnClick" , function ( _ , button ) 
@@ -5191,7 +5266,11 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportNextRangeButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportNextRangeButton );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportNextRangeButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].selectedLang == 5 then -- Russian
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportNextRangeButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 10.5 );
+    else
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportNextRangeButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    end
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportNextRangeButton:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectedRangeButton , "RIGHT" , 10 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportNextRangeButton:SetSize ( 140 , 40 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportNextRangeButton.Value = 0;
@@ -5222,7 +5301,11 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportPreviousRangeButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportPreviousRangeButton );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportPreviousRangeButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
-
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].selectedLang == 5 then -- Russian
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportPreviousRangeButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 10.5 );
+    else
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportPreviousRangeButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    end
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportPreviousRangeButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectedRangeButton , "BOTTOMLEFT" , 0 , -10 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportPreviousRangeButton:SetSize ( 140 , 40 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportPreviousRangeButton.Value = 0;
@@ -5255,13 +5338,15 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportMemberDetailsHeadersButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportMemberDetailsHeadersButton );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportMemberDetailsHeadersButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportMemberDetailsHeadersButtonText:SetText ( GRM.L ( "Spreadsheet Headers" ) );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportMemberDetailsHeadersButton:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame , "BOTTOMLEFT" , 20 , 19 );
+    
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportMemberDetailsHeadersButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportLogScrollBorderFrame , "BOTTOMLEFT" , 5 , -5 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportMemberDetailsHeadersButton:SetSize ( 175 , 30 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportMemberDetailsHeadersButton:SetScript ( "OnClick" , function ( _ , button )
         if button == "LeftButton" then
             GRM.ExportMemberDetailsHeaders( false );
         end
     end);
+    GRM_UI.ScaleFontStringToObjectSize ( true , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportMemberDetailsHeadersButton:GetWidth() , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportMemberDetailsHeadersButtonText , 2 );
 
     -- EXPORT CHECKBUTTONS
     -- 15 of them so far!
@@ -5287,8 +5372,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportAutoIncludeHeadersCheckButton:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter1:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportPreviousRangeButton , "BOTTOMLEFT" , 0 , -10 );
@@ -5374,8 +5458,8 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         end
         GRM.SyncSettings();
     end);
-
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter5:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter1 , "RIGHT" , 100 , 0 );
+    
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter5:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter16 , "BOTTOMLEFT" , 0 , -4 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter5:SetHitRectInsets( 0 , -75 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter5.GRM_ExportFilter5Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter5 , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter5.GRM_ExportFilter5Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
@@ -5396,11 +5480,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter5:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter6:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter5 , "BOTTOMLEFT" , 0 , -4 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter6:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter1 , "RIGHT" , 100 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter6:SetHitRectInsets( 0 , -75 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter6.GRM_ExportFilter6Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter6 , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter6.GRM_ExportFilter6Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
@@ -5414,7 +5497,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GRM.SyncSettings();
     end);
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter7:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter6 , "BOTTOMLEFT" , 0 , -4 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter7:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter14 , "BOTTOMLEFT" , 0 , -4 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter7:SetHitRectInsets( 0 , -75 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter7.GRM_ExportFilter7Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter7 , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter7.GRM_ExportFilter7Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
@@ -5442,7 +5525,35 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GRM.SyncSettings();
     end);
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter9:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter8 , "BOTTOMLEFT" , 0 , -4 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter18:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter8 , "BOTTOMLEFT" , 0 , -4 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter18:SetHitRectInsets( 0 , -75 , 0 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter18.GRM_ExportFilter18Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter18 , "RIGHT" , 2 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter18.GRM_ExportFilter18Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter18.GRM_ExportFilter18Text:SetText ( GRM.L ( "Rank History" ) );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter18:SetScript ( "OnClick", function( self )
+        if self:GetChecked() then
+            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[18] = true;
+        else
+            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[18] = false;
+        end
+        GRM.SyncSettings();
+        if GameTooltip:IsVisible() then
+            GRM.RestoreTooltip();
+        end
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter18:SetScript ( "OnEnter" , function( self )
+        GRM_UI.SetTooltipScale();
+        GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+        GameTooltip:AddLine( GRM.L ( "Only the 10 most recent rank changes will be included" ) );
+        GameTooltip:Show();
+    end);
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter18:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end);
+
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter9:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter18 , "BOTTOMLEFT" , 0 , -4 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter9:SetHitRectInsets( 0 , -75 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter9.GRM_ExportFilter9Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter9 , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter9.GRM_ExportFilter9Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
@@ -5459,7 +5570,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter10:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter9 , "BOTTOMLEFT" , 0 , -4 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter10:SetHitRectInsets( 0 , -75 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter10.GRM_ExportFilter10Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter10 , "RIGHT" , 2 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter10.GRM_ExportFilter10Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter10.GRM_ExportFilter10Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
     if GRM_G.BuildVersion < 40000 then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter10.GRM_ExportFilter10Text:SetText ( GRM.L ( "Guild Rep" ) .. " |CFFFF0000" .. GRM.L ( "(Disabled in Classic)" ) );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter10:Disable();
@@ -5475,11 +5586,15 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GRM.SyncSettings();
     end);
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter5 , "RIGHT" , 100 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11:SetHitRectInsets( 0 , -75 , 0 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter6 , "RIGHT" , 100 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11.GRM_ExportFilter11Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11 , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11.GRM_ExportFilter11Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11.GRM_ExportFilter11Text:SetText ( GRM.L ( "Public Note" ) );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11.GRM_ExportFilter11Text:SetWidth ( 105 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11.GRM_ExportFilter11Text:SetJustifyH ( "LEFT" );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11.GRM_ExportFilter11Text:SetSpacing ( 1 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11.GRM_ExportFilter11Text:SetWordWrap ( true );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11 , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11.GRM_ExportFilter11Text );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11:SetScript ( "OnClick", function( self )
         if self:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[11] = true;
@@ -5490,10 +5605,14 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter11 , "BOTTOMLEFT" , 0 , -4 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12:SetHitRectInsets( 0 , -75 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12.GRM_ExportFilter12Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12 , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12.GRM_ExportFilter12Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12.GRM_ExportFilter12Text:SetText ( GRM.L ( "Officer Note" ) );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12.GRM_ExportFilter12Text:SetWidth ( 105 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12.GRM_ExportFilter12Text:SetJustifyH ( "LEFT" );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12.GRM_ExportFilter12Text:SetSpacing ( 1 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12.GRM_ExportFilter12Text:SetWordWrap ( true );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12 , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12.GRM_ExportFilter12Text );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12:SetScript ( "OnClick", function( self )
         if self:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[12] = true;
@@ -5504,10 +5623,14 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter12 , "BOTTOMLEFT" , 0 , -4 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13:SetHitRectInsets( 0 , -75 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13.GRM_ExportFilter13Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13 , "RIGHT" , 2 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13.GRM_ExportFilter13Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 13 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13.GRM_ExportFilter13Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13.GRM_ExportFilter13Text:SetText ( GRM.L ( "Custom Note" ) );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13.GRM_ExportFilter13Text:SetWidth ( 105 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13.GRM_ExportFilter13Text:SetJustifyH ( "LEFT" );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13.GRM_ExportFilter13Text:SetSpacing ( 1 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13.GRM_ExportFilter13Text:SetWordWrap ( true );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13 , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13.GRM_ExportFilter13Text );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13:SetScript ( "OnClick", function( self )
         if self:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[13] = true;
@@ -5517,10 +5640,22 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GRM.SyncSettings();
     end);
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter14:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13 , "BOTTOMLEFT" , 0 , -4 );
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].selectedLang == 5 then -- Russian
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13:SetScript ( "OnEnter" , function( self )
+            GRM_UI.SetTooltipScale();
+            GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+            GameTooltip:AddLine( GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13.GRM_ExportFilter13Text:GetText() );
+            GameTooltip:Show();
+        end);
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13:SetScript ( "OnLeave" , function()
+            GRM.RestoreTooltip()
+        end);
+    end
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter14:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter6 , "BOTTOMLEFT" , 0 , -4 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter14:SetHitRectInsets( 0 , -75 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter14.GRM_ExportFilter14Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter14 , "RIGHT" , 2 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter14.GRM_ExportFilter14Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 14 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter14.GRM_ExportFilter14Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter14.GRM_ExportFilter14Text:SetText ( GRM.L ( "Player Alts" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter14:SetScript ( "OnClick", function( self )
         if self:GetChecked() then
@@ -5530,27 +5665,179 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         end
         GRM.SyncSettings();
     end);
+    
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter13 , "BOTTOMLEFT" , 0 , -4 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17:SetHitRectInsets( 0 , 0 , 0 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17:SetScript ( "OnClick", function( self )
+        if self:GetChecked() then
+            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[17] = true;
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1Text:SetTextColor ( 1 , 0.82 , 0 );
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2Text:SetTextColor ( 1 , 0.82 , 0 );
+        else
+            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[17] = false;
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1Text:SetTextColor ( 0.5 , 0.5 , 0.5 );
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2Text:SetTextColor ( 0.5 , 0.5 , 0.5 );
+        end
+        GRM.SyncSettings();
+        if GameTooltip:IsVisible() then
+            GRM.RestoreTooltip();
+        end
+    end);
+    
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17:SetScript ( "OnEnter" , function( self )
+        GRM_UI.SetTooltipScale()
+        GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+        GameTooltip:AddLine( GRM.L ( "Leave unchecked to export every member of the guild" ) );
+        GameTooltip:Show();
+    end);
 
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end)
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17 , "RIGHT" , 5 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1 , "RIGHT" , 2 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1Text:SetText ( GRM.L ( "Mains Only" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1 , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1Text );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:SetScript ( "OnClick", function( self )
+        if self:GetChecked() then
+            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[19] = true;
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:SetChecked ( false );
+        end
+        GRM.SyncSettings();
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1 , "BOTTOMLEFT" , 0 , -2 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2 , "RIGHT" , 2 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2Text:SetText ( GRM.L ( "Alts Only" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2 , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2Text );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:SetScript ( "OnClick", function( self )
+        if self:GetChecked() then
+            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[19] = false;
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:SetChecked ( false );
+        end
+        GRM.SyncSettings();
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_DelimiterDropdownMenuSelected , "BOTTOMRIGHT" , 7 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton.GRM_ExportSelectAllButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton , "RIGHT" , 2 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton.GRM_ExportSelectAllButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton.GRM_ExportSelectAllButtonText:SetText ( "> " .. GRM.L ( "Check All" ) );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton.GRM_ExportSelectAllButtonText:SetWidth ( 65 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton.GRM_ExportSelectAllButtonText:SetWordWrap ( false );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton.GRM_ExportSelectAllButtonText:SetSpacing ( 0.5 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton.GRM_ExportSelectAllButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton.GRM_ExportSelectAllButtonText );
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton:SetScript ( "OnClick" , function ( self )
+        if self:GetChecked() then
+            -- check all
+
+            for i = 1 , 18 do
+                GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[i] = true;
+                _G[ "GRM_ExportFilter" .. i ]:SetChecked ( true );
+            end
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1Text:SetTextColor ( 1 , 0.82 , 0 );
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2Text:SetTextColor ( 1 , 0.82 , 0 );
+        else
+            for i = 1 , 18 do
+                GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[i] = false;
+                _G[ "GRM_ExportFilter" .. i ]:SetChecked ( false );
+            end
+
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1Text:SetTextColor ( 0.5 , 0.5 , 0.5 );
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2Text:SetTextColor ( 0.5 , 0.5 , 0.5 );
+        end
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton:SetScript ( "OnEnter" , function( self )
+        GRM_UI.SetTooltipScale();
+        GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+        GameTooltip:AddLine( GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton.GRM_ExportSelectAllButtonText:GetText() );
+        GameTooltip:Show();
+    end);
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end);
 
     --- END OF CHECKBUTTONS FOR EXPORT WINDOW
     -------------------------------------------
+    
+    -- Method:          GRM_UI.CheckButtonsAllChecked()
+    -- What it Does:    Returns true if all the export member list details check buttons are checked.
+    -- Purpose:         For the check all or uncheck all button
+    GRM_UI.CheckButtonsAllChecked = function()
+        local result = true;
+        
+        for i = 1 , 18 do
+            if not GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[i] then
+                result = false;
+                break;
+            end
+        end
+
+        return result;
+    end
 
     -- Setting the checkboxes in the export filter
     GRM_UI.SetExportFilters = function()
 
         if GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.TabPosition > 1 then
             local frame;
-            for i = 1 , 16 do
+            for i = 1 , 18 do
                 frame = _G[ "GRM_ExportFilter" .. i ];
                 if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[i] then
+
                     frame:SetChecked ( true );
+                    if i == 17 then
+                        GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:Enable();
+                        GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1Text:SetTextColor ( 1 , 0.82 , 0 );
+                        GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:Enable();
+                        GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2Text:SetTextColor ( 1 , 0.82 , 0 );
+                    end
+                elseif i == 17 then
+                    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:Disable();
+                    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1Text:SetTextColor ( 0.5 , 0.5 , 0.5 );
+                    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:Disable();
+                    GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2Text:SetTextColor ( 0.5 , 0.5 , 0.5 );
                 end
                 frame:Show();
             end
+
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportFilters[19] then
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:SetChecked ( true );
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:SetChecked ( false );
+            else
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:SetChecked ( false );
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:SetChecked ( true );
+            end
+
+            if GRM_UI.CheckButtonsAllChecked() then
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton:SetChecked ( true );
+            else
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton:SetChecked ( false );
+            end
+
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:Show();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:Show();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton:Show();
         else
-            for i = 1 , 16 do
+            for i = 1 , 18 do
                 _G[ "GRM_ExportFilter" .. i ]:Hide();
             end
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial1:Hide();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter17_Radial2:Hide();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportSelectAllButton:Hide();
         end
     end
 
@@ -6008,8 +6295,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralTab:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanTab:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralTab , "RIGHT" , 1 , 0 );
@@ -6032,8 +6318,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanTab:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncTab:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanTab , "RIGHT" , 1 , 0 );
@@ -6056,8 +6341,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncTab:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpTab:SetPoint ( "BOTTOMRIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.OptionsHeaderText3 , "BOTTOMRIGHT" , -1 , 7 );
@@ -6080,11 +6364,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpTab:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXTab:SetPoint ( "TOP" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpTab , "BOTTOM" , 0 , -5 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXTab:SetPoint ( "TOP" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpTab , "BOTTOM" , 0 , -7 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXTab:SetSize ( 76 , 25 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXTab:SetText ( GRM.L ( "UI" ) );
     PanelTemplates_TabResize ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXTab , nil , 76 , 25 );
@@ -6104,8 +6387,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXTab:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ModulesTab:SetPoint ( "RIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXTab , "LEFT" , -1 , 0 );
@@ -6127,8 +6409,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ModulesTab:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
     
 
@@ -6166,8 +6447,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UITab:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerTab:SetPoint ( "RIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UITab , "LEFT" , -1 , 0 );
@@ -6201,8 +6481,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerTab:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
     
     -- Options Frames
@@ -6295,12 +6574,20 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.OptionsRankRestrictHeaderText:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GlobalControlsText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame , "TOPLEFT" , 5 , -5 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GlobalControlsText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].selectedLang == 5 then -- Russian
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GlobalControlsText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 10 );
+    else
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GlobalControlsText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
+    end
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GlobalControlsText:SetText ( GRM.L ( "*GC = Global Control - Use Guild Info to Force Setting For All" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GlobalControlsText:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.OptionsUnifySettingsHeaderText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterReportAddEventsToCalendarButton , "BOTTOMLEFT" , 7 , -5 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.OptionsUnifySettingsHeaderText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 20 );
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].selectedLang == 5 then -- Russian
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.OptionsUnifySettingsHeaderText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 16 );
+    else
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.OptionsUnifySettingsHeaderText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 20 );
+    end
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.OptionsUnifySettingsHeaderText:SetText ( GRM.L ( "Force Settings with Guild Info Tags" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.OptionsUnifySettingsHeaderText:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
 
@@ -6326,7 +6613,6 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     -- BACKUP OPTIONS FRAME
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_AutoBackupCheckBox:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.OptionsHeaderText2 , "BOTTOMLEFT" );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_AutoBackupCheckBox:SetHitRectInsets ( 0 , 0 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_AutoBackupCheckBox:SetScript ( "OnClick", function( self)
         if self:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].allowAutoBackups = true;
@@ -6335,7 +6621,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         end
         GRM.SyncSettings();
     end);
-
+    
     -- Backup Frame tooltip setup
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_GuildNameTooltip:SetWidth ( 300 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_GuildNameTooltip:SetFrameStrata ( "TOOLTIP" );
@@ -6348,7 +6634,6 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_BackupPurgeGuildOptionText:SetSpacing ( 1 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_BackupPurgeGuildOption:SetSize ( 250 , 55 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_BackupPurgeGuildOption:SetBackdrop ( GRM_UI.noteBackdrop2 );
-    -- GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_BackupPurgeGuildOption:SetFrameStrata ( "FULLSCREEN_DIALOG" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_BackupPurgeGuildOption.GRM_BackupPurgeGuildOptionButton:SetSize ( 235 , 40 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_BackupPurgeGuildOption.GRM_BackupPurgeGuildOptionButton:SetHighlightTexture ( "Interface\\Buttons\\UI-Panel-Button-Highlight" );   
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_BackupPurgeGuildOption.GRM_BackupPurgeGuildOptionButton:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_BackupPurgeGuildOption , "LEFT" , 8 , 0 );
@@ -6390,6 +6675,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.DaysOnAutoBackupText:SetSpacing ( 1 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.DaysOnAutoBackupText:SetJustifyH ( "LEFT" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.DaysOnAutoBackupText:SetText ( GRM.L ( "Enable Auto-Backup Once Every" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_AutoBackupCheckBox , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.DaysOnAutoBackupText );
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.DaysOnAutoBackupText2:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.DaysOnAutoBackupText , "RIGHT" , 32 , 0 )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.DaysOnAutoBackupText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 14 );
@@ -6559,10 +6845,13 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpOptionsFrame.GRM_SlashCommandText10:SetJustifyH ( "LEFT" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpOptionsFrame.GRM_SlashCommandText10:SetText( "|cffff0000" .. GRM.L ( "Resets Guild data" ) );
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpOptionsFrame.GRM_SlashCommandText11:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpOptionsFrame.GRM_HardResetButton , "TOPRIGHT" , 1 , - 4 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpOptionsFrame.GRM_SlashCommandText11:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpOptionsFrame.GRM_HardResetButton , "RIGHT" , 1 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpOptionsFrame.GRM_SlashCommandText11:SetFont ( GRM_G.FontChoice , 13 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpOptionsFrame.GRM_SlashCommandText11:SetJustifyH ( "LEFT" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpOptionsFrame.GRM_SlashCommandText11:SetText( "|cffff0000" .. GRM.L ( "Hard reset of ALL GRM data, account-wide. Game will reload!" ) );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpOptionsFrame.GRM_SlashCommandText11:SetWordWrap ( true );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpOptionsFrame.GRM_SlashCommandText11:SetWidth ( 500 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpOptionsFrame.GRM_SlashCommandText11:SetSpacing ( 0.5 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_HelpOptionsFrame.GRM_SlashCommandText11:SetJustifyH ( "LEFT" );
 
     GRM_UI.GRM_RosterCheckBoxSideFrame:SetScript ( "OnHide" , function ()
         if GRM_UI.GRM_RosterConfirmFrame:IsVisible() and GRM_UI.GRM_RosterConfirmFrameText:GetText() == GRM.L ( "Really Clear the Guild Log?" ) then
@@ -6580,10 +6869,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     -- CORE OPTIONS
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_GeneralOptionsFrameText , "BOTTOMLEFT" , -4 , -4 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButtonText:SetText ( GRM.L ( "Show at Logon" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButton:SetScript ( "OnClick", function()
         if GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButton:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].viewOnLoad = true;
@@ -6598,9 +6887,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorizeSystemMessagesCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorizeSystemMessagesCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorizeSystemMessagesCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorizeSystemMessagesCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorizeSystemMessagesCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorizeSystemMessagesCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorizeSystemMessagesCheckButtonText:SetText ( GRM.L ( "Class Colorize Names in Guild Member Alerts" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorizeSystemMessagesCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorizeSystemMessagesCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorizeSystemMessagesCheckButton:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -6613,9 +6903,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterShowMainTagCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorizeSystemMessagesCheckButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterShowMainTagCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterShowMainTagCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterShowMainTagCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterShowMainTagCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterShowMainTagCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterShowMainTagCheckButtonText:SetText ( GRM.L ( "Show 'Main' Name in Chat" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterShowMainTagCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterShowMainTagCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterShowMainTagCheckButton:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -6632,9 +6923,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMainTagOnMains:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterShowMainTagCheckButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMainTagOnMainsText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMainTagOnMains , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMainTagOnMainsText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMainTagOnMains , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMainTagOnMainsText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMainTagOnMainsText:SetText ( GRM.L ( "Show 'Main' Tag on both Mains and Alts in Chat" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMainTagOnMains , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMainTagOnMainsText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMainTagOnMains:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -6652,16 +6944,15 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorPickerOptionsText:SetText ( "|cffff0000<>|r " .. GRM.L ( "Choose Color:" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorSelectOptionsFrame:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorPickerOptionsText , "RIGHT" , 5 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorSelectOptionsFrame:SetSize ( 18 , 18 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorSelectOptionsFrame:SetBackdrop (
-        {
-            bgFile = nil,
-            edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
-            tile = true,
-            tileSize = 32,
-            edgeSize = 9,
-            insets = { left = -2 , right = -2 , top = -3 , bottom = -2 }
-        }
-    );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorSelectOptionsFrame:SetBackdrop ( {
+        bgFile = nil,
+        edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+        tile = true,
+        tileSize = 32,
+        edgeSize = 9,
+        insets = { left = -2 , right = -2 , top = -3 , bottom = -2 }
+    } );
+
     -- color box texture
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ColorSelectOptionsFrame:SetScript ( "OnShow" , function( self )
         self.GRM_OptionsTexture:SetPoint ( "CENTER" , self );
@@ -6739,8 +7030,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_MainTagFormatSelected:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end)
 
     if not isManualUpdate then
@@ -6834,8 +7124,14 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         ColorPickerFrame:SetMovable ( true );
         ColorPickerFrame:RegisterForDrag ( "LeftButton" );
         ColorPickerFrame:SetScript ( "OnDragStart" , function()
-            if ColorPickerFrame.Header:IsMouseOver( 0.5 , -0.5 , -0.5 , 0.5 ) and not ColorPickerWheel:IsMouseOver( 1 , -1 , -1 , 1 ) then
-                ColorPickerFrame:StartMoving();
+            if GRM_G.BuildVersion < 80000 then
+                if ColorPickerFrameHeader:IsMouseOver( 0.5 , -0.5 , -0.5 , 0.5 ) and not ColorPickerWheel:IsMouseOver( 1 , -1 , -1 , 1 ) then
+                    ColorPickerFrame:StartMoving();
+                end
+            else
+                if ColorPickerFrame.Header:IsMouseOver( 0.5 , -0.5 , -0.5 , 0.5 ) and not ColorPickerWheel:IsMouseOver( 1 , -1 , -1 , 1 ) then
+                    ColorPickerFrame:StartMoving();
+                end
             end
         end);
         ColorPickerFrame:SetScript ( "OnDragStop" , ColorPickerFrame.StopMovingOrSizing );
@@ -7091,8 +7387,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         end
     end)
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ReportDestinationEditBox:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
     
     -- Setting the info to the editBox
@@ -7123,8 +7418,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ReportDestinationEditBox:SetScript ( "OnEditFocusGained" , function ( self )
         self:HighlightText ( 0 );
         self:SetCursorPosition ( 0 );
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
 
@@ -7169,6 +7463,9 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontDropDownMenu:Hide();
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TimestampSelectedDropDownMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_24HrSelectedDropDownMenu:Hide();
+
                 GRM.PopulateLanguageDropdown();
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_LanguageDropDownMenu:Show();
             end
@@ -7185,8 +7482,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_LanguageSelected:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end)
 
     -- FONT SELECTION
@@ -7221,8 +7517,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             if  GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontDropDownMenu:IsVisible() then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontDropDownMenu:Hide();
             else
-                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_LanguageDropDownMenu:Hide();
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TimestampSelectedDropDownMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_LanguageDropDownMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_24HrSelectedDropDownMenu:Hide();
                 GRM.PopulateFontDropdown();
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontDropDownMenu:Show();
             end
@@ -7239,8 +7537,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontSelected:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end)
 
     -- Timestamp Selection
@@ -7277,7 +7574,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TimestampSelectedDropDownMenu:Hide();
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_LanguageDropDownMenu:Hide();
-                if ( not GRM_G.GlobalControl5 or IsGuildLeader() ) then
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontDropDownMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_24HrSelectedDropDownMenu:Hide();
+                if ( not GRM_G.GlobalControl5 or CanEditGuildInfo() ) then
                     GRM.PopulateTimestampFormatDropDown();
                     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TimestampSelectedDropDownMenu:Show();
                 end
@@ -7286,7 +7586,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TimestampSelected:SetScript ( "OnEnter" , function ( self )
-        if GRM.IsSyncRankGuildLeaderRestricted ( 1 ) and not IsGuildLeader() then
+        if GRM.IsSyncRankGuildLeaderRestricted ( 1 ) and not CanEditGuildInfo() then
             GRM_G.GlobalControl5 = true;
             GRM_UI.SetTooltipScale();
             GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
@@ -7299,8 +7599,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TimestampSelected:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- 24Hr Time Selection
@@ -7336,6 +7635,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             if  GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_24HrSelectedDropDownMenu:IsVisible() then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_24HrSelectedDropDownMenu:Hide();
             else
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TimestampSelectedDropDownMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_LanguageDropDownMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontDropDownMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabMenu:Hide();
                 GRM.Populate24HrDropDown();
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_24HrSelectedDropDownMenu:Show();
             end
@@ -7383,8 +7686,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogExtraOptionsFrame.GRM_LogFontSizeSlider:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- FONT SLIDER
@@ -7402,10 +7704,14 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontSizeSlider.GRM_FontSizeSliderText3:SetPoint ( "BOTTOM" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontSizeSlider , "TOP" , 0 , 10 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontSizeSlider.GRM_FontSizeSliderText3:SetText ( GRM.L ( "Example" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontSizeSlider.GRM_FontSizeSliderText3:SetTextColor ( 1 , 0.82 , 0 , 1 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontSizeSlider.GRM_FontSizeSliderText3:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 + GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].fontModifier );
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontSizeSlider:SetScript ( "OnValueChanged" , function( self , value )
         self.GRM_FontSizeSliderText2:SetText ( math.floor ( value + 0.5 ) .. "%" );
         self.GRM_FontSizeSliderText3:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 + ( ( math.floor ( value + 0.5 ) - 100  ) / 10 ) );
+        if GameTooltip:IsVisible() then
+            GRM.RestoreTooltip();
+        end
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontSizeSlider:SetScript ( "OnMouseUp" , function ( self , button )
@@ -7430,8 +7736,9 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontSizeSlider:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        if GameTooltip:IsVisible() then
+            GRM.RestoreTooltip();
+        end
     end);
     
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TooltipScaleSlider.GRM_TooltipScaleSliderText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontText , "BOTTOMLEFT" , 0 , -18 );
@@ -7445,7 +7752,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TooltipScaleSlider.GRM_TooltipScaleSliderText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TooltipScaleSlider:SetScript ( "OnValueChanged" , function( self , value )
-        if self:IsVisible() then
+        if self:IsVisible() and self:IsMouseOver() then
             self.GRM_TooltipScaleSliderText2:SetText ( math.floor ( value + 0.5 ) .. "%" );
             GameTooltip:SetScale ( ( ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TooltipScaleSlider:GetValue() - 50 ) / 5 ) * 0.02 + 0.8 );
         end
@@ -7467,21 +7774,23 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         if not GameTooltip:IsVisible() and not GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_LanguageDropDownMenu:IsVisible() and not GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontDropDownMenu:IsVisible() then
             GRM_UI.SetTooltipScale();
             GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+            GameTooltip:AddLine( GRM.L ( "This only affects GRM tooltips" ) , 1 , 0 , 0  );
+            GameTooltip:AddLine( " " );
             GameTooltip:AddLine( GRM.L ( "Right-Click to Reset to 100%" ) );
             GameTooltip:Show();
         end
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TooltipScaleSlider:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- Minimap Button!
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMinimapButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMainTagOnMains , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMinimapButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMinimapButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMinimapButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMinimapButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMinimapButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMinimapButtonText:SetText ( GRM.L ( "Show Minimap Button" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMinimapButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMinimapButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMinimapButton:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -7495,9 +7804,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_ShowMinimapButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButtonText:SetText ( GRM.L ( "Sync Addon Settings on All Alts in Same Guild" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButton:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -7509,6 +7819,60 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         end
     end);
 
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelectionButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TimestampSelectionText , "BOTTOMLEFT" , -3 , -12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelectionButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelectionButton , "RIGHT" , 2 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelectionButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelectionButtonText:SetText ( GRM.L ( "Always open to selected tab:" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelectionButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelectionButtonText );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelectionButton:SetScript ( "OnClick" , function( self , button )
+        if button == "LeftButton" then
+            if self:GetChecked() then
+                GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].defaultTabSelection[1] = true;
+            else
+                GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].defaultTabSelection[1] = false;
+            end
+            GRM.SyncSettings();
+        end
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelectionButtonText , "RIGHT" , 1.0 , 1.5 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected:SetSize (  110 , 18 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected.GRM_DefaultTabSelectedText:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected.GRM_DefaultTabSelectedText:SetWidth ( 105 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected.GRM_DefaultTabSelectedText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabMenu:SetPoint ( "TOP" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected , "BOTTOM" );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabMenu:SetWidth ( 110 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabMenu:SetFrameStrata ( "DIALOG" );
+
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabMenu:SetScript ( "OnKeyDown" , function ( self , key )
+        self:SetPropagateKeyboardInput ( true );      -- Ensures keyboard access will default to the main chat window on / or Enter. UX feature.
+        if key == "ESCAPE" then
+            self:SetPropagateKeyboardInput ( false );
+            self:Hide();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected:Show();
+        end
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected:SetScript ( "OnShow" , function() 
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabMenu:Hide();
+    end)
+   
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelected:SetScript ( "OnMouseDown" , function( _ , button ) 
+        if button == "LeftButton" then
+            if  GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabMenu:IsVisible() then
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabMenu:Hide();
+            else
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_TimestampSelectedDropDownMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_LanguageDropDownMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_FontDropDownMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_24HrSelectedDropDownMenu:Hide();
+                GRM.PopulateDefaultTabDropdown();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabMenu:Show();
+            end
+        end
+    end);
+
     -- For tooltip
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButton:SetScript ( "OnEnter" , function( self )
         GRM_UI.SetTooltipScale();
@@ -7517,14 +7881,14 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_SyncAllSettingsCheckButton:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
     
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_FadeCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OptionsUXText , "BOTTOMLEFT" , -4 , -4 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_FadeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_FadeCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_FadeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_FadeCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_FadeCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_FadeCheckButtonText:SetText ( GRM.L ( "Enable Fade on Tab Change" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_FadeCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_FadeCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_FadeCheckButton:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -7537,21 +7901,24 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_NoteBordersButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_FadeCheckButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_NoteBordersButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_NoteBordersButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_NoteBordersButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_NoteBordersButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_NoteBordersButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_NoteBordersButtonText:SetText ( GRM.L ( "Show Border on Public, Officer, and Custom Notes" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_NoteBordersButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_NoteBordersButtonText );
+    
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_NoteBordersButton:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
                 GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].showBorders = true;
-                GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteWindow:SetBackdrop ( GRM_UI.noteBackdrop );
-                GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow:SetBackdrop ( GRM_UI.noteBackdrop );
-                GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame:SetBackdrop ( GRM_UI.noteBackdrop );
+                GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteWindow:Show();
+                GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow:Show();
+                GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame:Show();
+                
             else
                 GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].showBorders = false;
-                GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteWindow:SetBackdrop ( nil );
-                GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow:SetBackdrop ( nil );
-                GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame:SetBackdrop ( nil );
+                GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerOfficerNoteWindow:Hide();
+                GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteWindow:Hide();
+                GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame:Hide();
             end
             GRM.SyncSettings();
         end
@@ -7562,7 +7929,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ReputationToggleButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_NoteBordersButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ReputationToggleButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ReputationToggleButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ReputationToggleButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ReputationToggleButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ReputationToggleButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
 
     tempString = GRM.L ( "Show Character Guild Reputation" );
@@ -7571,7 +7938,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ReputationToggleButtonText:SetTextColor ( 0.5 , 0.5 , 0.5 );        
     end
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ReputationToggleButtonText:SetText ( tempString );
-
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ReputationToggleButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ReputationToggleButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ReputationToggleButton:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -7589,9 +7956,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_BirthdayToggleButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ReputationToggleButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_BirthdayToggleButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_BirthdayToggleButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_BirthdayToggleButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_BirthdayToggleButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_BirthdayToggleButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_BirthdayToggleButtonText:SetText ( GRM.L ( "Show Guild Member Birthdays" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_BirthdayToggleButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_BirthdayToggleButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_BirthdayToggleButton:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -7629,15 +7997,22 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_BirthdayToggleButton:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_BirthdayToggleButton , "BOTTOMLEFT" , 0 , -6 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText:SetText ( GRM.L ( "Colorize Roster Names to Match Class" ) );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText2:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText , "RIGHT" , 2 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText:SetText ( GRM.L ( "Colorize Names on Roster and Chat Window to Match Class" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText );
+
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].selectedLang == 5 then -- Russian
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText2:ClearAllPoints();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText2:SetPoint ( "BOTTOM" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText , "TOP" , 0 , 1 );
+    else
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText2:ClearAllPoints();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText2:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText , "RIGHT" , 2 , 0 );
+    end
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText2:SetText ( GRM.L ( "(Applies Only to Classic)" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ColorizePlayerNamesButtonText2:SetTextColor ( 1 , 0 , 0 );
@@ -7652,8 +8027,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             if button == "LeftButton" then
                 if self:GetChecked() then
                     GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].colorizeClassicRosterNames = true;
+                    SetCVar("chatClassColorOverride" , 0 );
                 else
                     GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].colorizeClassicRosterNames = false;
+                    SetCVar("chatClassColorOverride" , 1 )
                 end
                 GRM.SyncSettings();
             end
@@ -7714,16 +8091,14 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame:SetScale ( baseScale );
         end
 
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
         GRM.SyncSettings();
 
     end);
 
     if not isManualUpdate then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_CoreWindowScaleSlider:HookScript ( "OnMouseDown" , function ()
-            GRM_UI.RestoreTooltipScale();
-            GameTooltip:Hide();
+            GRM.RestoreTooltip();
         end);
     end
 
@@ -7734,8 +8109,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_CoreWindowScaleSlider:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
 
@@ -7795,16 +8169,14 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].UIScaling[2] = GRM.Round ( baseScale , 2 );
         end
 
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
         GRM.SyncSettings();
 
     end);
 
     if not isManualUpdate then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_MouseOverScaleSlider:HookScript ( "OnMouseDown" , function ()
-            GRM_UI.RestoreTooltipScale();
-            GameTooltip:Hide();
+            GRM.RestoreTooltip();
         end);
     end
 
@@ -7819,8 +8191,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_MouseOverScaleSlider:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- MACRO TOOL SLIDER
@@ -7879,16 +8250,14 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].UIScaling[3] = GRM.Round ( baseScale , 2 );
         end
 
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
         GRM.SyncSettings();
 
     end);
 
     if not isManualUpdate then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_MacroToolScaleSlider:HookScript ( "OnMouseDown" , function ()
-            GRM_UI.RestoreTooltipScale();
-            GameTooltip:Hide();
+            GRM.RestoreTooltip();
         end);
     end
 
@@ -7902,8 +8271,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_MacroToolScaleSlider:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- EXPORT TOOL SLIDER
@@ -7962,16 +8330,14 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].UIScaling[4] = GRM.Round ( baseScale , 2 );
         end
 
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
         GRM.SyncSettings();
 
     end);
 
     if not isManualUpdate then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ExportToolScaleSlider:HookScript ( "OnMouseDown" , function ()
-            GRM_UI.RestoreTooltipScale();
-            GameTooltip:Hide();
+            GRM.RestoreTooltip();
         end);
     end
 
@@ -7993,8 +8359,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ExportToolScaleSlider:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- Audit Join Date Tool
@@ -8053,16 +8418,14 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].UIScaling[5] = GRM.Round ( baseScale , 2 );
         end
 
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
         GRM.SyncSettings();
 
     end);
 
     if not isManualUpdate then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_AdvancedAuditToolScaleSlider:HookScript ( "OnMouseDown" , function ()
-            GRM_UI.RestoreTooltipScale();
-            GameTooltip:Hide();
+            GRM.RestoreTooltip();
         end);
     end
 
@@ -8076,8 +8439,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_AdvancedAuditToolScaleSlider:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- Congrol buttons to bring up the windows to make scaling more obvious to see
@@ -8106,12 +8468,24 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         end
     end);
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_MacroToolScaleSlider.GRM_MacroToolScaleSliderText2 , "RIGHT" , 10 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMouseoverButton:SetScript ( "OnEnter" , function( self )
+        GRM_UI.SetTooltipScale();
+        GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+        GameTooltip:AddLine( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMouseoverButton.GRM_OpenMouseoverButtonText:GetText() );
+        GameTooltip:Show();
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMouseoverButton:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end)
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMouseoverButton , "BOTTOMLEFT" , 0 , -1 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton:SetSize ( 130 , 30 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton.GRM_OpenMacroToolButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton.GRM_OpenMacroToolButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton.GRM_OpenMacroToolButtonText:SetWordWrap ( true );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton.GRM_OpenMacroToolButtonText:SetText ( GRM.L ( "Open Macro Tool" ) );
+    GRM_UI.ScaleFontStringToObjectSize ( true , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton:GetWidth() , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton.GRM_OpenMacroToolButtonText , 2 );
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton:SetScript ( "OnClick" , function( _ , button )
         if button == "LeftButton" then
@@ -8119,12 +8493,24 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         end
     end);
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_ExportToolScaleSlider.GRM_ExportToolScaleSliderText2 , "RIGHT" , 10 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton:SetScript ( "OnEnter" , function( self )
+        GRM_UI.SetTooltipScale();
+        GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+        GameTooltip:AddLine( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton.GRM_OpenMacroToolButtonText:GetText() );
+        GameTooltip:Show();
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end)
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenMacroToolButton , "BOTTOMLEFT" , 0 , -1 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton:SetSize ( 130 , 30 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton.GRM_OpenExportToolButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton.GRM_OpenExportToolButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton.GRM_OpenExportToolButtonText:SetWordWrap ( true );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton.GRM_OpenExportToolButtonText:SetText ( GRM.L ( "Open Export Tool" ) );
+    GRM_UI.ScaleFontStringToObjectSize ( true , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton:GetWidth() , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton.GRM_OpenExportToolButtonText , 2 );
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton:SetScript ( "OnClick" , function( _ , button )
         if button == "LeftButton" then
@@ -8133,23 +8519,46 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         end
     end);
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_AdvancedAuditToolScaleSlider.GRM_AdvancedAuditToolScaleSliderText2 , "RIGHT" , 10 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton:SetScript ( "OnEnter" , function( self )
+        GRM_UI.SetTooltipScale();
+        GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+        GameTooltip:AddLine( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton.GRM_OpenExportToolButtonText:GetText() );
+        GameTooltip:Show();
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end)
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenExportToolButton , "BOTTOMLEFT" , 0 , -1 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton:SetSize ( 130 , 30 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton.GRM_OpenAuditJoinDateToolButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton.GRM_OpenAuditJoinDateToolButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton.GRM_OpenAuditJoinDateToolButtonText:SetWordWrap ( true );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton.GRM_OpenAuditJoinDateToolButtonText:SetText ( GRM.L ( "Open Join Date Tool" ) );
-
+    GRM_UI.ScaleFontStringToObjectSize ( true , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton:GetWidth() , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton.GRM_OpenAuditJoinDateToolButtonText , 2 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton:SetScript ( "OnClick" , function( _ , button )
         if button == "LeftButton" then
             GRM_UI.GRM_AuditJDTool:Show();
         end
     end);
 
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton:SetScript ( "OnEnter" , function( self )
+        GRM_UI.SetTooltipScale();
+        GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+        GameTooltip:AddLine( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton.GRM_OpenAuditJoinDateToolButtonText:GetText() );
+        GameTooltip:Show();
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UXOptionsFrame.GRM_OpenAuditJoinDateToolButton:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end)
+
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonChangesCheckButton:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonCheckButtonText , "RIGHT" , 6 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonChangesCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonChangesCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonChangesCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonChangesCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonChangesCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonChangesCheckButtonText:SetText ( GRM.L ( "Only Show if Log Changes" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonChangesCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonChangesCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_RosterLoadOnLogonChangesCheckButton:SetScript ( "OnClick", function( self )
         if self:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].onlyViewIfChanges = true;
@@ -8161,24 +8570,26 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.OptionsRankRestrictHeaderText , "BOTTOMLEFT" , -4 , -4 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText0:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText0:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText0:SetText ( "Add Join Date to:" );
-
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText0:SetText ( GRM.L ( "Add Join Date to:" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText0 );
+    
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButton , "BOTTOMRIGHT" , 0 , -5 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1 , "RIGHT" , 4 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1:SetHitRectInsets ( 0 , -90 , 0 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText:SetText ( GRM.L ( "Officer Note" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1 , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText );
     
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1 , "BOTTOMLEFT" , 0 , -5 );  
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2 , "RIGHT" , 4 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2:SetText ( GRM.L ( "Public Note" ) );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2:SetHitRectInsets ( 0 , -90 , 0 , 0 );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2 , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2 );
     
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2 , "BOTTOMLEFT" , 0 , -5 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3 , "RIGHT" , 4 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetText ( GRM.L ( "Custom Note" ) );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3:SetHitRectInsets ( 0 , -90 , 0 , 0 );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3 , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3 );
     
     
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText4:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText0 , "RIGHT" , 2 , 0 );
@@ -8227,7 +8638,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             local isRestricted , index = GRM.IsSyncRankGuildLeaderRestricted ( 5 );
             local showTooltip = false;
 
-            if isRestricted and not IsGuildLeader() then
+            if isRestricted and not CanEditGuildInfo() then
                 GRM_G.GlobalControl4 = true;
                 GRM_UI.SetTooltipScale();
                 GameTooltip:SetOwner ( frame , "ANCHOR_TOP" );
@@ -8256,14 +8667,14 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
             if showTooltip then
                 -- Add extra line
-                if not CanEditOfficerNote() and GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination < 3 and GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination > 0 then          -- Rank restricted to add to public/officer notes - Custom anyone can add to it.
+                if not C_GuildInfo.CanEditOfficerNote() and GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination < 3 and GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination > 0 then          -- Rank restricted to add to public/officer notes - Custom anyone can add to it.
                     GameTooltip:AddLine ( GRM.L ( "Due to your current rank, you will be unable to add Join Date Timestamps" ) );
                 elseif includeCheckbox and index == 0 then
                     GameTooltip:AddLine ( GRM.L ( "Adding the Join Date cannot be disabled due to the global setting" ) );
                 end
 
                 GameTooltip:Show();
-            elseif not CanEditOfficerNote() and GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination < 3 and GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination > 0 then
+            elseif not C_GuildInfo.CanEditOfficerNote() and GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination < 3 and GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination > 0 then
                 GRM_UI.SetTooltipScale();
                 GameTooltip:SetOwner ( frame , "ANCHOR_TOP" );
                 GameTooltip:AddLine ( GRM.L ( "Due to your current rank, you will be unable to add Join Date Timestamps" ) );
@@ -8272,8 +8683,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
         end);
         frame:SetScript ( "OnLeave" , function()
-            GRM_UI.RestoreTooltipScale();
-            GameTooltip:Hide();
+            GRM.RestoreTooltip();
         end);
     end
     
@@ -8290,7 +8700,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetText ( GRM.L ( "Custom Note" ) );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2:SetChecked ( false );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3:SetChecked ( false );
-            if not CanEditOfficerNote() then
+            GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1 , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText );
+            GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2 , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2 );
+            GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3 , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3 );
+            if not C_GuildInfo.CanEditOfficerNote() then
                 GRM.Report ( GRM.L ( "Warning! Due to your rank you will be unable to add Join Date timestamps to the {name}" , GRM.L ( "Officer Note" ) ) );
             end
             GRM.UpdateGuildInfoWithNewValue ( 5 , 1 );
@@ -8313,7 +8726,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetText ( GRM.L ( "Custom Note" ) );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1:SetChecked ( false );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3:SetChecked ( false );
-            if not CanEditOfficerNote() then
+            if not C_GuildInfo.CanEditOfficerNote() then
                 GRM.Report ( GRM.L ( "Warning! Due to your rank you will be unable to add Join Date timestamps to the {name}" , GRM.L ( "Public Note" ) ) );
             end
             GRM.UpdateGuildInfoWithNewValue ( 5 , 2 );
@@ -8348,10 +8761,11 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         end
     end)
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3 , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3 , "BOTTOMLEFT" , -5 , -8 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButtonText:SetText ( GRM.L ( "Include \"Joined:\" tag with the date." ) .. " |cff00ccff(" .. GRM.L ( "GC" ) .. ")|r" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButton:SetScript ( "OnClick", function( self , button )
         if not GRM_G.GlobalControl4_5 and button == "LeftButton" then 
             if self:GetChecked() then
@@ -8362,8 +8776,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
                 GRM.UpdateGuildInfoWithNewValue ( 6 , "-" );
             end
             
-            GRM_UI.RestoreTooltipScale();
-            GameTooltip:Hide();
+            GRM.RestoreTooltip();
         elseif GRM_G.GlobalControl4_5 then
             if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].includeTag then
                 self:SetChecked ( true );
@@ -8385,7 +8798,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
         GRM_UI.SetTooltipScale();
         GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
-        if isRestricted and not IsGuildLeader() then
+        if isRestricted and not CanEditGuildInfo() then
             GRM_G.GlobalControl4_5 = true;
             
             
@@ -8400,16 +8813,15 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButton:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- Report Destination
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButtonText , "BOTTOMLEFT" , 0 , -16 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButton , "BOTTOMLEFT" , 6 , -14 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinText:SetText ( GRM.L ( "Custom Join Tag:" ) );
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinEditBox:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinText , "RIGHT" , 8 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinEditBox:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinEditBox , "TOPLEFT" , 0 , 4 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinEditBox:SetSize ( 115 , 22 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinEditBox:SetMaxLetters ( 16 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinEditBox:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
@@ -8424,7 +8836,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.SetTooltipScale();
             GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
 
-            if GRM.IsCustomJoinRestricted() and not IsGuildLeader() then
+            if GRM.IsCustomJoinRestricted() and not CanEditGuildInfo() then
                 GameTooltip:AddLine ( GameTooltip:AddLine ( "|CFF00CCFF" .. GRM.L ( "Warning - Global Controls:" ) ) );
                 GameTooltip:AddLine ( GRM.L ( "Unable to Modify. Global setting is set to :   {name}" , GRM_G.customHeaderJoin .. " " .. GRM.FormatTimeStamp ( GRM.GetTimestamp() , false ) ) );
                 self:Disable();
@@ -8437,8 +8849,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         end
     end)
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinEditBox:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinEditBox:SetScript ( "OnShow" , function ( self )
@@ -8468,11 +8879,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinEditBox:SetScript ( "OnEditFocusGained" , function ( self )
         self:HighlightText ( 0 );
         self:SetCursorPosition ( 0 );
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
     
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinEditBox , "RIGHT" , 8 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinText , "BOTTOMLEFT" , 0 , -16 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText:SetText ( GRM.L ( "Custom Rejoin Tag:" ) );
 
@@ -8490,12 +8900,17 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText2:SetText ( "(" .. GRM.L ( "GC" ) .. ")" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText2:SetTextColor ( 0 , 0.8 , 1 );
 
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText3:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinEditBox, "RIGHT" , 2 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText3:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText3:SetText ( "(" .. GRM.L ( "GC" ) .. ")" );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText3:SetTextColor ( 0 , 0.8 , 1 );
+
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinEditBox:SetScript ( "OnEnter" , function( self )
         if not self:HasFocus() then
             GRM_UI.SetTooltipScale();
             GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
 
-            if GRM.IsCustomReJoinRestricted() and not IsGuildLeader() then
+            if GRM.IsCustomReJoinRestricted() and not CanEditGuildInfo() then
                 GameTooltip:AddLine ( GameTooltip:AddLine ( "|CFF00CCFF" .. GRM.L ( "Warning - Global Controls:" ) ) );
                 GameTooltip:AddLine ( GRM.L ( "Unable to Modify. Global setting is set to :   {name}" , GRM_G.customHeaderRejoin .. " " .. GRM.FormatTimeStamp ( GRM.GetTimestamp() , false ) ) );
                 self:Disable();
@@ -8508,8 +8923,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         end
     end)
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinEditBox:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
     
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinEditBox:SetScript ( "OnShow" , function ( self )
@@ -8539,15 +8953,15 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinEditBox:SetScript ( "OnEditFocusGained" , function ( self )
         self:HighlightText ( 0 );
         self:SetCursorPosition ( 0 );
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- Time Interval Controls on checking for changes!!!
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.OptionsScanDetailsText , "BOTTOMLEFT" , -4 , -4 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButtonText:SetText ( GRM.L ( "Before Scan Timer" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButtonText2:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButtonText , "RIGHT" , 37.5 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButtonText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButtonText2:SetText ( GRM.L ( "After Scan Timer" ) );
@@ -8556,7 +8970,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].scanEnabled = true;
             GRM.Report ( GRM.L ( "Reactivating SCAN for Guild Member Changes..." ) );
 
-            GuildRoster();
+            C_GuildInfo.GuildRoster();
             C_Timer.After ( 5 , GRM.TriggerTrackingCheck );     -- 5 sec delay necessary to trigger server call.
         else
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].scanEnabled = false;
@@ -8570,10 +8984,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote:SetBackdrop ( GRM_UI.noteBackdrop2 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote:SetFrameStrata ( "HIGH" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote:SetSize ( 35 , 22 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNoteText:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNoteText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNoteText:SetTextColor ( 1.0 , 0 , 0 , 1.0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNoteText:SetText ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].scanDelay );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote.GRM_RosterTimeIntervalOverlayNoteText:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote.GRM_RosterTimeIntervalOverlayNoteText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote.GRM_RosterTimeIntervalOverlayNoteText:SetTextColor ( 1.0 , 0 , 0 , 1.0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote.GRM_RosterTimeIntervalOverlayNoteText:SetText ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].scanDelay );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalEditBox:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButtonText , "RIGHT" , 5 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalEditBox:SetSize ( 30 , 22 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalEditBox:SetMaxLetters ( 3 );
@@ -8601,11 +9015,13 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         local numSeconds = tonumber ( self:GetText() );
         if numSeconds >= 20 then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].scanDelay = numSeconds;
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNoteText:SetText ( numSeconds );
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote.GRM_RosterTimeIntervalOverlayNoteText:SetText ( numSeconds );
             self:Hide();
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote:Show();
 
-            GuildRoster();
+            -- Reset the integrity check
+            GRM_G.TimeAtCompletion = time();
+            C_GuildInfo.GuildRoster();
             GRM.SyncSettings();
             C_Timer.After ( 5 , GRM.TriggerTrackingCheck );     -- 5 sec delay necessary to trigger server call.
         else
@@ -8666,53 +9082,48 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText2:SetTextColor ( 1.0 , 0.82 , 0 , 1 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText3:SetTextColor ( 1.0 , 0.82 , 0 , 1 );
             
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[1] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 60 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[1] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 10 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
 
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[2] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 70 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[2] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 20 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
 
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[3] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 80 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[3] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 30 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
 
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[4] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 85 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[4] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 40 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
 
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[5] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 90 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[5] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 50 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
 
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[6] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 100 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[6] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 60 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Button:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Button:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Button:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Button:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Button:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button:Enable();
 
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[7] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 110 then
-                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
-            else
-                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
-            end
-
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[8] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 120 then
-                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
-            else
-                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
-            end
         else
             -- Disable
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText2:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
@@ -8723,8 +9134,12 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Button:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Button:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Button:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Button:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Button:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button:Disable();
         end
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelRange:SetText ( GRM.GetLevelRange() );
     end
@@ -8762,9 +9177,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     -- Report Inactive Recommendation.
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterTimeIntervalCheckButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButtonText:SetText ( GRM.L ( "Before Inactive Timer" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButtonText2:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButtonText , "RIGHT" , 32 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButtonText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButtonText2:SetText ( GRM.L ( "After Inactive Timer" ) );
@@ -8790,9 +9206,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         end
         GRM.SyncSettings();
     end);
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ReportInactivesOnlyIfAllButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ReportInactivesOnlyIfAllButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ReportInactivesOnlyIfAllButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ReportInactivesOnlyIfAllButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ReportInactivesOnlyIfAllButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ReportInactivesOnlyIfAllButtonText:SetText ( GRM.L ( "Only Report if there are no Active Alts in the Group" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ReportInactivesOnlyIfAllButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ReportInactivesOnlyIfAllButtonText );
 
 
     -- Options Slash command buttons
@@ -8894,8 +9311,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ResetDefaultOptionsButton:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_ExportGlobalControlButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.OptionsUnifySettingsHeaderText , "BOTTOMLEFT" , -5 , -5 );
@@ -8918,8 +9334,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
                     local exportLogic = function()
                         GRM.SetGlobalControlsToGuildInfo();
                         if GameTooltip:IsVisible() then
-                            GRM_UI.RestoreTooltipScale();
-                            GameTooltip:Hide();
+                            GRM.RestoreTooltip();
                         end
                     end
 
@@ -9008,8 +9423,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_ExportGlobalControlButton:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ReportInactiveReturnOverlayNote:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportInactiveReturnButtonText , "RIGHT" , 0.5 , 0 );
@@ -9062,9 +9476,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     -- Add Event Options on Announcing...
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ReportInactivesOnlyIfAllButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsCheckButtonText:SetText ( GRM.L ( "Announce Events" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsCheckButtonText2:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsCheckButtonText , "RIGHT" , 32 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsCheckButtonText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
 
@@ -9154,7 +9569,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     -- Add Event Options Button to add events to calendar
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterReportAddEventsToCalendarButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterReportAddEventsToCalendarButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterReportAddEventsToCalendarButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterReportAddEventsToCalendarButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterReportAddEventsToCalendarButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterReportAddEventsToCalendarButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
 
     tempString = GRM.L ( "Add Events to Calendar" );
@@ -9164,6 +9579,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterReportAddEventsToCalendarButtonText:SetText ( tempString );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterReportAddEventsToCalendarButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterReportAddEventsToCalendarButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterReportAddEventsToCalendarButton:SetScript ( "OnClick", function( self )
         if self:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].allowEventsToCalendar = true;
@@ -9174,10 +9590,11 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     -- SYNC WITH OTHER PLAYERS!
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButton , 27 , 0)
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncCompatibilityMessageButton , "BOTTOMLEFT" , 0 , -6 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButton , "RIGHT" , 2 , 0)
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButtonText:SetText ( GRM.L ( "SYNC Changes With Guildies at Rank" ) .. " " );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButtonText2:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncRankDropDownSelected , "RIGHT" , 1.5 , 0)
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButtonText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButtonText2:SetText ( GRM.L ( "or Higher" ) .. " |cff00ccff(" .. GRM.L ( "GC" ) .. ")|r" );
@@ -9193,6 +9610,11 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanListText3:SetTextColor ( 1.0 , 0.82 , 0.0 , 1.0 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton:Enable();
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButtonText:SetTextColor ( 1.0 , 0.82 , 0.0 , 1.0 );
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText:SetTextColor ( 1.0 , 0.82 , 0.0 , 1.0 );
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText2:SetTextColor ( 1.0 , 0.82 , 0.0 , 1.0 );
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote.GRM_AutoTriggerTimeOverlayNoteText:SetTextColor ( 1.0 , 0 , 0 , 1.0 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBox:Enable();
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBoxText:SetTextColor ( 1.0 , 0.82 , 0.0 , 1.0 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_BDaySyncCheckBox:Enable();
@@ -9233,6 +9655,11 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanListText3:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton:Disable();
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButtonText:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText2:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote.GRM_AutoTriggerTimeOverlayNoteText:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBox:Disable();
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBoxText:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankText:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
@@ -9254,10 +9681,79 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GRM.SyncSettings();
     end);
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButton , "BOTTOMRIGHT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton , 27 , 0);
+    -- Time Interval Controls on checking for changes!!!
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncCheckButton , "BOTTOMRIGHT" , 0 , -6 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton , "RIGHT" , 2 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText:SetText ( GRM.L ( "Before Auto Trigger" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText2:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText , "RIGHT" , 37.5 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText2:SetText ( GRM.L ( "After Auto Trigger" ) );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton:SetScript ( "OnClick", function()
+        if GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton:GetChecked() then
+            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].autoTriggerSync = true;
+        else
+            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].autoTriggerSync = false;
+            GRM.Report ( GRM.L ( "Type '/grm sync' to initiate a one-time sync." ) );
+        end
+        GRM.SyncSettings();
+    end);
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText , "RIGHT" , 1.0 , 0 )
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote:SetBackdrop ( GRM_UI.noteBackdrop2 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote:SetFrameStrata ( "HIGH" );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote:SetSize ( 35 , 22 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote.GRM_AutoTriggerTimeOverlayNoteText:SetPoint ( "CENTER" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote.GRM_AutoTriggerTimeOverlayNoteText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote.GRM_AutoTriggerTimeOverlayNoteText:SetTextColor ( 1.0 , 0 , 0 , 1.0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote.GRM_AutoTriggerTimeOverlayNoteText:SetText ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncDelay );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText , "RIGHT" , 5 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:SetSize ( 30 , 22 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:SetMaxLetters ( 3 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:SetNumeric ( true );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:SetTextColor ( 1.0 , 0 , 0 , 1.0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 10 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:EnableMouse ( true );
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote:SetScript ( "OnMouseDown" , function ( self , button )
+        if button == "LeftButton" then
+            if GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:IsEnabled() then
+                self:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:SetText ( "" );
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:Show()
+            end
+        end    
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:SetScript ( "OnEscapePressed" , function( self )
+        self:Hide();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote:Show();
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:SetScript ( "OnEnterPressed" , function( self )
+        local numSeconds = tonumber ( self:GetText() );
+        if numSeconds >= 10 then
+            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncDelay = numSeconds;
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote.GRM_AutoTriggerTimeOverlayNoteText:SetText ( numSeconds );
+            self:Hide();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote:Show();
+
+            GRM.SyncSettings();
+        else
+            GRM.Report ( GRM.L ( "Please choose a scan interval {num} seconds or higher!" , nil , nil , 10 ) .. " " .. GRM.L ( "{num} is too Low!" , nil , nil , numSeconds ) );
+        end      
+    end);
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:SetScript ( "OnEditFocusLost" , function() 
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:Hide();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote:Show();
+    end)
+
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton , "BOTTOMLEFT" , 0 , -6 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton , "RIGHT" , 2 , 0);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButtonText:SetText ( GRM.L ( "Only Restrict Incoming Player Data to Rank Threshold, not Outgoing" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton:SetScript ( "OnClick", function( self )
         if self:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportAllRanks = true;
@@ -9271,13 +9767,15 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton:SetScript ( "OnEnter" , function( self )
         GRM_UI.SetTooltipScale();
         GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" , 0 , -28 );
-        GameTooltip:AddLine( GRM.L ( "This only applies to Alt/Main Groupings, Join Dates, Promotion Dates, and Birthdates." ) );
-        GameTooltip:AddLine( GRM.L ( "Does NOT apply to Ban List or Custom Note" ) );
+        GameTooltip:AddLine ( GRM.L ( "All ranks will receive the outgoing player data. Only players of the selected rank or higher can modify and share that data." ) );
+        GameTooltip:AddLine ( " " );
+        GameTooltip:AddLine( GRM.L ( "This only applies to Alt/Main Groupings, Join Dates, Promotion Dates, Birthdates, and Custom Notes." ) );
+        GameTooltip:AddLine( GRM.L ( "Custom Notes can be Restricted Further Below" ) );
+        GameTooltip:AddLine( GRM.L ( "Does NOT apply to Ban List" ) );
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- Rank Drop Down for Options Frame
@@ -9311,12 +9809,11 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             if  GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncRankDropDownMenu:IsVisible() then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncRankDropDownMenu:Hide();
            else
-               GRM.PopulateOptionsRankDropDown();
-               GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncRankDropDownMenu:Show();
-               GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterBanListDropDownMenu:Hide();
-               GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankDropDownMenu:Hide();
-                GRM_UI.RestoreTooltipScale();
-               GameTooltip:Hide();
+                GRM.PopulateOptionsRankDropDown();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncRankDropDownMenu:Show();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterBanListDropDownMenu:Hide();
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankDropDownMenu:Hide();
+                GRM.RestoreTooltip();
            end
         end
     end);
@@ -9327,7 +9824,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
             local isRestricted , index = GRM.IsSyncRankGuildLeaderRestricted ( 2 );
 
-            if not isRestricted or IsGuildLeader() then
+            if not isRestricted or CanEditGuildInfo() then
                 GRM_G.GlobalControl1 = false;
                 GameTooltip:AddLine ( GRM.L ( "|CFF00CCFFMinimum Rank to Sync: Player Data, Ban List" ) );
                 GameTooltip:AddLine( GRM.L ( "|CFFE6CC7FClick|r to Change Rank Restriction" ) );
@@ -9341,15 +9838,15 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncRankDropDownSelected:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end)
 
     -- Sync Ban list
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanList:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanListText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanList , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanListText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanList , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanListText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanListText:SetText ( GRM.L ( "Sync BAN List With Guildies at Rank" ) .. " " );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanList , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanListText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanList:SetScript ( "OnClick", function( self )
         if self:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncBanList = true;
@@ -9404,8 +9901,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterBanListDropDownMenu:Show();
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankDropDownMenu:Hide();
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncRankDropDownMenu:Hide();
-                GRM_UI.RestoreTooltipScale();
-                GameTooltip:Hide();
+                GRM.RestoreTooltip();
            end
         end
     end);
@@ -9416,7 +9912,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
             local isRestricted , index = GRM.IsSyncRankGuildLeaderRestricted ( 3 );
 
-            if not isRestricted or IsGuildLeader() then
+            if not isRestricted or CanEditGuildInfo() then
                 GRM_G.GlobalControl2 = false;
                 GameTooltip:AddLine ( GRM.L ( "|CFF00CCFFSync filter can be set tighter for the Ban List" ) );
                 GameTooltip:AddLine( GRM.L ( "|CFFE6CC7FClick|r to Change Rank Restriction" ) );
@@ -9431,16 +9927,16 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterBanListDropDownSelected:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end)
 
 
     -- CUSTOM NOTE OPTIONS...
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBox:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanList , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBoxText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBox , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBoxText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBox , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBoxText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBoxText:SetText ( GRM.L ( "Sync Custom Notes" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBox , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBoxText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBox:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -9474,9 +9970,10 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_BDaySyncCheckBox:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankText2 , "BOTTOMLEFT" , -1 , -13 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_BDaySyncCheckBoxText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_BDaySyncCheckBox , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_BDaySyncCheckBoxText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_BDaySyncCheckBox , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_BDaySyncCheckBoxText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_BDaySyncCheckBoxText:SetText ( GRM.L ( "Sync Birthdays" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_BDaySyncCheckBox , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_BDaySyncCheckBoxText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_BDaySyncCheckBox:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -9535,8 +10032,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankDropDownMenu:Show();
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncRankDropDownMenu:Hide();
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterBanListDropDownMenu:Hide();
-                GRM_UI.RestoreTooltipScale();
-                GameTooltip:Hide();
+                GRM.RestoreTooltip();
             end
         end
     end);
@@ -9547,7 +10043,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GameTooltip:SetOwner ( self , "ANCHOR_TOP" );
             local isRestricted , index = GRM.IsSyncRankGuildLeaderRestricted ( 4 );
 
-            if not isRestricted or IsGuildLeader() then
+            if not isRestricted or CanEditGuildInfo() then
                 GRM_G.GlobalControl3 = false;
                 GameTooltip:AddLine( GRM.L ( "|CFF00CCFFDefault Selection For All Players" ) );
             else
@@ -9561,13 +10057,17 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomSelected:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end)
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankText2:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankText , "BOTTOMLEFT" , 1 , -20 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].selectedLang == 5 then -- Russian
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
+    else
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    end
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankText2:SetText ( GRM.L ( "Reset Default Custom Note Restrictions for ALL Guildies" ) );
+    
 
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomRankResetButton:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankText2 , "RIGHT" , 3 , 0 );
@@ -9603,15 +10103,15 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomRankResetButton:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterNotifyOnChangesCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_BDaySyncCheckBox , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterNotifyOnChangesCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterNotifyOnChangesCheckButton , 27 , 0);
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterNotifyOnChangesCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterNotifyOnChangesCheckButton , "RIGHT" , 2 , 0);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterNotifyOnChangesCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterNotifyOnChangesCheckButtonText:SetText ( GRM.L ( "Display Sync Update Messages" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterNotifyOnChangesCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterNotifyOnChangesCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterNotifyOnChangesCheckButton:SetScript ( "OnClick", function( self)
         if self:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncChatEnabled = true;
@@ -9622,10 +10122,11 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end);
 
     -- Sync options - Restrict sync to current addon users only.
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncSpeedSlider.GRM_SyncSpeedSliderText , "BOTTOMLEFT" , -4 , -14 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButton , 27 , 0)
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncSpeedSlider.GRM_SyncSpeedSliderText , "BOTTOMLEFT" , -4 , -10 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButton , "RIGHT" , 2 , 0)
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButtonText:SetText ( GRM.L ( "Only Sync With Up-to-Date Addon Users" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButton:SetScript ( "OnClick", function( self )
         if self:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncSameVersion = true;
@@ -9636,10 +10137,29 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GRM.SyncSettings();
     end);
 
+    -- Sync options - Hide messages recommending others to update addon.
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncCompatibilityMessageButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButton , "BOTTOMRIGHT" , 0 , -6 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncCompatibilityMessageButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncCompatibilityMessageButton , "RIGHT" , 2 , 0)
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncCompatibilityMessageButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncCompatibilityMessageButtonText:SetText ( GRM.L ( "Report When Other Members Have Outdated Versions" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncCompatibilityMessageButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncCompatibilityMessageButtonText );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncCompatibilityMessageButton:SetScript ( "OnClick", function( self )
+        if self:GetChecked() then
+            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncCompatibilityMsg = true;
+        else
+            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncCompatibilityMsg = false;
+        end
+        GRM.SyncSettings();
+    end);
+
     -- Only announce Anniversaries of Player who is designated "main"
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsCheckButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButton , 27 , 0)
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButton , "RIGHT" , 2 , 0)
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButtonText:SetWordWrap ( true );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButtonText:SetWidth ( 540 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButtonText:SetSpacing ( 0.5 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButtonText:SetJustifyH ( "LEFT" );
 
     tempString = GRM.L ( "Only Announce Birthdays and Anniversaries if Listed as 'Main'" );
     if GRM_G.BuildVersion < 30000 then  -- Calendar addin in 3.0 WOTLK
@@ -9649,6 +10169,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     end
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButtonText:SetText ( tempString );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButton:SetScript ( "OnClick", function( self )
         if self:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].onlyAnnounceForMain = true;
@@ -9660,9 +10181,15 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     -- Show public/officer ntoe on joining and leaving players.
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMainOnlyCheckButton , "BOTTOMLEFT" , 0 , -6 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButton , 27 , 0)
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButton , "RIGHT" , 2 , 0)
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButtonText:SetWordWrap ( true );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButtonText:SetWidth ( 540 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButtonText:SetSpacing ( 0.5 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButtonText:SetJustifyH ( "LEFT" );
+
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButtonText:SetText ( GRM.L ( "Show Public, Officer, and Custom Notes on Log Entries of Left Players" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ShowNotesOnLeavingPlayerButton:SetScript ( "OnClick", function( self )
         if self:GetChecked() then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].addNotesToLeft = true;
@@ -9682,53 +10209,48 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText2:SetTextColor ( 1.0 , 0.82 , 0 , 1 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText3:SetTextColor ( 1.0 , 0.82 , 0 , 1 );
             
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[1] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 60 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[1] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 10 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
 
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[2] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 70 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[2] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 20 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
 
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[3] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 80 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[3] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 30 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
 
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[4] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 85 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[4] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 40 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
 
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[5] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 90 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[5] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 50 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
 
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[6] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 100 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[6] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 60 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
             else
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Button:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Button:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Button:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Button:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Button:Enable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button:Enable();
 
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[7] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 110 then
-                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
-            else
-                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
-            end
-
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[8] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 120 then
-                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
-            else
-                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
-            end
         else
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].recordLevelUp = false;
 
@@ -9741,15 +10263,21 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Button:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Button:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Button:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Button:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Button:Disable();
+            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button:Disable();
+
         end
         GRM.SyncSettings();
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelRange:SetText ( GRM.GetLevelRange() );
     end);
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelRecordButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelRecordButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText:SetText ( GRM.L ( "Report Level Up Changes" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelRecordButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText );
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText3:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText , "BOTTOMLEFT" , 1 , -20 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText3:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
@@ -9765,7 +10293,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText2 , "RIGHT" , 4 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Text:SetText ( "60" );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Text:SetText ( "10" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Button:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Text , "RIGHT" , -2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Button:SetHitRectInsets ( 0 , 0 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Button:SetScript ( "OnClick", function( self )
@@ -9774,7 +10302,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
         else
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[1] = false;
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin > 60 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin > 10 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
         end
@@ -9784,7 +10312,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Button , "RIGHT" , 4 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Text:SetText ( "70" );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Text:SetText ( "20" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Button:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Text , "RIGHT" , -2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Button:SetHitRectInsets ( 0 , 0 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Button:SetScript ( "OnClick", function( self )
@@ -9793,7 +10321,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
         else
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[2] = false;
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin > 70 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin > 20 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
         end
@@ -9803,7 +10331,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Button , "RIGHT" , 4 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Text:SetText ( "80" );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Text:SetText ( "30" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Button:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Text , "RIGHT" , -2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Button:SetHitRectInsets ( 0 , 0 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Button:SetScript ( "OnClick", function( self )
@@ -9812,7 +10340,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
         else
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[3] = false;
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin > 80 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin > 30 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
         end
@@ -9822,7 +10350,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Button , "RIGHT" , 4 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetText ( "85" );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetText ( "40" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Button:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text , "RIGHT" , -2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Button:SetHitRectInsets ( 0 , 0 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Button:SetScript ( "OnClick", function( self )
@@ -9831,7 +10359,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
         else
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[4] = false;
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin > 85 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin > 40 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
         end
@@ -9841,7 +10369,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Button , "RIGHT" , 4 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetText ( "90" );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetText ( "50" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Button:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text , "RIGHT" , -2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Button:SetHitRectInsets ( 0 , 0 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Button:SetScript ( "OnClick", function( self )
@@ -9850,7 +10378,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
         else
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[5] = false;
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin > 90 then
+            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin > 50 then
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
             end
         end
@@ -9860,7 +10388,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Button , "RIGHT" , 4 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetText ( "100" );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetText ( "60" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text , "RIGHT" , -2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button:SetHitRectInsets ( 0 , 0 , 0 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button:SetScript ( "OnClick", function( self )
@@ -9868,66 +10396,23 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[6] = true;
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
         else
-            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[6] = false;
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin > 100 then
-                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
-            end
+            self:SetChecked ( true );
         end
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelRange:SetText ( GRM.GetLevelRange() );
         GRM.SyncSettings();
     end);
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button , "RIGHT" , 4 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetText ( "110" );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Button:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text , "RIGHT" , -2 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Button:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Button:SetScript ( "OnClick", function( self )
-        if self:GetChecked() then
-            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[7] = true;
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
-        else
-            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[7] = false;
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin > 110 then
-                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
-            end
-        end
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelRange:SetText ( GRM.GetLevelRange() );
-        GRM.SyncSettings();
-    end);
-
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Button , "RIGHT" , 4 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetText ( "120" );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Button:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text , "RIGHT" , -2 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Button:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Button:Disable();
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Button:SetScript ( "OnClick", function( self )
-        if self:GetChecked() then
-            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[8] = true;
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
-        else
-            GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[8] = false;
-            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin > 120 or ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin == GRM_G.LvlCap and GRM_UI.AllLevelFiltersOff ) then
-                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
-            end
-        end
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelRange:SetText ( GRM.GetLevelRange() );
-        GRM.SyncSettings();
-    end);
-
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Button:SetScript ( "OnEnter" , function( self )
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button:SetScript ( "OnEnter" , function( self )
         GRM_UI.SetTooltipScale();
         GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
         GameTooltip:AddLine( GRM.L ( "Unable to disable level cap tracking. Please disable ALL tracking to turn off." ) );
         GameTooltip:Show();
     end);
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Button:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
     end);
-
+    
     -- Need to make new checkbox option to choose to record levels or not.
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncSpeedSlider.GRM_SyncSpeedSliderText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.OptionsSyncHeaderText , "BOTTOMLEFT" , 0 , -10 );
@@ -9969,8 +10454,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncSpeedSlider:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_DateSubmitButton:SetPoint ( "TOP" , GRM_UI.GRM_MemberDetailMetaData.GRM_MonthDropDownMenuSelected , "BOTTOM" , -20 , -3 );
@@ -10000,8 +10484,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end)
     GRM_UI.GRM_MemberDetailMetaData.GRM_DateSubmitButton:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end)
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_DateSubmitButton:SetScript ( "OnKeyDown" , function ( self , key )
@@ -10025,13 +10508,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterCheckBoxSideFrame , 14 , -45 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterJoinedChatCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame , -14 , -45 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterJoinedChatCheckButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[1][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[1][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[1][3] , 1.0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButtonText:SetText ( GRM.L ( "Joined" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButtonText:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButton:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10060,13 +10544,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterJoinedCheckButton , "BOTTOMLEFT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterLeveledChatCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterJoinedChatCheckButton , "BOTTOMRIGHT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterLeveledChatCheckButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[2][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[2][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[2][3] , 1.0 )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButtonText:SetText ( GRM.L ( "Leveled" ) .. " " );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButtonText:SetWordWrap ( false );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButtonText:SetWidth ( 50 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButton:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10096,13 +10581,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeveledChangeCheckButton , "BOTTOMLEFT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterInactiveReturnChatCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterLeveledChatCheckButton , "BOTTOMRIGHT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterInactiveReturnChatCheckButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[3][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[3][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[3][3] , 1.0 )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButtonText:SetText ( GRM.L ( "Inactive Return" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButtonText:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButton:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10131,13 +10617,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterInactiveReturnCheckButton , "BOTTOMLEFT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterPromotionChatCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterInactiveReturnChatCheckButton , "BOTTOMRIGHT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterPromotionChatCheckButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[4][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[4][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[4][3] , 1.0 )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButtonText:SetText ( GRM.L ( "Promotions" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButtonText:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButton:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10166,13 +10653,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterPromotionChangeCheckButton , "BOTTOMLEFT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterDemotionChatCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterPromotionChatCheckButton , "BOTTOMRIGHT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterDemotionChatCheckButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[5][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[5][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[5][3] , 1.0 )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButtonText:SetText ( GRM.L ( "Demotions" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButtonText:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButton:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10201,13 +10689,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterDemotionChangeCheckButton , "BOTTOMLEFT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterNoteChatCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterDemotionChatCheckButton , "BOTTOMRIGHT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterNoteChatCheckButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[6][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[6][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[6][3] , 1.0 )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButtonText:SetText ( GRM.L ( "Note" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButtonText:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButton:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10236,13 +10725,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNoteChangeCheckButton , "BOTTOMLEFT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterOfficerNoteChatCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterNoteChatCheckButton , "BOTTOMRIGHT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterOfficerNoteChatCheckButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[7][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[7][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[7][3] , 1.0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButtonText:SetText ( GRM.L ( "Officer's Note" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButtonText:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButton:SetScript ( "OnClick", function(self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10271,13 +10761,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterOfficerNoteChangeCheckButton , "BOTTOMLEFT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterCustomNoteChatCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterOfficerNoteChatCheckButton , "BOTTOMRIGHT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterCustomNoteChatCheckButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[8][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[8][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[8][3] , 1.0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButtonText:SetText ( GRM.L ( "Custom Note" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButtonText:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButton:SetScript ( "OnClick", function(self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10306,13 +10797,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterCustomNoteChangeCheckButton , "BOTTOMLEFT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterNameChangeChatCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterCustomNoteChatCheckButton , "BOTTOMRIGHT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterNameChangeChatCheckButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[9][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[9][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[9][3] , 1.0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButtonText:SetText ( GRM.L ( "Name Change" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButtonText:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButton:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10341,13 +10833,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterNameChangeCheckButton , "BOTTOMLEFT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterRankRenameChatCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterNameChangeChatCheckButton , "BOTTOMRIGHT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterRankRenameChatCheckButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[10][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[10][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[10][3] , 1.0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButtonText:SetText ( GRM.L ( "Rank Renamed" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButtonText:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButton:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10376,13 +10869,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRankRenameCheckButton , "BOTTOMLEFT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterEventChatCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterRankRenameChatCheckButton , "BOTTOMRIGHT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterEventChatCheckButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[11][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[11][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[11][3] , 1.0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButtonText:SetText ( GRM.L ( "Event Announce" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButtonText:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButton:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10411,13 +10905,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterEventCheckButton , "BOTTOMLEFT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterLeftGuildChatCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterEventChatCheckButton , "BOTTOMRIGHT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterLeftGuildChatCheckButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[12][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[12][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[12][3] , 1.0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButtonText:SetText ( GRM.L ( "Left" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButtonText:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButton:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10446,13 +10941,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterLeftGuildCheckButton , "BOTTOMLEFT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterRecommendationsChatButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterLeftGuildChatCheckButton , "BOTTOMRIGHT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterRecommendationsChatButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[13][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[13][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[13][3] , 1.0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButtonText:SetText ( GRM.L ( "Recommendations" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButtonText:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButton:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10481,13 +10977,14 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterRecommendationsButton , "BOTTOMLEFT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterBannedPlayersButtonChatButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterRecommendationsChatButton , "BOTTOMRIGHT" , 0 , 2 );
     GRM_UI.GRM_RosterCheckBoxSideFrame.GRM_RosterBannedPlayersButtonChatButton:SetHitRectInsets ( 0 , 0 , 0 , 0 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButton , 27 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButton , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButtonText:SetTextColor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[14][1] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[14][2] , GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].logColor[14][3] , 1.0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButtonText:SetText ( GRM.L ( "Banned" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButtonText:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButtonText:SetWidth ( 120 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButtonText:SetJustifyH ( "LEFT" );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_RosterBannedPlayersButton:SetScript ( "OnClick", function( self , button )
         if button == "LeftButton" then
             if self:GetChecked() then
@@ -10611,10 +11108,15 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
         GRM.SyncSettings();
     end);
     
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagJoinText , "BOTTOMLEFT" , 0 , -12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_CustomTagREJoinText , "BOTTOMLEFT" , 0 , -12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButtonText:SetText ( GRM.L ( "Allow Guild Members to Type \"!note\" to Set Their Own Public Note" ) .. " |cff00ccff(" .. GRM.L ( "GC" ) .. ")|r" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButtonText:SetWordWrap ( true );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButtonText:SetWidth ( 540 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButtonText:SetSpacing ( 0.5 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButtonText:SetJustifyH ( "LEFT" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButton , "RIGHT" , 1 , 0 );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButton , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButtonText );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButton:SetScript ( "OnClick", function ( self , button )
         if button == "LeftButton" and not GRM_G.GlobalControl7 then
             if self:GetChecked() then
@@ -10637,7 +11139,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButton:SetScript ( "OnEnter" , function( self )
         local isRestricted = GRM.IsSyncRankGuildLeaderRestricted ( 9 );
 
-        if isRestricted and not IsGuildLeader() then
+        if isRestricted and not CanEditGuildInfo() then
             GRM_G.GlobalControl7 = true;
             local setting = "";
             if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].noteSetEnabled then
@@ -10655,8 +11157,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_NoteTagFeatureCheckButton:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
     
     
@@ -10719,10 +11220,35 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
         end
     end);
 
+    -- Method:          GRM_UI.DefaultTabSelectLogic()
+    -- What it Does:    Opens the corresponding tab everytime the core GRM window is opened
+    -- Purpose:         Quality of life customization controls
+    GRM_UI.DefaultTabSelectLogic = function()
+        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].defaultTabSelection[1] then
+            local target = GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].defaultTabSelection[2];
+
+            if target == 1 then
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_LogTab:Click();
+            elseif target == 2 then
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_AddEventTab:Click();
+            elseif target == 3 then
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_BanListTab:Click();
+            elseif target == 4 then
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_AddonUsersTab:Click();
+            elseif target == 5 then
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsTab:Click();
+            elseif target == 6 then
+                GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab:Click();
+            end
+        end
+    end
+
     -- Build Log Frames Function
     GRM_UI.GRM_RosterChangeLogFrame:SetScript ( "OnShow" , function()
         GRM_UI.BuildLogFrames();
-        -- GRM_UI.GRM_RosterChangeLogFrame.GRM_LogFrame.GRM_LogEditBox:SetText( GRM.L ( "Search Filter" ) );
+        GRM_UI.DefaultTabSelectLogic();
+        
+
         if not GRM_G.MinimapOk then
             C_Timer.After ( 1 , function()
                 GRM_G.MinimapOk = true;
@@ -10860,8 +11386,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton1:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton1:SetScript ( "OnClick" , function ( _ , button )
@@ -10886,7 +11411,11 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton2Text:SetWidth ( 105 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton2Text:SetJustifyH ( "CENTER" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton2Text:SetText ( string.upper ( GRM.L ( "Join Date" ) ) );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton2Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 14 );
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].selectedLang == 5 then -- Russian
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton2Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
+    else
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton2Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 14 );
+    end
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton2:SetScript ( "OnEnter" , function ( self )
         GRM_UI.SetTooltipScale();
@@ -10900,8 +11429,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton2:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton2:SetScript ( "OnClick" , function ( _ , button )
@@ -10926,7 +11454,11 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton3Text:SetWidth ( 105 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton3Text:SetJustifyH ( "CENTER" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton3Text:SetText ( string.upper ( GRM.L ( "Promo Date" ) ) );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton3Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 14 );
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].selectedLang == 5 then -- Russian
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton3Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
+    else
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton3Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 14 );
+    end
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton3:SetScript ( "OnEnter" , function ( self )
         GRM_UI.SetTooltipScale();
@@ -10940,8 +11472,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton3:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton3:SetScript ( "OnClick" , function ( _ , button )
@@ -10966,7 +11497,11 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton4Text:SetWidth ( 105 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton4Text:SetJustifyH ( "CENTER" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton4Text:SetText ( string.upper ( GRM.L ( "Birthday" ) ) );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton4Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 14 );
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].selectedLang == 5 then -- Russian
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton4Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
+    else
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton4Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 14 );
+    end
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton4:SetScript ( "OnEnter" , function ( self )
         GRM_UI.SetTooltipScale();
@@ -10980,8 +11515,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton4:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton4:SetScript ( "OnClick" , function ( _ , button )
@@ -11007,7 +11541,11 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton5Text:SetWordWrap ( false );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton5Text:SetJustifyH ( "CENTER" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton5Text:SetText ( string.upper ( GRM.L ( "Main/Alt" ) ) );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton5Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 14 );
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].selectedLang == 5 then -- Russian
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton5Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
+    else
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton5Text:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 14 );
+    end
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton5:SetScript ( "OnEnter" , function ( self )
         GRM_UI.SetTooltipScale();
@@ -11021,8 +11559,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton5:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditFrameButton5:SetScript ( "OnClick" , function ( _ , button )
@@ -11259,8 +11796,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame:SetScript ( "OnHide" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
         GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditWindowDropDownFrame:Hide();
     end);
 
@@ -11279,13 +11815,11 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
 
                 elseif GameTooltip:IsVisible() and not ( self.GRM_AuditFrameText7:IsMouseOver ( 4 , -4 , -4 , 4 ) or self.GRM_AuditFrameText8:IsMouseOver ( 4 , -4 , -4 , 4 ) ) then
                     if GameTooltip:GetOwner() ~= nil and GameTooltip:GetOwner():GetName() == "GRM_AuditFrame" then
-                        GRM_UI.RestoreTooltipScale();
-                        GameTooltip:Hide();
+                        GRM.RestoreTooltip();
                     end
                 end
             elseif GameTooltip:IsVisible() and GameTooltip:GetOwner() ~= nil and GameTooltip:GetOwner():GetName() == "GRM_AuditFrame" then
-                GRM_UI.RestoreTooltipScale();
-                GameTooltip:Hide();
+                GRM.RestoreTooltip();
             end
             GRM_G.auditTimer = 0;
         end
@@ -11450,7 +11984,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolButton6Text:SetText ( GRM.L ( "Clear Selection" ) );
 
     GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolCheckBox:SetPoint ( "TOPLEFT" , GRM_UI.GRM_AuditJDTool.GRM_JDToolScrollBorderFrame , "BOTTOMLEFT" , 15 , 5 )
-    GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolCheckBoxText:SetPoint ( "LEFT" , GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolCheckBox , 27 , 0 );
+    GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolCheckBoxText:SetPoint ( "LEFT" , GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolCheckBox , "RIGHT" , 2 , 0 );
     GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolCheckBoxText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
     GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolCheckBoxText:SetText ( GRM.L ( "Only Show Players With Incomplete Status" ) );
     GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolCheckBox:SetScript ( "OnClick" , function( self , button )
@@ -11513,8 +12047,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolButton4:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     ---- BUTTON 3 ----
@@ -11535,8 +12068,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolButton3:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     ---- BUTTON 2 ----
@@ -11561,8 +12093,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolButton2:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     ---- BUTTON 1 ----
@@ -11586,8 +12117,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolButton1:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     ---- BUTTON 7 ----
@@ -11642,8 +12172,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_AuditJDTool.GRM_AuditJDToolButton7:SetScript ( "OnLeave" , function ()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- Refresh Highlights
@@ -11773,7 +12302,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanTitleText:SetText ( GRM.L ( "Add Player to Ban List" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanTitleText:SetFont( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_CompleteBanEntryText:SetPoint ( "RIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanConfirmButton , "LEFT" , -17 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_CompleteBanEntryText:SetPoint ( "RIGHT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanConfirmButton , "LEFT" , -14 , -5 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_CompleteBanEntryText:SetFont( GRM_G.FontChoice , GRM_G.FontModifier + 10 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_CompleteBanEntryText:SetWidth ( 75 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_CompleteBanEntryText:SetText ( GRM.L ( "Press ENTER to complete" ) );
@@ -11786,11 +12315,11 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_CompleteBanEntryText2:SetWordWrap ( true );
 
 
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame , "TOPLEFT" , 18 , -35 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame , "TOPLEFT" , 8 , -35 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionText:SetText ( GRM.L ( "Name:" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionText:SetFont( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
     -- Edit Box Values
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionEditBox:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionText , "RIGHT" , 20 , 0 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionEditBox:SetPoint ( "LEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionText , "RIGHT" , 30 , 0 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionEditBox:SetSize ( 125 , 20 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionEditBox:SetTextInsets( 2 , 3 , 3 , 2 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionEditBox:SetMaxLetters ( 12 );
@@ -11895,8 +12424,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_BanServerSelected:SetScript ( "OnLeave" , function()
         if GameTooltip:IsVisible() then
-            GRM_UI.RestoreTooltipScale();
-            GameTooltip:Hide();
+            GRM.RestoreTooltip();
         end
     end);
 
@@ -11929,7 +12457,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBoxText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanClassSelectionText , "BOTTOMLEFT" , 0 , -10 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBoxText:SetText ( GRM.L ( "Reason:" ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBoxText:SetFont( GRM_G.FontChoice , GRM_G.FontModifier + 11 );
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionWarningText:SetPoint ( "BOTTOM" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame , 0 , 16 );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionWarningText:SetPoint ( "BOTTOM" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame , 0 , 12 );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionWarningText:SetText ( GRM.L ( "It is |CFFFF0000CRITICAL|r the player's name and server are spelled correctly for accurate tracking and notifications." ) );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionWarningText:SetWordWrap ( true );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionWarningText:SetWidth ( 250 );
@@ -12231,11 +12759,13 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
         GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanDropDownMenu:Hide();
         GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_PopupWindowConfirmFrame:Hide();
         GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanScrollFrame:Hide();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBoxFrame:EnableMouse ( false );
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBox:SetScript ( "OnEditFocusLost" , function()
         GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBox:HighlightText ( #GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBox:GetText() );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_ReasonCountText:Hide();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBoxFrame:EnableMouse ( true );
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanReasonEditBox:SetScript ( "OnTextChanged" , function ( self )
@@ -12252,8 +12782,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
                     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanDropDownMenu:Hide();
             else
                 if GameTooltip:IsVisible() then
-                    GRM_UI.RestoreTooltipScale();
-                    GameTooltip:Hide();
+                    GRM.RestoreTooltip();
                 end
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanDropDownMenu:Show();
             end
@@ -12270,8 +12799,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanDropDownClassSelected:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- Resets the values on loading the "Add Ban" window...
@@ -12569,12 +13097,13 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
                 memberInfoToAdd.rankIndex = 99;                                         -- 3 (It needs to be 1 less to match when compared to the guildRosterInfo call )
                 memberInfoToAdd.level = 1;                                              -- 4
                 memberInfoToAdd.note = "";                                              -- 5
-                if CanViewOfficerNote() then -- Officer Note permission to view.
+                if C_GuildInfo.CanViewOfficerNote() then -- Officer Note permission to view.
                     memberInfoToAdd.officerNote = "";                                   -- 6
                 else
                     memberInfoToAdd.officerNote = nil; -- Set Officer note to nil if needed due to memberInfoToAdd not being able to view. - If it is set to "" then memberInfoToAdd will think it is changing.
                 end
                 memberInfoToAdd.class = string.upper ( GRM_G.tempAddBanClass );                                   -- 7
+                originalClass = memberInfoToAdd.class;
                 memberInfoToAdd.lastOnline = 1;                                         -- 8 Time since they last logged in in hours.
                 memberInfoToAdd.zone = "";                                              -- 9
                 memberInfoToAdd.achievementPoints = 100;                                -- 10    
@@ -12694,6 +13223,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
         end
         -- Build the frames...
         GRM.RefreshBanListFrames();
+        GRM_Patch.BuildGUIDProfilesForAllNoLongerInGuild(); -- One Time
         
     end);
 
@@ -12802,8 +13332,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_BanListRemoveAllCurrentButton:SetScript ( "OnLeave" , function()
-        GRM_UI.RestoreTooltipScale();
-        GameTooltip:Hide();
+        GRM.RestoreTooltip()
     end);
 
     -- For managing the logic on the ban editing.
@@ -12994,62 +13523,67 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
                 if CanEditGuildEvent() then
                     local tempTime = time();
                     if tempTime - GRM_G.CalendarAddDelay > 5 then
-                        for i = 1 , #GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName] do
-                            local name = GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][1];
-                            local title = GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][2];
-                            if GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameNameToAddTitleText:GetText() == GRM.SlimName ( name ) and GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameNameToAddText:GetText() == title then
-    
-                                -- Ensure it is not already on the calendar ( eventName , year , month , day )
-                                if not GRM.IsCalendarEventAlreadyAdded ( GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][2] , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][5] , GRM.ConvertMonthToSelectedCalendarMonth ( GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][3] ) , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][4] ) then
-                                    -- Add to Calendar
-                                    GRM.AddAnnouncementToCalendar ( title , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][3] , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][4] , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][5] , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][6] );
-                                    -- Do I really need a "SlimName" here?
-                                    GRM.Report ( GRM.L ( "Event Added to Calendar: {custom1}" , nil , nil , nil , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][2] ) );
-                                    
-                                    -- Let's Broadcast the change to the other users now!
-                                    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncEnabled then
-                                        local syncRankFilter = GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncRank;
-                                        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportAllRanks then
-                                            syncRankFilter = GuildControlGetNumRanks() - 1;
+                        for i = #GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName] , 1 , -1 do
+
+                            if GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i] == nil or GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][1] == nil then
+                                table.remove ( GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName] , i );
+                            else
+                                local name = GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][1];
+                                local title = GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][2];
+                                if GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameNameToAddTitleText:GetText() == GRM.SlimName ( name ) and GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameNameToAddText:GetText() == title then
+        
+                                    -- Ensure it is not already on the calendar ( eventName , year , month , day )
+                                    if not GRM.IsCalendarEventAlreadyAdded ( GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][2] , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][5] , GRM.ConvertMonthToSelectedCalendarMonth ( GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][3] ) , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][4] ) then
+                                        -- Add to Calendar
+                                        GRM.AddAnnouncementToCalendar ( title , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][3] , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][4] , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][5] , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][6] );
+                                        -- Do I really need a "SlimName" here?
+                                        GRM.Report ( GRM.L ( "Event Added to Calendar: {custom1}" , nil , nil , nil , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][2] ) );
+                                        
+                                        -- Let's Broadcast the change to the other users now!
+                                        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncEnabled then
+                                            local syncRankFilter = GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncRank;
+                                            if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportAllRanks then
+                                                syncRankFilter = GuildControlGetNumRanks() - 1;
+                                            end
+                                            GRMsync.SendMessage ( "GRM_SYNC" , GRM_G.PatchDayString .. "?GRM_AC?" .. syncRankFilter .. "?" .. name .. "?" .. GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][2] .. "?" .. tostring ( GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][7] ) , "GUILD");
                                         end
-                                        GRMsync.SendMessage ( "GRM_SYNC" , GRM_G.PatchDayString .. "?GRM_AC?" .. syncRankFilter .. "?" .. name .. "?" .. GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][2] .. "?" .. tostring ( GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][7] ) , "GUILD");
-                                    end
-    
-                                    -- Remove from que
-                                    GRM.RemoveFromCalendarQue ( name , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][7] , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][2] );
-                                    -- Reset Frames
-                                    -- Clear the buttons first
-                                    if GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_AddEventScrollChildFrame.allFrameButtons ~= nil then
+        
+                                        -- Remove from que
+                                        GRM.RemoveFromCalendarQue ( name , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][7] , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][2] );
+                                        -- Reset Frames
+                                        -- Clear the buttons first
+                                        if GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_AddEventScrollChildFrame.allFrameButtons ~= nil then
+                                            for i = 1 , #GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_AddEventScrollChildFrame.allFrameButtons do
+                                                GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_AddEventScrollChildFrame.allFrameButtons[i][1]:Hide();
+                                            end
+                                        end
+                                        -- Status Notification logic
+                                        if #GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName] > 0 then
+                                            GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameStatusMessageText:SetText ( GRM.L ( "Please Select Event to Add to Calendar" ) );
+                                            GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameStatusMessageText:Show();
+                                            GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameNameToAddText:Hide();
+                                            GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameNameDateText:Hide();
+                                        else
+                                            GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameStatusMessageText:SetText ( GRM.L ( "No Calendar Events to Add" ) );
+                                            GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameStatusMessageText:Show();
+                                            GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameNameToAddText:Hide();
+                                            GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameNameDateText:Hide();
+                                        end
+                            
+                                        -- Ok Building Frame!
+                                        GRM.BuildEventCalendarManagerScrollFrame();
+                                        -- Unlock the highlights too!
                                         for i = 1 , #GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_AddEventScrollChildFrame.allFrameButtons do
-                                            GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_AddEventScrollChildFrame.allFrameButtons[i][1]:Hide();
+                                            GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_AddEventScrollChildFrame.allFrameButtons[i][1]:UnlockHighlight();
                                         end
-                                    end
-                                    -- Status Notification logic
-                                    if #GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName] > 0 then
-                                        GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameStatusMessageText:SetText ( GRM.L ( "Please Select Event to Add to Calendar" ) );
-                                        GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameStatusMessageText:Show();
-                                        GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameNameToAddText:Hide();
-                                        GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameNameDateText:Hide();
+        
+                                        GRM_G.CalendarAddDelay = tempTime;
+                                        break;
                                     else
-                                        GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameStatusMessageText:SetText ( GRM.L ( "No Calendar Events to Add" ) );
-                                        GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameStatusMessageText:Show();
-                                        GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameNameToAddText:Hide();
-                                        GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameNameDateText:Hide();
+                                        GRM.Report ( GRM.L ( "{name}'s event has already been added to the calendar!" , GRM.SlimName ( name ) ) );
+                                        GRM.RemoveFromCalendarQue ( name , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][7] , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][2] );
+                                        GRM.RefreshAddEventFrame();
                                     end
-                        
-                                    -- Ok Building Frame!
-                                    GRM.BuildEventCalendarManagerScrollFrame();
-                                    -- Unlock the highlights too!
-                                    for i = 1 , #GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_AddEventScrollChildFrame.allFrameButtons do
-                                        GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_AddEventScrollChildFrame.allFrameButtons[i][1]:UnlockHighlight();
-                                    end
-    
-                                    GRM_G.CalendarAddDelay = tempTime;
-                                    break;
-                                else
-                                    GRM.Report ( GRM.L ( "{name}'s event has already been added to the calendar!" , GRM.SlimName ( name ) ) );
-                                    GRM.RemoveFromCalendarQue ( name , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][7] , GRM_CalendarAddQue_Save[GRM_G.F][GRM_G.guildName][i][2] );
-                                    GRM.RefreshAddEventFrame();
                                 end
                             end
                         end
@@ -13123,7 +13657,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
     -- Slider Parameters
     GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame.GRM_AltGroupingScrollChildFrame.GRM_AltGroupingScrollFrameSlider:SetOrientation ( "VERTICAL" );
     GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame.GRM_AltGroupingScrollChildFrame.GRM_AltGroupingScrollFrameSlider:SetSize ( 20 , 85 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame.GRM_AltGroupingScrollChildFrame.GRM_AltGroupingScrollFrameSlider:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame.GRM_AltGroupingScrollFrame , "TOPRIGHT" , -3.5 , -14.5 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame.GRM_AltGroupingScrollChildFrame.GRM_AltGroupingScrollFrameSlider:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame.GRM_AltGroupingScrollFrame , "TOPRIGHT" , -1.5 , -14.5 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame.GRM_AltGroupingScrollChildFrame.GRM_AltGroupingScrollFrameSlider:SetValue ( 0 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame.GRM_AltGroupingScrollChildFrame.GRM_AltGroupingScrollFrameSlider:SetValueStep ( 20 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame.GRM_AltGroupingScrollChildFrame.GRM_AltGroupingScrollFrameSlider:SetStepsPerPage ( 14 );
@@ -13163,19 +13697,30 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
         end
         GRM_G.timer6 = 0;               -- reset onupdate timer...
         if GRM_UI.GRM_MemberDetailMetaData:IsMouseOver() then
-            GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_MemberDetailMetaData , "BOTTOMRIGHT" , -3 , 0 );
-        elseif CalendarViewEventFrame and CalendarViewEventFrame:IsMouseOver() then
-            GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:SetPoint ( "BOTTOMLEFT" , CalendarViewEventFrame , "BOTTOMRIGHT" , 11 , 0 );
+            GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:ClearAllPoints();
+            GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_MemberDetailMetaData , "BOTTOMRIGHT" , -1 , 0 );
+            GRM.BuildAltGroupingScrollFrame( GRM_G.currentName );
+        elseif CalendarViewEventFrame and CalendarViewEventFrame:IsVisible() and CalendarViewEventFrame:IsMouseOver() then
+            GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:ClearAllPoints();
+            if IsAddOnLoaded ( "LOIHCal" ) and not LOIHCalDB.config.overlay then
+                GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:SetPoint ( "TOP" , LOIHCal_Container , "BOTTOM" , 0 , -50 );
+            else
+                GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:SetPoint ( "BOTTOMLEFT" , CalendarViewEventFrame , "BOTTOMRIGHT" , 11 , 0 );
+            end
             GRM_UI.GRM_MemberDetailMetaData:Hide();
-        elseif CalendarCreateEventFrame and CalendarCreateEventFrame:IsMouseOver() then
-            GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:SetPoint ( "BOTTOMLEFT" , CalendarCreateEventFrame , "BOTTOMRIGHT" , 11 , 0 );
+            GRM.BuildAltGroupingScrollFrame( GRM_G.CurrentCalendarName );
+        elseif CalendarCreateEventFrame and CalendarCreateEventFrame:IsVisible() and CalendarCreateEventFrame:IsMouseOver() then
+            GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:ClearAllPoints();
+            if IsAddOnLoaded ( "LOIHCal" ) and not LOIHCalDB.config.overlay then
+                GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:SetPoint ( "TOP" , LOIHCal_Container , "BOTTOM" , 0 , -50 );
+            else
+                GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:SetPoint ( "BOTTOMLEFT" , CalendarCreateEventFrame , "BOTTOMRIGHT" , 11 , 0 );
+            end
             GRM_UI.GRM_MemberDetailMetaData:Hide();
+            GRM.BuildAltGroupingScrollFrame( GRM_G.CurrentCalendarName );
         end
-        -- Reset the tooltips
-        GRM.BuildAltGroupingScrollFrame();
-        GRM_UI.RestoreTooltipScale();
+        GRM.RestoreTooltip();
         GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingTooltip:Hide();
-        GameTooltip:Hide();
     end);
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:SetScript ( "OnHide" , function()
@@ -13222,7 +13767,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
             end
 
             if needsRefresh then
-                GRM.BuildAltGroupingScrollFrame();
+                GRM.BuildAltGroupingScrollFrame( GRM_G.currentName );
             end
         end
     end);
@@ -13243,7 +13788,7 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
                 end
                 
                 if GRM_G.timer7 > 300 then
-                    GRM.BuildAltGroupingScrollFrame();      -- Rebuild every 5 min just in case changes.
+                    GRM.BuildAltGroupingScrollFrame( GRM_G.currentName );      -- Rebuild every 5 min just in case changes.
                     GRM_G.timer7 = 0;
                 end
                 GRM_G.timer6 = 0;
@@ -13501,6 +14046,9 @@ GRM_UI.BuildLogFrames = function()
     if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncSameVersion then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncOnlyCurrentVersionCheckButton:SetChecked ( true );
     end
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncCompatibilityMsg then
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncCompatibilityMessageButton:SetChecked ( true );
+    end
 
     if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncBanList then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanList:SetChecked ( true );
@@ -13526,6 +14074,9 @@ GRM_UI.BuildLogFrames = function()
     if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].exportAllRanks then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton:SetChecked ( true );
     end
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].autoTriggerSync then
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton:SetChecked ( true );
+    end
     if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].syncCustomNote then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBox:SetChecked ( true );
     end
@@ -13540,6 +14091,9 @@ GRM_UI.BuildLogFrames = function()
     if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].allAltRequirement then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ReportInactivesOnlyIfAllButton:SetChecked ( true );
     end
+    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].defaultTabSelection[1] then
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_GeneralOptionsFrame.GRM_DefaultTabSelectionButton:SetChecked ( true );
+    end
 
     -- Leveling 
     if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].recordLevelUp then
@@ -13548,53 +14102,47 @@ GRM_UI.BuildLogFrames = function()
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText2:SetTextColor ( 1.0 , 0.82 , 0 , 1 );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText3:SetTextColor ( 1.0 , 0.82 , 0 , 1 );
         
-        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[1] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 60 then
+        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[1] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 10 then
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
         else
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
         end
 
-        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[2] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 70 then
+        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[2] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 20 then
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
         else
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
         end
 
-        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[3] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 80 then
+        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[3] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 30 then
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
         else
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
         end
 
-        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[4] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 85 then
+        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[4] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 40 then
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
         else
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
         end
 
-        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[5] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 90 then
+        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[5] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 50 then
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
         else
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
         end
 
-        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[6] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 100 then
+        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[6] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 60 then
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
         else
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
         end
-
-        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[7] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 110 then
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
-        else
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
-        end
-
-        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[8] or GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin <= 120 then
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetTextColor ( 0.0 , 0.8 , 1.0 , 1.0 );
-        else
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetTextColor ( 1.0 , 0 , 0 , 1 );
-        end
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Button:Enable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Button:Enable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Button:Enable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Button:Enable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Button:Enable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button:Enable();
     else
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText2:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_MinLevelText3:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
@@ -13604,8 +14152,12 @@ GRM_UI.BuildLogFrames = function()
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Text:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter1Button:Disable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter2Button:Disable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter3Button:Disable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter4Button:Disable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter5Button:Disable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button:Disable();
     end
 
     -- Sub controls on leveling
@@ -13631,14 +14183,6 @@ GRM_UI.BuildLogFrames = function()
 
     if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[6] then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter6Button:SetChecked ( true );
-    end
-
-    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[7] then
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter7Button:SetChecked ( true );
-    end
-
-    if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelFilters[8] then
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelFilter8Button:SetChecked ( true );
     end
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_LevelRange:SetText ( GRM.GetLevelRange() );
@@ -13719,7 +14263,7 @@ GRM_UI.BuildLogFrames = function()
     
     -- Reset the editboxes
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterReportUpcomingEventsOverlayNoteText:SetText ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].eventAdvanceDays ) ;    
-    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNoteText:SetText ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].scanDelay );
+    GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_RosterTimeIntervalOverlayNote.GRM_RosterTimeIntervalOverlayNoteText:SetText ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].scanDelay );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_ReportInactiveReturnOverlayNoteText:SetText ( math.floor ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].inactiveHours / 24 ) );
     if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].levelReportMin == 0 then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_ScanningOptionsFrame.GRM_RosterMinLvlOverlayNoteText:SetText ( 1 );
@@ -13751,6 +14295,11 @@ GRM_UI.BuildLogFrames = function()
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanListText3:SetTextColor ( 1.0 , 0.82 , 0.0 , 1.0 );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton:Enable();
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButtonText:SetTextColor ( 1.0 , 0.82 , 0.0 , 1.0 );
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton:Enable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText:SetTextColor ( 1.0 , 0.82 , 0.0 , 1.0 );
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText2:SetTextColor ( 1.0 , 0.82 , 0.0 , 1.0 );
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:Enable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote.GRM_AutoTriggerTimeOverlayNoteText:SetTextColor ( 1.0 , 0 , 0 , 1.0 );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBox:Enable();
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBoxText:SetTextColor ( 1.0 , 0.82 , 0.0 , 1.0 );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_BDaySyncCheckBox:Enable();
@@ -13773,6 +14322,11 @@ GRM_UI.BuildLogFrames = function()
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_RosterSyncBanListText3:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButton:Disable();
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_SyncAllRestrictReceiveButtonText:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButton:Disable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_AutoTriggerSyncCheckButtonText2:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeEditBox:Disable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_AutoTriggerTimeOverlayNote.GRM_AutoTriggerTimeOverlayNoteText:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBox:Disable();
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_CustomNoteSyncCheckBoxText:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_SyncOptionsFrame.GRM_DefaultCustomRankText:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
@@ -13927,12 +14481,11 @@ if GRM_G.BuildVersion >= 30000 then  -- < 2 = Classic and < 3 = TBC - no calenda
             button:SetScript ( "OnEnter" , function( self )
                 local inviteIndex = i + GRM_G.currentCalendarOffset;
                 local inviteInfo = C_Calendar.EventGetInvite ( inviteIndex );
+
                 if ( inviteInfo ~= nil and inviteInfo.name ) then               -- Verify the buttons.
                     local name = GRM.FormatNameWithPlayerServer ( inviteInfo.name );
                     GRM_G.CurrentCalendarName = name;
-                    if not GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:IsVisible() then
-                        GRM_G.currentName = name;                           -- useful for players with alts...
-                    end
+
                     local classHexCode = GRM.GetClassColorRGB ( inviteInfo.classFilename , true );
                     GRM_G.CurrentCalendarHexCode = classHexCode;
                     name = classHexCode .. GRM.GetNameWithMainTags ( name , false , true , true , false ) .. "|r";
@@ -13940,12 +14493,15 @@ if GRM_G.BuildVersion >= 30000 then  -- < 2 = Classic and < 3 = TBC - no calenda
                     GRM_UI.SetTooltipScale();
                     GameTooltip:SetOwner ( self  , "ANCHOR_CURSOR" );
                     GameTooltip:AddLine ( name );
+
                     if GRM_G.IsAltGrouping then
                         GameTooltip:AddLine ( GRM.L ( "|CFFE6CC7FClick|r to view more alt details." ) );
                     end
+
                     GameTooltip:AddLine( GRM.L ( "|CFFE6CC7FRight-Click|r for additional options." ) );
                     -- For calendar timing
                     local responseTime = C_Calendar.EventGetInviteResponseTime ( button.inviteIndex );
+
                     if ( responseTime and responseTime.weekday ~= 0 ) then
                         GameTooltip:AddLine ( CALENDAR_TOOLTIP_INVITE_RESPONDED );
                         -- date
@@ -13959,36 +14515,37 @@ if GRM_G.BuildVersion >= 30000 then  -- < 2 = Classic and < 3 = TBC - no calenda
                             HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b
                         );
                     end
+
                     GameTooltip:Show();
                 end
+
             end);
 
             button:SetScript ( "OnLeave" , function()
                 GRM_G.IsAltGrouping = false;
-                GRM_UI.RestoreTooltipScale();
-                GameTooltip:Hide();
+                GRM.RestoreTooltip();
             end);
 
             -- Hold the action button script holders...
             button:SetScript ( "OnMouseDown" , function( _ , button )
                 if button == "LeftButton" then
                     if GRM_G.IsAltGrouping then
-                        if GRM_G.CurrentCalendarName ~= GRM_G.currentName then
-                            GRM_G.currentName = GRM_G.CurrentCalendarName;
-                        elseif GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:IsVisible() then
+                        
+                        if GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:IsVisible() then
                             GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:Hide()
                             return;
                         end
+
                         if not GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:IsVisible() then
                             GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:Show();
                         else
                             GRM_UI.GRM_MemberDetailMetaData:Hide();
                             GRM_G.timer6 = 0;
-                            GRM.BuildAltGroupingScrollFrame();
-                            GRM_UI.RestoreTooltipScale();
+                            GRM.BuildAltGroupingScrollFrame( GRM_G.CurrentCalendarName );
+                            GRM.RestoreTooltip();
                             GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingTooltip:Hide();
-                            GameTooltip:Hide();
                         end
+
                     else
                         GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrame:Hide();
                     end
@@ -14032,6 +14589,113 @@ if GRM_G.BuildVersion >= 30000 then  -- < 2 = Classic and < 3 = TBC - no calenda
     end
 end
 
+GRM_UI.ConfigureClassicRankShiftButtons = function()
+    GuildControlPopupFrame.GRM_ShiftUpButtonUp = CreateFrame ( "Button" , "GRM_ShiftUpButtonUp" , GuildControlPopupFrame , "UIPanelScrollUpButtonTemplate" );
+    GuildControlPopupFrame.GRM_ShiftUpButtonUp.GRM_ShiftUpButtonUpText = GuildControlPopupFrame.GRM_ShiftUpButtonUp:CreateFontString ( "GRM_ShiftUpButtonUpText" , "OVERLAY" , "GameFontNormal" );
+
+    GuildControlPopupFrame.GRM_ShiftUpButtonUp:SetSize ( 17 , 15 );
+    GuildControlPopupFrame.GRM_ShiftUpButtonUp:SetPoint ( "TOPRIGHT" , GuildControlPopupFrame , "TOPRIGHT" , -33 , -20 );
+    GuildControlPopupFrame.GRM_ShiftUpButtonUp.GRM_ShiftUpButtonUpText:SetPoint ( "TOP" , GuildControlPopupFrame.GRM_ShiftUpButtonUp , "BOTTOM" , 0 , -1 );
+    GuildControlPopupFrame.GRM_ShiftUpButtonUp.GRM_ShiftUpButtonUpText:SetWordWrap ( true );
+    GuildControlPopupFrame.GRM_ShiftUpButtonUp.GRM_ShiftUpButtonUpText:SetWidth ( 55 );
+    GuildControlPopupFrame.GRM_ShiftUpButtonUp.GRM_ShiftUpButtonUpText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+    GuildControlPopupFrame.GRM_ShiftUpButtonUp.GRM_ShiftUpButtonUpText:SetText ( GRM.L ( "Shift Rank Up" ) );
+    GuildControlPopupFrame.GRM_ShiftUpButtonUp:SetScript ( "OnClick" , function ( self , button )
+        if button == "LeftButton" then
+            local currentRankId = GRM_UI.GetCurrentSelectedControlRank();
+            local currentRankName = GuildControlGetRankName ( currentRankId );
+            GuildControlShiftRankUp ( currentRankId );
+
+            GRM.Report ( GRM.L ( "The Guild Rank \"{name}\" has Shifted up from rank {num} to {custom1}" , currentRankName , nil , currentRankId , currentRankId - 1 ) );
+
+            GuildControlPopupFrame:Hide();
+
+            GRM_UI.RefreshShiftRankButtonPositions();
+        end
+    end);
+
+    GuildControlPopupFrame.GRM_ShiftUpButtonUp:SetScript ( "OnEnter" , function( self )
+        GRM_UI.SetTooltipScale()
+        GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+        GameTooltip:AddLine( GRM.L ( "After shifting the rank up by 1, the window will automatically close" ) );
+        GameTooltip:AddLine( GRM.L ( "Addon restrictions require manual selection of guild rank" ) );
+        GameTooltip:Show();
+    end);
+
+    GuildControlPopupFrame.GRM_ShiftUpButtonUp:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end)
+
+    GuildControlPopupFrame.GRM_ShiftUpButtonDown = CreateFrame ( "Button" , "GRM_ShiftUpButtonDown" , GuildControlPopupFrame , "UIPanelScrollDownButtonTemplate" );
+    GuildControlPopupFrame.GRM_ShiftUpButtonDown.GRM_ShiftUpButtonDownText = GuildControlPopupFrame.GRM_ShiftUpButtonDown:CreateFontString ( "GRM_ShiftUpButtonDownText" , "OVERLAY" , "GameFontNormal" );
+
+    GuildControlPopupFrame.GRM_ShiftUpButtonDown:SetSize ( 17 , 15 );
+    GuildControlPopupFrame.GRM_ShiftUpButtonDown:SetPoint ( "TOPLEFT" , GuildControlPopupFrame , "TOPLEFT" , 33 , -20 );
+    GuildControlPopupFrame.GRM_ShiftUpButtonDown.GRM_ShiftUpButtonDownText:SetPoint ( "TOP" , GuildControlPopupFrame.GRM_ShiftUpButtonDown , "BOTTOM" , 0 , -1 );
+    GuildControlPopupFrame.GRM_ShiftUpButtonDown.GRM_ShiftUpButtonDownText:SetWordWrap ( true );
+    GuildControlPopupFrame.GRM_ShiftUpButtonDown.GRM_ShiftUpButtonDownText:SetWidth ( 55 );
+    GuildControlPopupFrame.GRM_ShiftUpButtonDown.GRM_ShiftUpButtonDownText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+    GuildControlPopupFrame.GRM_ShiftUpButtonDown.GRM_ShiftUpButtonDownText:SetText ( GRM.L ( "Shift Rank Down" ) );
+    GuildControlPopupFrame.GRM_ShiftUpButtonDown:SetScript ( "OnClick" , function ( self , button )
+        if button == "LeftButton" then
+            local currentRankId = GRM_UI.GetCurrentSelectedControlRank();
+            local currentRankName = GuildControlGetRankName ( currentRankId );
+            GuildControlShiftRankDown ( currentRankId );
+
+            GRM.Report ( GRM.L ( "The Guild Rank \"{name}\" has Shifted lower from rank {num} to {custom1}" , currentRankName , nil , currentRankId , currentRankId + 1 ) );
+
+            GuildControlPopupFrame:Hide();
+
+            GRM_UI.RefreshShiftRankButtonPositions();
+        end
+    end);
+
+    GuildControlPopupFrame.GRM_ShiftUpButtonDown:SetScript ( "OnEnter" , function( self )
+        GRM_UI.SetTooltipScale()
+        GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+        GameTooltip:AddLine( GRM.L ( "After shifting the down by 1, the window will automatically close" ) );
+        GameTooltip:AddLine( GRM.L ( "Addon restrictions require manual selection of guild rank" ) );
+        GameTooltip:Show();
+    end);
+
+    GuildControlPopupFrame.GRM_ShiftUpButtonDown:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end)
+
+    GuildControlPopupFrame:HookScript ( "OnShow" , GRM_UI.RefreshShiftRankButtonPositions )
+    -- refresh button positioning if different rank is selected
+    hooksecurefunc ( "GuildControlPopupFrameDropDownButton_OnClick" , GRM_UI.RefreshShiftRankButtonPositions );
+    hooksecurefunc ( "GuildControlPopupFrameRemoveRankButton_OnClick" , GRM_UI.RefreshShiftRankButtonPositions );
+    hooksecurefunc ( "GuildControlPopupFrameAddRankButton_OnUpdate" , GRM_UI.RefreshShiftRankButtonPositions );
+end
+
+GRM_UI.RefreshShiftRankButtonPositions = function()
+    local currentRankId = GRM_UI.GetCurrentSelectedControlRank();
+
+    -- Rank 2 cannot be promoted into the guild leader rank
+    -- Obvously guild leader cannot go higher
+    if currentRankId < 3 then
+        GuildControlPopupFrame.GRM_ShiftUpButtonUp:Hide();
+        if currentRankId == 1 then
+            GuildControlPopupFrame.GRM_ShiftUpButtonDown:Hide();
+        else
+            GuildControlPopupFrame.GRM_ShiftUpButtonDown:Show();
+        end
+    else
+        GuildControlPopupFrame.GRM_ShiftUpButtonUp:Show();
+        if currentRankId < GuildControlGetNumRanks() then
+            GuildControlPopupFrame.GRM_ShiftUpButtonDown:Show();
+        else
+            GuildControlPopupFrame.GRM_ShiftUpButtonDown:Hide();
+        end
+    end
+
+
+end
+
+GRM_UI.GetCurrentSelectedControlRank = function()
+    return UIDropDownMenu_GetSelectedID ( GuildControlPopupFrameDropDown );
+end
 
 -- END CALENDAR
 
@@ -14046,18 +14710,19 @@ GRM_UI.OldRosterLog_OnShow = function( isManual )
         GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRoster:SetSize ( 20 , 20 );
         GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRoster:ClearAllPoints();
         GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRoster:SetPoint ( "BOTTOMRIGHT" , GuildRosterViewDropdown , "TOPRIGHT" , -12 , -5.5 );
-        GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRoster:SetHitRectInsets ( -90 , 1 , 1 , 1 );
         GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRosterText:SetPoint ( "RIGHT" , GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRoster , "LEFT" , -3 , 0 );
         
         
         GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRoster:SetScript ( "OnClick", function( self )
             if self:GetChecked() then
                 GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].showMouseoverOld = true;
+                GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRosterText:SetTextColor ( 1 , 0.82 , 0 , 1 );
                 if GRM_UI.MemberDetailFrameClassic:IsVisible() then
                     GRM_UI.MemberDetailFrameClassic:Hide();
                 end
             else
                 GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].showMouseoverOld = false;
+                GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRosterText:SetTextColor ( 1 , 0 , 0 , 1 );
                 if not GRM_G.CurrentPinCommunity and GRM_UI.GRM_MemberDetailMetaData:IsVisible() then
                     GRM_UI.GRM_MemberDetailMetaData:Hide();
                 end                
@@ -14068,11 +14733,20 @@ GRM_UI.OldRosterLog_OnShow = function( isManual )
 
         if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].showMouseoverOld then
             GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRoster:SetChecked ( true );
+            GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRosterText:SetTextColor ( 1 , 0.82 , 0 , 1 );
+        else
+            GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRosterText:SetTextColor ( 1 , 0 , 0 , 1 );
         end
     end
 
     GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRosterText:SetText ( GRM.L ( "Show Mouseover" ) );
-    GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRosterText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9.5 ); 
+    GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRoster:SetHitRectInsets ( - GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRosterText:GetWidth() -2 , 1 , 1 , 1 );
+    GRM_UI.GuildRosterFrame.GRM_EnableMouseOverOldRosterText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9.5 );
+
+    if IsGuildLeader() and GRM_G.BuildVersion < 40000 and not GRM_G.rankShiftLoaded then
+        GRM_G.rankShiftLoaded = true;
+        GRM_UI.ConfigureClassicRankShiftButtons();
+    end
 end
 
 -- Method:          GRM_UI.MainRoster_OnShow()
@@ -14105,6 +14779,7 @@ GRM_UI.MainRoster_OnShow = function( isManual )
                 else
                     GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].showMouseoverOld = true;
                 end
+                rosterFrame.GRM_EnableMouseOverText:SetTextColor ( 1 , 0.82 , 0 , 1 );
                 if GRM_UI.MemberDetailFrame:IsVisible() then
                     GRM_UI.MemberDetailFrame:Hide();
                 end
@@ -14120,6 +14795,7 @@ GRM_UI.MainRoster_OnShow = function( isManual )
                         GRM_UI.GRM_MemberDetailMetaData:Hide();
                     end
                 end
+                rosterFrame.GRM_EnableMouseOverText:SetTextColor ( 1 , 0 , 0 , 1 );
             end
             GRM_UI.Unpause();
             GRM.SyncSettings();
@@ -14152,10 +14828,14 @@ GRM_UI.MainRoster_OnShow = function( isManual )
 
         if ( GRM_G.BuildVersion >= 80000 and GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].showMouseoverRetail ) or ( GRM_G.BuildVersion < 80000 and GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].showMouseoverOld ) then
             rosterFrame.GRM_EnableMouseOver:SetChecked ( true );
+            rosterFrame.GRM_EnableMouseOverText:SetTextColor ( 1 , 0.82 , 0 , 1 );
+        else
+            rosterFrame.GRM_EnableMouseOverText:SetTextColor ( 1 , 0 , 0 , 1 );
         end
     end
 
     rosterFrame.GRM_EnableMouseOverText:SetText ( GRM.L ( "Show Mouseover" ) );
+    rosterFrame.GRM_EnableMouseOver:SetHitRectInsets ( - rosterFrame.GRM_EnableMouseOverText:GetWidth() -2 , 1 , 1 , 1 );
     rosterFrame.GRM_EnableMouseOverText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9.5 ); 
 end
     

@@ -90,6 +90,7 @@ L.MPROFILE_DELETE_SELF_ERROR		= "Cannot delete mod settings currently in use."
 L.MPROFILE_DELETE_S_ERROR			= "Source is corrupted. Settings not deleted or partly deleted. Delete failed."
 
 L.NOTE_SHARE_SUCCESS				= "%s has shared their note for %s"
+L.NOTE_SHARE_LINK					= "Click Here to Open Note"
 L.NOTE_SHARE_FAIL					= "%s attempted to share note text with you for %s. However, mod associated with this ability is not uninstalled or is not loaded. If you need this note, make sure you load the mod they are sharing notes for and ask them to share again"
 
 L.NOTEHEADER						= "Enter your note text here for %s. Enclosing a players name with >< class colors it. For alerts with multiple counts, separate notes with '/'"
@@ -165,30 +166,27 @@ L.VOICE_COUNT_MISSING				= "Countdown voice %d is set to a voice/count pack that
 L.BIG_WIGS							= "BigWigs"
 
 L.UPDATEREMINDER_HEADER				= "Your version of " .. L.DEADLY_BOSS_MODS .. " is out-of-date.\n Version %s (%s) is available for download through Curse/Twitch, WoWI, or from the GitHub Releases page"
-L.UPDATEREMINDER_HEADER_ALPHA		= "Your ALPHA version of " .. L.DEADLY_BOSS_MODS .. " is out-of-date.\n You are at least %s test versions behind. It is recommended that DBM users that choose ALPHA versions run the latest ALPHA. Otherwise, they should run latest RELEASE version. Out of date ALPHAs have a stricter version check because they are development versions of " .. L.DBM .. "."
 L.UPDATEREMINDER_FOOTER				= "Press " .. (IsMacClient() and "Cmd-C" or "Ctrl-C")  ..  " to copy the download link to your clipboard."
 L.UPDATEREMINDER_FOOTER_GENERIC		= "Press " .. (IsMacClient() and "Cmd-C" or "Ctrl-C")  ..  " to copy the link to your clipboard."
 L.UPDATEREMINDER_DISABLE			= "WARNING: Due to your " .. L.DEADLY_BOSS_MODS .. " being too out of date it has been force disabled and cannot be used until updated. This is to ensure outdated or incompatible mods do not cause poor play experience for yourself or fellow group members."
---L.UPDATEREMINDER_NODISABLE		= "WARNING: Your " .. L.DEADLY_BOSS_MODS .. " install is very out of date. While you may have disabled update notification, this message starts to appear after a certain threshold and cannot be disabled. Updating is HIGHLY recommended."
 L.UPDATEREMINDER_HOTFIX				= L.DBM .. " version you are on has known issues during this boss encounter that are corrected if you update to latest release"
 L.UPDATEREMINDER_HOTFIX_ALPHA		= L.DBM .. " version you are on has known issues during this boss encounter that are corrected in an upcoming release (or latest alpha version)"
 L.UPDATEREMINDER_MAJORPATCH			= "WARNING: Do to your " .. L.DEADLY_BOSS_MODS .. " being out of date, " .. L.DBM .. " has been disabled until updated, since this is a major game patch. This is to ensure old and incompatible code doesn't cause poor play experience for yourself or fellow group members. Make sure you download a newer version from deadlybossmods.com or curse as soon as possible."
-L.UPDATEREMINDER_TESTVERSION		= "WARNING: You are using a version of " .. L.DEADLY_BOSS_MODS .. " not intended to be used with this game version. Please make sure you download the appropriate version for your game client from deadlybossmods.com or curse."
 L.VEM								= "WARNING: You are running both " .. L.DEADLY_BOSS_MODS .. " and Voice Encounter Mods. " .. L.DBM .. " will not run in this configuration and therefore will not be loaded."
 L.OUTDATEDPROFILES					= "WARNING: DBM-Profiles not compatible with this version of " .. L.DBM .. ". It must be removed before " .. L.DBM .. " can proceed, to avoid conflict."
-L.OUTDATEDSPELLTIMERS				= "WARNING: DBM-SpellTimers breaks " .. L.DBM .. "and must be disabled for " .. L.DBM .. " to function properly."
+L.OUTDATEDSPELLTIMERS				= "WARNING: DBM-SpellTimers breaks " .. L.DBM .. " and must be disabled for " .. L.DBM .. " to function properly."
 L.OUTDATEDRLT						= "WARNING: DBM-RaidLeadTools breaks " .. L.DBM .. ". DBM-RaidLeadTools is no longer supported and must be removed for " .. L.DBM .. " to function properly."
 L.VICTORYSOUND						= "WARNING: DBM-VictorySound not compatible with this version of " .. L.DBM .. ". It must be removed before " .. L.DBM .. " can proceed, to avoid conflict."
 L.DPMCORE							= "WARNING: Deadly PvP mods is discontinued and not compatible with this version of " .. L.DBM .. ". It must be removed before " .. L.DBM .. " can proceed, to avoid conflict."
 L.DBMLDB							= "WARNING: DBM-LDB is now built into DBM-Core. While it won't do any harm, it's recommended to remove 'DBM-LDB' from your addons folder"
 L.UPDATE_REQUIRES_RELAUNCH			= "WARNING: This " .. L.DBM .. " update will not work correctly if you don't fully restart your game client. This update contains new files or .toc file changes that cannot be loaded via ReloadUI. You may encounter broken functionality or errors if you continue without a client restart."
-L.OUT_OF_DATE_NAG					= "Your version of " .. L.DEADLY_BOSS_MODS .. " is out-of-date. It is recommended you update for this fight so you are not missing an important alert or timer or a yell rest of raid is expecting to see from you."
+L.OUT_OF_DATE_NAG					= "Your version of " .. L.DBM.. " is out-of-date and this specific fight mod has newer features or bug fixes. It is recommended you update for this fight to improve your experience."
 L.CLASSIC_ONLY						= "WARNING: This version of " .. L.DBM .. " is only meant to be used with World of Warcraft: Classic. Uninstall this version and install correct version of " .. L.DBM .. " for Retail WoW."
 
 L.MOVABLE_BAR						= "Drag me!"
 
---L.PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h sent you a " .. L.DBM .. " timer: '%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[Cancel this timer]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[Ignore timers from %1$s]|r|h"
-L.PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h sent you a " .. L.DBM .. " timer"
+L.PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h sent you a " .. L.DBM .. " timer: '%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[Cancel this timer]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[Ignore timers from %1$s]|r|h"
+--L.PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h sent you a " .. L.DBM .. " timer"
 L.PIZZA_CONFIRM_IGNORE				= "Do you really want to ignore " .. L.DBM .. " timers from %s for this session?"
 L.PIZZA_ERROR_USAGE					= "Usage: /dbm [broadcast] timer <time> <text>. <time> must be greater than 1."
 
@@ -620,8 +618,8 @@ L.INSTANCE_INFO_STATS_DENIED		= "Denied the request: %s"
 L.INSTANCE_INFO_STATS_AWAY			= "Away: %s"
 L.INSTANCE_INFO_STATS_NO_RESPONSE	= "No recent " .. L.DBM .. " version installed: %s"
 L.INSTANCE_INFO_RESULTS				= "Instance ID scan results. Note that instances might show up more than once if there are players with localized WoW clients in your raid."
---L.INSTANCE_INFO_SHOW_RESULTS		= "Players yet to respond: %s\n|HDBM:showRaidIdResults|h|cff3588ff[Show results now]|r|h"
-L.INSTANCE_INFO_SHOW_RESULTS		= "Players yet to respond: %s"
+L.INSTANCE_INFO_SHOW_RESULTS		= "Players yet to respond: %s\n|HDBM:showRaidIdResults|h|cff3588ff[Show results now]|r|h"
+--L.INSTANCE_INFO_SHOW_RESULTS		= "Players yet to respond: %s"
 
 L.LAG_CHECKING						= "Checking raid Latency..."
 L.LAG_HEADER						= L.DEADLY_BOSS_MODS .. " - Latency Results"
@@ -657,6 +655,7 @@ L.CURSE_ICON						= "|TInterface\\AddOns\\DBM-Core\\textures\\UI-EJ-Icons.blp:20
 L.POISON_ICON						= "|TInterface\\AddOns\\DBM-Core\\textures\\UI-EJ-Icons.blp:20:20:0:0:255:66:39:55:40:58|t"
 L.DISEASE_ICON						= "|TInterface\\AddOns\\DBM-Core\\textures\\UI-EJ-Icons.blp:20:20:0:0:255:66:70:86:40:58|t"
 L.ENRAGE_ICON						= "|TInterface\\AddOns\\DBM-Core\\textures\\UI-EJ-Icons.blp:20:20:0:0:255:66:102:118:40:58|t"
+L.BLEED_ICON						= "|TInterface\\AddOns\\DBM-Core\\textures\\UI-EJ-Icons.blp:20:20:0:0:255:66:168:182:40:58|t"
 
 --LDB
 L.LDB_TOOLTIP_HELP1					= "Click to open " .. L.DBM
