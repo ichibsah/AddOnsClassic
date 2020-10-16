@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("Mograine_and_Whitemane", "DBM-Party-Classic", 12)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision("20200615035721")
+mod:SetRevision("20200617140016")
 mod:SetCreatureID(3977, 3976, 99999)--Whitemane, Mograine
 --mod:SetEncounterID(585)
 
