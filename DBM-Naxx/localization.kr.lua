@@ -220,10 +220,6 @@ L:SetWarningLocalization({
 	WarningChargeNotChanged	= "극성 변경 안됨"
 })
 
-L:SetOptionCatLocalization({
-	Arrows	= "화살표"
-})
-
 ---------------------------
 --  훈련교관 라주비어스  --
 ---------------------------
