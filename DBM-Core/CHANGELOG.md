@@ -1,8 +1,46 @@
 # Deadly Boss Mods Core
 
-## [1.13.61-27-g8a22a8a](https://github.com/DeadlyBossMods/DBM-Classic/tree/8a22a8aedd0eba2adc3be455ebf09fdd829df52f) (2020-10-25)
-[Full Changelog](https://github.com/DeadlyBossMods/DBM-Classic/compare/1.13.61...8a22a8aedd0eba2adc3be455ebf09fdd829df52f) [Previous Releases](https://github.com/DeadlyBossMods/DBM-Classic/releases)
+## [1.13.61-56-ge76933d](https://github.com/DeadlyBossMods/DBM-Classic/tree/e76933d8c3afcc94624fc77c224ebbb714d7b3b4) (2020-11-19)
+[Full Changelog](https://github.com/DeadlyBossMods/DBM-Classic/compare/1.13.61...e76933d8c3afcc94624fc77c224ebbb714d7b3b4) [Previous Releases](https://github.com/DeadlyBossMods/DBM-Classic/releases)
 
+- Fixed logged syncs so they don't actually needlessly send syncs to self over comms, just locally handle like non logged syncs  
+    Fixed world syncs (used by world bosses and world buffs) to actually locally handle sync so you can still get world buff alerts when you aren't guilded.  
+- Update localization.br.lua (#637)  
+- Update localization.cn.lua (#636)  
+- Update localization.es.lua (#634)  
+- Update localization.mx.lua (#635)  
+- Update localization.br.lua (#633)  
+- Fixed option spell Id for frost tomb on KT  
+    Added enrage support to Gluth  
+- Update localization.fr.lua (#631)  
+- tweak landslide trample timer  
+- Removed infoframe and frozen timer from Viscidous. Phase detection is unreliable and so are counters. This, combined with fact that classic support is being scaled back significantly, measures are being taken to either fix lose ends, or remove them.  
+- make dark glare warning/timer show/end 2 seconds earlier Closes #554  
+- Several sapphiron and KT fixes. Both probably need more work but this best could be done without transcriptor and extensive debug  
+- Cho rush going friendly should now be registered as a victory  
+- Update koKR (Classic) (#629)  
+- Update localization.de.lua (#630)  
+- Update localization.ru.lua AQ40 (#628)  
+    * Update localization.ru.lua  
+    * Update localization.ru.lua  
+- Update localization.ru.lua (#622)  
+    * Update localization.ru.lua  
+    * Update localization.ru.lua  
+    * Update localization.ru.lua  
+- Update localization.ru.lua (#627)  
+- Update DBM-AQ20.toc (#626)  
+- Create localization.mx.lua (#625)  
+- Tweak adds from Gothik based on feedback, not totally verified yet.  
+- Update localization.es.lua (#624)  
+- Fix bad icon and option default  
+- Update localization.br.lua (#623)  
+    * Update localization.br.lua  
+    * Update localization.br.lua  
+- Update localization.de.lua (#621)  
+- Update DBM-Naxx.toc (#620)  
+- Update localization.cn.lua (#619)  
+- missed one  
+- Cleanup Gothik a little  
 - naxx: refine some timers from logs (#612)  
 - Update localization.cn.lua (#618)  
 - Noth Update  

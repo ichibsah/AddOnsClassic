@@ -1,10 +1,8 @@
 # <FGI> FastGuildInvite
 
-## 77 (2020-10-14)
+## 80 (2020-11-22)
  
 
-- changed max level for retail  
-- intro update  
-- updated version of addon to 90001  
-- update Libs for SL  
-- Fixed player name issue in filter using non-standard characters  
+- added support for Raider.IO  
+    added additional line for player info  
+    the reset button is returned to the scan window  

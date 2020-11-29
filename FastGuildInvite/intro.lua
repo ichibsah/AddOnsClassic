@@ -11,19 +11,27 @@ local L = {
 		support = "Ниже вы можете найти ссылки если вы хотите материально поддержать автора.",
 		laterButton = "Напомнить при обновлении аддона",
 		neverButton = "Больше не показывать",
+		
+		
 		updates = {
-			"Быстрое исправление причин неработоспособности аддона в SL.",
-			"Почему в чате появляется информация об игроках все еще не известно.",
+			"В окно сканирования возвращена кнопка сброс. Она находится в правом нижнем углу, обозначена значком \"R\".",
+			"Добавлена дополнительная линия информации об игроке, длинные имя и реалм отображались не полностью.",
+			"Добавлена поддержка Raider.IO. При наведении мыши на информацию об игроке в подсказке отображается информация Raider.IO, если это возможно.",
 		},
+		
+		
 	},
 	enUS = {
 		head = "Thanks for helping make the addon better.",
 		support = "Below you can find links if you want to financially support the author.",
 		laterButton = "Remind me when updating addon",
 		neverButton = "Do not show again",
+		
+		
 		updates = {
-			"Quick fix for the reasons for the inoperability of the add-on in SL.",
-			"Why information about players appears in the chat is still unknown.",
+			"Reset button returned to scan window. It is located in the lower right corner, indicated by an \"R\".",
+			"Added additional line of information about the player, long name and realm were not fully displayed.",
+			"Added support for Raider.IO. When you hover the mouse over the player information, the tooltip displays the Raider.IO information, if possible.",
 		},
 	}
 }

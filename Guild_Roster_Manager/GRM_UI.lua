@@ -125,6 +125,7 @@ GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteScrollF
 -- Populating Frames with FontStrings
 GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailNameText = GRM_UI.GRM_MemberDetailMetaData:CreateFontString ( "GRM_MemberDetailNameText" , "OVERLAY" , "GameFontNormalLarge" );
 GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailMainText = GRM_UI.GRM_MemberDetailMetaData:CreateFontString ( "GRM_MemberDetailMainText" , "OVERLAY" , "GameFontWhiteTiny" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailAltText = GRM_UI.GRM_MemberDetailMetaData:CreateFontString ( "GRM_MemberDetailAltText" , "OVERLAY" , "GameFontWhiteTiny" );
 GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailLevel = GRM_UI.GRM_MemberDetailMetaData:CreateFontString ( "GRM_MemberDetailLevel" , "OVERLAY" , "GameFontNormalSmall" );
 GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailRankTxt = GRM_UI.GRM_MemberDetailMetaData:CreateFontString ( "GRM_MemberDetailRankTxt" , "OVERLAY" , "GameFontNormal" );
 GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailRankDateTxt = GRM_UI.GRM_MemberDetailMetaData:CreateFontString ( "GRM_MemberDetailRankDateTxt" , "OVERLAY" , "GameFontNormalSmall" );
@@ -150,8 +151,8 @@ GRM_UI.GRM_MemberDetailMetaData.GRM_GroupInviteButton = CreateFrame ( "Button" ,
 GRM_UI.GRM_MemberDetailMetaData.GRM_GroupInviteButton.GRM_GroupInviteButtonText = GRM_UI.GRM_MemberDetailMetaData.GRM_GroupInviteButton:CreateFontString ( "GRM_GroupInviteButtonText" , "OVERLAY" , "GameFontWhiteTiny" );
 
 -- Safe from recommendations checkbox
-GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton = CreateFrame ( "CheckButton" , "GRM_SafeFromRulesCheckButton" , GRM_UI.GRM_MemberDetailMetaData , "OptionsSmallCheckButtonTemplate" );
-GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton.GRM_SafeFromRulesCheckButtonText = GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton:CreateFontString ( "GRM_SafeFromRulesCheckButtonText" , "OVERLAY" , GameFontWhiteTiny );
+GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton = CreateFrame ( "Button" , "GRM_SafeFromRulesButton" , GRM_UI.GRM_MemberDetailMetaData , "GameMenuButtonTemplate" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton.GRM_SafeFromRulesButtonText = GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton:CreateFontString ( "GRM_SafeFromRulesButtonText" , "OVERLAY" , GameFontWhiteTiny );
 
 -- Tooltips
 GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailRankToolTip = CreateFrame ( "GameTooltip" , "GRM_MemberDetailRankToolTip" , GRM_UI.GRM_MemberDetailMetaData , "GameTooltipTemplate" );
@@ -1149,7 +1150,42 @@ GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditWindowDropDownFrame.GRM_
 
 GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditWindowDropDownFrame:Hide();
 
+-- Member Mouseover window - macro tool checkbox frame
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame = CreateFrame ( "Frame" , "GRM_MacroToolIgnoreListSettingsFrame" , GRM_UI.GRM_MemberDetailMetaData , "TranslucentFrameTemplate" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_MacroToolIgnoreListSettingsFrameCloseButton = CreateFrame ( "Button" , "GRM_MacroToolIgnoreListSettingsFrameCloseButton" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame , "UIPanelCloseButton" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame:CreateFontString ( "GRM_ListFilterHeadingText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText2 = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame:CreateFontString ( "GRM_ListFilterHeadingText2" , "OVERLAY" , "GameFontNormalSmall" );
 
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBox = CreateFrame ( "CheckButton" , "GRM_IgnoreListFrameKickCheckBox" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame , "OptionsSmallCheckButtonTemplate" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBoxText = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBox:CreateFontString ( "GRM_IgnoreListFrameKickCheckBoxText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBoxText2 = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBox:CreateFontString ( "GRM_IgnoreListFrameKickCheckBoxText2" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox = CreateFrame ( "CheckButton" , "GRM_IgnoreListFramePromoteCheckBox" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame , "OptionsSmallCheckButtonTemplate" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBoxText = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox:CreateFontString ( "GRM_IgnoreListFramePromoteCheckBoxText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBoxText2 = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox:CreateFontString ( "GRM_IgnoreListFramePromoteCheckBoxText2" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox = CreateFrame ( "CheckButton" , "GRM_IgnoreListFrameDemoteCheckBox" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame , "OptionsSmallCheckButtonTemplate" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBoxText = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox:CreateFontString ( "GRM_IgnoreListFrameDemoteCheckBoxText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBoxText2 = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox:CreateFontString ( "GRM_IgnoreListFrameDemoteCheckBoxText2" , "OVERLAY" , "GameFontNormalSmall" );
+
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton = CreateFrame ( "CheckButton" , "GRM_IgnoreListKickTimeExpireButton" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame , "OptionsSmallCheckButtonTemplate" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonText = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton:CreateFontString ( "GRM_IgnoreListKickTimeExpireButtonText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonDateSetText = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton:CreateFontString ( "GRM_IgnoreListKickTimeExpireButtonDateSetText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonTimeLeftText = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton:CreateFontString ( "GRM_IgnoreListKickTimeExpireButtonTimeLeftText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox = CreateFrame( "EditBox" , "GRM_IgnoreListKickTimeExpireEditBox" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton , "InputBoxTemplate" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox:ClearFocus();
+
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton = CreateFrame ( "CheckButton" , "GRM_IgnoreListPromoteTimeExpireButton" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame , "OptionsSmallCheckButtonTemplate" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonText = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton:CreateFontString ( "GRM_IgnoreListPromoteTimeExpireButtonText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonDateSetText = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton:CreateFontString ( "GRM_IgnoreListPromoteTimeExpireButtonDateSetText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonTimeLeftText = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton:CreateFontString ( "GRM_IgnoreListPromoteTimeExpireButtonTimeLeftText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox = CreateFrame( "EditBox" , "GRM_IgnoreListPromoteTimeExpireEditBox" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton , "InputBoxTemplate" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox:ClearFocus();
+
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton = CreateFrame ( "CheckButton" , "GRM_IgnoreListDemoteTimeExpireButton" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame , "OptionsSmallCheckButtonTemplate" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonText = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton:CreateFontString ( "GRM_IgnoreListDemoteTimeExpireButtonText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonDateSetText = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton:CreateFontString ( "GRM_IgnoreListDemoteTimeExpireButtonDateSetText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonTimeLeftText = GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton:CreateFontString ( "GRM_IgnoreListDemoteTimeExpireButtonTimeLeftText" , "OVERLAY" , "GameFontNormalSmall" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox = CreateFrame( "EditBox" , "GRM_IgnoreListDemoteTimeExpireEditBox" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton , "InputBoxTemplate" );
+GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox:ClearFocus();
 
 
 
@@ -1160,6 +1196,27 @@ GRM_UI.GRM_RosterChangeLogFrame.GRM_AuditFrame.GRM_AuditWindowDropDownFrame:Hide
 
 -- GRM_UI LOCAL GLOBALS
 local AllClasses = { "Deathknight" , "Demonhunter" , "Druid" , "Hunter" , "Mage" , "Monk" , "Paladin" , "Priest" , "Rogue" , "Shaman" , "Warlock" , "Warrior" };
+
+--------------------------------------
+-------- COMMON LOGIC TO REUSE -------
+--------------------------------------
+
+-- Method:          GRM_UI.SetCloseButtonTooltip ( buttonObject )
+-- What it Does:    Creates a generic tooltip for the given button, with both OnEnter and OnLeave behavior, pinning tooltip to cursor
+-- Purpose:         Code efficiency. Time saving. Clean
+GRM_UI.SetCloseButtonTooltip = function ( button )
+    button:SetScript ( "OnEnter" , function( self )
+        GRM_UI.SetTooltipScale()
+        GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+        GameTooltip:AddLine ( GRM.L ( "{name} or Press ESC" , "|CFFE6CC7F" .. GRM.L ( "Click" ) .. "|r" ) );
+        GameTooltip:Show();
+    end);
+
+    button:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end)
+end
+
 
 -----------------------------------------------
 --------- UI CONTROLS -------------------------
@@ -1442,6 +1499,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
                 end
             end
         end);
+        GRM_UI.SetCloseButtonTooltip ( GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailMetaDataCloseButton );
     end
     GRM_UI.GRM_MemberDetailMetaData:SetSize( 300 , 330 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailMetaDataCloseButton:SetPoint( "TOPRIGHT" , GRM_UI.GRM_MemberDetailMetaData , 3, 3 );
@@ -2160,6 +2218,11 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
     GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailMainText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 7.5 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailMainText:SetText ( GRM.L ( "( Main )" ) );
     GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailMainText:SetTextColor ( 1.0 , 0.0 , 0.0 , 1.0 );
+    
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailAltText:SetPoint ( "TOP" , GRM_UI.GRM_MemberDetailMetaData , 0 , -12 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailAltText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 7.5 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailAltText:SetText ( "( " .. GRM.L ( "Alt" ) .. " )" );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailAltText:SetTextColor ( 1.0 , 0.5 , 0.5 , 1.0 );
 
     GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailRankDateTxt:SetTextColor ( 1 , 1 , 1 , 1.0 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailRankDateTxt:SetPoint ( "TOP" , GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailRankTxt , "BOTTOM" , 0 , -4 );
@@ -2222,9 +2285,10 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
 
     -- GROUP INVITE BUTTON
     GRM_UI.GRM_MemberDetailMetaData.GRM_GroupInviteButton:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_MemberDetailMetaData , 16, 13 )
-    GRM_UI.GRM_MemberDetailMetaData.GRM_GroupInviteButton:SetSize ( 88 , 19 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_GroupInviteButton:SetSize ( 70 , 20 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_GroupInviteButton.GRM_GroupInviteButtonText:SetText ( GRM.L ( "Group Invite" ) );
     GRM_UI.GRM_MemberDetailMetaData.GRM_GroupInviteButton.GRM_GroupInviteButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_MemberDetailMetaData.GRM_GroupInviteButton );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_GroupInviteButton.GRM_GroupInviteButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_GroupInviteButton.GRM_GroupInviteButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
 
     
     -- player note edit box and font string (31 characters)
@@ -2300,7 +2364,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
         if GRM_G.BuildVersion >= 80000 and CommunitiesFrame and CommunitiesFrame.GuildMemberDetailFrame.NoteBackground.PersonalNoteText ~= nil then
             universalFont = CommunitiesFrame.GuildMemberDetailFrame.NoteBackground.PersonalNoteText:GetFont();
         elseif GRM_G.BuildVersion < 80000 and GuildFrame and PersonalNoteTex then
-            universalFont = PersonalNoteTex:GetFont();
+            universalFont = PersonalNoteTex;
         end
         GRM_UI.GRM_MemberDetailMetaData.GRM_PlayerNoteEditBox:SetFont( universalFont , GRM_G.FontModifier + 9 );
         GRM_UI.GRM_MemberDetailMetaData.GRM_noteFontString1:SetFont ( universalFont , GRM_G.FontModifier + 9 );
@@ -2581,70 +2645,701 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
         end
     end);
 
+    -- Reusable function for the Ignroe rules selection window
+    GRM_UI.ReEnableSubIgnoreOption = function ( button , text , editBox )
+        button:Enable();
+        editBox:Enable();
+        text:SetTextColor ( 1 , 0.82 , 0 );
+        editBox:SetTextColor ( 1 , 1 , 1 );
+    end
+
+    -- Reusable function for the Ignroe rules selection window
+    GRM_UI.DisableSubIgnoreOption = function ( button , text , editBox )
+        button:Disable();
+        editBox:Disable();
+        text:SetTextColor ( 0.5 , 0.5 , 0.5 );
+        editBox:SetTextColor ( 0.5 , 0.5 , 0.5 );
+    end
+
+    -- Rebuild the checkbox frame here...
+    GRM_UI.MacroIgnoreCheckBoxesFrame_OnShow = function()
+        local ruleEnum = { [false] = "|CFF00CCFF" .. GRM.L ( "Monitoring" ) .. "|r" , [true] = "|CFFFF0000" .. GRM.L ( "Ignoring" ) .. "|r" };
+        local disabled = "|CFFFF0000" .. GRM.L ( "Disabled at Current Rank" ) .. "|r"; 
+        local color1 , color2 , color3 = "" , "" , "";
+        local baseHeight = 184;
+
+        GRM.ValidateIgnoreExpireDates ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName] );
+
+        if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[1] then
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBox:SetChecked( true );
+            GRM_UI.ReEnableSubIgnoreOption ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonText , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox );
+            color1 = "|CFF00CCFF";
+
+        else
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBox:SetChecked ( false );
+            color1 = "|CFF7F7F7F";
+            -- Adjust coloring and use of sub option
+            GRM_UI.DisableSubIgnoreOption ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonText , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox );
+        end
+
+        if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[1] then
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox:SetChecked( true );
+            GRM_UI.ReEnableSubIgnoreOption ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonText , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox );
+            color2 = "|CFF00CCFF";
+        else
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox:SetChecked ( false );
+            GRM_UI.DisableSubIgnoreOption ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonText , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox );
+            color2 = "|CFF7F7F7F";
+        end
+
+        if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[1] then
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox:SetChecked( true );
+            GRM_UI.ReEnableSubIgnoreOption ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonText , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox );
+            color3 = "|CFF00CCFF";
+        else
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox:SetChecked ( false );
+            GRM_UI.DisableSubIgnoreOption ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonText , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox );
+            color3 = "|CFF7F7F7F";
+        end
+
+        -- Kick ignore list tiime expire config
+        if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[2] then
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton:SetChecked ( true );
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox:ClearAllPoints();
+            
+            if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[1] then
+                local date = "";
+                local timeLeft = "";
+                if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[4] > 0 then
+                    date = GRM.EpochToDateConvertedForm ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[4] - ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[3] * 86400 ) );
+                    timeLeft = GRM.GetTimePassedInZone ( nil , GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[4] - time() , true );
+                end
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonDateSetText:SetText ( GRM.L ( "Configured: {custom1}" , nil , nil , nil , "|CFFFFFFFF" .. date .. "|r" ) );
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonTimeLeftText:SetText ( GRM.L ( "Time Left: {custom1}" , nil , nil , nil , "|CFFFFFFFF" .. timeLeft .. "|r" ) );
+
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonDateSetText:Show();
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonTimeLeftText:Show();
+                baseHeight = baseHeight + GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.modifier;
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton , "BOTTOMLEFT" , 10 , - ( 1 + GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.modifier ) );
+
+            else
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonDateSetText:Hide();
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonTimeLeftText:Hide();
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton , "BOTTOMLEFT" , 10 , -1 );
+            end
+
+            
+        else
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton:SetChecked ( false );
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox:ClearAllPoints();
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton , "BOTTOMLEFT" , 10 , -1 );
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonDateSetText:Hide();
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonTimeLeftText:Hide();
+        end
+
+
+        -- PROMOTE FILTERS
+        if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[2] then
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton:SetChecked ( true );
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox:ClearAllPoints();
+            
+            if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[1] then
+                local date = "";
+                local timeLeft = "";
+                if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[4] > 0 then
+                    date = GRM.EpochToDateConvertedForm ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[4] - ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[3] * 86400 ) );
+                    timeLeft = GRM.GetTimePassedInZone ( nil , GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[4] - time() , true );
+                end
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonDateSetText:SetText ( GRM.L ( "Configured: {custom1}" , nil , nil , nil , "|CFFFFFFFF" .. date .. "|r" ) );
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonTimeLeftText:SetText ( GRM.L ( "Time Left: {custom1}" , nil , nil , nil , "|CFFFFFFFF" .. timeLeft .. "|r" ) );
+        
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonDateSetText:Show();
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonTimeLeftText:Show();
+                baseHeight = baseHeight + GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.modifier;
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton , "BOTTOMLEFT" , 10 , - ( 1 + GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.modifier ) );
+        
+            else
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonDateSetText:Hide();
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonTimeLeftText:Hide();
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton , "BOTTOMLEFT" , 10 , -1 );
+            end
+        
+            
+        else
+
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton:SetChecked ( false );
+
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox:ClearAllPoints();
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton , "BOTTOMLEFT" , 10 , -1 );
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonDateSetText:Hide();
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonTimeLeftText:Hide();
+        end
+
+
+        -- DEMOTE FILTERS
+        if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[2] then
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton:SetChecked ( true );
+            
+            if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[1] then
+                local date = "";
+                local timeLeft = "";
+                if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[4] > 0 then
+                    date = GRM.EpochToDateConvertedForm ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[4] - ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[3] * 86400 ) );
+                    timeLeft = GRM.GetTimePassedInZone ( nil , GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[4] - time() , true );
+                end
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonDateSetText:SetText ( GRM.L ( "Configured: {custom1}" , nil , nil , nil , "|CFFFFFFFF" .. date .. "|r" ) );
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonTimeLeftText:SetText ( GRM.L ( "Time Left: {custom1}" , nil , nil , nil , "|CFFFFFFFF" .. timeLeft .. "|r" ) );
+        
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonDateSetText:Show();
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonTimeLeftText:Show();
+                baseHeight = baseHeight + GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.modifier;
+
+        
+            else
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonDateSetText:Hide();
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonTimeLeftText:Hide();
+            end
+        
+        else
+        
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton:SetChecked ( false );
+        
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonDateSetText:Hide();
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonTimeLeftText:Hide();
+        end
+             
+        -- Monitoring/Ignored text
+        local kickMsg , promoteMsg, demoteMsg = "" , "" , "";
+
+        if CanGuildRemove() then
+            kickMsg = ruleEnum[GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[1]];
+        else
+            kickMsg = disabled;
+        end
+
+        if CanGuildPromote() then
+            promoteMsg = ruleEnum[GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[1]];
+        else
+            promoteMsg = disabled;
+        end
+
+        if CanGuildDemote() then
+            demoteMsg = ruleEnum[GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[1]];
+        else
+            demoteMsg = disabled;
+        end
+
+        GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBoxText2:SetText ( kickMsg );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBoxText2:SetText ( promoteMsg );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBoxText2:SetText ( demoteMsg );
+
+        -- Expire checkboxs
+        GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox:SetText ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[3] );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonText:SetText ( GRM.L ( "Reactivate monitoring after {num} days." , nil , nil , color1 .. GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[3] .. "|r" ) .. "  " .. GRM.L ( "Set Days:" ) );
+        GRM.NormalizeHitRects ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonText );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox:SetText ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[3] );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonText:SetText ( GRM.L ( "Reactivate monitoring after {num} days." , nil , nil , color2 .. GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[3] .. "|r" ) .. "  " .. GRM.L ( "Set Days:" ) );
+        GRM.NormalizeHitRects ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonText );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox:SetText ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[3] );
+        GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonText:SetText ( GRM.L ( "Reactivate monitoring after {num} days." , nil , nil , color3 .. GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[3] .. "|r" ) .. "  " .. GRM.L ( "Set Days:" ) );
+        GRM.NormalizeHitRects ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonText );
+
+        -- Frame positions and sizing
+        GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame:SetHeight ( baseHeight );
+    end
+
+    GRM_UI.MacroIgnoreCheckBoxesFrame_OnUpdate = function( self , elapsed )
+        self.Timer = self.Timer + elapsed;
+        if self.Timer >= 1 then
+
+            -- Kick
+            if GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonTimeLeftText:IsVisible() and GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[4] > 0 then
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonTimeLeftText:SetText ( GRM.L ( "Time Left: {custom1}" , nil , nil , nil , "|CFFFFFFFF" .. GRM.GetTimePassedInZone ( nil , GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[4] - time() , true ) .. "|r" ) );
+            end
+
+            -- Promote
+            if GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonTimeLeftText:IsVisible() and GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[4] > 0 then
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonTimeLeftText:SetText ( GRM.L ( "Time Left: {custom1}" , nil , nil , nil , "|CFFFFFFFF" .. GRM.GetTimePassedInZone ( nil , GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[4] - time() , true ) .. "|r" ) );
+            end
+
+
+            -- Demote
+            if GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonTimeLeftText:IsVisible() and GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[4] > 0 then
+                GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonTimeLeftText:SetText ( GRM.L ( "Time Left: {custom1}" , nil , nil , nil , "|CFFFFFFFF" .. GRM.GetTimePassedInZone ( nil , GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[4] - time() , true ) .. "|r" ) );
+            end
+
+            if ( time() >= GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[4] ) or  ( time() >= GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[4] ) or  ( time() >= GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[4] ) then
+                GRM.ValidateIgnoreExpireDates ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName] );
+            end
+
+            self.Timer = 0;
+        end
+    end
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame:SetScript ( "OnKeyDown" , function ( self , key )
+        self:SetPropagateKeyboardInput ( true );      -- Ensures keyboard access will default to the main chat window on / or Enter. UX feature.
+        if key == "ESCAPE" then
+            self:SetPropagateKeyboardInput ( false );
+            self:Hide();
+        end
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame:SetScript ( "OnUpdate" , GRM_UI.MacroIgnoreCheckBoxesFrame_OnUpdate );
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame:SetSize ( 300 , 140 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData , "BOTTOMLEFT" , 0 , 2 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.modifier = 24;
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.Timer = 1;
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_MacroToolIgnoreListSettingsFrameCloseButton:SetPoint ( "TOPRIGHT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame , "TOPRIGHT" , 2 , 2 );
+    if not isManualUpdate then
+        GRM_UI.SetCloseButtonTooltip ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_MacroToolIgnoreListSettingsFrameCloseButton );
+    end
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText:SetPoint ( "Top" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame , "TOP" , 0 , -12 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 12 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText:SetText ( GRM.L ( "Macro Rule Ignore Lists" ) );
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText2:SetPoint ( "Top" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText , "BOTTOM" , 0 , -2 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText2:SetText ( GRM.L ( "Select categories you wish the player to be ignored" ) );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText2:SetTextColor ( 1 , 1 , 1 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText2:SetWordWrap ( true );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText2:SetSpacing ( 1 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText2:SetJustifyH ( "CENTER" );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_ListFilterHeadingText2:SetWidth ( 280 );
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBox:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame , "TOPLEFT" , 12 , -43 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBox:SetSize ( 20 , 20 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBoxText:SetPoint ( "LEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBox , "RIGHT" , 1 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBoxText:SetJustifyH ( "LEFT" );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBoxText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBoxText:SetText ( GRM.L ( "Kick Rules" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBox , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBoxText );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBoxText2:SetPoint ( "RIGHT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBox , "RIGHT" , 253 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBoxText2:SetJustifyH ( "RIGHT" );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBoxText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBox:SetScript ( "OnClick" , function ( self , button )
+        if button == "LeftButton" then           
+            if self:GetChecked() then
+                GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[1] = true;
+            else
+                GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[1] = false;
+            end
+
+            GRM_UI.MacroIgnoreCheckBoxesFrame_OnShow();
+            GRM.RefreshAllMacroToolFrames();
+        end
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameKickCheckBox , "BOTTOMRIGHT" , -10 , -1 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton:SetSize ( 20 , 20 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton , "RIGHT" , 1 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonDateSetText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonText , "BOTTOMLEFT" , 0 , -7 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonDateSetText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 7 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonDateSetText:SetJustifyH ( "LEFT" );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonDateSetText:SetTextColor ( 0.90 , 0.80 , 0.50 , 1.0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonTimeLeftText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonDateSetText , "BOTTOMLEFT" , 0 , -6 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonTimeLeftText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 7 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonTimeLeftText:SetTextColor ( 0.90 , 0.80 , 0.50 , 1.0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton:SetScript ( "OnClick", function( self ) 
+        if self:GetChecked() then
+            if not GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[2] then
+                GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[2] = true;
+
+                if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[3] > 0 then
+                    GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[4] = time() + ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[3] * 86400 );
+                end
+            end
+        else
+            if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[2] then
+                GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[2] = false;
+                GRM.RestoreTooltip();
+            end
+        end
+        GRM_UI.MacroIgnoreCheckBoxesFrame_OnShow();
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton:SetScript ( "OnEnter" , function( self )
+
+        if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[2] and GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[4] > 0 then
+            GRM_UI.SetTooltipScale();
+            GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+            GameTooltip:AddLine ( GRM.L ( "WARNING! Unchecking this setting will reset the timer upon re-enabling." ) );
+            GameTooltip:Show();
+        end
+    end);
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButton:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox:SetPoint ( "LEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireButtonText , "RIGHT" , 8 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox:SetSize ( 25 , 22 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox:SetMaxLetters ( 3 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox:SetNumeric ( true );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox:SetTextColor ( 1.0 , 0 , 0 , 1.0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox:EnableMouse ( true );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox.value = 0;
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox:SetAutoFocus( false );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox:SetScript ( "OnEscapePressed" , function( self )
+        self:SetText ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox.value );
+        self:ClearFocus();
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox:SetScript ( "OnEnterPressed" , function( self )
+        local numDays = tonumber ( self:GetText() );
+        if numDays > 0 and numDays < 1000 then
+            GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[3] = numDays;
+            GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.kick[4] = time() + ( numDays * 86400 );
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox.value = numDays;
+        else
+            GRM.Report ( GRM.L ( "Please choose a day between {num} and {custom1}" , nil , nil , 1 , 999 ) );
+        end   
+        self:ClearFocus();   
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox:SetScript ( "OnEditFocusLost" , function( self ) 
+        self:HighlightText ( 0 , 0 );
+        self:SetText ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListKickTimeExpireEditBox.value );
+        GRM_UI.MacroIgnoreCheckBoxesFrame_OnShow();
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox:SetSize ( 20 , 20 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBoxText:SetPoint ( "LEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox , "RIGHT" , 1 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBoxText:SetJustifyH ( "LEFT" );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBoxText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBoxText:SetText ( GRM.L ( "Promote Rules" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBoxText );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBoxText2:SetPoint ( "RIGHT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox , "RIGHT" , 253 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBoxText2:SetJustifyH ( "RIGHT" );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBoxText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox:SetScript ( "OnClick" , function ( self , button )
+        if button == "LeftButton" then
+            if self:GetChecked() then
+                GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[1] = true;
+            else
+                GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[1] = false;
+            end
+
+            GRM_UI.MacroIgnoreCheckBoxesFrame_OnShow();
+            GRM.RefreshAllMacroToolFrames();
+        end
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFramePromoteCheckBox , "BOTTOMRIGHT" , -10 , -1 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton:SetSize ( 20 , 20 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton , "RIGHT" , 1 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonDateSetText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonText , "BOTTOMLEFT" , 0 , -7 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonDateSetText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 7 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonDateSetText:SetJustifyH ( "LEFT" );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonDateSetText:SetTextColor ( 0.90 , 0.80 , 0.50 , 1.0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonTimeLeftText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonDateSetText , "BOTTOMLEFT" , 0 , -6 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonTimeLeftText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 7 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonTimeLeftText:SetTextColor ( 0.90 , 0.80 , 0.50 , 1.0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton:SetScript ( "OnClick", function( self ) 
+        if self:GetChecked() then
+            if not GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[2] then
+                GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[2] = true;
+
+                if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[3] > 0 then
+                    GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[4] = time() + ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[3] * 86400 );
+                end
+            end
+        else
+            if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[2] then
+                GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[2] = false;
+                GRM.RestoreTooltip();
+            end
+        end
+        GRM_UI.MacroIgnoreCheckBoxesFrame_OnShow();
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton:SetScript ( "OnEnter" , function( self )
+
+        if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[2] and GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[4] > 0 then
+            GRM_UI.SetTooltipScale();
+            GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+            GameTooltip:AddLine ( GRM.L ( "WARNING! Unchecking this setting will reset the timer upon re-enabling." ) );
+            GameTooltip:Show();
+        end
+    end);
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButton:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox:SetPoint ( "LEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireButtonText , "RIGHT" , 8 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox:SetSize ( 25 , 22 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox:SetMaxLetters ( 3 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox:SetNumeric ( true );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox:SetTextColor ( 1.0 , 0 , 0 , 1.0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox:EnableMouse ( true );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox.value = 0;
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox:SetAutoFocus( false );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox:SetScript ( "OnEscapePressed" , function( self )
+        self:SetText ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox.value );
+        self:ClearFocus();
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox:SetScript ( "OnEnterPressed" , function( self )
+        local numDays = tonumber ( self:GetText() );
+        if numDays > 0 and numDays < 1000 then
+            GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[3] = numDays;
+            GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.promote[4] = time() + ( numDays * 86400 );
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox.value = numDays;
+        else
+            GRM.Report ( GRM.L ( "Please choose a day between {num} and {custom1}" , nil , nil , 1 , 999 ) );
+        end   
+        self:ClearFocus();   
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox:SetScript ( "OnEditFocusLost" , function( self ) 
+        self:HighlightText ( 0 , 0 );
+        self:SetText ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListPromoteTimeExpireEditBox.value );
+        GRM_UI.MacroIgnoreCheckBoxesFrame_OnShow();
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox:SetSize ( 20 , 20 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBoxText:SetPoint ( "LEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox , "RIGHT" , 1 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBoxText:SetJustifyH ( "LEFT" );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBoxText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBoxText:SetText ( GRM.L ( "Demote Rules" ) );
+    GRM.NormalizeHitRects ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBoxText );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBoxText2:SetPoint ( "RIGHT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox , "RIGHT" , 253 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBoxText2:SetJustifyH ( "RIGHT" );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBoxText2:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox:SetScript ( "OnClick" , function ( self , button )
+        if button == "LeftButton" then
+            if self:GetChecked() then
+                GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[1] = true;
+            else
+                GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[1] = false;
+            end
+
+            GRM_UI.MacroIgnoreCheckBoxesFrame_OnShow();
+            GRM.RefreshAllMacroToolFrames();
+        end
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListFrameDemoteCheckBox , "BOTTOMRIGHT" , -10 , -1 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton:SetSize ( 20 , 20 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton , "RIGHT" , 1 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonDateSetText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonText , "BOTTOMLEFT" , 0 , -7 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonDateSetText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 7 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonDateSetText:SetJustifyH ( "LEFT" );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonDateSetText:SetTextColor ( 0.90 , 0.80 , 0.50 , 1.0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonTimeLeftText:SetPoint ( "TOPLEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonDateSetText , "BOTTOMLEFT" , 0 , -6 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonTimeLeftText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 7 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonTimeLeftText:SetTextColor ( 0.90 , 0.80 , 0.50 , 1.0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton:SetScript ( "OnClick", function( self ) 
+        if self:GetChecked() then
+            if not GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[2] then
+                GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[2] = true;
+
+                if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[3] > 0 then
+                    GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[4] = time() + ( GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[3] * 86400 );
+                end
+            end
+        else
+            if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[2] then
+                GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[2] = false;
+                GRM.RestoreTooltip();
+            end
+        end
+        GRM_UI.MacroIgnoreCheckBoxesFrame_OnShow();
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton:SetScript ( "OnEnter" , function( self )
+
+        if GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[2] and GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[4] > 0 then
+            GRM_UI.SetTooltipScale();
+            GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+            GameTooltip:AddLine ( GRM.L ( "WARNING! Unchecking this setting will reset the timer upon re-enabling." ) );
+            GameTooltip:Show();
+        end
+    end);
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButton:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip()
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox:SetPoint ( "LEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireButtonText , "RIGHT" , 8 , 0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox:SetSize ( 25 , 22 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox:SetMaxLetters ( 3 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox:SetNumeric ( true );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox:SetTextColor ( 1.0 , 0 , 0 , 1.0 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox:EnableMouse ( true );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox.value = 0;
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox:SetAutoFocus( false );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox:SetScript ( "OnEscapePressed" , function( self )
+        self:SetText ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox.value );
+        self:ClearFocus();
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox:SetScript ( "OnEnterPressed" , function( self )
+        local numDays = tonumber ( self:GetText() );
+        if numDays > 0 and numDays < 1000 then
+            GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[3] = numDays;
+            GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].safeList.demote[4] = time() + ( numDays * 86400 );
+            GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox.value = numDays;
+        else
+            GRM.Report ( GRM.L ( "Please choose a day between {num} and {custom1}" , nil , nil , 1 , 999 ) );
+        end   
+        self:ClearFocus();   
+    end);
+
+    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox:SetScript ( "OnEditFocusLost" , function( self ) 
+        self:HighlightText ( 0 , 0 );
+        self:SetText ( GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame.GRM_IgnoreListDemoteTimeExpireEditBox.value );
+        GRM_UI.MacroIgnoreCheckBoxesFrame_OnShow();
+    end);
+
     -- Checkbox
-    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton:SetSize ( 20 , 20 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton.GRM_SafeFromRulesCheckButtonText:SetPoint ( "LEFT" , GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton , "RIGHT" , 1 , 0 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton.GRM_SafeFromRulesCheckButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton.GRM_SafeFromRulesCheckButtonText:SetText ( GRM.L ( "Ignore Macro Tool Filters" ) );
-    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton:SetScript ( "OnClick", function ( self , button )
+    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton:SetSize ( 70 , 20 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton.GRM_SafeFromRulesButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton.GRM_SafeFromRulesButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton.GRM_SafeFromRulesButtonText:SetText ( GRM.L ( "Macro Rules" ) );
+    GRM_UI.ScaleFontStringToObjectSize ( true , GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton:GetWidth() , GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton.GRM_SafeFromRulesButtonText , 2 );
+    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton:SetScript ( "OnClick", function ( _ , button )
         if button == "LeftButton" then
             local player = GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName];
 
-            if self:GetChecked() then
-                player.safeList = true;
-                if IsControlKeyDown() then
-                    GRM_UI.SetAllAltsToIgnore ( true );
+            if IsControlKeyDown() then
+                -- Set All settings to Enable
+
+                if IsShiftKeyDown() then
+                    GRM_UI.SyncAltsToSameIgnoreFilters ( player );
+                    GRM.Report ( GRM.L ( "{name}'s alts now share the same macro rule ignore settings." , GRM.GetClassifiedName ( player.name , true ) ) );
+                else
+                    GRM_UI.SetAllMacroIgnoreFilters ( player , true );
+                    GRM_UI.SetIgnoreCheckButtonTooltip();
+                    GRM.RefreshAllMacroToolFrames();
                 end
+                
+            elseif IsAltKeyDown() then
+                -- Disable player from all macro lists
+                GRM_UI.SetAllMacroIgnoreFilters ( player , false );
+                GRM_UI.SetIgnoreCheckButtonTooltip();
+                GRM.RefreshAllMacroToolFrames();
             else
-                player.safeList = false;
-                if IsControlKeyDown() then
-                    GRM_UI.SetAllAltsToIgnore ( false );
+                if not GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame:IsVisible() then
+                    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame:Show();
+                    GRM_G.pause = true;
+                else
+                    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame:Hide();
                 end
+                -- Let's hide the tooltip in this instance. The others I'll keep up.
+                GRM.RestoreTooltip();
             end
-            GRM_UI.SetIgnoreCheckButtonTooltip();
-            GRM.RefreshAllMacroToolFrames();            
+
+            if GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame:IsVisible() then
+                GRM_UI.MacroIgnoreCheckBoxesFrame_OnShow();
+            end
         end
     end);
 
     GRM_UI.SetIgnoreCheckButtonTooltip = function()
-        GRM_UI.SetTooltipScale();
-        GameTooltip:SetOwner ( GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton , "ANCHOR_CURSOR" );
-        if #GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName].alts > 0 then
-            if GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton:GetChecked() then 
-                GameTooltip:AddLine ( GRM.L ( "|CFFE6CC7FCtrl-Click|r to also REMOVE all alts from the ignore list" ) );
+        local player = GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName];
+        if player ~= nil and player.alts ~= nil then
+
+            local ruleEnum = { [false] = "|CFF00CCFF" .. GRM.L ( "Monitoring" ) .. "|r" , [true] = "|CFFFF0000" .. GRM.L ( "Ignoring" ) .. "|r" }
+            local numSafeLists = GRM.HowManySafeListsIsPlayerOn ( player );
+            local disabled = "|CFFFF0000" .. GRM.L ( "Disabled at Current Rank" ) .. "|r"; 
+            GRM_UI.SetTooltipScale();
+            GameTooltip:SetOwner ( GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton , "ANCHOR_CURSOR" );
+
+            -- Set Permissions.
+
+            local kickMsg , promoteMsg, demoteMsg = "" , "" , "";
+
+            if CanGuildRemove() then
+                kickMsg = ruleEnum [player.safeList.kick[1]];
             else
-                GameTooltip:AddLine ( GRM.L ( "|CFFE6CC7FCtrl-Click|r to also ADD all alts to the ignore list" ) );
+                kickMsg = disabled;
             end
+
+            if CanGuildPromote() then
+                promoteMsg = ruleEnum [player.safeList.promote[1]];
+            else
+                promoteMsg = disabled;
+            end
+
+            if CanGuildDemote() then
+                demoteMsg = ruleEnum [player.safeList.demote[1]];
+            else
+                demoteMsg = disabled;
+            end
+
+            GameTooltip:AddLine ( GRM.L ( "Macro Tool:" ) );
+            GameTooltip:AddDoubleLine ( GRM.L ( "Kick Rules" ) , kickMsg );
+            GameTooltip:AddDoubleLine ( GRM.L ( "Promote Rules" ) , promoteMsg );
+            GameTooltip:AddDoubleLine ( GRM.L ( "Demote Rules" ) , demoteMsg );
+            GameTooltip:AddLine ( " " );
+
+            if numSafeLists < 3 then
+                GameTooltip:AddLine ( GRM.L ( "{custom1} to add player to all 3 macro tool ignore lists" , nil , nil , nil , "|CFFE6CC7F" .. GRM.L ( "Ctrl-Click" ) .. "|r" ) );
+            end
+            if numSafeLists > 0 then
+                GameTooltip:AddLine ( GRM.L ( "{custom1} to remove player from all 3 macro tool ignore lists" , nil , nil , nil , "|CFFE6CC7F" .. GRM.L ( "Alt-Click" ) .. "|r" ) );
+            end
+
+            if #player.alts > 0 then
+                GameTooltip:AddLine ( GRM.L ( "{custom1} to push ignore list settings to {name}'s alts" , GRM.GetClassifiedName ( GRM_G.currentName , true ) , nil , nil , "|CFFE6CC7F" .. GRM.L ( "Ctrl-Shift-Click" ) .. "|r" ) );
+            end
+
+            local macroText = "";
+            if GRM_L["/XXXX"] ~= true then
+                macroText = GRM_L["/XXXX"];
+            else
+                macroText = "/grm";
+            end
+
+            GameTooltip:AddLine ( " " );
+            GameTooltip:AddLine( GRM.L ( "Type \"{name} {name2}\" to Bring Up Macro Tool. {custom1} also work." , macroText , string.lower ( GRM.L ( "Macro" ) ) , nil , "\n" .. string.lower ( GRM.L ( "Tool" ) ) .. ", " .. string.lower ( GRM.L ( "Kick" ) ) .. ", " .. string.lower ( GRM.L ( "Promote" ) ) .. ", " .. string.lower ( GRM.L ( "Demote" ) ) ) );
+            GameTooltip:Show();
         end
-        GameTooltip:AddLine( GRM.L ( "Type \"/grm tool\" to Bring Up Macro Tool" ) );
-        GameTooltip:Show();
+    end
+
+    -- For use in the mosueover button above for auto-setting values
+    GRM_UI.SetAllMacroIgnoreFilters = function ( player , isEnabled )
+        for list in pairs ( player.safeList ) do
+            player.safeList[list][1] = isEnabled;
+        end
     end
 
     -- To enable or disable the ignore list for all alts...
-    GRM_UI.SetAllAltsToIgnore = function( enable )
-        local player = GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][GRM_G.currentName];
+    GRM_UI.SyncAltsToSameIgnoreFilters = function( player )
 
         if #player.alts > 0 then                     -- Number of alts, if > 0 then do something.
             local tempAlt;
+            local safeList = GRM.DeepCopyArray ( player.safeList );
 
             for i = 1 , #player.alts do              -- Loop through all alts
                 tempAlt = GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][player.alts[i][1]];
                 if tempAlt ~= nil then
                     -- No point in adding yourself.
-                    if tempAlt.name ~= GRM_G.addonUser then
-                        tempAlt.safeList = enable;          -- Set the setting
-                    end
+                    tempAlt.safeList.kick = safeList.kick;
+                    tempAlt.safeList.promote = safeList.promote;
+                    tempAlt.safeList.demote = safeList.demote;
                 end
             end
         end
     end
 
-    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton:SetScript ( "OnEnter" , function()
+    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton:SetScript ( "OnEnter" , function()
         GRM_UI.SetIgnoreCheckButtonTooltip();
     end);
 
-    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton:SetScript ( "OnLeave" , function()
-        GRM.RestoreTooltip()
+    GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton:SetScript ( "OnLeave" , function()
+        GRM.RestoreTooltip();
     end);
 
     -- CUSTOM NOTE WINDOW DETAILS
@@ -2724,7 +3419,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
         GRM_UI.GRM_MemberDetailMetaData.GRM_GroupInviteButton:Hide();
         GRM_UI.GRM_MemberDetailMetaData.GRM_ConfirmCustomNoteButton:Show();
         GRM_UI.GRM_MemberDetailMetaData.GRM_CancelCustomNoteButton:Show();
-        GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton:Hide();
+        GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton:Hide();
     end);
 
 
@@ -2925,7 +3620,7 @@ GRM_UI.GR_MetaDataInitializeUIFirst = function( isManualUpdate )
             GRM_UI.GRM_MemberDetailMetaData.GRM_CustomNoteEditBoxFrame.GRM_CustomNoteTextCount:Hide();
             
             if GRM_G.currentName ~= GRM_G.addonUser then
-                GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesCheckButton:Show();
+                GRM_UI.GRM_MemberDetailMetaData.GRM_SafeFromRulesButton:Show();
                 local player = GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][ GRM_G.currentName ];
                 if player ~= nil then
                     if player.isOnline then
@@ -3689,11 +4384,12 @@ GRM_UI.GR_MetaDataInitializeUIThird = function( isManualUpdate )
     GRM_UI.ConfirmPromoDate = function()
         local name = GRM_G.currentName;
         local player = GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][name];
-    
+        player = GRM.ValidateUnverifiedDate ( player , "verifiedPromoteDate" );
+
         if player ~= nil then
             -- For SYNC
             player.verifiedPromoteDate[1] = player.rankHistory[#player.rankHistory][2];
-            player.verifiedPromoteDate[2] = player.rankHistory[#player.rankHistory][3];
+            player.verifiedPromoteDate[2] = time();
             
             -- If player had it set to "unknown before"
             player.promoteDateUnknown = false;
@@ -3715,7 +4411,6 @@ GRM_UI.GR_MetaDataInitializeUIThird = function( isManualUpdate )
             GRM.RefreshAuditFrames ( true , true );
         end    
     end
-
     -- Method:          GRM_UI.ConfirmJoinDate()
     -- What it Does:    Confirms the current date and adds it.
     -- Purpose:         Easier UX for confirming dates, especially in Classic
@@ -3724,10 +4419,9 @@ GRM_UI.GR_MetaDataInitializeUIThird = function( isManualUpdate )
         local player = GRM_GuildMemberHistory_Save[ GRM_G.F ][ GRM_G.guildName ][name];
 
         if player ~= nil then
-                
             -- For SYNC
             player.verifiedJoinDate[1] = player.joinDate[#player.joinDate];
-            player.verifiedJoinDate[2] = player.joinDateEpoch[#player.joinDateEpoch]
+            player.verifiedJoinDate[2] = time();
             
             -- If player had it set to "unknown before"
             player.joinDateUnknown = false;
@@ -3817,6 +4511,8 @@ GRM_UI.GR_MetaDataInitializeUIThird = function( isManualUpdate )
     GRM_UI.GRM_LoadToolButton:SetSize ( 90 , 11 );
     GRM_UI.GRM_LoadToolButton:SetPoint ( "RIGHT" , GRM_UI.GRM_LoadLogButton , "LEFT" , 0 , 0 );
     GRM_UI.GRM_LoadToolButton.Timer = 0;
+    GRM_UI.GRM_LoadToolButton.count = 0;
+    GRM_UI.GRM_LoadToolButton.total = 0;
     GRM_UI.GRM_LoadToolButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_LoadToolButton );
     GRM_UI.GRM_LoadToolButtonText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
     GRM_UI.GRM_LoadToolButtonText:SetText ( GRM.L ( "Macro Tool" ) );
@@ -3839,6 +4535,22 @@ GRM_UI.GR_MetaDataInitializeUIThird = function( isManualUpdate )
         end
     end);
 
+    GRM_UI.GRM_LoadToolButton:SetScript ( "OnEnter" , function ( self )
+        if GRM_UI.GRM_LoadToolButton.total > 0 then
+            GRM_UI.SetTooltipScale();
+            GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+            GameTooltip:AddLine ( GRM.L ( "Macro Tool" ) , 0 , 0.8 , 1 );
+            GameTooltip:AddDoubleLine( GRM.L ( "Players to Kick:" ) , GRM_UI.GRM_LoadToolButton.count[1] );
+            GameTooltip:AddDoubleLine( GRM.L ( "Players to Promote:" ) , GRM_UI.GRM_LoadToolButton.count[2] );
+            GameTooltip:AddDoubleLine( GRM.L ( "Players to Demote:" ) , GRM_UI.GRM_LoadToolButton.count[3] );
+            GameTooltip:Show();
+        end
+    end);
+
+    GRM_UI.GRM_LoadToolButton:SetScript ( "OnLeave" , function ()
+        GRM.RestoreTooltip();
+    end);
+
     -- BUTTONS
     if GRM_G.BuildVersion < 80000 then
         GRM_UI.GRM_LoadToolOldRosterButton:SetSize ( 90 , 20 );
@@ -3849,6 +4561,8 @@ GRM_UI.GR_MetaDataInitializeUIThird = function( isManualUpdate )
     end
     GRM_UI.GRM_LoadToolOldRosterButton:SetPoint ( "RIGHT" , GRM_UI.GRM_LoadLogOldRosterButton , "LEFT" , 0 , 0 );
     GRM_UI.GRM_LoadToolOldRosterButton.Timer = 0;
+    GRM_UI.GRM_LoadToolOldRosterButton.count = 0;
+    GRM_UI.GRM_LoadToolOldRosterButton.total = 0;
     GRM_UI.GRM_LoadToolOldRosterButtonText:SetPoint ( "CENTER" , GRM_UI.GRM_LoadToolOldRosterButton );
     GRM_UI.GRM_LoadToolOldRosterButtonText:SetText ( GRM.L ( "Macro Tool" ) );
 
@@ -3870,6 +4584,22 @@ GRM_UI.GR_MetaDataInitializeUIThird = function( isManualUpdate )
                 self.Timer = 0;
             end
         end
+    end);
+
+    GRM_UI.GRM_LoadToolOldRosterButton:SetScript ( "OnEnter" , function ( self )
+        if GRM_UI.GRM_LoadToolOldRosterButton.total > 0 then
+            GRM_UI.SetTooltipScale();
+            GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
+            GameTooltip:AddLine ( GRM.L ( "Macro Tool" ) );
+            GameTooltip:AddDoubleLine( GRM.L ( "Players to Kick:" ) , GRM_UI.GRM_LoadToolOldRosterButton.count[1] );
+            GameTooltip:AddDoubleLine( GRM.L ( "Players to Promote:" ) , GRM_UI.GRM_LoadToolOldRosterButton.count[2] );
+            GameTooltip:AddDoubleLine( GRM.L ( "Players to Demote:" ) , GRM_UI.GRM_LoadToolOldRosterButton.count[3] );
+            GameTooltip:Show();
+        end
+    end);
+
+    GRM_UI.GRM_LoadToolOldRosterButton:SetScript ( "OnLeave" , function ()
+        GRM.RestoreTooltip();
     end);
     
 end
@@ -4176,7 +4906,7 @@ GRM_UI.PreAddonLoadUI = function()
             GRM_UI.SetTooltipScale();
             GameTooltip:SetOwner ( self , "ANCHOR_CURSOR" );
             if count > 1 then
-                GameTooltip:AddLine( GRM.L ( "{num} guild members have incomeplete info." , nil , nil , count ) );
+                GameTooltip:AddLine( GRM.L ( "{num} guild members have incomplete info." , nil , nil , count ) );
             elseif count == 1 then
                 GameTooltip:AddLine( GRM.L ( "Just 1 guild member still has incomplete info. Great job!" ) );
             else
@@ -4433,19 +5163,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GRM_UI.GRM_RosterChangeLogFrame.GRM_GuildAuditTab:SetText ( GRM.L ( "AUDIT" ) );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_AddonUsersTab:SetText ( GRM.L ( "SYNC USERS" ) );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsTab:SetText ( string.upper ( GRM.L ( "Options" ) ) );
-        if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination == 1 then
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText:SetText ( "|cffff0000" .. GRM.L ( "Officer Note" ) );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2:SetText ( GRM.L ( "Public Note" ) );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetText ( GRM.L ( "Custom Note" ) );
-        elseif GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination == 2 then
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText:SetText ( GRM.L ( "Officer Note" ) );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2:SetText ( "|cffff0000" .. GRM.L ( "Public Note" ) );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetText ( GRM.L ( "Custom Note" ) );
-        elseif GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination == 3 then
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText:SetText ( GRM.L ( "Officer Note" ) );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2:SetText ( GRM.L ( "Public Note" ) );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetText ( "|cffff0000" .. GRM.L ( "Custom Note" ) );
-        end
+        GRM_UI.AdjustTextColoring ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination );
     end
 
     -- Popup window to confirm!
@@ -5389,7 +6107,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         GameTooltip:Show();
     end);
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportAutoIncludeHeadersCheckButton:SetScript ( "OnLeave" , function()
-        GRM.RestoreTooltip()
+        GRM.RestoreTooltip();
     end);
 
     GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportFilter1:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_ExportLogBorderFrame.GRM_ExportPreviousRangeButton , "BOTTOMLEFT" , 0 , -10 );
@@ -8614,6 +9332,35 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText4:SetText ( "(" .. GRM.L ( "GC" ) .. ")" );
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText4:SetTextColor ( 0 , 0.8 , 1 );
 
+    GRM_UI.DisableNoteDestinationButtons = function()
+        GRM_UI.AdjustTextColoring ( 4 );
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1:Disable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2:Disable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3:Disable();
+    end
+
+    GRM_UI.EnableNoteDestinationButtons = function()
+        GRM_UI.AdjustTextColoring ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination );
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1:Enable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2:Enable();
+        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3:Enable();
+    end
+
+    GRM_UI.AdjustTextColoring = function ( indexToRed )
+        local names = { GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2 , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3 };
+
+        for i = 1 , #names do 
+
+            if indexToRed == 4 then
+                names[i]:SetTextColor ( 0.5 , 0.5 , 0.5 );
+            elseif i == indexToRed then
+                names[i]:SetTextColor ( 1 , 0 , 0 );
+            else
+                names[i]:SetTextColor ( 1 , 0.82 , 0 );
+            end
+        end
+
+    end
     
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButton:SetScript ( "OnClick", function( self , button )              
         if button == "LeftButton" and not GRM_G.GlobalControl4 then
@@ -8621,20 +9368,24 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
                 GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].addTimestampToNote = true;
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButton:Enable();
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButtonText:SetTextColor ( 1.0 , 0.82 , 0.0 , 1.0 );
+                GRM_UI.EnableNoteDestinationButtons();
 
                 if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination == 0 then
                     GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination = 1;
                     GRM.UpdateGuildInfoWithNewValue ( 5 , 1 );
                 end
+                
             else
                 GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].addTimestampToNote = false;
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButton:Disable();
                 GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_AddJoinedTagButtonText:SetTextColor ( 0.5 , 0.5 , 0.5 , 1 );
+                GRM_UI.DisableNoteDestinationButtons();
                 if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination > 0 then
                     GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination = 0;
                     GRM.UpdateGuildInfoWithNewValue ( 5 , 0 );
                 end
             end
+            GRM_UI.ConfigureJoinDateLocation();
             GRM.SyncSettings();
         elseif GRM_G.GlobalControl4 then
             if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].addTimestampToNote then
@@ -8712,9 +9463,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" and not GRM_G.GlobalControl4 then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination = 1;
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText:SetText ( "|cffff0000" .. GRM.L ( "Officer Note" ) );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2:SetText ( GRM.L ( "Public Note" ) );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetText ( GRM.L ( "Custom Note" ) );
+            GRM_UI.AdjustTextColoring ( 1 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2:SetChecked ( false );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3:SetChecked ( false );
             GRM.NormalizeHitRects ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1 , GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText );
@@ -8738,9 +9487,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2:SetScript ( "OnClick" , function( self , button )
         if button == "LeftButton" and not GRM_G.GlobalControl4 then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination = 2;
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText:SetText ( GRM.L ( "Officer Note" ) );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2:SetText ( "|cffff0000" .. GRM.L ( "Public Note" ) );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetText ( GRM.L ( "Custom Note" ) );
+            GRM_UI.AdjustTextColoring ( 2 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1:SetChecked ( false );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3:SetChecked ( false );
             if not GRM.CanEditOfficerNote() then
@@ -8762,9 +9509,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
         if button == "LeftButton" and not GRM_G.GlobalControl4 then
             GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination = 3;
             GRM.SyncSettings();
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText:SetText ( GRM.L ( "Officer Note" ) );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2:SetText ( GRM.L ( "Public Note" ) );
-            GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetText ( "|cffff0000" .. GRM.L ( "Custom Note" ) );
+            GRM_UI.AdjustTextColoring ( 3 );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1:SetChecked ( false );
             GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2:SetChecked ( false );
             GRM.UpdateGuildInfoWithNewValue ( 5 , 3 );
@@ -10486,7 +11231,7 @@ GRM_UI.MetaDataInitializeUIrosterLog1 = function( isManualUpdate )
     GRM_UI.GRM_MemberDetailMetaData.GRM_DateSubmitButtonTxt:SetText ( GRM.L ( "Set Join Date" ) );
     GRM_UI.GRM_MemberDetailMetaData.GRM_DateSubmitButtonTxt:SetSpacing ( 0 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_DateSubmitButtonTxt:SetWordWrap ( true );
-    GRM_UI.ScaleFontStringToObjectSize ( true , GRM_UI.GRM_MemberDetailMetaData.GRM_DateSubmitButton:GetWidth() , GRM_UI.GRM_MemberDetailMetaData.GRM_DateSubmitButtonTxt , 12 );
+    GRM_UI.ScaleFontStringToObjectSize ( true , GRM_UI.GRM_MemberDetailMetaData.GRM_DateSubmitButton:GetWidth() , GRM_UI.GRM_MemberDetailMetaData.GRM_DateSubmitButtonTxt , 2 );
     GRM_UI.GRM_MemberDetailMetaData.GRM_DateSubmitButton:SetScript ( "OnShow" , function()
         GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailMetaZoneInfoText:Hide();
         GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailMetaZoneInfoZoneText:Hide();
@@ -11217,6 +11962,9 @@ GRM_UI.MetaDataInitializeUIrosterLog2 = function( isManualUpdate )
                 elseif GRM_UI.MemberDetailFrameClassic ~= nil and GRM_UI.MemberDetailFrameClassic:IsVisible() then
                     GRM_UI.MemberDetailFrameClassic:Hide();
                     GRM_G.pause = true;
+
+                elseif GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame and GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame:IsVisible() then
+                    GRM_UI.GRM_MemberDetailMetaData.GRM_MacroToolIgnoreListSettingsFrame:Hide();
 
                 else
                     GRM_G.pause = false;
@@ -13967,7 +14715,6 @@ GRM_UI.BuildLogFilterSideFrame = function()
     GRM_UI.ConfigureSelectAllCheckButtons();
 end
 
-
 -- Method:          GRM_UI.ConfigureJoinDateLocation()
 -- What it Does:    Configures the front-end UI in the options, including enabling/disabling if you have officer permissions, and basing the selection properly
 -- Purpose:         UI Configuration on load.
@@ -13976,29 +14723,29 @@ GRM_UI.ConfigureJoinDateLocation = function()
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1:SetChecked ( true );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2:SetChecked ( false );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3:SetChecked ( false );
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText:SetText ( "|cffff0000" .. GRM.L ( "Officer Note" ) );
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2:SetText ( GRM.L ( "Public Note" ) );
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetText ( GRM.L ( "Custom Note" ) );
+
     elseif GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination == 2 then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1:SetChecked ( false );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2:SetChecked ( true );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3:SetChecked ( false );
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText:SetText ( GRM.L ( "Officer Note" ) );
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2:SetText ( "|cffff0000" .. GRM.L ( "Public Note" ) );
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetText ( GRM.L ( "Custom Note" ) );
+
     elseif GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination == 3 then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton1:SetChecked ( false );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton2:SetChecked ( false );
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampRadioButton3:SetChecked ( true );
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText:SetText ( GRM.L ( "Officer Note" ) );
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText2:SetText ( GRM.L ( "Public Note" ) );
-        GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButtonText3:SetText ( "|cffff0000" .. GRM.L ( "Custom Note" ) );
     end
+
+    GRM_UI.AdjustTextColoring ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination );
 
     if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].addTimestampToNote and not ( GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].joinDateDestination == 0 ) then
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButton:SetChecked ( true );
+        GRM_UI.EnableNoteDestinationButtons();
     else
         GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_OfficerOptionsFrame.GRM_RosterAddTimestampCheckButton:SetChecked ( false );
+    end
+
+    if not GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].addTimestampToNote then
+        GRM_UI.DisableNoteDestinationButtons();
     end
 
     if GRM_AddonSettings_Save[GRM_G.F][GRM_G.addonUser].includeTag then
@@ -14617,7 +15364,7 @@ GRM_UI.ConfigureClassicRankShiftButtons = function()
     GuildControlPopupFrame.GRM_ShiftUpButtonUp.GRM_ShiftUpButtonUpText:SetWidth ( 55 );
     GuildControlPopupFrame.GRM_ShiftUpButtonUp.GRM_ShiftUpButtonUpText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
     GuildControlPopupFrame.GRM_ShiftUpButtonUp.GRM_ShiftUpButtonUpText:SetText ( GRM.L ( "Shift Rank Up" ) );
-    GuildControlPopupFrame.GRM_ShiftUpButtonUp:SetScript ( "OnClick" , function ( self , button )
+    GuildControlPopupFrame.GRM_ShiftUpButtonUp:SetScript ( "OnClick" , function ( _ , button )
         if button == "LeftButton" then
             local currentRankId = GRM_UI.GetCurrentSelectedControlRank();
             local currentRankName = GuildControlGetRankName ( currentRankId );
@@ -14653,7 +15400,7 @@ GRM_UI.ConfigureClassicRankShiftButtons = function()
     GuildControlPopupFrame.GRM_ShiftUpButtonDown.GRM_ShiftUpButtonDownText:SetWidth ( 55 );
     GuildControlPopupFrame.GRM_ShiftUpButtonDown.GRM_ShiftUpButtonDownText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 );
     GuildControlPopupFrame.GRM_ShiftUpButtonDown.GRM_ShiftUpButtonDownText:SetText ( GRM.L ( "Shift Rank Down" ) );
-    GuildControlPopupFrame.GRM_ShiftUpButtonDown:SetScript ( "OnClick" , function ( self , button )
+    GuildControlPopupFrame.GRM_ShiftUpButtonDown:SetScript ( "OnClick" , function ( _ , button )
         if button == "LeftButton" then
             local currentRankId = GRM_UI.GetCurrentSelectedControlRank();
             local currentRankName = GuildControlGetRankName ( currentRankId );
@@ -15210,10 +15957,7 @@ GRM_UI.InitalizeGuildFrame = function()
         
         CommunitiesFrame:HookScript ( "OnShow" , function()
             GRM_UI.CommunitesFrame_OnShow();
-            C_Timer.After ( 1 , GRM.TempFixPatchEightPointThreeRecruitmentDisconnect );
         end);
-
-        GRM.TempFixPatchEightPointThreeRecruitmentDisconnect();
 
     end
 

@@ -78,10 +78,13 @@ vowels and consonants that may contain the player's name.
 for Example:%s3%s:%s5%s
 will mean that players with more than%s3%s vowels in a row
 or more%s5%s consonants will not be added to Queue.]=]
+L["Вкл/Выкл"] = "On/Off"
+L["вкл/выкл"] = "On/Off"
 L["Включен"] = "Included"
 L["Включить фильтры"] = "Enable filters"
 L["Время запоминания игрока"] = "Player memorization time"
 L["Все"] = "All"
+L["Вы можете перемещать окно за его фон и закрыть его двойным кликом."] = "You can move the window behind its background and close it with a double click."
 L["Вы не состоите в гильдии или у вас нет прав для приглашения."] = "You are not a member of the guild or you do not have permission to invite."
 L["Вы уверены?"] = "Are you sure?"
 L["Выберите сообщение"] = "Select message"
@@ -93,6 +96,7 @@ L["Выключить сообщения аддона"] = "Disable addon message
 L["Да"] = "Yes"
 L["Данные для синхронизации"] = "Data to sync"
 L["Данные для синхронизации не выбраны"] = "No sync data selected"
+L["Данные игрока"] = "Player info"
 L["Данные синхронизированы с игроком %s."] = "Data synchronized with player %s."
 L["Диапазон уровней"] = "Level range"
 L["Диапазон уровней (Мин:Макс)"] = "Level Range (Min: Max)"
@@ -105,12 +109,14 @@ L["Другая помощь"] = "Other Help"
 L[ [=[Если имя игрока содержит введенную
 фразу, он не будет добавлен в очередь]=] ] = [=[If the player name contains the entered
 phrase, it will not be added to the queue]=]
+L["Заголовок окна"] = "Window title"
 L["Заметка для новых игроков"] = "Note for new players"
 L["Заметка для офицеров для новых игроков"] = "Officer note for new players"
 L["Записывать игрока в базу данных даже если приглашение не было отправлено"] = "Write a player to the database even if the invitation has not been sent"
 L["Записывать игрока в базу данных сразу после нахождения"] = "Write the player to the database immediately after finding"
 L["Запоминать всех игроков"] = "Remember all players"
 L["Запрос синхронизации у: %s. %d"] = "Sync Request: %s. %d"
+L["Запрос: %s. Поиск вернул игроков: %d"] = "Query: %s. Returned players: %d"
 L["Запускать в фоновом режиме"] = "Run in the background"
 L["Запускать поиск в фоновом режиме"] = "Run a background search"
 L["Игнорировать"] = "Ignore"
@@ -136,11 +142,13 @@ L["Классы:"] = "Classes:"
 L["Количество ошибок: %d"] = "Number of errors: %d"
 L["Количество уровней сканируемых за один раз"] = "Number of levels scanned at one time"
 L["Контакт"] = "Contact"
+L["Логи"] = "Logs"
 L["Максимальное количество фильтров %s. Пожалуйста измените или удалите имеющийся фильтр."] = "The maximum number of filters %s. Please change or remove existing filter."
 L["Нажмите на фильтр для изменения состояния"] = "Click on the filter to change the state"
 L["Назначить клавишу для приглашения"] = "Assign a key to the invitation"
 L["Назначить клавишу следующего поиска"] = "Assign a key to the next search"
 L["Назначить кнопку (%s)"] = "Assign button (%s)"
+L["Настроить интерфейс"] = "Customize interface"
 L["Настроить сообщения"] = "Customize posts"
 L["Настройка сообщений, подсказка"] = [=[Auto Replace.
 NAME is the name of the player to whom the message is sent.
@@ -169,11 +177,14 @@ L["Отключить"] = "Disable"
 L["Отправить запрос"] = "Send request"
 L["Отправить сообщение и пригласить"] = "Send a message and invite"
 L["Ошибка типа синхронизации"] = "Sync type error"
+L["Панель кнопок"] = "Button bar"
 L["Перевод"] = "Translate"
 L["Подтверждение отправки данных синхронизации"] = "Confirmation of sending synchronization data"
 L["Поиск вернул 50 или более результатов, рекомендуется изменить настройки поиска. Запрос: %s"] = "Search returned 50 or more results, it is recommended to change the search settings. Query: %s"
 L["Поиск разблокирован"] = "Search Unlocked"
+L["Показывать в чате текущий запрос"] = "Show current request in chat"
 L["Поле может содержать только буквы"] = "This field can only contain letters. "
+L["Полоса прогресса"] = "Progress bar"
 L["Пользовательский список"] = "Custom list"
 L["Превышен лимит ожидания ответа"] = "Response timeout limit exceeded"
 L["Превышен лимит символов. Максимальная длина сообщения 255 символов. Длина сообщения превышена на %d"] = "Character limit exceeded. The maximum message length is 255 characters. Message length exceeded by %d"
@@ -186,6 +197,9 @@ L["Расширенное сканирование"] = "Advanced Scan"
 L["Расы:"] = "Race:"
 L["Режим приглашения"] = "Invitation mode"
 L["Сбросить"] = "Reset"
+L[ [=[Сбросить текущие поисковые запросы и результаты поиска.
+Не забывайте сбрасывать поиск если вы изменили диапазон уровней или список поисковых запросов.]=] ] = [=[Reset current searches and search results.
+Remember to reset your search if you change the level range or search query list.]=]
 L["Синхронизация"] = "Synchronization"
 L[ [=[Синхронизация с %s.
 %d/%d]=] ] = [=[Sync with %s.

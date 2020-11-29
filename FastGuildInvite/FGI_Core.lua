@@ -367,7 +367,17 @@ local defaultSettings =  {
 		confirmSearchClear = true,
 		fastBlacklist = false,
 		introShow = true,
-		saveSearch = true
+		saveSearch = true,
+		logs = {
+			on = false,
+			
+		},
+		scanFrameChilds = {
+			title = true,
+			player = true,
+			progress = true,
+			buttons = true,
+		}
 	},
 } 
 

@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("DarkmasterGandling", "DBM-Party-Classic", 13)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision("20200623220529")
+mod:SetRevision("20200723014157")
 mod:SetCreatureID(1853)
 
 mod:RegisterCombat("combat")

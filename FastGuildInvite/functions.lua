@@ -216,7 +216,16 @@ local function onListUpdate()
 	local list = addon.search.inviteList
 	
 	interface.chooseInvites.player:SetText(#list > 0 and format("%s%s %d %s %s|r", color[list[1].NoLocaleClass:upper()], list[1].name, list[1].lvl, list[1].class, list[1].race) or "")
-	inviteBtnText(format(L["Пригласить: %d"], #list))
+	interface.scanFrame.player:SetText(#list > 0 and format("%s%s %d %s|r", color[list[1].NoLocaleClass:upper()], list[1].name, list[1].lvl, list[1].class) or "")
+	if #list > 0 then
+		interface.scanFrame.player.data = {
+			name = list[1].name:find("%-") and list[1].name:match("(.*)%-") or list[1].name,
+			realm = list[1].name:find("%-") and list[1].name:match("%-(.*)") or GetNormalizedRealmName()
+		}
+	else
+		interface.scanFrame.player.data = {}
+	end
+	inviteBtnText(format("+(%d)", #list))
 end
 
 function fn:blacklistRemove(name)
@@ -835,6 +844,7 @@ end
 
 local function searchWhoResultCallback(query, results)
 	local searchLvl = getSearchDeepLvl(query)
+	if DB.global.logs.on then print(("%s " .. L["Запрос: %s. Поиск вернул игроков: %d"]):format("|cffffff00<|r|cff16ABB5FGI|r|cffffff00>|r", query, #results)) end
 	if #results >= FGI_MAXWHORETURN and DB.realm.customWho then
 		if not DB.global.addonMSG then
 			print(format(L["Поиск вернул 50 или более результатов, рекомендуется изменить настройки поиска. Запрос: %s"], query))

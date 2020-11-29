@@ -103,6 +103,11 @@ settings.Synchronization.name = L["Синхронизация"]
 settings.Synchronization.parent = settings.name
 InterfaceOptions_AddCategory(settings.Synchronization)
 
+settings.CustomInterface = CreateFrame("Frame", settings)
+settings.CustomInterface.name = L["Настроить интерфейс"]
+settings.CustomInterface.parent = settings.name
+InterfaceOptions_AddCategory(settings.CustomInterface)
+
 settings.CustomList = CreateFrame("Frame", settings)
 settings.CustomList.name = L["Пользовательский список"]
 settings.CustomList.parent = settings.name
@@ -113,6 +118,11 @@ settings.credits.name = L["Благодарности"]
 settings.credits.parent = settings.name
 InterfaceOptions_AddCategory(settings.credits)
 
+settings.Logs = CreateFrame("Frame", settings)
+settings.Logs.name = L["Логи"]
+settings.Logs.parent = settings.name
+InterfaceOptions_AddCategory(settings.Logs)
+
 --[[settings.db = CreateFrame("Frame", settings)
 settings.db.name = "DB"
 settings.db.parent = settings.name
@@ -120,8 +130,8 @@ InterfaceOptions_AddCategory(settings.db)]]
 
 -- InterfaceOptionsFrame_OpenToCategory(settings)
 -- InterfaceOptionsFrame_OpenToCategory(settings)
--- InterfaceOptionsFrame_OpenToCategory(settings.profile)
--- InterfaceOptionsFrame_OpenToCategory(settings.profile)
+-- InterfaceOptionsFrame_OpenToCategory(settings.CustomInterface)
+-- InterfaceOptionsFrame_OpenToCategory(settings.CustomInterface)
 
 
 local w,h = 623, 568
